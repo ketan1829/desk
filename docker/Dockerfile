@@ -99,6 +99,10 @@ RUN if [ "$RAILS_ENV" != "production" ]; then \
 COPY --from=pre-builder /gems/ /gems/
 COPY --from=pre-builder /app /app
 
+RUN chmod +x docker/entrypoints/rails.sh
+ENTRYPOINT ["docker/entrypoints/rails.sh"]
+CMD bundle exec bundle exec rails s -b 0.0.0.0 -p 3000
+
 WORKDIR /app
 
 EXPOSE 3000
