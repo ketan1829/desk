@@ -103,6 +103,9 @@ WORKDIR /app
 
 EXPOSE 3000
 
+RUN chmod +x docker/entrypoints/rails.sh
+ENTRYPOINT ["docker/entrypoints/rails.sh"]
 
 CMD ["bundle", "exec", "bundle", "exec", "rails", "s", "-b", "0.0.0.0", "-p", "3000"]
 
+# CMD ["docker", "exec", "-it", "$(basename $(pwd))_rails_1", "sh", "-c", "'RAILS_ENV=production bundle exec rails c'"]
