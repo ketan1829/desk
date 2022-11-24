@@ -6,37 +6,81 @@ services:
       context: .
       dockerfile: ./docker/Dockerfile
       args:
-        BUNDLE_WITHOUT: 'development:test'
-        EXECJS_RUNTIME: Disabled
-        RAILS_ENV: 'production'
-        RAILS_SERVE_STATIC_FILES: 'true'
-    image: chatwoot:latest
-    env_file: .env ## Change this file for customized env variables
+        BUNDLE_WITHOUT: ''
+        EXECJS_RUNTIME: 'Node'
+        RAILS_ENV: 'development'
+        RAILS_SERVE_STATIC_FILES: 'false'
+    tty: true
+    stdin_open: true
+    image: chatwoot:development
+    env_file: .env
 
   rails:
     <<: *base
-    image: chatwoot:latest
+    build:
+      context: .
+      dockerfile: ./docker/dockerfiles/rails.Dockerfile
+    image: chatwoot-rails:development
+    volumes:
+      - ./:/app:delegated
+      - node_modules:/app/node_modules
+      - packs:/app/public/packs
+      - cache:/app/tmp/cache
+      - bundle:/usr/local/bundle
     depends_on:
       - postgres
       - redis
+      - webpack
+      - mailhog
+      - sidekiq
     ports:
       - 3000:3000
+    env_file: .env
     environment:
-      - NODE_ENV=production
-      - RAILS_ENV=production
+      - WEBPACKER_DEV_SERVER_HOST=webpack
+      - NODE_ENV=development
+      - RAILS_ENV=development
     entrypoint: docker/entrypoints/rails.sh
-    command: ['bundle', 'exec', 'rails', 's', '-p', '3000', '-b', '0.0.0.0']
+    command: ["bundle", "exec", "rails", "s", "-p", "3000", "-b", "0.0.0.0"]
 
   sidekiq:
     <<: *base
-    image: chatwoot:latest
+    image: chatwoot-rails:development
+    volumes:
+      - ./:/app:delegated
+      - node_modules:/app/node_modules
+      - packs:/app/public/packs
+      - cache:/app/tmp/cache
+      - bundle:/usr/local/bundle
     depends_on:
       - postgres
       - redis
+      - mailhog
     environment:
-      - NODE_ENV=production
-      - RAILS_ENV=production
-    command: ['bundle', 'exec', 'sidekiq', '-C', 'config/sidekiq.yml']
+      - NODE_ENV=development
+      - RAILS_ENV=development
+    command: ["bundle", "exec", "sidekiq", "-C", "config/sidekiq.yml"]
+
+  webpack:
+    <<: *base
+    build:
+      context: .
+      dockerfile: ./docker/dockerfiles/webpack.Dockerfile
+    image: chatwoot-webpack:development
+    volumes:
+      - ./:/app:delegated
+      - node_modules:/app/node_modules # Node modules shared across containers
+      - packs:/app/public/packs
+      - cache:/app/tmp/cache
+      - bundle:/usr/local/bundle
+    ports:
+      - "3035" # Webpack dev server
+    environment:
+      - WEBPACKER_DEV_SERVER_HOST=0.0.0.0
+      - NODE_ENV=development
+      - RAILS_ENV=development
+    entrypoint: docker/entrypoints/webpack.sh
+    command: bin/webpack-dev-server
 
   postgres:
     image: postgres:12
@@ -53,14 +97,23 @@ services:
   redis:
     image: redis:alpine
     restart: always
+    command: ["sh", "-c", "redis-server --requirepass \"$REDIS_PASSWORD\""]
+    env_file: .env
     volumes:
       - redis:/data/redis
     ports:
       - '6379:6379'
 
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - 1025:1025
+      - 8025:8025
+
 volumes:
   postgres:
   redis:
-  bundle:
   packs:
-  node_modules_rails:
+  node_modules:
+  cache:
+  bundle:
