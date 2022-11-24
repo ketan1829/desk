@@ -102,7 +102,3 @@ COPY --from=pre-builder /app /app
 WORKDIR /app
 
 EXPOSE 3000
-
-
-# RUN chmod +x docker/entrypoints/rails.sh
-# RUN exec rails s -b 0.0.0.0 -p 3000x
