@@ -90,7 +90,7 @@ services:
     volumes:
       - postgres:/data/postgres
     environment:
-      - POSTGRES_DB=chatwoot
+      - POSTGRES_DB='aligned_chatwoot'
       - POSTGRES_USER='chatwoot'
       - POSTGRES_PASSWORD='KJHo6VxM0MkUfnN7cCwXKUXyWzPAArXj'
 
