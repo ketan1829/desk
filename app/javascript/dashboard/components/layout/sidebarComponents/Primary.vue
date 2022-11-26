@@ -16,13 +16,13 @@
       />
     </nav>
     <div class="menu vertical user-menu">
-      <primary-nav-item
+      <!-- <primary-nav-item
         v-if="!isACustomBrandedInstance"
         icon="book-open-globe"
         name="DOCS"
         :open-in-new-page="true"
         :to="helpDocsURL"
-      />
+      /> -->
       <notification-bell @open-notification-panel="openNotificationPanel" />
       <agent-details @toggle-menu="toggleOptions" />
       <options-menu
