@@ -17,15 +17,15 @@
               })
             }}
           </p>
-          <p v-if="globalConfig.installationName === 'Chatwoot'">
-            <a
+          <p v-if="globalConfig.installationName === 'Aligned CSP'">
+            <!-- <a
               href="https://www.chatwoot.com/changelog"
               target="_blank"
               rel="noopener nofollow noreferrer"
               class="onboarding--link"
             >
               {{ $t('ONBOARDING.READ_LATEST_UPDATES') }}
-            </a>
+            </a> -->
             <span>🎉</span>
           </p>
         </div>
