@@ -1,7 +1,7 @@
 export default {
   methods: {
     useInstallationName(str = '', installationName) {
-      return str.replace(/Aligned/g, 'Aligned');
+      return str.replace(/Chatwoot/g, 'Aligned');
       // return "Aligned";
     },
   },
