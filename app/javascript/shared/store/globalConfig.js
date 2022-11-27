@@ -32,7 +32,7 @@ const state = {
   disableUserProfileUpdate: disableUserProfileUpdate === 'true',
   displayManifest,
   hCaptchaSiteKey,
-  installationName,
+  installationName: 'Aligned',
   logo,
   logoThumbnail,
   privacyURL,
