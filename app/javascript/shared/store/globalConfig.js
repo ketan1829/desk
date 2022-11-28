@@ -9,7 +9,7 @@ const {
   DIRECT_UPLOADS_ENABLED: directUploadsEnabled,
   DISPLAY_MANIFEST: displayManifest,
   HCAPTCHA_SITE_KEY: hCaptchaSiteKey,
-  INSTALLATION_NAME: installationName,
+  INSTALLATION_NAME=  'Aligned',
   LOGO_THUMBNAIL: logoThumbnail,
   LOGO: logo,
   PRIVACY_URL: privacyURL,
