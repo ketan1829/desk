@@ -109,6 +109,11 @@ services:
     ports:
       - 1025:1025
       - 8025:8025
+    environment:
+      - SMTP_OPENSSL_VERIFY_MODE=peer
+      - SMTP_ENABLE_STARTTLS_AUTO=true
+      - SMTP_TLS=true
+      
 
 volumes:
   postgres:
