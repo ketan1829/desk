@@ -90,9 +90,9 @@ services:
     volumes:
       - postgres:/data/postgres
     environment:
-      - POSTGRES_DB='aligned_chatwoot'
+      - POSTGRES_DB='desk_aligned'
       - POSTGRES_USER='chatwoot'
-      - POSTGRES_PASSWORD='KJHo6VxM0MkUfnN7cCwXKUXyWzPAArXj'
+      - POSTGRES_PASSWORD='KETAcoHdy6n4L3gi40Za09dOGfLd5'
 
   redis:
     image: redis:alpine
