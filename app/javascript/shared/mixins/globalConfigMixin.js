@@ -1,6 +1,6 @@
 export default {
   methods: {
-    useInstallationName(str = 'Choira', installationName) {
+    useInstallationName(str = 'LifeelSpace', installationName) {
       return str.replace(/Chatwoot/g, installationName);
     },
   },

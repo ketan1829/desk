@@ -32,7 +32,7 @@ const state = {
   disableUserProfileUpdate: disableUserProfileUpdate === 'true',
   displayManifest,
   hCaptchaSiteKey,
-  installationName: 'Choira',
+  installationName: 'LifeelSpace',
   logo,
   logoThumbnail,
   privacyURL,
