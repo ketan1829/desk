@@ -1,16 +1,8 @@
 {
-  "name": "LifeelSpace",
-  "description": "LifeelSpace is a customer support tool for instant messaging channels",
-  "website": "https://www.space.lifeel.in/",
-  "repository": "https://github.com/ketan1829/desk",
-  "logo": "https://app.LifeelSpace.com/brand-assets/logo_thumbnail.svg",
-  "keywords": [
-    "live chat",
-    "customer support",
-    "ruby",
-    "rails",
-    "vue"
-  ],
+  "name": "Book|Keeper Help Center",
+  "description": "Book|Keeper Help Center is a customer support tool for instant messaging channels",
+  "logo": "https://app.Book|Keeper Help Center.com/brand-assets/logo_thumbnail.svg",
+
   "success_url": "/",
   "env": {
     "SECRET_TOKEN": {
@@ -26,11 +18,11 @@
       "value": "production"
     },
     "FRONTEND_URL": {
-      "description": "Public root URL of the LifeelSpace installation. This will be used in the emails.",
+      "description": "Public root URL of the Book|Keeper Help Center installation. This will be used in the emails.",
       "value": "https://CHANGE.herokuapp.com"
     },
     "INSTALLATION_ENV": {
-      "description": "Installation method used for LifeelSpace.",
+      "description": "Installation method used for Book|Keeper Help Center.",
       "value": "heroku"
     },
     "REDIS_OPENSSL_VERIFY_MODE":{

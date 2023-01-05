@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>
-    LifeelSpace
+    Book|Keeper Help Center
       <%# <%= @global_config['INSTALLATION_NAME'] %>
     </title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
@@ -10,7 +10,7 @@
       <meta name="msapplication-TileColor" content="#1f93ff">
       <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
       <meta name="theme-color" content="#1f93ff">
-      <meta name="description" content="LifeelSpace is not just an app or website. It's a complete ecosystem to empower you with tools to jam, produce and explore music, the last remaining magic in this world.✨">
+      <meta name="description" content="Book|Keeper Help Center is not just an app or website. It's a complete ecosystem to empower you with tools to jam, produce and explore music, the last remaining magic in this world.✨">
       <% if ENV['IOS_APP_IDENTIFIER'].present? %>
         <meta name="apple-itunes-app" content='app-id=<%= ENV['IOS_APP_IDENTIFIER'] %>'>
       <% end %>
@@ -71,7 +71,7 @@
     <script>
       window.chatwootSettings = { hideMessageBubble: true, position: 'left' };
       (function(d,t) {
-        var BASE_URL='<%= ENV.fetch('FRONTEND_URL', 'https://www.LifeelSpace.io') %>';
+        var BASE_URL='<%= ENV.fetch('FRONTEND_URL', 'https://www.Book|Keeper Help Center.io') %>';
         var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
         g.src=BASE_URL+"/packs/js/sdk.js"; g.defer=true; g.async=true;
         s.parentNode.insertBefore(g,s);

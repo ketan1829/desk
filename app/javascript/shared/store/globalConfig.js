@@ -32,7 +32,7 @@ const state = {
   disableUserProfileUpdate: disableUserProfileUpdate === 'true',
   displayManifest,
   hCaptchaSiteKey,
-  installationName: 'LifeelSpace',
+  installationName: 'Book|Keeper Help Center',
   logo,
   logoThumbnail,
   privacyURL,
