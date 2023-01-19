@@ -1,14 +1,5 @@
 <template>
-  <banner
-    v-if="shouldShowBanner"
-    class="update-banner"
-    color-scheme="primary"
-    :banner-message="bannerMessage"
-    href-link="https://github.com/chatwoot/chatwoot/releases"
-    :href-link-text="$t('GENERAL_SETTINGS.LEARN_MORE')"
-    has-close-button
-    @close="dismissUpdateBanner"
-  />
+
 </template>
 <script>
 import Banner from 'dashboard/components/ui/Banner.vue';
