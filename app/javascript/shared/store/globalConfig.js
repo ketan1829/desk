@@ -30,7 +30,7 @@ const state = {
   createNewAccountFromDashboard,
   directUploadsEnabled: directUploadsEnabled === 'true',
   disableUserProfileUpdate: disableUserProfileUpdate === 'true',
-  displayManifest,
+  displayManifest:false,
   hCaptchaSiteKey,
   installationName: 'Book|Keeper Help Center',
   logo,
