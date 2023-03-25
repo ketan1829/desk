@@ -23,7 +23,7 @@ const state = {
   apiChannelName,
   apiChannelThumbnail,
   appVersion,
-  brandName : 'LifeelSpace' ,
+  brandName: 'LifeelSpace',
   chatwootInboxToken,
   csmlEditorHost,
   deploymentEnv,
@@ -35,9 +35,9 @@ const state = {
   installationName: 'LifeelSpace',
   logo,
   logoThumbnail,
-  privacyURL : 'https://lifeel.in' ,
-  termsURL : 'https://lifeel.in' ,
-  widgetBrandURL : 'https://lifeel.in' ,
+  privacyURL : 'https://space.lifeel.in',
+  termsURL : 'https://space.lifeel.in',
+  widgetBrandURL: 'https://space.lifeel.in',
 };
 
 export const getters = {
