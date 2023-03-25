@@ -149,6 +149,6 @@ const runSDK = ({ baseUrl, websiteToken }) => {
   });
 };
 
-window.choiraSDK = { // chatwootSDK
+window.chatwootSDK = { // chatwootSDK
   run: runSDK,
 };
