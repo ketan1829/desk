@@ -14,20 +14,20 @@ export const closeBubble = document.createElement('button');
 export const notificationBubble = document.createElement('span');
 
 export const setBubbleText = bubbleText => {
-  if (isExpandedView(window.$chatwoot.type)) {
+  if (isExpandedView(window.$lifeel.type)) {
     const textNode = document.getElementById('woot-widget--expanded__text');
     textNode.innerHTML = bubbleText;
   }
 };
 
 export const createBubbleIcon = ({ className, src, target }) => {
-  let bubbleClassName = `${className} woot-elements--${window.$chatwoot.position}`;
+  let bubbleClassName = `${className} woot-elements--${window.$lifeel.position}`;
   const bubbleIcon = document.createElement('img');
   bubbleIcon.src = src;
   bubbleIcon.alt = 'bubble-icon';
   target.appendChild(bubbleIcon);
 
-  if (isExpandedView(window.$chatwoot.type)) {
+  if (isExpandedView(window.$lifeel.type)) {
     const textNode = document.createElement('div');
     textNode.id = 'woot-widget--expanded__text';
     textNode.innerHTML = '';
@@ -54,10 +54,10 @@ export const createNotificationBubble = () => {
 
 export const onBubbleClick = (props = {}) => {
   const { toggleValue } = props;
-  const { isOpen } = window.$chatwoot;
+  const { isOpen } = window.$lifeel;
   if (isOpen !== toggleValue) {
     const newIsOpen = toggleValue === undefined ? !isOpen : toggleValue;
-    window.$chatwoot.isOpen = newIsOpen;
+    window.$lifeel.isOpen = newIsOpen;
 
     toggleClass(chatBubble, 'woot--hide');
     toggleClass(closeBubble, 'woot--hide');

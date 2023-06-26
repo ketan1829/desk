@@ -13,7 +13,7 @@ import {
 import { addClasses, removeClasses } from '../sdk/DOMHelpers';
 import { SDK_SET_BUBBLE_VISIBILITY } from 'shared/constants/sharedFrameEvents';
 const runSDK = ({ baseUrl, websiteToken }) => {
-  if (window.$chatwoot) {
+  if (window.$lifeel) {
     return;
   }
 
@@ -23,7 +23,7 @@ const runSDK = ({ baseUrl, websiteToken }) => {
     locale = window.navigator.language.replace('-', '_');
   }
 
-  window.$chatwoot = {
+  window.$lifeel = {
     baseUrl,
     hasLoaded: false,
     hideMessageBubble: chatwootSettings.hideMessageBubble || false,
@@ -49,21 +49,21 @@ const runSDK = ({ baseUrl, websiteToken }) => {
       if (visibility === 'hide') {
         addClasses(widgetHolder, 'woot-widget--without-bubble');
         addClasses(widgetElm, 'woot-hidden');
-        window.$chatwoot.hideMessageBubble = true;
+        window.$lifeel.hideMessageBubble = true;
       } else if (visibility === 'show') {
         removeClasses(widgetElm, 'woot-hidden');
         removeClasses(widgetHolder, 'woot-widget--without-bubble');
-        window.$chatwoot.hideMessageBubble = false;
+        window.$lifeel.hideMessageBubble = false;
       }
       IFrameHelper.sendMessage(SDK_SET_BUBBLE_VISIBILITY, {
-        hideMessageBubble: window.$chatwoot.hideMessageBubble,
+        hideMessageBubble: window.$lifeel.hideMessageBubble,
       });
     },
 
     popoutChatWindow() {
       IFrameHelper.events.popoutChatWindow({
-        baseUrl: window.$chatwoot.baseUrl,
-        websiteToken: window.$chatwoot.websiteToken,
+        baseUrl: window.$lifeel.baseUrl,
+        websiteToken: window.$lifeel.websiteToken,
         locale,
       });
     },
@@ -86,8 +86,8 @@ const runSDK = ({ baseUrl, websiteToken }) => {
         return;
       }
 
-      window.$chatwoot.identifier = identifier;
-      window.$chatwoot.user = user;
+      window.$lifeel.identifier = identifier;
+      window.$lifeel.user = user;
       IFrameHelper.sendMessage('set-user', { identifier, user });
       Cookies.set(userCookieName, hashToBeStored, {
         expires: 365,
@@ -126,7 +126,7 @@ const runSDK = ({ baseUrl, websiteToken }) => {
     },
 
     reset() {
-      if (window.$chatwoot.isOpen) {
+      if (window.$lifeel.isOpen) {
         IFrameHelper.events.toggleBubble();
       }
 
@@ -135,11 +135,11 @@ const runSDK = ({ baseUrl, websiteToken }) => {
 
       const iframe = IFrameHelper.getAppFrame();
       iframe.src = IFrameHelper.getUrl({
-        baseUrl: window.$chatwoot.baseUrl,
-        websiteToken: window.$chatwoot.websiteToken,
+        baseUrl: window.$lifeel.baseUrl,
+        websiteToken: window.$lifeel.websiteToken,
       });
 
-      window.$chatwoot.resetTriggered = true;
+      window.$lifeel.resetTriggered = true;
     },
   };
 
