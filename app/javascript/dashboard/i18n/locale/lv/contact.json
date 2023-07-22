@@ -15,6 +15,7 @@
     "INITIATED_FROM": "Uzsākts no",
     "INITIATED_AT": "Uzsākts plkst",
     "IP_ADDRESS": "IP adrese",
+    "CREATED_AT_LABEL": "Izveidots",
     "NEW_MESSAGE": "Jauns ziņojums",
     "CONVERSATIONS": {
       "NO_RECORDS_FOUND": "Ar šo kontaktpersonu nav saistītas iepriekšējās sarunas.",
@@ -32,7 +33,8 @@
       "LABEL_SELECT": {
         "TITLE": "Pievienot Etiķetes",
         "PLACEHOLDER": "Meklēt etiķetes",
-        "NO_RESULT": "Etiķetes nav atrastas"
+        "NO_RESULT": "Etiķetes nav atrastas",
+        "CREATE_LABEL": "Izveidot jaunu etiķeti"
       }
     },
     "MERGE_CONTACT": "Apvienot kontaktu",
@@ -70,6 +72,13 @@
       "CANCEL": "Atcelt"
     },
     "SUCCESS_MESSAGE": "Kontaktpersonas ir veiksmīgi saglabātas",
+    "ERROR_MESSAGE": "Radās kļūda. Lūdzu, mēģiniet vēlreiz"
+  },
+  "EXPORT_CONTACTS": {
+    "BUTTON_LABEL": "Eksportēt",
+    "TITLE": "Eksportēt Kontaktpersonas",
+    "DESC": "Eksportēt kontaktpersonas uz CSV failu.",
+    "SUCCESS_MESSAGE": "Notiek eksportēšana, Jūs saņemsit paziņojumu pa e-pastu, kad eksporta fails būs gatavs lejupielādei.",
     "ERROR_MESSAGE": "Radās kļūda. Lūdzu, mēģiniet vēlreiz"
   },
   "DELETE_NOTE": {
@@ -121,6 +130,7 @@
         "LABEL": "Telefona numurs",
         "HELP": "Tālruņa numuram ir jābūt E.164 formātā, piemēram: +37155555555",
         "ERROR": "Tālruņa numuram ir jābūt tukšam, vai E.164 formātā",
+        "DIAL_CODE_ERROR": "Lūdzu, izvēlieties sastādīšanas kodu no saraksta",
         "DUPLICATE": "Šis tālruņa numurs tiek izmantots citai kontaktpersonai."
       },
       "LOCATION": {
@@ -130,6 +140,17 @@
       "COMPANY_NAME": {
         "PLACEHOLDER": "Ievadiet uzņēmuma nosaukumu",
         "LABEL": "Uzņēmuma Nosaukums"
+      },
+      "COUNTRY": {
+        "PLACEHOLDER": "Ievadiet valsts nosaukumu",
+        "LABEL": "Valsts Nosaukums",
+        "SELECT_PLACEHOLDER": "Izvēlieties",
+        "REMOVE": "Noņemt",
+        "SELECT_COUNTRY": "Izvēlies valsti"
+      },
+      "CITY": {
+        "PLACEHOLDER": "Ievadiet pilsētas nosaukumu",
+        "LABEL": "Pilsētas nosaukums"
       },
       "SOCIAL_PROFILES": {
         "FACEBOOK": {
@@ -170,6 +191,7 @@
       },
       "INBOX": {
         "LABEL": "Iesūtne",
+        "PLACEHOLDER": "Izvēlieties avota iesūtni",
         "ERROR": "Izvēlieties iesūtni"
       },
       "SUBJECT": {
@@ -197,6 +219,7 @@
     "FILTER_CONTACTS": "Filtrs",
     "FILTER_CONTACTS_SAVE": "Saglabāt filtru",
     "FILTER_CONTACTS_DELETE": "Dzēst filtru",
+    "FILTER_CONTACTS_EDIT": "Rediģēt segmentu",
     "LIST": {
       "LOADING_MESSAGE": "Notiek kontaktpersonu ielāde...",
       "404": "Neviena kontaktpersona neatbilst jūsu meklēšanas vaicājumam 🔍",
@@ -206,6 +229,7 @@
         "PHONE_NUMBER": "Telefona Numurs",
         "CONVERSATIONS": "Sarunas",
         "LAST_ACTIVITY": "Pēdējās Darbības",
+        "CREATED_AT": "Izveidots",
         "COUNTRY": "Valsts",
         "CITY": "Pilsēta",
         "SOCIAL_PROFILES": "Sociālie Profili",

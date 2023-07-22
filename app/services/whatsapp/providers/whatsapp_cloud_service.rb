@@ -2,6 +2,8 @@ class Whatsapp::Providers::WhatsappCloudService < Whatsapp::Providers::BaseServi
   def send_message(phone_number, message)
     if message.attachments.present?
       send_attachment_message(phone_number, message)
+    elsif message.content_type == 'input_select'
+      send_interactive_text_message(phone_number, message)
     else
       send_text_message(phone_number, message)
     end
@@ -23,8 +25,25 @@ class Whatsapp::Providers::WhatsappCloudService < Whatsapp::Providers::BaseServi
   end
 
   def sync_templates
-    response = HTTParty.get("#{business_account_path}/message_templates?access_token=#{whatsapp_channel.provider_config['api_key']}")
-    whatsapp_channel.update(message_templates: response['data'], message_templates_last_updated: Time.now.utc) if response.success?
+    # ensuring that channels with wrong provider config wouldn't keep trying to sync templates
+    whatsapp_channel.mark_message_templates_updated
+    templates = fetch_whatsapp_templates("#{business_account_path}/message_templates?access_token=#{whatsapp_channel.provider_config['api_key']}")
+    whatsapp_channel.update(message_templates: templates, message_templates_last_updated: Time.now.utc) if templates.present?
+  end
+
+  def fetch_whatsapp_templates(url)
+    response = HTTParty.get(url)
+    return [] unless response.success?
+
+    next_url = next_url(response)
+
+    return response['data'] + fetch_whatsapp_templates(next_url) if next_url.present?
+
+    response['data']
+  end
+
+  def next_url(response)
+    response['paging'] ? response['paging']['next'] : ''
   end
 
   def validate_provider_config?
@@ -37,18 +56,20 @@ class Whatsapp::Providers::WhatsappCloudService < Whatsapp::Providers::BaseServi
   end
 
   def media_url(media_id)
-    "https://graph.facebook.com/v13.0/#{media_id}"
+    "#{api_base_path}/v13.0/#{media_id}"
   end
 
-  private
+  def api_base_path
+    ENV.fetch('WHATSAPP_CLOUD_BASE_URL', 'https://graph.facebook.com')
+  end
 
   # TODO: See if we can unify the API versions and for both paths and make it consistent with out facebook app API versions
   def phone_id_path
-    "https://graph.facebook.com/v13.0/#{whatsapp_channel.provider_config['phone_number_id']}"
+    "#{api_base_path}/v13.0/#{whatsapp_channel.provider_config['phone_number_id']}"
   end
 
   def business_account_path
-    "https://graph.facebook.com/v14.0/#{whatsapp_channel.provider_config['business_account_id']}"
+    "#{api_base_path}/v14.0/#{whatsapp_channel.provider_config['business_account_id']}"
   end
 
   def send_text_message(phone_number, message)
@@ -78,7 +99,7 @@ class Whatsapp::Providers::WhatsappCloudService < Whatsapp::Providers::BaseServi
       "#{phone_id_path}/messages",
       headers: api_headers,
       body: {
-        messaging_product: 'whatsapp',
+        :messaging_product => 'whatsapp',
         'to' => phone_number,
         'type' => type,
         type.to_s => type_content
@@ -109,5 +130,22 @@ class Whatsapp::Providers::WhatsappCloudService < Whatsapp::Providers::BaseServi
         parameters: template_info[:parameters]
       }]
     }
+  end
+
+  def send_interactive_text_message(phone_number, message)
+    payload = create_payload_based_on_items(message)
+
+    response = HTTParty.post(
+      "#{phone_id_path}/messages",
+      headers: api_headers,
+      body: {
+        messaging_product: 'whatsapp',
+        to: phone_number,
+        interactive: payload,
+        type: 'interactive'
+      }.to_json
+    )
+
+    process_response(response)
   end
 end

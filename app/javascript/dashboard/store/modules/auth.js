@@ -2,12 +2,7 @@ import Vue from 'vue';
 import types from '../mutation-types';
 import authAPI from '../../api/auth';
 
-import {
-  setUser,
-  clearCookiesOnLogout,
-  clearLocalStorageOnLogout,
-} from '../utils/api';
-import { getLoginRedirectURL } from '../../helper/URLHelper';
+import { setUser, clearCookiesOnLogout } from '../utils/api';
 
 const initialState = {
   currentUser: {
@@ -97,24 +92,6 @@ export const getters = {
 
 // actions
 export const actions = {
-  login(_, { ssoAccountId, ssoConversationId, ...credentials }) {
-    return new Promise((resolve, reject) => {
-      authAPI
-        .login(credentials)
-        .then(response => {
-          clearLocalStorageOnLogout();
-          window.location = getLoginRedirectURL({
-            ssoAccountId,
-            ssoConversationId,
-            user: response.data,
-          });
-          resolve();
-        })
-        .catch(error => {
-          reject(error);
-        });
-    });
-  },
   async validityCheck(context) {
     try {
       const response = await authAPI.validityCheck();
@@ -209,7 +186,16 @@ export const actions = {
 // mutations
 export const mutations = {
   [types.SET_CURRENT_USER_AVAILABILITY](_state, availability) {
-    Vue.set(_state.currentUser, 'availability', availability);
+    const accounts = _state.currentUser.accounts.map(account => {
+      if (account.id === _state.currentUser.account_id) {
+        return { ...account, availability, availability_status: availability };
+      }
+      return account;
+    });
+    Vue.set(_state, 'currentUser', {
+      ..._state.currentUser,
+      accounts,
+    });
   },
   [types.CLEAR_USER](_state) {
     _state.currentUser = initialState.currentUser;

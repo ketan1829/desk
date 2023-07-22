@@ -15,6 +15,7 @@
     "INITIATED_FROM": "Započeto sa",
     "INITIATED_AT": "Započeto u",
     "IP_ADDRESS": "IP adresa",
+    "CREATED_AT_LABEL": "Created",
     "NEW_MESSAGE": "Nova poruka",
     "CONVERSATIONS": {
       "NO_RECORDS_FOUND": "Nema ranijih razgovora povezanih sa ovim kontaktom.",
@@ -32,7 +33,8 @@
       "LABEL_SELECT": {
         "TITLE": "Dodaj oznake",
         "PLACEHOLDER": "Pretraži oznake",
-        "NO_RESULT": "Oznake nisu pronađene"
+        "NO_RESULT": "Oznake nisu pronađene",
+        "CREATE_LABEL": "Create new label"
       }
     },
     "MERGE_CONTACT": "Spoji kontakt",
@@ -70,6 +72,13 @@
       "CANCEL": "Otkaži"
     },
     "SUCCESS_MESSAGE": "Kontakti su uspešno sačuvani",
+    "ERROR_MESSAGE": "Pojavila se greška, molim vas pokušajte ponovo"
+  },
+  "EXPORT_CONTACTS": {
+    "BUTTON_LABEL": "Export",
+    "TITLE": "Export Contacts",
+    "DESC": "Export contacts to a CSV file.",
+    "SUCCESS_MESSAGE": "Export is in progress, You will be notified via email when export file is ready to dowanlod.",
     "ERROR_MESSAGE": "Pojavila se greška, molim vas pokušajte ponovo"
   },
   "DELETE_NOTE": {
@@ -119,8 +128,9 @@
       "PHONE_NUMBER": {
         "PLACEHOLDER": "Unesite broj telefona kontakta",
         "LABEL": "Broj telefona",
-        "HELP": "Broj telefona bi trebao biti u E.164 formatu npr.: +381601234567 [+][broj države][pozivni broj][broj telefona]",
+        "HELP": "Phone number should be of E.164 format eg: +1415555555 [+][country code][area code][local phone number]. You can select the dial code from the dropdown.",
         "ERROR": "Broj telefona bi trebao biti ili prazan ili u E.164 formatu",
+        "DIAL_CODE_ERROR": "Please select a dial code from the list",
         "DUPLICATE": "Broj telefona je iskorišćen kod drugog kontakta."
       },
       "LOCATION": {
@@ -130,6 +140,17 @@
       "COMPANY_NAME": {
         "PLACEHOLDER": "Unesite ime kompanije",
         "LABEL": "Ime firme"
+      },
+      "COUNTRY": {
+        "PLACEHOLDER": "Enter the country name",
+        "LABEL": "Naziv zemlje",
+        "SELECT_PLACEHOLDER": "Select",
+        "REMOVE": "Ukloni",
+        "SELECT_COUNTRY": "Select Country"
+      },
+      "CITY": {
+        "PLACEHOLDER": "Enter the city name",
+        "LABEL": "City Name"
       },
       "SOCIAL_PROFILES": {
         "FACEBOOK": {
@@ -169,7 +190,8 @@
         "LABEL": "Za"
       },
       "INBOX": {
-        "LABEL": "Prijemno sanduče",
+        "LABEL": "Via Inbox",
+        "PLACEHOLDER": "Choose source inbox",
         "ERROR": "Izaberite prijemno sanduče"
       },
       "SUBJECT": {
@@ -197,6 +219,7 @@
     "FILTER_CONTACTS": "Filter",
     "FILTER_CONTACTS_SAVE": "Sačuvaj filter",
     "FILTER_CONTACTS_DELETE": "Izbriši filter",
+    "FILTER_CONTACTS_EDIT": "Edit segment",
     "LIST": {
       "LOADING_MESSAGE": "Preuzimanje kontakata...",
       "404": "Nisu pronađeni kontakti 🔍",
@@ -206,6 +229,7 @@
         "PHONE_NUMBER": "Broj telefona",
         "CONVERSATIONS": "Razgovori",
         "LAST_ACTIVITY": "Poslednja aktivnost",
+        "CREATED_AT": "Kreirano",
         "COUNTRY": "Država",
         "CITY": "Grad",
         "SOCIAL_PROFILES": "Socijalne mreže",

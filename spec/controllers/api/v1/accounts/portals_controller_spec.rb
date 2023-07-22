@@ -26,7 +26,7 @@ RSpec.describe 'Api::V1::Accounts::Portals', type: :request do
             headers: agent.create_new_auth_token
 
         expect(response).to have_http_status(:success)
-        json_response = JSON.parse(response.body)
+        json_response = response.parsed_body
         expect(json_response['payload'].length).to be 2
         expect(json_response['payload'][0]['id']).to be portal.id
       end
@@ -48,7 +48,7 @@ RSpec.describe 'Api::V1::Accounts::Portals', type: :request do
             headers: agent.create_new_auth_token
 
         expect(response).to have_http_status(:success)
-        json_response = JSON.parse(response.body)
+        json_response = response.parsed_body
         expect(json_response['name']).to eq portal.name
         expect(json_response['meta']['all_articles_count']).to eq 0
       end
@@ -65,7 +65,7 @@ RSpec.describe 'Api::V1::Accounts::Portals', type: :request do
             headers: agent.create_new_auth_token
 
         expect(response).to have_http_status(:success)
-        json_response = JSON.parse(response.body)
+        json_response = response.parsed_body
         expect(json_response['name']).to eq portal.name
         expect(json_response['meta']['all_articles_count']).to eq 2
         expect(json_response['meta']['mine_articles_count']).to eq 1
@@ -86,24 +86,20 @@ RSpec.describe 'Api::V1::Accounts::Portals', type: :request do
 
     context 'when it is an authenticated user' do
       it 'creates portal' do
-        file = fixture_file_upload(Rails.root.join('spec/assets/avatar.png'), 'image/png')
-
         portal_params = {
           portal: {
             name: 'test_portal',
             slug: 'test_kbase',
             custom_domain: 'https://support.chatwoot.dev'
-          },
-          logo: file
+          }
         }
         post "/api/v1/accounts/#{account.id}/portals",
              params: portal_params,
              headers: admin.create_new_auth_token
 
         expect(response).to have_http_status(:success)
-        json_response = JSON.parse(response.body)
+        json_response = response.parsed_body
         expect(json_response['name']).to eql('test_portal')
-        expect(json_response['logo']['filename']).to eql('avatar.png')
         expect(json_response['custom_domain']).to eql('support.chatwoot.dev')
       end
     end
@@ -134,7 +130,7 @@ RSpec.describe 'Api::V1::Accounts::Portals', type: :request do
             headers: admin.create_new_auth_token
 
         expect(response).to have_http_status(:success)
-        json_response = JSON.parse(response.body)
+        json_response = response.parsed_body
         expect(json_response['name']).to eql(portal_params[:portal][:name])
         expect(json_response['config']).to eql({ 'allowed_locales' => [{ 'articles_count' => 0, 'categories_count' => 0, 'code' => 'en' },
                                                                        { 'articles_count' => 0, 'categories_count' => 0, 'code' => 'es' }] })
@@ -154,7 +150,7 @@ RSpec.describe 'Api::V1::Accounts::Portals', type: :request do
             headers: admin.create_new_auth_token
 
         expect(response).to have_http_status(:success)
-        json_response = JSON.parse(response.body)
+        json_response = response.parsed_body
         expect(json_response['archived']).to eql(portal_params[:portal][:archived])
 
         portal.reload
@@ -208,10 +204,39 @@ RSpec.describe 'Api::V1::Accounts::Portals', type: :request do
             headers: admin.create_new_auth_token
 
         expect(response).to have_http_status(:success)
-        json_response = JSON.parse(response.body)
+        json_response = response.parsed_body
         expect(portal.reload.member_ids).to include(agent_1.id)
         expect(json_response['portal_members'].length).to be(3)
       end
+    end
+  end
+
+  describe 'POST /api/v1/accounts/{account.id}/portals/attach_file' do
+    it 'update the portal with a logo' do
+      file = fixture_file_upload(Rails.root.join('spec/assets/avatar.png'), 'image/png')
+
+      post "/api/v1/accounts/#{account.id}/portals/attach_file",
+           headers: admin.create_new_auth_token,
+           params: { logo: file }
+
+      expect(response).to have_http_status(:success)
+
+      blob = response.parsed_body
+
+      expect(blob['blob_key']).to be_present
+      expect(blob['blob_id']).to be_present
+
+      params = { blob_id: blob['blob_id'] }
+
+      expect(portal.logo.attachment).not_to be_present
+
+      patch "/api/v1/accounts/#{account.id}/portals/#{portal.slug}",
+            headers: admin.create_new_auth_token,
+            params: params
+      portal.reload
+
+      expect(portal.logo.presence).to be_truthy
+      expect(portal.logo.attachment).to be_present
     end
   end
 end

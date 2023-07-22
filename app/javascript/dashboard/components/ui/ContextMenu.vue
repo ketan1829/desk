@@ -1,8 +1,6 @@
 <template>
   <div
-    v-show="show"
-    ref="context"
-    class="context-menu-container"
+    class="fixed outline-none z-[9999] cursor-pointer"
     :style="style"
     tabindex="0"
     @blur="$emit('close')"
@@ -39,15 +37,6 @@ export default {
   },
   mounted() {
     this.$nextTick(() => this.$el.focus());
-    this.show = true;
   },
 };
 </script>
-<style>
-.context-menu-container {
-  position: fixed;
-  z-index: var(--z-index-very-high);
-  outline: none;
-  cursor: pointer;
-}
-</style>

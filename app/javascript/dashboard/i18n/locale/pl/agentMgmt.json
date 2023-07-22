@@ -74,6 +74,11 @@
           "LABEL": "Adres e-mail",
           "PLACEHOLDER": "Wprowadź adres e-mail agenta"
         },
+        "AGENT_AVAILABILITY": {
+          "LABEL": "Dostępność",
+          "PLACEHOLDER": "Wybierz status dostępności",
+          "ERROR": "Wymagana jest dostępność"
+        },
         "SUBMIT": "Edytuj agenta"
       },
       "BUTTON_TEXT": "Edytuj",
@@ -105,7 +110,8 @@
         },
         "PLACEHOLDER": {
           "AGENT": "Wyszukaj konsultantów",
-          "TEAM": "Wyszukaj zespoły"
+          "TEAM": "Wyszukaj zespoły",
+          "INPUT": "Wyszukiwanie konsultantów"
         }
       }
     }

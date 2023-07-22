@@ -23,6 +23,14 @@ class ArticlePolicy < ApplicationPolicy
     @account_user.administrator? || portal_member?
   end
 
+  def attach_file?
+    @account_user.administrator? || portal_member?
+  end
+
+  def reorder?
+    @account_user.administrator? || portal_member?
+  end
+
   private
 
   def portal_member?

@@ -1,48 +1,78 @@
 <template>
-  <form class="conversation--form" @submit.prevent="onFormSubmit">
+  <form class="conversation--form w-full" @submit.prevent="onFormSubmit">
     <div v-if="showNoInboxAlert" class="callout warning">
       <p>
         {{ $t('NEW_CONVERSATION.NO_INBOX') }}
       </p>
     </div>
     <div v-else>
-      <div class="row gutter-small">
-        <div class="columns">
-          <label :class="{ error: $v.targetInbox.$error }">
+      <div class="gap-2 flex flex-row">
+        <div class="w-[50%]">
+          <label>
             {{ $t('NEW_CONVERSATION.FORM.INBOX.LABEL') }}
-            <select v-model="targetInbox">
-              <option
-                v-for="contactableInbox in inboxes"
-                :key="contactableInbox.inbox.id"
-                :value="contactableInbox"
-              >
-                {{ contactableInbox.inbox.name }}
-              </option>
-            </select>
+          </label>
+          <div class="multiselect-wrap--small">
+            <multiselect
+              v-model="targetInbox"
+              track-by="id"
+              label="name"
+              :placeholder="$t('FORMS.MULTISELECT.SELECT')"
+              selected-label=""
+              select-label=""
+              deselect-label=""
+              :max-height="160"
+              :close-on-select="true"
+              :options="[...inboxes]"
+            >
+              <template slot="singleLabel" slot-scope="{ option }">
+                <inbox-dropdown-item
+                  v-if="option.name"
+                  :name="option.name"
+                  :inbox-identifier="computedInboxSource(option)"
+                  :channel-type="option.channel_type"
+                />
+                <span v-else>
+                  {{ $t('NEW_CONVERSATION.FORM.INBOX.PLACEHOLDER') }}
+                </span>
+              </template>
+              <template slot="option" slot-scope="{ option }">
+                <inbox-dropdown-item
+                  :name="option.name"
+                  :inbox-identifier="computedInboxSource(option)"
+                  :channel-type="option.channel_type"
+                />
+              </template>
+            </multiselect>
+          </div>
+          <label :class="{ error: $v.targetInbox.$error }">
             <span v-if="$v.targetInbox.$error" class="message">
               {{ $t('NEW_CONVERSATION.FORM.INBOX.ERROR') }}
             </span>
           </label>
         </div>
-        <div class="columns">
+        <div class="w-[50%]">
           <label>
             {{ $t('NEW_CONVERSATION.FORM.TO.LABEL') }}
-            <div class="contact-input">
+            <div
+              class="flex items-center h-[2.4735rem] rounded-sm py-1 px-2 bg-slate-25 dark:bg-slate-900 border border-solid border-slate-75 dark:border-slate-600"
+            >
               <thumbnail
                 :src="contact.thumbnail"
                 size="24px"
                 :username="contact.name"
                 :status="contact.availability_status"
               />
-              <h4 class="text-block-title contact-name">
+              <h4
+                class="m-0 ml-2 mr-2 text-slate-700 dark:text-slate-100 text-sm"
+              >
                 {{ contact.name }}
               </h4>
             </div>
           </label>
         </div>
       </div>
-      <div v-if="isAnEmailInbox" class="row">
-        <div class="columns">
+      <div v-if="isAnEmailInbox" class="w-full">
+        <div class="w-full">
           <label :class="{ error: $v.subject.$error }">
             {{ $t('NEW_CONVERSATION.FORM.SUBJECT.LABEL') }}
             <input
@@ -57,9 +87,9 @@
           </label>
         </div>
       </div>
-      <div class="row">
-        <div class="columns">
-          <div class="canned-response">
+      <div class="w-full">
+        <div class="w-full">
+          <div class="relative">
             <canned-response
               v-if="showCannedResponseMenu && hasSlashCommand"
               :search-key="cannedResponseSearchKey"
@@ -79,6 +109,7 @@
                   v-model="message"
                   class="message-editor"
                   :class="{ editor_warning: $v.message.$error }"
+                  :enable-variables="true"
                   :placeholder="$t('NEW_CONVERSATION.FORM.MESSAGE.PLACEHOLDER')"
                   @toggle-canned-menu="toggleCannedMenu"
                   @blur="$v.message.$touch"
@@ -99,7 +130,7 @@
             {{ $t('NEW_CONVERSATION.FORM.MESSAGE.LABEL') }}
             <textarea
               v-model="message"
-              class="message-input"
+              class="min-h-[5rem]"
               type="text"
               :placeholder="$t('NEW_CONVERSATION.FORM.MESSAGE.PLACEHOLDER')"
               @input="$v.message.$touch"
@@ -111,7 +142,10 @@
         </div>
       </div>
     </div>
-    <div v-if="!hasWhatsappTemplates" class="modal-footer">
+    <div
+      v-if="!hasWhatsappTemplates"
+      class="flex flex-row justify-end gap-2 py-2 px-0 w-full"
+    >
       <button class="button clear" @click.prevent="onCancel">
         {{ $t('NEW_CONVERSATION.FORM.CANCEL') }}
       </button>
@@ -128,10 +162,12 @@ import Thumbnail from 'dashboard/components/widgets/Thumbnail';
 import WootMessageEditor from 'dashboard/components/widgets/WootWriter/Editor';
 import ReplyEmailHead from 'dashboard/components/widgets/conversation/ReplyEmailHead';
 import CannedResponse from 'dashboard/components/widgets/conversation/CannedResponse.vue';
+import InboxDropdownItem from 'dashboard/components/widgets/InboxDropdownItem';
 import WhatsappTemplates from './WhatsappTemplates.vue';
 import alertMixin from 'shared/mixins/alertMixin';
 import { INBOX_TYPES } from 'shared/mixins/inboxMixin';
 import { ExceptionWithMessage } from 'shared/helpers/CustomErrors';
+import { getInboxSource } from 'dashboard/helper/inbox';
 import { required, requiredIf } from 'vuelidate/lib/validators';
 
 export default {
@@ -141,6 +177,7 @@ export default {
     ReplyEmailHead,
     CannedResponse,
     WhatsappTemplates,
+    InboxDropdownItem,
   },
   mixins: [alertMixin],
   props: {
@@ -160,9 +197,9 @@ export default {
       message: '',
       showCannedResponseMenu: false,
       cannedResponseSearchKey: '',
-      selectedInbox: '',
       bccEmails: '',
       ccEmails: '',
+      targetInbox: {},
       whatsappTemplateSelected: false,
     };
   },
@@ -185,8 +222,8 @@ export default {
     }),
     emailMessagePayload() {
       const payload = {
-        inboxId: this.targetInbox.inbox.id,
-        sourceId: this.targetInbox.source_id,
+        inboxId: this.targetInbox.id,
+        sourceId: this.targetInbox.sourceId,
         contactId: this.contact.id,
         message: { content: this.message },
         mailSubject: this.subject,
@@ -201,12 +238,17 @@ export default {
       }
       return payload;
     },
-    targetInbox: {
+    selectedInbox: {
       get() {
-        return this.selectedInbox || {};
+        const inboxList = this.contact.contactableInboxes || [];
+        return (
+          inboxList.find(inbox => inbox.inbox.id === this.targetInbox.id) || {
+            inbox: {},
+          }
+        );
       },
       set(value) {
-        this.selectedInbox = value;
+        this.targetInbox = value.inbox;
       },
     },
     showNoInboxAlert() {
@@ -216,7 +258,11 @@ export default {
       return this.inboxes.length === 0 && !this.uiFlags.isFetchingInboxes;
     },
     inboxes() {
-      return this.contact.contactableInboxes || [];
+      const inboxList = this.contact.contactableInboxes || [];
+      return inboxList.map(inbox => ({
+        ...inbox.inbox,
+        sourceId: inbox.source_id,
+      }));
     },
     isAnEmailInbox() {
       return (
@@ -259,17 +305,15 @@ export default {
       this.$emit('success');
     },
     replaceTextWithCannedResponse(message) {
-      setTimeout(() => {
-        this.message = message;
-      }, 50);
+      this.message = message;
     },
     toggleCannedMenu(value) {
       this.showCannedMenu = value;
     },
     prepareWhatsAppMessagePayload({ message: content, templateParams }) {
       const payload = {
-        inboxId: this.targetInbox.inbox.id,
-        sourceId: this.targetInbox.source_id,
+        inboxId: this.targetInbox.id,
+        sourceId: this.targetInbox.sourceId,
         contactId: this.contact.id,
         message: { content, template_params: templateParams },
         assigneeId: this.currentUser.id,
@@ -312,62 +356,48 @@ export default {
       const payload = this.prepareWhatsAppMessagePayload(messagePayload);
       await this.createConversation(payload);
     },
+    inboxReadableIdentifier(inbox) {
+      return `${inbox.name} (${inbox.channel_type})`;
+    },
+    computedInboxSource(inbox) {
+      if (!inbox.channel_type) return '';
+      const classByType = getInboxSource(
+        inbox.channel_type,
+        inbox.phone_number,
+        inbox
+      );
+      return classByType;
+    },
   },
 };
 </script>
 
 <style scoped lang="scss">
 .conversation--form {
-  padding: var(--space-normal) var(--space-large) var(--space-large);
+  @apply pt-4 px-8 pb-8;
 }
 
-.canned-response {
-  ::v-deep .mention--box {
-    border-left: 1px solid var(--color-border);
-    border-right: 1px solid var(--color-border);
-    top: var(--space-jumbo) !important;
+.message-editor {
+  @apply px-3;
+
+  ::v-deep {
+    .ProseMirror-menubar {
+      @apply rounded-tl-[4px];
+    }
   }
 }
 
-.input-group-label {
-  font-size: var(--font-size-small);
-}
-
-.contact-input {
-  display: flex;
-  align-items: center;
-  height: 3.9rem;
-  background: var(--color-background-light);
-
-  border: 1px solid var(--color-border);
-  padding: var(--space-smaller) var(--space-small);
-  border-radius: var(--border-radius-small);
-
-  .contact-name {
-    margin: 0;
-    margin-left: var(--space-small);
+::v-deep {
+  .mention--box {
+    @apply left-0 m-auto right-0 top-auto h-fit;
   }
-}
 
-.message-input {
-  min-height: 8rem;
-}
-
-.modal-footer {
-  display: flex;
-  justify-content: flex-end;
-}
-.row.gutter-small {
-  gap: var(--space-small);
-}
-
-::v-deep .mention--box {
-  border-left: 1px solid var(--color-border);
-  border-right: 1px solid var(--color-border);
-  left: 0;
-  margin: auto;
-  right: 0;
-  top: 18rem !important;
-  width: 90%;
+  /* TODO: Remove when have standardized a component out of multiselect  */
+  .multiselect .multiselect__content .multiselect__option span {
+    @apply inline-flex w-6 text-slate-600 dark:text-slate-400;
+  }
+  .multiselect .multiselect__content .multiselect__option {
+    @apply py-0.5 px-1;
+  }
 }
 </style>

@@ -26,8 +26,39 @@ class ActionCableConnector extends BaseActionCableConnector {
       'first.reply.created': this.onFirstReplyCreated,
       'conversation.read': this.onConversationRead,
       'conversation.updated': this.onConversationUpdated,
+      'account.cache_invalidated': this.onCacheInvalidate,
     };
   }
+
+  onReconnect = () => {
+    this.syncActiveConversationMessages();
+  };
+
+  onDisconnected = () => {
+    this.setActiveConversationLastMessageId();
+  };
+
+  setActiveConversationLastMessageId = () => {
+    const {
+      params: { conversation_id },
+    } = this.app.$route;
+    if (conversation_id) {
+      this.app.$store.dispatch('setConversationLastMessageId', {
+        conversationId: Number(conversation_id),
+      });
+    }
+  };
+
+  syncActiveConversationMessages = () => {
+    const {
+      params: { conversation_id },
+    } = this.app.$route;
+    if (conversation_id) {
+      this.app.$store.dispatch('syncActiveConversationMessages', {
+        conversationId: Number(conversation_id),
+      });
+    }
+  };
 
   isAValidEvent = data => {
     return this.app.$store.getters.getCurrentAccountId === data.account_id;
@@ -74,8 +105,16 @@ class ActionCableConnector extends BaseActionCableConnector {
   onLogout = () => AuthAPI.logout();
 
   onMessageCreated = data => {
+    const {
+      conversation: { last_activity_at: lastActivityAt },
+      conversation_id: conversationId,
+    } = data;
     DashboardAudioNotificationHelper.onNewMessage(data);
     this.app.$store.dispatch('addMessage', data);
+    this.app.$store.dispatch('updateConversationLastActivity', {
+      lastActivityAt,
+      conversationId,
+    });
   };
 
   onReload = () => window.location.reload();
@@ -155,6 +194,13 @@ class ActionCableConnector extends BaseActionCableConnector {
 
   onFirstReplyCreated = () => {
     bus.$emit('fetch_overview_reports');
+  };
+
+  onCacheInvalidate = data => {
+    const keys = data.cache_keys;
+    this.app.$store.dispatch('labels/revalidate', { newKey: keys.label });
+    this.app.$store.dispatch('inboxes/revalidate', { newKey: keys.inbox });
+    this.app.$store.dispatch('teams/revalidate', { newKey: keys.team });
   };
 }
 

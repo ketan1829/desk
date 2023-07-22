@@ -1,19 +1,40 @@
 <template>
-  <div class="contact--profile">
-    <div class="contact--info">
-      <thumbnail
-        v-if="showAvatar"
-        :src="contact.thumbnail"
-        size="56px"
-        :username="contact.name"
-        :status="contact.availability_status"
-      />
+  <div class="relative items-center p-4 bg-white dark:bg-slate-900">
+    <div class="text-left rtl:text-right">
+      <div class="flex justify-between flex-row">
+        <thumbnail
+          v-if="showAvatar"
+          :src="contact.thumbnail"
+          size="56px"
+          :username="contact.name"
+          :status="contact.availability_status"
+        />
+        <woot-button
+          v-if="showCloseButton"
+          :icon="closeIconName"
+          class="clear secondary rtl:rotate-180"
+          @click="onPanelToggle"
+        />
+      </div>
 
-      <div class="contact--details">
-        <div v-if="showAvatar" class="contact--name-wrap">
-          <h3 class="sub-block-title contact--name">
+      <div class="mt-2 w-full">
+        <div v-if="showAvatar" class="flex items-center mb-2 gap-1">
+          <h3
+            class="text-base text-slate-800 dark:text-slate-100 capitalize whitespace-normal my-0"
+          >
             {{ contact.name }}
           </h3>
+          <fluent-icon
+            v-if="contact.created_at"
+            v-tooltip="
+              `${$t('CONTACT_PANEL.CREATED_AT_LABEL')} ${dynamicTime(
+                contact.created_at
+              )}`
+            "
+            icon="info"
+            size="14"
+            class="mt-0.5"
+          />
           <a
             :href="contactProfileLink"
             class="fs-default"
@@ -28,11 +49,12 @@
             />
           </a>
         </div>
-        <p v-if="additionalAttributes.description" class="contact--bio">
+
+        <p v-if="additionalAttributes.description" class="break-words">
           {{ additionalAttributes.description }}
         </p>
         <social-icons :social-profiles="socialProfiles" />
-        <div class="contact--metadata">
+        <div class="mb-3">
           <contact-info-row
             :href="contact.email ? `mailto:${contact.email}` : ''"
             :value="contact.email"
@@ -47,6 +69,7 @@
             icon="call"
             emoji="📞"
             :title="$t('CONTACT_PANEL.PHONE_NUMBER')"
+            show-copy
           />
           <contact-info-row
             v-if="contact.identifier"
@@ -70,11 +93,11 @@
           />
         </div>
       </div>
-      <div class="contact-actions">
+      <div class="flex items-center w-full mt-2 gap-2">
         <woot-button
           v-tooltip="$t('CONTACT_PANEL.NEW_MESSAGE')"
           title="$t('CONTACT_PANEL.NEW_MESSAGE')"
-          class="new-message"
+          class="mr-2 rtl:ml-2 rtl:mr-0"
           icon="chat"
           size="small"
           @click="toggleConversationModal"
@@ -82,17 +105,16 @@
         <woot-button
           v-tooltip="$t('EDIT_CONTACT.BUTTON_LABEL')"
           title="$t('EDIT_CONTACT.BUTTON_LABEL')"
-          class="edit-contact"
+          class="mr-2 rtl:ml-2 rtl:mr-0"
           icon="edit"
           variant="smooth"
           size="small"
           @click="toggleEditModal"
         />
         <woot-button
-          v-if="isAdmin"
           v-tooltip="$t('CONTACT_PANEL.MERGE_CONTACT')"
           title="$t('CONTACT_PANEL.MERGE_CONTACT')"
-          class="merge-contact"
+          class="mr-2 rtl:ml-2 rtl:mr-0"
           icon="merge"
           variant="smooth"
           size="small"
@@ -104,7 +126,7 @@
           v-if="isAdmin"
           v-tooltip="$t('DELETE_CONTACT.BUTTON_LABEL')"
           title="$t('DELETE_CONTACT.BUTTON_LABEL')"
-          class="delete-contact"
+          class="mr-2 rtl:ml-2 rtl:mr-0"
           icon="delete"
           variant="smooth"
           size="small"
@@ -147,7 +169,7 @@
 </template>
 <script>
 import { mixin as clickaway } from 'vue-clickaway';
-
+import timeMixin from 'dashboard/mixins/time';
 import ContactInfoRow from './ContactInfoRow';
 import Thumbnail from 'dashboard/components/widgets/Thumbnail.vue';
 import SocialIcons from './SocialIcons';
@@ -169,7 +191,7 @@ export default {
     NewConversation,
     ContactMergeModal,
   },
-  mixins: [alertMixin, adminMixin, clickaway],
+  mixins: [alertMixin, adminMixin, clickaway, timeMixin],
   props: {
     contact: {
       type: Object,
@@ -182,6 +204,14 @@ export default {
     showAvatar: {
       type: Boolean,
       default: true,
+    },
+    showCloseButton: {
+      type: Boolean,
+      default: true,
+    },
+    closeIconName: {
+      type: String,
+      default: 'chevron-right',
     },
   },
   data() {
@@ -233,6 +263,9 @@ export default {
     toggleEditModal() {
       this.showEditModal = !this.showEditModal;
     },
+    onPanelToggle() {
+      this.$emit('toggle-panel');
+    },
     toggleConversationModal() {
       this.showConversationModal = !this.showConversationModal;
     },
@@ -278,73 +311,3 @@ export default {
   },
 };
 </script>
-
-<style scoped lang="scss">
-.contact--profile {
-  position: relative;
-  align-items: flex-start;
-  padding: var(--space-normal);
-
-  .user-thumbnail-box {
-    margin-right: var(--space-normal);
-  }
-}
-
-.contact--details {
-  margin-top: var(--space-small);
-  width: 100%;
-}
-
-.contact--info {
-  text-align: left;
-}
-
-.contact--name-wrap {
-  display: flex;
-  align-items: center;
-  margin-bottom: var(--space-small);
-}
-
-.contact--name {
-  text-transform: capitalize;
-  white-space: normal;
-  margin: 0 var(--space-smaller) 0 0;
-
-  a {
-    color: var(--color-body);
-  }
-}
-
-.contact--metadata {
-  margin-bottom: var(--space-slab);
-}
-
-.contact-actions {
-  margin-top: var(--space-small);
-}
-
-.contact-actions {
-  display: flex;
-  align-items: center;
-  width: 100%;
-
-  .new-message,
-  .edit-contact,
-  .merge-contact,
-  .delete-contact {
-    margin-right: var(--space-small);
-  }
-}
-.merege-summary--card {
-  padding: var(--space-normal);
-}
-.contact--bio {
-  word-wrap: break-word;
-}
-
-.button--contact-menu {
-  position: absolute;
-  right: var(--space-normal);
-  top: 0;
-}
-</style>

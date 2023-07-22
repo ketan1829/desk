@@ -1,16 +1,16 @@
 <template>
-  <div class="row content-box full-height">
+  <div class="flex-1 overflow-auto p-4">
     <woot-button
       color-scheme="success"
-      class-names="button--fixed-right-top"
+      class-names="button--fixed-top"
       icon="add-circle"
       @click="openAddPopup"
     >
       {{ $t('INTEGRATION_SETTINGS.WEBHOOK.HEADER_BTN_TXT') }}
     </woot-button>
 
-    <div class="row">
-      <div class="small-8 columns with-right-space ">
+    <div class="flex flex-row gap-4">
+      <div class="w-[60%]">
         <p
           v-if="!uiFlags.fetchingList && !records.length"
           class="no-items-error-message"
@@ -49,7 +49,7 @@
         </table>
       </div>
 
-      <div class="small-4 columns">
+      <div class="w-[34%]">
         <span
           v-dompurify-html="
             useInstallationName(

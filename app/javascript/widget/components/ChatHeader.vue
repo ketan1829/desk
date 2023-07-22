@@ -19,19 +19,19 @@
       />
       <div>
         <div
-          class="font-medium text-base flex items-center"
+          class="font-medium text-base leading-4 flex items-center"
           :class="$dm('text-black-900', 'dark:text-slate-50')"
         >
           <span v-dompurify-html="title" class="mr-1" />
           <div
             :class="
-              `h-2 w-2 rounded-full leading-4
+              `h-2 w-2 rounded-full
               ${isOnline ? 'bg-green-500' : 'hidden'}`
             "
           />
         </div>
         <div
-          class="text-xs mt-1"
+          class="text-xs mt-1 leading-3"
           :class="$dm('text-black-700', 'dark:text-slate-400')"
         >
           {{ replyWaitMessage }}
@@ -46,6 +46,7 @@
 import { mapGetters } from 'vuex';
 
 import availabilityMixin from 'widget/mixins/availability';
+import nextAvailabilityTime from 'widget/mixins/nextAvailabilityTime';
 import FluentIcon from 'shared/components/FluentIcon/Index.vue';
 import HeaderActions from './HeaderActions';
 import routerMixin from 'widget/mixins/routerMixin';
@@ -57,7 +58,7 @@ export default {
     FluentIcon,
     HeaderActions,
   },
-  mixins: [availabilityMixin, routerMixin, darkMixin],
+  mixins: [nextAvailabilityTime, availabilityMixin, routerMixin, darkMixin],
   props: {
     avatarUrl: {
       type: String,
@@ -92,11 +93,6 @@ export default {
         return this.isInBetweenTheWorkingHours;
       }
       return anyAgentOnline;
-    },
-    replyWaitMessage() {
-      return this.isOnline
-        ? this.replyTimeStatus
-        : this.$t('TEAM_AVAILABILITY.OFFLINE');
     },
   },
   methods: {

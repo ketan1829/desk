@@ -53,10 +53,6 @@
           "ENABLE": "Opret samtaler fra nævnte Tweets"
         }
       },
-      "MICROSOFT": {
-        "HELP": "To add your Microsoft account as a channel, you need to authenticate your Microsoft account by clicking on 'Sign in with Microsoft' ",
-        "ERROR_MESSAGE": "There was an error connecting to Microsoft, please try again"
-      },
       "WEBSITE_CHANNEL": {
         "TITLE": "Hjemmesidekanal",
         "DESC": "Opret en kanal til din hjemmeside og begynde at supporte dine kunder via vores hjemmeside widget.",
@@ -348,6 +344,17 @@
       "FINISH": {
         "TITLE": "Du klarede det!",
         "DESC": "Du er færdig med at integrere din Facebook-side med Chatwoot. Næste gang en kunde sender en meddelelse til din side, vil samtalen automatisk dukke op i din indbakke.<br>Vi giver dig også et widget script, som du nemt kan tilføje til din hjemmeside. Når dette er live på din hjemmeside, kan kunder sende dig en besked direkte fra din hjemmeside uden hjælp fra et eksternt værktøj, og samtalen vises lige her, på Chatwoot.<br>Cool, var? Nå ikke, vi forsøge at være :)"
+      },
+      "EMAIL_PROVIDER": {
+        "TITLE": "Select your email provider",
+        "DESCRIPTION": "Select an email provider from the list below. If you don't see your email provider in the list, you can select the other provider option and provide the IMAP and SMTP Credentials."
+      },
+      "MICROSOFT": {
+        "TITLE": "Microsoft Email",
+        "DESCRIPTION": "Click on the Sign in with Microsoft button to get started. You will redirected to the email sign in page. Once you accept the requested permissions, you would be redirected back to the inbox creation step.",
+        "EMAIL_PLACEHOLDER": "Enter email address",
+        "HELP": "To add your Microsoft account as a channel, you need to authenticate your Microsoft account by clicking on 'Sign in with Microsoft' ",
+        "ERROR_MESSAGE": "There was an error connecting to Microsoft, please try again"
       }
     },
     "DETAILS": {
@@ -432,7 +439,8 @@
       "LABEL": "Funktioner",
       "DISPLAY_FILE_PICKER": "Vis filvælger på widget'en",
       "DISPLAY_EMOJI_PICKER": "Vis emoji-vælger på widget'en",
-      "ALLOW_END_CONVERSATION": "Tillad brugere at afslutte samtale fra widget"
+      "ALLOW_END_CONVERSATION": "Tillad brugere at afslutte samtale fra widget",
+      "USE_INBOX_AVATAR_FOR_BOT": "Use inbox name and avatar for the bot"
     },
     "SETTINGS_POPUP": {
       "MESSENGER_HEADING": "Messenger- Script",
@@ -456,6 +464,7 @@
       "AUTO_ASSIGNMENT_SUB_TEXT": "Aktiver eller deaktiver automatisk tildeling af nye samtaler til agenter tilføjet til denne indbakke.",
       "HMAC_VERIFICATION": "Bruger Identitetsvalidering",
       "HMAC_DESCRIPTION": "For at validere brugerens identitet, kan du passere en `identifier_hash` for hver bruger. Du kan generere en HMAC sha256 hash ved hjælp af 'identifier' med nøglen vist her.",
+      "HMAC_LINK_TO_DOCS": "You can read more here.",
       "HMAC_MANDATORY_VERIFICATION": "Gennemtving Validering Af Bruger Identitet",
       "HMAC_MANDATORY_DESCRIPTION": "Hvis aktiveret, vil forespørgsler der mangler 'identifier_hash' blive afvist.",
       "INBOX_IDENTIFIER": "Identifikator For Indbakke",
@@ -465,7 +474,21 @@
       "ALLOW_MESSAGES_AFTER_RESOLVED": "Tillad beskeder efter samtalen løst",
       "ALLOW_MESSAGES_AFTER_RESOLVED_SUB_TEXT": "Tillad slutbrugere at sende beskeder, selv efter samtalen er løst.",
       "WHATSAPP_SECTION_SUBHEADER": "Denne API-nøgle bruges til integration med WhatsApp API'erne.",
-      "WHATSAPP_SECTION_TITLE": "API Nøgle"
+      "WHATSAPP_SECTION_UPDATE_SUBHEADER": "Enter the updated key to be used for the integration with the WhatsApp APIs.",
+      "WHATSAPP_SECTION_TITLE": "API Nøgle",
+      "WHATSAPP_SECTION_UPDATE_TITLE": "Update API Key",
+      "WHATSAPP_SECTION_UPDATE_PLACEHOLDER": "Enter the new API Key here",
+      "WHATSAPP_SECTION_UPDATE_BUTTON": "Opdater",
+      "WHATSAPP_WEBHOOK_TITLE": "Webhook Verificér Token",
+      "WHATSAPP_WEBHOOK_SUBHEADER": "This token is used to verify the authenticity of the webhook endpoint.",
+      "UPDATE_PRE_CHAT_FORM_SETTINGS": "Update Pre Chat Form Settings"
+    },
+    "HELP_CENTER": {
+      "LABEL": "Help Center",
+      "PLACEHOLDER": "Select Help Center",
+      "SELECT_PLACEHOLDER": "Select Help Center",
+      "REMOVE": "Remove Help Center",
+      "SUB_TEXT": "Attach a Help Center with the inbox"
     },
     "AUTO_ASSIGNMENT": {
       "MAX_ASSIGNMENT_LIMIT": "Grænse for automatisk tildeling",
@@ -512,7 +535,6 @@
       "UPDATE": "Opdater indstillinger for åbningstider",
       "TOGGLE_AVAILABILITY": "Aktiver forretningstilgængelighed for denne indbakke",
       "UNAVAILABLE_MESSAGE_LABEL": "Utilgængelig besked til besøgende",
-      "UNAVAILABLE_MESSAGE_DEFAULT": "Vi er ikke tilgængelige i øjeblikket. Skriv en besked og vi svarer, når vi er tilbage.",
       "TOGGLE_HELP": "Aktivering af forretningstilgængelighed vil vise de tilgængelige timer på live chat widget, selvom alle agenter er offline. Udenfor tilgængelige timer kan livreddere advares med en besked og en pre-chat formular.",
       "DAY": {
         "ENABLE": "Aktiver tilgængelighed for denne dag",
@@ -674,6 +696,10 @@
       },
       "BRANDING_TEXT": "Drevet af Chatwoot",
       "SCRIPT_SETTINGS": "\n      window.chatwootSettings = {options};"
+    },
+    "EMAIL_PROVIDERS": {
+      "MICROSOFT": "Microsoft",
+      "OTHER_PROVIDERS": "Other Providers"
     }
   }
 }

@@ -15,6 +15,7 @@
     "INITIATED_FROM": "Iniciado desde",
     "INITIATED_AT": "Iniciado el",
     "IP_ADDRESS": "Dirección IP",
+    "CREATED_AT_LABEL": "Creado",
     "NEW_MESSAGE": "Nuevo mensaje",
     "CONVERSATIONS": {
       "NO_RECORDS_FOUND": "No hay conversaciones previas asociadas a este contacto.",
@@ -32,7 +33,8 @@
       "LABEL_SELECT": {
         "TITLE": "Añadir etiquetas",
         "PLACEHOLDER": "Buscar etiquetas",
-        "NO_RESULT": "No se encontraron etiquetas"
+        "NO_RESULT": "No se encontraron etiquetas",
+        "CREATE_LABEL": "Create new label"
       }
     },
     "MERGE_CONTACT": "Combinar contacto",
@@ -70,6 +72,13 @@
       "CANCEL": "Cancelar"
     },
     "SUCCESS_MESSAGE": "Contacto guardado correctamente",
+    "ERROR_MESSAGE": "Hubo un error, por favor inténtelo de nuevo"
+  },
+  "EXPORT_CONTACTS": {
+    "BUTTON_LABEL": "Exportar",
+    "TITLE": "Exportar contactos",
+    "DESC": "Exportar contactos a un archivo CSV.",
+    "SUCCESS_MESSAGE": "El proceso de exportar esta en proceso. Será notificado por correo cuando el archivo esté listo para descargar.",
     "ERROR_MESSAGE": "Hubo un error, por favor inténtelo de nuevo"
   },
   "DELETE_NOTE": {
@@ -121,6 +130,7 @@
         "LABEL": "Número telefónico",
         "HELP": "El número telefónico debe tener el formato E.164, por ejemplo: +753001234567 [+][código del país][código de área][número teléfonico]",
         "ERROR": "El número telefónico debe estar vacío o en formato E.164",
+        "DIAL_CODE_ERROR": "Por favor, seleccione un código de marcado de la lista",
         "DUPLICATE": "Este número de teléfono está en uso para otro contacto."
       },
       "LOCATION": {
@@ -130,6 +140,17 @@
       "COMPANY_NAME": {
         "PLACEHOLDER": "Escriba el nombre de la empresa",
         "LABEL": "Empresa"
+      },
+      "COUNTRY": {
+        "PLACEHOLDER": "Introduzca el nombre del país",
+        "LABEL": "Nombre del país",
+        "SELECT_PLACEHOLDER": "Seleccionar",
+        "REMOVE": "Eliminar",
+        "SELECT_COUNTRY": "Seleccionar país"
+      },
+      "CITY": {
+        "PLACEHOLDER": "Introduzca el nombre de la ciudad",
+        "LABEL": "Nombre de ciudad"
       },
       "SOCIAL_PROFILES": {
         "FACEBOOK": {
@@ -170,6 +191,7 @@
       },
       "INBOX": {
         "LABEL": "Bandeja de entrada",
+        "PLACEHOLDER": "Elegir bandeja de entrada",
         "ERROR": "Seleccione una bandeja de entrada"
       },
       "SUBJECT": {
@@ -197,6 +219,7 @@
     "FILTER_CONTACTS": "Filtro",
     "FILTER_CONTACTS_SAVE": "Guardar filtro",
     "FILTER_CONTACTS_DELETE": "Eliminar filtro",
+    "FILTER_CONTACTS_EDIT": "Editar segmento",
     "LIST": {
       "LOADING_MESSAGE": "Cargando contactos...",
       "404": "No hay contactos que coincidan con tu búsqueda 🔍",
@@ -206,6 +229,7 @@
         "PHONE_NUMBER": "Número telefónico",
         "CONVERSATIONS": "Conversaciones",
         "LAST_ACTIVITY": "Última actividad",
+        "CREATED_AT": "Creado el",
         "COUNTRY": "País",
         "CITY": "Ciudad",
         "SOCIAL_PROFILES": "Perfiles Sociales",

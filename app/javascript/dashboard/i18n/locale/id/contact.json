@@ -15,6 +15,7 @@
     "INITIATED_FROM": "Dimulai dari",
     "INITIATED_AT": "Dimulai pada",
     "IP_ADDRESS": "IP Address",
+    "CREATED_AT_LABEL": "Created",
     "NEW_MESSAGE": "Pesan baru",
     "CONVERSATIONS": {
       "NO_RECORDS_FOUND": "Tidak ada percakapan sebelumnya yang terkait dengan kontak ini.",
@@ -32,7 +33,8 @@
       "LABEL_SELECT": {
         "TITLE": "Tambah label",
         "PLACEHOLDER": "Cari label",
-        "NO_RESULT": "Tidak ada label"
+        "NO_RESULT": "Tidak ada label",
+        "CREATE_LABEL": "Create new label"
       }
     },
     "MERGE_CONTACT": "Gabungkan Kontak",
@@ -70,6 +72,13 @@
       "CANCEL": "Batalkan"
     },
     "SUCCESS_MESSAGE": "Kontak berhasil disimpan",
+    "ERROR_MESSAGE": "Terjadi kesalahan, harap coba lagi"
+  },
+  "EXPORT_CONTACTS": {
+    "BUTTON_LABEL": "Export",
+    "TITLE": "Export Contacts",
+    "DESC": "Export contacts to a CSV file.",
+    "SUCCESS_MESSAGE": "Export is in progress, You will be notified via email when export file is ready to dowanlod.",
     "ERROR_MESSAGE": "Terjadi kesalahan, harap coba lagi"
   },
   "DELETE_NOTE": {
@@ -121,6 +130,7 @@
         "LABEL": "Nomor Telpon",
         "HELP": "Nomer telepon harus dalam format E.164 misalnya: +1415555555 [+][kode negara][kode area][nomer telepon]",
         "ERROR": "Nomer telepon harus kosong atau dalam format E. 164",
+        "DIAL_CODE_ERROR": "Please select a dial code from the list",
         "DUPLICATE": "Nomer ini sudah dipakai dengan kontak lain."
       },
       "LOCATION": {
@@ -130,6 +140,17 @@
       "COMPANY_NAME": {
         "PLACEHOLDER": "Masukkan nama perusahaan",
         "LABEL": "Nama Perusahaan"
+      },
+      "COUNTRY": {
+        "PLACEHOLDER": "Enter the country name",
+        "LABEL": "Country Name",
+        "SELECT_PLACEHOLDER": "Select",
+        "REMOVE": "Hapus",
+        "SELECT_COUNTRY": "Select Country"
+      },
+      "CITY": {
+        "PLACEHOLDER": "Enter the city name",
+        "LABEL": "City Name"
       },
       "SOCIAL_PROFILES": {
         "FACEBOOK": {
@@ -170,6 +191,7 @@
       },
       "INBOX": {
         "LABEL": "Kotak masuk",
+        "PLACEHOLDER": "Choose source inbox",
         "ERROR": "Pilih kotak masuk"
       },
       "SUBJECT": {
@@ -197,6 +219,7 @@
     "FILTER_CONTACTS": "Saring",
     "FILTER_CONTACTS_SAVE": "Save filter",
     "FILTER_CONTACTS_DELETE": "Delete filter",
+    "FILTER_CONTACTS_EDIT": "Edit segment",
     "LIST": {
       "LOADING_MESSAGE": "Memuat kontak...",
       "404": "Tidak ada kontak yang cocok dengan pencarian Anda 🔍",
@@ -206,6 +229,7 @@
         "PHONE_NUMBER": "Nomor Telpon",
         "CONVERSATIONS": "Percakapan",
         "LAST_ACTIVITY": "Aktivitas Terakhir",
+        "CREATED_AT": "Created At",
         "COUNTRY": "Negara",
         "CITY": "Kota",
         "SOCIAL_PROFILES": "Profil Sosial",

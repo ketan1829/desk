@@ -21,6 +21,7 @@ sr-Latn:
   messages:
     reset_password_success: Opa! Zahtev za resetovanjem lozinke je uspešan. Proverite vašu e-poštu za uputstvo.
     reset_password_failure: O ne! Nismo mogli da pronađemo nijednog korisnika sa navedenom e-poštom.
+    inbox_deletetion_response: Your inbox deletion request will be processed in some time.
   errors:
     validations:
       presence: ne sme biti prazno
@@ -37,6 +38,8 @@ sr-Latn:
     contacts:
       import:
         failed: Datoteka je prazna
+      export:
+        success: We will notify you once contacts export file is ready to view.
       email:
         invalid: Neispravna e-pošta
       phone_number:
@@ -55,8 +58,11 @@ sr-Latn:
         connection_closed_error: Povezivanje je prekinuto.
       validations:
         name: ne treba početi ili se završiti sa simbolima i ne treba da sadrži < > / \ @ karaktere.
+    custom_filters:
+      number_of_records: Limit reached. The maximum number of allowed custom filters for a user per account is 50.
   reports:
     period: Period izveštaja %{since} do %{until}
+    utc_warning: Generisani izveštaj je u UTC vremenskoj zoni
     agent_csv:
       agent_name: Naziv agenta
       conversations_count: Broj razgovora
@@ -78,6 +84,8 @@ sr-Latn:
       conversations_count: Broj razgovora
       avg_first_response_time: Prosečno vreme prvog odgovora (minuti)
       avg_resolution_time: Prosečno vreme rešavanja (minuti)
+    conversation_traffic_csv:
+      timezone: Timezone
     default_group_by: dan
     csat:
       headers:
@@ -108,6 +116,11 @@ sr-Latn:
         pending: "Razgovor je označen kao na čekanju od strane %{user_name}"
         snoozed: "Razgovor je odložen od strane %{user_name}"
         auto_resolved: "Razgovor je označen kao rešen od strane sistema zbog %{duration} dana neaktivnosti"
+        system_auto_open: System reopened the conversation due to a new incoming message.
+      priority:
+        added: '%{user_name} set the priority to %{new_priority}'
+        updated: '%{user_name} changed the priority from %{old_priority} to %{new_priority}'
+        removed: '%{user_name} removed the priority'
       assignee:
         self_assigned: "%{user_name} je samododelio sebe ovom razgovoru"
         assigned: "Dodeljeno %{assignee_name} od strane %{user_name}"
@@ -129,8 +142,12 @@ sr-Latn:
     reply:
       email:
         header:
-          from_with_name: '%{assignee_name} iz %{inbox_name} <%{from_email}>'
-          reply_with_name: '%{assignee_name} iz %{inbox_name} <reply+%{reply_email}>'
+          from_with_name: "%{assignee_name} iz %{inbox_name} <%{from_email}>"
+          reply_with_name: "%{assignee_name} iz %{inbox_name} <reply+%{reply_email}>"
+      channel_email:
+        header:
+          reply_with_name: "%{assignee_name} iz %{inbox_name} <%{from_email}>"
+          reply_with_inbox_name: "%{inbox_name} <%{from_email}>"
       email_subject: "Nove poruke u ovom razgovoru"
       transcript_subject: "Transkript razgovora"
     survey:
@@ -155,11 +172,29 @@ sr-Latn:
     fullcontact:
       name: "Fullcontact"
       description: "FullContact integracija pomaže vam da obogatite profile posetilaca. Identifikujte korisnike čim podele njihovu adresu e-pošte i ponudite im prilagođenu korisničku podršku. Povežite vaš FullContact sa vašim nalogom deljenjem FullContact API ključa."
+    google_translate:
+      name: "Google Translate"
+      description: "Make it easier for agents to translate messages by adding a Google Translate Integration. Google translate helps to identify the language automatically and convert it to the language chosen by the agent/account admin."
+    openai:
+      name: "OpenAI"
+      description: "Integrate powerful AI features into Chatwoot by leveraging the GPT models from OpenAI."
   public_portal:
     search:
       search_placeholder: Search for article by title or body...
       empty_placeholder: Ništa nije pronađeno.
       loading_placeholder: Searching...
       results_title: Search results
+    toc_header: 'On this page'
     hero:
       sub_title: Search for the articles here or browse the categories below.
+    common:
+      home: Početak
+      last_updated_on: Last updated on %{last_updated_on}
+      view_all_articles: View all articles
+      article: article
+      articles: članci
+      no_articles: There are no articles here
+    footer:
+      made_with: Made with
+    header:
+      go_to_homepage: Go to the main site

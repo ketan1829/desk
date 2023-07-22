@@ -11,9 +11,11 @@
 #  first_reply_created_at :datetime
 #  identifier             :string
 #  last_activity_at       :datetime         not null
+#  priority               :integer
 #  snoozed_until          :datetime
 #  status                 :integer          default("open"), not null
 #  uuid                   :uuid             not null
+#  waiting_since          :datetime
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  account_id             :integer          not null
@@ -23,10 +25,12 @@
 #  contact_inbox_id       :bigint
 #  display_id             :integer          not null
 #  inbox_id               :integer          not null
+#  sla_policy_id          :bigint
 #  team_id                :bigint
 #
 # Indexes
 #
+#  conv_acid_inbid_stat_asgnid_idx                    (account_id,inbox_id,status,assignee_id)
 #  index_conversations_on_account_id                  (account_id)
 #  index_conversations_on_account_id_and_display_id   (account_id,display_id) UNIQUE
 #  index_conversations_on_assignee_id_and_account_id  (assignee_id,account_id)
@@ -34,11 +38,15 @@
 #  index_conversations_on_contact_id                  (contact_id)
 #  index_conversations_on_contact_inbox_id            (contact_inbox_id)
 #  index_conversations_on_first_reply_created_at      (first_reply_created_at)
+#  index_conversations_on_id_and_account_id           (account_id,id)
 #  index_conversations_on_inbox_id                    (inbox_id)
 #  index_conversations_on_last_activity_at            (last_activity_at)
+#  index_conversations_on_priority                    (priority)
 #  index_conversations_on_status_and_account_id       (status,account_id)
+#  index_conversations_on_status_and_priority         (status,priority)
 #  index_conversations_on_team_id                     (team_id)
 #  index_conversations_on_uuid                        (uuid) UNIQUE
+#  index_conversations_on_waiting_since               (waiting_since)
 #
 
 class Conversation < ApplicationRecord
@@ -48,6 +56,7 @@ class Conversation < ApplicationRecord
   include ActivityMessageHandler
   include UrlHelper
   include SortHandler
+  include ConversationMuteHelpers
 
   validates :account_id, presence: true
   validates :inbox_id, presence: true
@@ -58,12 +67,14 @@ class Conversation < ApplicationRecord
   validate :validate_referer_url
 
   enum status: { open: 0, resolved: 1, pending: 2, snoozed: 3 }
+  enum priority: { low: 0, medium: 1, high: 2, urgent: 3 }
 
   scope :unassigned, -> { where(assignee_id: nil) }
   scope :assigned, -> { where.not(assignee_id: nil) }
   scope :assigned_to, ->(agent) { where(assignee_id: agent.id) }
+  scope :unattended, -> { where(first_reply_created_at: nil) }
   scope :resolvable, lambda { |auto_resolve_duration|
-    return [] if auto_resolve_duration.to_i.zero?
+    return none if auto_resolve_duration.to_i.zero?
 
     open.where('last_activity_at < ? ', Time.now.utc - auto_resolve_duration.days)
   }
@@ -86,10 +97,13 @@ class Conversation < ApplicationRecord
   has_many :mentions, dependent: :destroy_async
   has_many :messages, dependent: :destroy_async, autosave: true
   has_one :csat_survey_response, dependent: :destroy_async
+  has_many :conversation_participants, dependent: :destroy_async
   has_many :notifications, as: :primary_actor, dependent: :destroy_async
+  has_many :attachments, through: :messages
 
   before_save :ensure_snooze_until_reset
   before_create :mark_conversation_pending_if_bot
+  before_create :ensure_waiting_since
 
   after_update_commit :execute_after_update_commit_callbacks
   after_create_commit :notify_conversation_creation
@@ -141,19 +155,14 @@ class Conversation < ApplicationRecord
     save
   end
 
-  def mute!
-    resolved!
-    Redis::Alfred.setex(mute_key, 1, mute_period)
-    create_muted_message
+  def toggle_priority(priority = nil)
+    self.priority = priority.presence
+    save
   end
 
-  def unmute!
-    Redis::Alfred.delete(mute_key)
-    create_unmuted_message
-  end
-
-  def muted?
-    Redis::Alfred.get(mute_key).present?
+  def bot_handoff!
+    open!
+    dispatcher_dispatch(CONVERSATION_BOT_HANDOFF)
   end
 
   def unread_messages
@@ -192,6 +201,10 @@ class Conversation < ApplicationRecord
     messages.chat.last(5)
   end
 
+  def csat_survey_link
+    "#{ENV.fetch('FRONTEND_URL', nil)}/survey/responses/#{uuid}"
+  end
+
   private
 
   def execute_after_update_commit_callbacks
@@ -202,6 +215,10 @@ class Conversation < ApplicationRecord
 
   def ensure_snooze_until_reset
     self.snoozed_until = nil unless snoozed?
+  end
+
+  def ensure_waiting_since
+    self.waiting_since = Time.now.utc
   end
 
   def validate_additional_attributes
@@ -218,10 +235,16 @@ class Conversation < ApplicationRecord
   end
 
   def notify_conversation_updation
-    return unless previous_changes.keys.present? && (previous_changes.keys & %w[team_id assignee_id status snoozed_until
-                                                                                custom_attributes label_list first_reply_created_at]).present?
+    return unless previous_changes.keys.present? && allowed_keys?
 
     dispatcher_dispatch(CONVERSATION_UPDATED, previous_changes)
+  end
+
+  def allowed_keys?
+    (
+      previous_changes.keys.intersect?(%w[team_id assignee_id status snoozed_until custom_attributes label_list first_reply_created_at priority]) ||
+      (previous_changes['additional_attributes'].present? && previous_changes['additional_attributes'][1].keys.intersect?(%w[conversation_language]))
+    )
   end
 
   def self_assign?(assignee_id)
@@ -268,14 +291,6 @@ class Conversation < ApplicationRecord
     create_label_removed(user_name, previous_labels - current_labels)
   end
 
-  def mute_key
-    format(Redis::RedisKeys::CONVERSATION_MUTE_KEY, id: id)
-  end
-
-  def mute_period
-    6.hours
-  end
-
   def validate_referer_url
     return unless additional_attributes['referer']
 
@@ -287,3 +302,6 @@ class Conversation < ApplicationRecord
     "NEW.display_id := nextval('conv_dpid_seq_' || NEW.account_id);"
   end
 end
+
+Conversation.include_mod_with('EnterpriseConversationConcern')
+Conversation.include_mod_with('SentimentAnalysisHelper')

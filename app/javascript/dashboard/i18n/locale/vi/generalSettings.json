@@ -3,6 +3,7 @@
     "TITLE": "Cài đặt tài khoản",
     "SUBMIT": "Cập nhật cài đặt",
     "BACK": "Trờ về",
+    "DISMISS": "Dismiss",
     "UPDATE": {
       "ERROR": "Không thể cập nhật cài đặt, hãy thử lại!",
       "SUCCESS": "Đã cập nhật thành công cài đặt tài khoản"
@@ -48,7 +49,10 @@
       }
     },
     "UPDATE_CHATWOOT": "Đã có bản cập nhật %{latestChatwootVersion} cho Chatwoot. Vui lòng cập nhật phiên bản của bạn.",
-    "LEARN_MORE": "Tìm hiểu thêm"
+    "LEARN_MORE": "Tìm hiểu thêm",
+    "PAYMENT_PENDING": "Your payment is pending. Please update your payment information to continue using Chatwoot",
+    "LIMITS_UPGRADE": "Your account has exceeded the usage limits, please upgrade your plan to continue using Chatwoot",
+    "OPEN_BILLING": "Open billing"
   },
   "FORMS": {
     "MULTISELECT": {
@@ -82,6 +86,7 @@
       "conversation_creation": "Hội thoại mới mới",
       "conversation_assignment": "Hội thoại đã được phân công",
       "assigned_conversation_new_message": "Tin nhắn mới",
+      "participating_conversation_new_message": "Tin nhắn mới",
       "conversation_mention": "Nhắc đến"
     }
   },
@@ -100,7 +105,9 @@
       "REPORTS": "Báo cáo",
       "CONVERSATION": "Hội thoại",
       "CHANGE_ASSIGNEE": "Thay đổi người được phân công",
+      "CHANGE_PRIORITY": "Change Priority",
       "CHANGE_TEAM": "Thay đổi nhóm",
+      "SNOOZE_CONVERSATION": "Tạm dừng \bhội thoại",
       "ADD_LABEL": "Thêm nhãn vào hội thoại",
       "REMOVE_LABEL": "Xoá nhãn khỏi hội thoại",
       "SETTINGS": "Cài đặt"
@@ -125,6 +132,7 @@
       "GO_TO_NOTIFICATIONS": "Đi đến Thông báo",
       "ADD_LABELS_TO_CONVERSATION": "Thêm nhãn vào hội thoại",
       "ASSIGN_AN_AGENT": "Gán cho tổng đài viên",
+      "ASSIGN_PRIORITY": "Assign priority",
       "ASSIGN_A_TEAM": "Phân công một nhóm",
       "MUTE_CONVERSATION": "Tắt tiếng hội thoại",
       "UNMUTE_CONVERSATION": "Bật tiếng hội thoại",
@@ -135,7 +143,10 @@
       "SNOOZE_CONVERSATION": "Tạm dừng \bhội thoại",
       "UNTIL_NEXT_REPLY": "Cho đến phản hồi kế tiếp",
       "UNTIL_NEXT_WEEK": "Cho đến tuần sau",
-      "UNTIL_TOMORROW": "Cho đến ngày mai"
+      "UNTIL_TOMORROW": "Cho đến ngày mai",
+      "UNTIL_NEXT_MONTH": "Until next month",
+      "AN_HOUR_FROM_NOW": "Until an hour from now",
+      "CUSTOM": "Custom..."
     }
   },
   "DASHBOARD_APPS": {

@@ -1,6 +1,7 @@
 :root {
   --white: #fff;
   --white-transparent: rgba(255, 255, 255, 0.9);
+  --black-transparent: rgba(0, 0, 0, 0.9);
 
   --w-25: #F5FAFF;
   --w-50: #EBF5FF;
@@ -102,4 +103,7 @@
   --color-whatsapp-brand: #25d366;
   --color-sms-twilio: #f42f46;
   --color-cloud-generic: #18b7b0;
+
+  // Tech-debt
+  --color-medium-gray: #8492a6;
 }

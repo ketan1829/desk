@@ -20,7 +20,11 @@ describe('#Reports API', () => {
   });
   describeWithAPIMock('API calls', context => {
     it('#getAccountReports', () => {
-      reportsAPI.getReports('conversations_count', 1621103400, 1621621800);
+      reportsAPI.getReports({
+        metric: 'conversations_count',
+        from: 1621103400,
+        to: 1621621800,
+      });
       expect(context.axiosMock.get).toHaveBeenCalledWith('/api/v2/reports', {
         params: {
           metric: 'conversations_count',
@@ -38,9 +42,13 @@ describe('#Reports API', () => {
         '/api/v2/reports/summary',
         {
           params: {
+            business_hours: undefined,
+            group_by: undefined,
+            id: undefined,
             since: 1621103400,
-            until: 1621621800,
+            timezone_offset: -0,
             type: 'account',
+            until: 1621621800,
           },
         }
       );

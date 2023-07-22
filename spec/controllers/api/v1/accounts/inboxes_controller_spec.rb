@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'Inboxes API', type: :request do
+  include ActiveJob::TestHelper
+
   let(:account) { create(:account) }
   let(:agent) { create(:user, account: account, role: :agent) }
   let(:admin) { create(:user, account: account, role: :administrator) }
@@ -246,13 +248,15 @@ RSpec.describe 'Inboxes API', type: :request do
     context 'when it is an authenticated user' do
       before do
         create(:inbox_member, user: agent, inbox: inbox)
-        inbox.avatar.attach(io: File.open(Rails.root.join('spec/assets/avatar.png')), filename: 'avatar.png', content_type: 'image/png')
+        inbox.avatar.attach(io: Rails.root.join('spec/assets/avatar.png').open, filename: 'avatar.png', content_type: 'image/png')
       end
 
       it 'delete inbox avatar for administrator user' do
-        delete "/api/v1/accounts/#{account.id}/inboxes/#{inbox.id}/avatar",
-               headers: admin.create_new_auth_token,
-               as: :json
+        perform_enqueued_jobs(only: DeleteObjectJob) do
+          delete "/api/v1/accounts/#{account.id}/inboxes/#{inbox.id}/avatar",
+                 headers: admin.create_new_auth_token,
+                 as: :json
+        end
 
         expect { inbox.avatar.attachment.reload }.to raise_error(ActiveRecord::RecordNotFound)
         expect(response).to have_http_status(:success)
@@ -283,12 +287,18 @@ RSpec.describe 'Inboxes API', type: :request do
       let(:admin) { create(:user, account: account, role: :administrator) }
 
       it 'deletes inbox' do
-        delete "/api/v1/accounts/#{account.id}/inboxes/#{inbox.id}",
-               headers: admin.create_new_auth_token,
-               as: :json
+        expect(DeleteObjectJob).to receive(:perform_later).with(inbox, admin, anything).once
+
+        perform_enqueued_jobs(only: DeleteObjectJob) do
+          delete "/api/v1/accounts/#{account.id}/inboxes/#{inbox.id}",
+                 headers: admin.create_new_auth_token,
+                 as: :json
+        end
+
+        json_response = response.parsed_body
 
         expect(response).to have_http_status(:success)
-        expect { inbox.reload }.to raise_exception(ActiveRecord::RecordNotFound)
+        expect(json_response['message']).to eq('Your inbox deletion request will be processed in some time.')
       end
 
       it 'is unable to delete inbox of another account' do
@@ -402,7 +412,7 @@ RSpec.describe 'Inboxes API', type: :request do
              as: :json
 
         expect(response).to have_http_status(:success)
-        json_response = JSON.parse(response.body)
+        json_response = response.parsed_body
         expect(json_response['allow_messages_after_resolved']).to be true
       end
     end
@@ -421,7 +431,8 @@ RSpec.describe 'Inboxes API', type: :request do
 
     context 'when it is an authenticated user' do
       let(:admin) { create(:user, account: account, role: :administrator) }
-      let(:valid_params) { { name: 'new test inbox', enable_auto_assignment: false } }
+      let!(:portal) { create(:portal, account_id: account.id) }
+      let(:valid_params) { { name: 'new test inbox', enable_auto_assignment: false, portal_id: portal.id } }
 
       it 'will not update inbox for agent' do
         agent = create(:user, account: account, role: :agent)
@@ -442,7 +453,8 @@ RSpec.describe 'Inboxes API', type: :request do
 
         expect(response).to have_http_status(:success)
         expect(inbox.reload.enable_auto_assignment).to be_falsey
-        expect(JSON.parse(response.body)['name']).to eq 'new test inbox'
+        expect(inbox.reload.portal_id).to eq(portal.id)
+        expect(response.parsed_body['name']).to eq 'new test inbox'
       end
 
       it 'updates api inbox when administrator' do
@@ -459,17 +471,37 @@ RSpec.describe 'Inboxes API', type: :request do
         expect(api_channel.reload.webhook_url).to eq('webhook.test')
       end
 
-      it 'updates twitter inbox when administrator' do
-        api_channel = create(:channel_twitter_profile, account: account, tweets_enabled: true)
-        api_inbox = create(:inbox, channel: api_channel, account: account)
+      it 'updates whatsapp inbox when administrator' do
+        stub_request(:post, 'https://waba.360dialog.io/v1/configs/webhook').to_return(status: 200, body: '', headers: {})
+        stub_request(:get, 'https://waba.360dialog.io/v1/configs/templates').to_return(status: 200, body: '', headers: {})
+        whatsapp_channel = create(:channel_whatsapp, account: account)
+        whatsapp_inbox = create(:inbox, channel: whatsapp_channel, account: account)
+        whatsapp_channel.prompt_reauthorization!
 
-        patch "/api/v1/accounts/#{account.id}/inboxes/#{api_inbox.id}",
+        expect(whatsapp_channel).to be_reauthorization_required
+
+        patch "/api/v1/accounts/#{account.id}/inboxes/#{whatsapp_inbox.id}",
+              headers: admin.create_new_auth_token,
+              params: { enable_auto_assignment: false, channel: { provider_config: { api_key: 'new_key' } } },
+              as: :json
+
+        expect(response).to have_http_status(:success)
+        expect(whatsapp_inbox.reload.enable_auto_assignment).to be_falsey
+        expect(whatsapp_channel.reload.provider_config['api_key']).to eq('new_key')
+        expect(whatsapp_channel.reload).not_to be_reauthorization_required
+      end
+
+      it 'updates twitter inbox when administrator' do
+        twitter_channel = create(:channel_twitter_profile, account: account, tweets_enabled: true)
+        twitter_inbox = create(:inbox, channel: twitter_channel, account: account)
+
+        patch "/api/v1/accounts/#{account.id}/inboxes/#{twitter_inbox.id}",
               headers: admin.create_new_auth_token,
               params: { channel: { tweets_enabled: false } },
               as: :json
 
         expect(response).to have_http_status(:success)
-        expect(api_channel.reload.tweets_enabled).to be(false)
+        expect(twitter_channel.reload.tweets_enabled).to be(false)
       end
 
       it 'updates email inbox when administrator' do

@@ -9,6 +9,7 @@ import es from './locale/es';
 import fa from './locale/fa';
 import fi from './locale/fi';
 import fr from './locale/fr';
+import he from './locale/he';
 import hi from './locale/hi';
 import hu from './locale/hu';
 import id from './locale/id';
@@ -33,6 +34,8 @@ import uk from './locale/uk';
 import vi from './locale/vi';
 import zh_CN from './locale/zh_CN';
 import zh_TW from './locale/zh_TW';
+import is from './locale/is';
+import lt from './locale/lt';
 
 export default {
   ar,
@@ -46,6 +49,7 @@ export default {
   fa,
   fi,
   fr,
+  he,
   hi,
   hu,
   id,
@@ -70,4 +74,6 @@ export default {
   vi,
   zh_CN,
   zh_TW,
+  is,
+  lt,
 };

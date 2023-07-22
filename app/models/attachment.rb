@@ -37,13 +37,14 @@ class Attachment < ApplicationRecord
   belongs_to :message
   has_one_attached :file
   validate :acceptable_file
-
-  enum file_type: [:image, :audio, :video, :file, :location, :fallback, :share, :story_mention]
+  validates :external_url, length: { maximum: Limits::URL_LENGTH_LIMIT }
+  enum file_type: [:image, :audio, :video, :file, :location, :fallback, :share, :story_mention, :contact]
 
   def push_event_data
     return unless file_type
     return base_data.merge(location_metadata) if file_type.to_sym == :location
     return base_data.merge(fallback_data) if file_type.to_sym == :fallback
+    return base_data.merge(contact_metadata) if file_type.to_sym == :contact
 
     base_data.merge(file_metadata)
   end
@@ -55,13 +56,13 @@ class Attachment < ApplicationRecord
 
   # NOTE: for External services use this methods since redirect doesn't work effectively in a lot of cases
   def download_url
-    ActiveStorage::Current.host = Rails.application.routes.default_url_options[:host] if ActiveStorage::Current.host.blank?
+    ActiveStorage::Current.url_options = Rails.application.routes.default_url_options if ActiveStorage::Current.url_options.blank?
     file.attached? ? file.blob.url : ''
   end
 
   def thumb_url
     if file.attached? && file.representable?
-      url_for(file.representation(resize: '250x250'))
+      url_for(file.representation(resize_to_fill: [250, nil]))
     else
       ''
     end
@@ -103,6 +104,12 @@ class Attachment < ApplicationRecord
       message_id: message_id,
       file_type: file_type,
       account_id: account_id
+    }
+  end
+
+  def contact_metadata
+    {
+      fallback_title: fallback_title
     }
   end
 

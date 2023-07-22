@@ -3,6 +3,7 @@
     "TITLE": "Pengaturan akun",
     "SUBMIT": "Ubah pengaturan",
     "BACK": "Kembali",
+    "DISMISS": "Dismiss",
     "UPDATE": {
       "ERROR": "Tidak dapat memperbarui pengaturan, coba lagi!",
       "SUCCESS": "Pengaturan akun berhasil diperbarui"
@@ -48,7 +49,10 @@
       }
     },
     "UPDATE_CHATWOOT": "Pembaharuan Chatwoot %{latestChatwootVersion} telah tersedia. Silahkan lakukan pembaharuan instance Anda.",
-    "LEARN_MORE": "Pelajari lebih lanjut"
+    "LEARN_MORE": "Pelajari lebih lanjut",
+    "PAYMENT_PENDING": "Your payment is pending. Please update your payment information to continue using Chatwoot",
+    "LIMITS_UPGRADE": "Your account has exceeded the usage limits, please upgrade your plan to continue using Chatwoot",
+    "OPEN_BILLING": "Open billing"
   },
   "FORMS": {
     "MULTISELECT": {
@@ -82,6 +86,7 @@
       "conversation_creation": "Percakapan baru",
       "conversation_assignment": "Percakapan ditugaskan",
       "assigned_conversation_new_message": "Pesan Baru",
+      "participating_conversation_new_message": "Pesan Baru",
       "conversation_mention": "Mention"
     }
   },
@@ -100,7 +105,9 @@
       "REPORTS": "Laporan",
       "CONVERSATION": "Percakapan",
       "CHANGE_ASSIGNEE": "Change Assignee",
+      "CHANGE_PRIORITY": "Change Priority",
       "CHANGE_TEAM": "Change Team",
+      "SNOOZE_CONVERSATION": "Snooze Conversation",
       "ADD_LABEL": "Add label to the conversation",
       "REMOVE_LABEL": "Remove label from the conversation",
       "SETTINGS": "Pengaturan"
@@ -125,6 +132,7 @@
       "GO_TO_NOTIFICATIONS": "Go to Notifications",
       "ADD_LABELS_TO_CONVERSATION": "Add label to the conversation",
       "ASSIGN_AN_AGENT": "Assign an agent",
+      "ASSIGN_PRIORITY": "Assign priority",
       "ASSIGN_A_TEAM": "Assign a team",
       "MUTE_CONVERSATION": "Mute conversation",
       "UNMUTE_CONVERSATION": "Unmute conversation",
@@ -135,7 +143,10 @@
       "SNOOZE_CONVERSATION": "Snooze Conversation",
       "UNTIL_NEXT_REPLY": "Until next reply",
       "UNTIL_NEXT_WEEK": "Until next week",
-      "UNTIL_TOMORROW": "Until tomorrow"
+      "UNTIL_TOMORROW": "Until tomorrow",
+      "UNTIL_NEXT_MONTH": "Until next month",
+      "AN_HOUR_FROM_NOW": "Until an hour from now",
+      "CUSTOM": "Custom..."
     }
   },
   "DASHBOARD_APPS": {

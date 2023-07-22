@@ -15,6 +15,7 @@
     "INITIATED_FROM": "Initiated from",
     "INITIATED_AT": "Initiated at",
     "IP_ADDRESS": "IP Address",
+    "CREATED_AT_LABEL": "Created",
     "NEW_MESSAGE": "New message",
     "CONVERSATIONS": {
       "NO_RECORDS_FOUND": "There are no previous conversations associated to this contact.",
@@ -32,7 +33,8 @@
       "LABEL_SELECT": {
         "TITLE": "Add Labels",
         "PLACEHOLDER": "Search labels",
-        "NO_RESULT": "No labels found"
+        "NO_RESULT": "No labels found",
+        "CREATE_LABEL": "Create new label"
       }
     },
     "MERGE_CONTACT": "Merge contact",
@@ -70,6 +72,13 @@
       "CANCEL": "Cancel"
     },
     "SUCCESS_MESSAGE": "Contacts saved successfully",
+    "ERROR_MESSAGE": "There was an error, please try again"
+  },
+  "EXPORT_CONTACTS": {
+    "BUTTON_LABEL": "Export",
+    "TITLE": "Export Contacts",
+    "DESC": "Export contacts to a CSV file.",
+    "SUCCESS_MESSAGE": "Export is in progress. You will be notified on email when the export file is ready to download.",
     "ERROR_MESSAGE": "There was an error, please try again"
   },
   "DELETE_NOTE": {
@@ -119,8 +128,9 @@
       "PHONE_NUMBER": {
         "PLACEHOLDER": "Enter the phone number of the contact",
         "LABEL": "Phone Number",
-        "HELP": "Phone number should be of E.164 format eg: +1415555555 [+][country code][area code][local phone number]",
+        "HELP": "Phone number should be of E.164 format eg: +1415555555 [+][country code][area code][local phone number]. You can select the dial code from the dropdown.",
         "ERROR": "Phone number should be either empty or of E.164 format",
+        "DIAL_CODE_ERROR": "Please select a dial code from the list",
         "DUPLICATE": "This phone number is in use for another contact."
       },
       "LOCATION": {
@@ -130,6 +140,17 @@
       "COMPANY_NAME": {
         "PLACEHOLDER": "Enter the company name",
         "LABEL": "Company Name"
+      },
+      "COUNTRY": {
+        "PLACEHOLDER": "Enter the country name",
+        "LABEL": "Country Name",
+        "SELECT_PLACEHOLDER": "Select",
+        "REMOVE": "Remove",
+        "SELECT_COUNTRY": "Select Country"
+      },
+      "CITY": {
+        "PLACEHOLDER": "Enter the city name",
+        "LABEL": "City Name"
       },
       "SOCIAL_PROFILES": {
         "FACEBOOK": {
@@ -169,7 +190,8 @@
         "LABEL": "To"
       },
       "INBOX": {
-        "LABEL": "Inbox",
+        "LABEL": "Via Inbox",
+        "PLACEHOLDER": "Choose source inbox",
         "ERROR": "Select an inbox"
       },
       "SUBJECT": {
@@ -197,6 +219,7 @@
     "FILTER_CONTACTS": "Filter",
     "FILTER_CONTACTS_SAVE": "Save filter",
     "FILTER_CONTACTS_DELETE": "Delete filter",
+    "FILTER_CONTACTS_EDIT": "Edit segment",
     "LIST": {
       "LOADING_MESSAGE": "Loading contacts...",
       "404": "No contacts matches your search 🔍",
@@ -206,6 +229,7 @@
         "PHONE_NUMBER": "Phone Number",
         "CONVERSATIONS": "Conversations",
         "LAST_ACTIVITY": "Last Activity",
+        "CREATED_AT": "Created At",
         "COUNTRY": "Country",
         "CITY": "City",
         "SOCIAL_PROFILES": "Social Profiles",
@@ -316,7 +340,7 @@
   },
   "MERGE_CONTACTS": {
     "TITLE": "Merge contacts",
-    "DESCRIPTION": "Merge contacts to combine two profiles into one, including all attributes and conversations. In case of conflict, the Primary contact’ s attributes will take precedence.",
+    "DESCRIPTION": "Merge contacts to combine two profiles into one, including all attributes and conversations. In case of conflict, the Primary contact’s attributes will take precedence.",
     "PRIMARY": {
       "TITLE": "Primary contact",
       "HELP_LABEL": "To be kept"

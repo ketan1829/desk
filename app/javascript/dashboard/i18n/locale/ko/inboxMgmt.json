@@ -53,10 +53,6 @@
           "ENABLE": "Create conversations from mentioned Tweets"
         }
       },
-      "MICROSOFT": {
-        "HELP": "To add your Microsoft account as a channel, you need to authenticate your Microsoft account by clicking on 'Sign in with Microsoft' ",
-        "ERROR_MESSAGE": "There was an error connecting to Microsoft, please try again"
-      },
       "WEBSITE_CHANNEL": {
         "TITLE": "웹사이트 채널",
         "DESC": "웹사이트를 위한 채널을 만들고 웹사이트 위젯을 통해 고객 지원을 시작하십시오.",
@@ -348,6 +344,17 @@
       "FINISH": {
         "TITLE": "못 박았다!",
         "DESC": "Facebook 페이지를 Chatwoot와 성공적으로 통합하셨습니다. 다음부터 고객이 페이지에 메시지를 보낼 때, 대화는 받은 메시지함에 자동으로 나타납니다.<br>웹사이트에 쉽게 추가할 수 있는 위젯 스크립트도 제공하고 있습니다. 일단 당신의 웹사이트에 생방송으로 접속하면, 고객들은 어떠한 외부 도구의 도움 없이도 당신의 웹사이트에서 바로 당신에게 메시지를 보낼 수 있고, 대화는 바로 여기 Chatwoot에 나타납니다.<<br> 멋지죠? 음, 우리는 그럴려고 노력합니다 :)"
+      },
+      "EMAIL_PROVIDER": {
+        "TITLE": "Select your email provider",
+        "DESCRIPTION": "Select an email provider from the list below. If you don't see your email provider in the list, you can select the other provider option and provide the IMAP and SMTP Credentials."
+      },
+      "MICROSOFT": {
+        "TITLE": "Microsoft Email",
+        "DESCRIPTION": "Click on the Sign in with Microsoft button to get started. You will redirected to the email sign in page. Once you accept the requested permissions, you would be redirected back to the inbox creation step.",
+        "EMAIL_PLACEHOLDER": "Enter email address",
+        "HELP": "To add your Microsoft account as a channel, you need to authenticate your Microsoft account by clicking on 'Sign in with Microsoft' ",
+        "ERROR_MESSAGE": "There was an error connecting to Microsoft, please try again"
       }
     },
     "DETAILS": {
@@ -432,7 +439,8 @@
       "LABEL": "특징",
       "DISPLAY_FILE_PICKER": "위젯에 파일 선택기 표시",
       "DISPLAY_EMOJI_PICKER": "위젯에 이모지 선택기 표시",
-      "ALLOW_END_CONVERSATION": "Allow users to end conversation from the widget"
+      "ALLOW_END_CONVERSATION": "Allow users to end conversation from the widget",
+      "USE_INBOX_AVATAR_FOR_BOT": "Use inbox name and avatar for the bot"
     },
     "SETTINGS_POPUP": {
       "MESSENGER_HEADING": "메신저 스크립트",
@@ -456,6 +464,7 @@
       "AUTO_ASSIGNMENT_SUB_TEXT": "받은 메시지에 추가된 에이전트에 새 대화를 자동으로 할당하거나 할당하지 않도록 설정하십시오.",
       "HMAC_VERIFICATION": "사용자 신원 검증",
       "HMAC_DESCRIPTION": "In order to validate the user's identity, you can pass an `identifier_hash` for each user. You can generate a HMAC sha256 hash using the `identifier` with the key shown here.",
+      "HMAC_LINK_TO_DOCS": "You can read more here.",
       "HMAC_MANDATORY_VERIFICATION": "Enforce User Identity Validation",
       "HMAC_MANDATORY_DESCRIPTION": "If enabled, requests missing the `identifier_hash` will be rejected.",
       "INBOX_IDENTIFIER": "Inbox Identifier",
@@ -465,7 +474,21 @@
       "ALLOW_MESSAGES_AFTER_RESOLVED": "Allow messages after conversation resolved",
       "ALLOW_MESSAGES_AFTER_RESOLVED_SUB_TEXT": "Allow the end-users to send messages even after the conversation is resolved.",
       "WHATSAPP_SECTION_SUBHEADER": "This API Key is used for the integration with the WhatsApp APIs.",
-      "WHATSAPP_SECTION_TITLE": "API Key"
+      "WHATSAPP_SECTION_UPDATE_SUBHEADER": "Enter the updated key to be used for the integration with the WhatsApp APIs.",
+      "WHATSAPP_SECTION_TITLE": "API Key",
+      "WHATSAPP_SECTION_UPDATE_TITLE": "Update API Key",
+      "WHATSAPP_SECTION_UPDATE_PLACEHOLDER": "Enter the new API Key here",
+      "WHATSAPP_SECTION_UPDATE_BUTTON": "업데이트",
+      "WHATSAPP_WEBHOOK_TITLE": "Webhook Verify Token",
+      "WHATSAPP_WEBHOOK_SUBHEADER": "This token is used to verify the authenticity of the webhook endpoint.",
+      "UPDATE_PRE_CHAT_FORM_SETTINGS": "Update Pre Chat Form Settings"
+    },
+    "HELP_CENTER": {
+      "LABEL": "Help Center",
+      "PLACEHOLDER": "Select Help Center",
+      "SELECT_PLACEHOLDER": "Select Help Center",
+      "REMOVE": "Remove Help Center",
+      "SUB_TEXT": "Attach a Help Center with the inbox"
     },
     "AUTO_ASSIGNMENT": {
       "MAX_ASSIGNMENT_LIMIT": "Auto assignment limit",
@@ -512,7 +535,6 @@
       "UPDATE": "변경된 영업시간 적용",
       "TOGGLE_AVAILABILITY": "이 받은 메시지함에 대해 영업시간 설정 적용",
       "UNAVAILABLE_MESSAGE_LABEL": "Unavailable message for visitors",
-      "UNAVAILABLE_MESSAGE_DEFAULT": "현재 담당자가 자리비움 상태입니다. 메시지를 남겨주시면 담당자 복귀 시 답변드리겠습니다.",
       "TOGGLE_HELP": "영업시간 설정을 적용할 경우 라이브챗 위젯에 해당 시간을 표시합니다. 담당자가 현재 오프라인 상태일 때도 해당 영업시간을 표시합니다. 영업 외 시간에는 사용자에게 아래 메시지와 대화 전 설문을 대신 보여줍니다.",
       "DAY": {
         "ENABLE": "아래 날짜에 대해 영업시간 설정 적용",
@@ -674,6 +696,10 @@
       },
       "BRANDING_TEXT": "Chatwoot 작동중",
       "SCRIPT_SETTINGS": "\n      window.chatwootSettings = {options};"
+    },
+    "EMAIL_PROVIDERS": {
+      "MICROSOFT": "Microsoft",
+      "OTHER_PROVIDERS": "Other Providers"
     }
   }
 }

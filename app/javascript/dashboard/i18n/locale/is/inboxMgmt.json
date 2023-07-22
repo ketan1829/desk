@@ -53,10 +53,6 @@
           "ENABLE": "Búðu til samtöl úr merktum Tweet-um"
         }
       },
-      "MICROSOFT": {
-        "HELP": "To add your Microsoft account as a channel, you need to authenticate your Microsoft account by clicking on 'Sign in with Microsoft' ",
-        "ERROR_MESSAGE": "There was an error connecting to Microsoft, please try again"
-      },
       "WEBSITE_CHANNEL": {
         "TITLE": "Vefsíðu rás",
         "DESC": "Búðu til rás fyrir vefsíðuna þína og byrjaðu að aðstoða viðskiptavini þína í gegnum netspjallið okkar.",
@@ -212,7 +208,7 @@
         },
         "INBOX_NAME": {
           "LABEL": "Nafn Innhólfs",
-          "PLACEHOLDER": "Please enter an inbox name",
+          "PLACEHOLDER": "Vinsamlegast sláðu inn nafn innhólfs",
           "ERROR": "Það er nauðsynlegt að fylla út þennan reit"
         },
         "PHONE_NUMBER": {
@@ -223,23 +219,23 @@
         "PHONE_NUMBER_ID": {
           "LABEL": "Phone number ID",
           "PLACEHOLDER": "Vinsamlega sláðu inn auðkenni símanúmers sem þú færð frá stjórnborði Facebook Developer.",
-          "ERROR": "Please enter a valid value."
+          "ERROR": "Vinsamlegast sláðu inn gilt gildi."
         },
         "BUSINESS_ACCOUNT_ID": {
           "LABEL": "Business Account ID",
           "PLACEHOLDER": "Vinsamlega sláðu inn auðkenni fyrirtækjareiknings sem þú færð frá stjórnborði Facebook Developer.",
-          "ERROR": "Please enter a valid value."
+          "ERROR": "Vinsamlegast sláðu inn gilt gildi."
         },
         "WEBHOOK_VERIFY_TOKEN": {
           "LABEL": "Webhook Verify Token",
           "PLACEHOLDER": "Sláðu inn staðfestingartákn sem þú vilt stilla fyrir Facebook webhooks.",
-          "ERROR": "Please enter a valid value."
+          "ERROR": "Vinsamlegast sláðu inn gilt gildi."
         },
         "API_KEY": {
           "LABEL": "API key",
           "SUBTITLE": "Configure the WhatsApp API key.",
           "PLACEHOLDER": "API key",
-          "ERROR": "Please enter a valid value."
+          "ERROR": "Vinsamlegast sláðu inn gilt gildi."
         },
         "API_CALLBACK": {
           "TITLE": "Callback URL",
@@ -348,6 +344,17 @@
       "FINISH": {
         "TITLE": "Nailed It!",
         "DESC": "Þú hefur lokið við að innleiða Facebook síðuna þína í Chatwoot. Næst þegar viðskiptavinur sendir skilaboð á síðunni þinni birtist samtalið sjálfkrafa í innhólfinu þínu.<br>Við erum líka að útvega þér netspjalls skriftu sem þú getur auðveldlega bætt við vefsíðuna þína. Þegar þetta er komið á vefsvæðið þitt geta viðskiptavinir sent þér skilaboð beint frá vefsíðunni þinni án hjálpar utanaðkomandi tóla og samtalið mun birtast hér, í Chatwoot.<br>Svalt, ha? Jæja, við reynum að vera það :)"
+      },
+      "EMAIL_PROVIDER": {
+        "TITLE": "Select your email provider",
+        "DESCRIPTION": "Select an email provider from the list below. If you don't see your email provider in the list, you can select the other provider option and provide the IMAP and SMTP Credentials."
+      },
+      "MICROSOFT": {
+        "TITLE": "Microsoft Email",
+        "DESCRIPTION": "Click on the Sign in with Microsoft button to get started. You will redirected to the email sign in page. Once you accept the requested permissions, you would be redirected back to the inbox creation step.",
+        "EMAIL_PLACEHOLDER": "Enter email address",
+        "HELP": "To add your Microsoft account as a channel, you need to authenticate your Microsoft account by clicking on 'Sign in with Microsoft' ",
+        "ERROR_MESSAGE": "There was an error connecting to Microsoft, please try again"
       }
     },
     "DETAILS": {
@@ -421,7 +428,7 @@
       "SETTINGS": "Stillingar",
       "COLLABORATORS": "Samstarfsaðilar",
       "CONFIGURATION": "Stillingar",
-      "CAMPAIGN": "Campaigns",
+      "CAMPAIGN": "Herferð",
       "PRE_CHAT_FORM": "Pre Chat Form",
       "BUSINESS_HOURS": "Business Hours",
       "WIDGET_BUILDER": "Widget Builder",
@@ -432,7 +439,8 @@
       "LABEL": "Fídusar",
       "DISPLAY_FILE_PICKER": "Display file picker on the widget",
       "DISPLAY_EMOJI_PICKER": "Display emoji picker on the widget",
-      "ALLOW_END_CONVERSATION": "Leyfa notendum að ljúka samtali úr græjunni"
+      "ALLOW_END_CONVERSATION": "Leyfa notendum að ljúka samtali úr græjunni",
+      "USE_INBOX_AVATAR_FOR_BOT": "Use inbox name and avatar for the bot"
     },
     "SETTINGS_POPUP": {
       "MESSENGER_HEADING": "Messenger Script",
@@ -456,6 +464,7 @@
       "AUTO_ASSIGNMENT_SUB_TEXT": "Virkja eða slökkva á sjálfvirkri úthlutun nýrra samtöla til umboðsmanna sem bætt er við þetta innhólf.",
       "HMAC_VERIFICATION": "User Identity Validation",
       "HMAC_DESCRIPTION": "Til að sannreyna auðkenni notandans geturðu sent `identifier_hash` fyrir hvern notanda. Þú getur búið til HMAC sha256 hash með því að nota 'identifier' með lyklinum sem sýndur er hér.",
+      "HMAC_LINK_TO_DOCS": "You can read more here.",
       "HMAC_MANDATORY_VERIFICATION": "Enforce User Identity Validation",
       "HMAC_MANDATORY_DESCRIPTION": "Ef það er virkt verður beiðnum sem vantar ‘identifier_hash’ hafnað.",
       "INBOX_IDENTIFIER": "Inbox Identifier",
@@ -465,7 +474,21 @@
       "ALLOW_MESSAGES_AFTER_RESOLVED": "Leyfa skilaboð eftir að samtal hefur verið leyst",
       "ALLOW_MESSAGES_AFTER_RESOLVED_SUB_TEXT": "Leyfa endanotendum að senda skilaboð jafnvel eftir að samtalið er leyst.",
       "WHATSAPP_SECTION_SUBHEADER": "Þessi API lykill er notaður fyrir samþættingu við WhatsApp API.",
-      "WHATSAPP_SECTION_TITLE": "API Lykill"
+      "WHATSAPP_SECTION_UPDATE_SUBHEADER": "Enter the updated key to be used for the integration with the WhatsApp APIs.",
+      "WHATSAPP_SECTION_TITLE": "API Lykill",
+      "WHATSAPP_SECTION_UPDATE_TITLE": "Update API Key",
+      "WHATSAPP_SECTION_UPDATE_PLACEHOLDER": "Enter the new API Key here",
+      "WHATSAPP_SECTION_UPDATE_BUTTON": "Uppfæra",
+      "WHATSAPP_WEBHOOK_TITLE": "Webhook Verify Token",
+      "WHATSAPP_WEBHOOK_SUBHEADER": "This token is used to verify the authenticity of the webhook endpoint.",
+      "UPDATE_PRE_CHAT_FORM_SETTINGS": "Update Pre Chat Form Settings"
+    },
+    "HELP_CENTER": {
+      "LABEL": "Help Center",
+      "PLACEHOLDER": "Select Help Center",
+      "SELECT_PLACEHOLDER": "Select Help Center",
+      "REMOVE": "Remove Help Center",
+      "SUB_TEXT": "Attach a Help Center with the inbox"
     },
     "AUTO_ASSIGNMENT": {
       "MAX_ASSIGNMENT_LIMIT": "Auto assignment limit",
@@ -512,7 +535,6 @@
       "UPDATE": "Update business hours settings",
       "TOGGLE_AVAILABILITY": "Virkja opnunartíma fyrirtækja fyrir þetta innhólf",
       "UNAVAILABLE_MESSAGE_LABEL": "Unavailable message for visitors",
-      "UNAVAILABLE_MESSAGE_DEFAULT": "Við erum ekki við í augnablikinu. Skildu eftir skilaboð og við svörum þegar við komum aftur.",
       "TOGGLE_HELP": "Með því að virkja opnunartíma fyrirtækis mun opnunartíminn sjást á vefspjallinu jafnvel þótt allir þjónustufulltrúar séu ótengdir. Utan opnunnartíma er hægt að vara viðskiptavini við með skilaboðum og forspjallsformi.",
       "DAY": {
         "ENABLE": "Enable availability for this day",
@@ -674,6 +696,10 @@
       },
       "BRANDING_TEXT": "Keyrt af Chatwoot",
       "SCRIPT_SETTINGS": "\n      window.chatwootSettings = {options};"
+    },
+    "EMAIL_PROVIDERS": {
+      "MICROSOFT": "Microsoft",
+      "OTHER_PROVIDERS": "Other Providers"
     }
   }
 }

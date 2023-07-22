@@ -251,7 +251,7 @@ export default {
     },
     getActionDropdownValues(type) {
       const { agents, labels, teams } = this;
-      return getActionOptions({ agents, labels, teams, type });
+      return getActionOptions({ agents, labels, teams, languages, type });
     },
     manifestCustomAttributes() {
       const conversationCustomAttributesRaw = this.$store.getters[
@@ -282,6 +282,9 @@ export default {
         ...manifestedCustomAttributes
       );
       this.automationTypes.conversation_updated.conditions.push(
+        ...manifestedCustomAttributes
+      );
+      this.automationTypes.conversation_opened.conditions.push(
         ...manifestedCustomAttributes
       );
     },

@@ -1,10 +1,19 @@
 <template>
   <div class="card">
     <div class="card-header">
-      <h5>{{ header }}</h5>
-      <span class="live">
-        <span class="ellipse" /><span>{{ $t('OVERVIEW_REPORTS.LIVE') }}</span>
-      </span>
+      <slot name="header">
+        <div class="card-header--title-area">
+          <h5>{{ header }}</h5>
+          <span class="live">
+            <span class="ellipse" /><span>{{
+              $t('OVERVIEW_REPORTS.LIVE')
+            }}</span>
+          </span>
+        </div>
+        <div class="card-header--control-area">
+          <slot name="control" />
+        </div>
+      </slot>
     </div>
     <div v-if="!isLoading" class="card-body row">
       <slot />
@@ -41,58 +50,61 @@ export default {
 </script>
 <style lang="scss" scoped>
 .card {
+  @apply bg-white dark:bg-slate-800 border-slate-75 dark:border-slate-700;
   margin: var(--space-small) !important;
-}
-.card-header {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-bottom: var(--space-medium);
 
-  h5 {
-    margin-bottom: var(--zero);
+  .card-header--control-area {
+    transition: opacity 0.2s ease-in-out;
+    @apply opacity-20;
   }
 
-  .live {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding-right: var(--space-small);
-    padding-left: var(--space-small);
-    margin: var(--space-smaller);
-    background: rgba(37, 211, 102, 0.1);
-    color: var(--g-400);
-    font-size: var(--font-size-mini);
-
-    .ellipse {
-      background-color: var(--g-400);
-      height: var(--space-smaller);
-      width: var(--space-smaller);
-      border-radius: var(--border-radius-rounded);
-      margin-right: var(--space-smaller);
+  &:hover {
+    .card-header--control-area {
+      @apply opacity-100;
     }
   }
 }
+
+.card-header {
+  grid-template-columns: repeat(auto-fit, minmax(max-content, 50%));
+  gap: var(--space-small) 0px;
+  @apply grid flex-grow w-full mb-6;
+
+  .card-header--title-area {
+    @apply flex items-center flex-row;
+
+    h5 {
+      @apply mb-0 text-slate-800 dark:text-slate-100;
+    }
+
+    .live {
+      background: rgba(37, 211, 102, 0.1);
+      @apply flex flex-row items-center pr-2 pl-2 m-1 text-green-400 dark:text-green-400 text-xs;
+
+      .ellipse {
+        @apply bg-green-400 dark:bg-green-400 h-1 w-1 rounded-full mr-1 rtl:mr-0 rtl:ml-0;
+      }
+    }
+  }
+
+  .card-header--control-area {
+    @apply flex flex-row items-center justify-end gap-2;
+  }
+}
+
 .card-body {
   .metric-content {
-    padding-bottom: var(--space-small);
+    @apply pb-2;
     .heading {
-      font-size: var(--font-size-default);
+      @apply text-base text-slate-700 dark:text-slate-100;
     }
     .metric {
-      color: var(--w-800);
-      font-size: var(--font-size-bigger);
-      margin-bottom: var(--zero);
-      margin-top: var(--space-smaller);
+      @apply text-woot-800 dark:text-woot-300 text-3xl mb-0 mt-1;
     }
   }
 }
 
 .conversation-metric-loader {
-  align-items: center;
-  display: flex;
-  font-size: var(--font-size-default);
-  justify-content: center;
-  padding: var(--space-large);
+  @apply items-center flex text-base justify-center p-12;
 }
 </style>

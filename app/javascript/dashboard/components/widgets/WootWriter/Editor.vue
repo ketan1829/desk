@@ -6,9 +6,14 @@
       @click="insertMentionNode"
     />
     <canned-response
-      v-if="showCannedMenu && !isPrivate"
+      v-if="shouldShowCannedResponses"
       :search-key="cannedSearchTerm"
       @click="insertCannedResponse"
+    />
+    <variable-list
+      v-if="shouldShowVariables"
+      :search-key="variableSearchTerm"
+      @click="insertVariable"
     />
     <div ref="editor" />
   </div>
@@ -31,6 +36,7 @@ import {
 
 import TagAgents from '../conversation/TagAgents';
 import CannedResponse from '../conversation/CannedResponse';
+import VariableList from '../conversation/VariableList';
 
 const TYPING_INDICATOR_IDLE_TIME = 4000;
 
@@ -43,6 +49,7 @@ import {
 import eventListenerMixins from 'shared/mixins/eventListenerMixins';
 import uiSettingsMixin from 'dashboard/mixins/uiSettings';
 import { isEditorHotKeyEnabled } from 'dashboard/mixins/uiSettings';
+import { replaceVariablesInMessage } from '@chatwoot/utils';
 import { CONVERSATION_EVENTS } from '../../../helper/AnalyticsHelper/events';
 
 const createState = (content, placeholder, plugins = []) => {
@@ -58,7 +65,7 @@ const createState = (content, placeholder, plugins = []) => {
 
 export default {
   name: 'WootMessageEditor',
-  components: { TagAgents, CannedResponse },
+  components: { TagAgents, CannedResponse, VariableList },
   mixins: [eventListenerMixins, uiSettingsMixin],
   props: {
     value: { type: String, default: '' },
@@ -68,13 +75,18 @@ export default {
     enableSuggestions: { type: Boolean, default: true },
     overrideLineBreaks: { type: Boolean, default: false },
     updateSelectionWith: { type: String, default: '' },
+    enableVariables: { type: Boolean, default: false },
+    enableCannedResponses: { type: Boolean, default: true },
+    variables: { type: Object, default: () => ({}) },
   },
   data() {
     return {
       showUserMentions: false,
       showCannedMenu: false,
+      showVariables: false,
       mentionSearchKey: '',
       cannedSearchTerm: '',
+      variableSearchTerm: '',
       editorView: null,
       range: null,
       state: undefined,
@@ -83,6 +95,14 @@ export default {
   computed: {
     contentFromEditor() {
       return MessageMarkdownSerializer.serialize(this.editorView.state.doc);
+    },
+    shouldShowVariables() {
+      return this.enableVariables && this.showVariables && !this.isPrivate;
+    },
+    shouldShowCannedResponses() {
+      return (
+        this.enableCannedResponses && this.showCannedMenu && !this.isPrivate
+      );
     },
     plugins() {
       if (!this.enableSuggestions) {
@@ -103,6 +123,7 @@ export default {
             this.range = args.range;
 
             this.mentionSearchKey = args.text.replace('@', '');
+
             return false;
           },
           onExit: () => {
@@ -142,6 +163,34 @@ export default {
             return event.keyCode === 13 && this.showCannedMenu;
           },
         }),
+        suggestionsPlugin({
+          matcher: triggerCharacters('{{'),
+          suggestionClass: '',
+          onEnter: args => {
+            if (this.isPrivate) {
+              return false;
+            }
+            this.showVariables = true;
+            this.range = args.range;
+            this.editorView = args.view;
+            return false;
+          },
+          onChange: args => {
+            this.editorView = args.view;
+            this.range = args.range;
+
+            this.variableSearchTerm = args.text.replace('{{', '');
+            return false;
+          },
+          onExit: () => {
+            this.variableSearchTerm = '';
+            this.showVariables = false;
+            return false;
+          },
+          onKeyDown: ({ event }) => {
+            return event.keyCode === 13 && this.showVariables;
+          },
+        }),
       ];
     },
   },
@@ -152,12 +201,17 @@ export default {
     showCannedMenu(updatedValue) {
       this.$emit('toggle-canned-menu', !this.isPrivate && updatedValue);
     },
+    showVariables(updatedValue) {
+      this.$emit('toggle-variables-menu', !this.isPrivate && updatedValue);
+    },
     value(newValue = '') {
       if (newValue !== this.contentFromEditor) {
         this.reloadState();
       }
     },
     editorId() {
+      this.showCannedMenu = false;
+      this.cannedSearchTerm = '';
       this.reloadState();
     },
     isPrivate() {
@@ -256,30 +310,31 @@ export default {
         userFullName: mentionItem.name,
       });
 
-      const tr = this.editorView.state.tr.replaceWith(
-        this.range.from,
-        this.range.to,
-        node
-      );
+      const tr = this.editorView.state.tr
+        .replaceWith(this.range.from, this.range.to, node)
+        .insertText(` `);
       this.state = this.editorView.state.apply(tr);
       this.emitOnChange();
       this.$track(CONVERSATION_EVENTS.USED_MENTIONS);
 
       return false;
     },
-
     insertCannedResponse(cannedItem) {
+      const updatedMessage = replaceVariablesInMessage({
+        message: cannedItem,
+        variables: this.variables,
+      });
       if (!this.editorView) {
         return null;
       }
 
       let from = this.range.from - 1;
       let node = new MessageMarkdownTransformer(messageSchema).parse(
-        cannedItem
+        updatedMessage
       );
 
-      if (node.textContent === cannedItem) {
-        node = this.editorView.state.schema.text(cannedItem);
+      if (node.textContent === updatedMessage) {
+        node = this.editorView.state.schema.text(updatedMessage);
         from = this.range.from;
       }
 
@@ -294,6 +349,29 @@ export default {
 
       tr.scrollIntoView();
       this.$track(CONVERSATION_EVENTS.INSERTED_A_CANNED_RESPONSE);
+      return false;
+    },
+    insertVariable(variable) {
+      if (!this.editorView) {
+        return null;
+      }
+      let node = this.editorView.state.schema.text(`{{${variable}}}`);
+      const from = this.range.from;
+
+      const tr = this.editorView.state.tr.replaceWith(
+        from,
+        this.range.to,
+        node
+      );
+
+      this.state = this.editorView.state.apply(tr);
+      this.emitOnChange();
+
+      // The `{{ }}` are added to the message, but the cursor is placed
+      // and onExit of suggestionsPlugin is not called. So we need to manually hide
+      this.showVariables = false;
+      this.$track(CONVERSATION_EVENTS.INSERTED_A_VARIABLE);
+      tr.scrollIntoView();
       return false;
     },
 
@@ -367,69 +445,61 @@ export default {
 @import '~@chatwoot/prosemirror-schema/src/styles/base.scss';
 
 .ProseMirror-menubar-wrapper {
-  display: flex;
-  flex-direction: column;
-
+  @apply flex flex-col;
   .ProseMirror-menubar {
     min-height: var(--space-two) !important;
-    margin-left: var(--space-minus-one);
-    padding-bottom: 0;
-  }
+    @apply -ml-2.5 pb-0 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-100;
 
+    .ProseMirror-menu-active {
+      @apply bg-slate-75 dark:bg-slate-800;
+    }
+  }
   > .ProseMirror {
-    padding: 0;
-    word-break: break-word;
+    @apply p-0 break-words text-slate-800 dark:text-slate-100;
   }
 }
 
 .editor-root {
-  width: 100%;
-  position: relative;
+  @apply w-full relative;
 }
 
 .ProseMirror-woot-style {
-  min-height: 8rem;
-  max-height: 12rem;
-  overflow: auto;
+  @apply overflow-auto min-h-[5rem] max-h-[7.5rem];
 }
 
 .ProseMirror-prompt {
-  z-index: var(--z-index-highest);
-  background: var(--color-background-light);
-  border-radius: var(--border-radius-normal);
-  border: 1px solid var(--color-border);
+  @apply z-50 bg-slate-25 dark:bg-slate-700 rounded-md border border-solid border-slate-75 dark:border-slate-800;
 }
 
 .is-private {
   .prosemirror-mention-node {
-    font-weight: var(--font-weight-medium);
-    background: var(--s-50);
-    color: var(--s-900);
-    padding: 0 var(--space-smaller);
+    @apply font-medium bg-slate-50 dark:bg-slate-200 text-slate-900 dark:text-slate-900 py-0 px-1;
   }
-  .ProseMirror-menubar {
-    background: var(--y-50);
+
+  .ProseMirror-menubar-wrapper {
+    .ProseMirror-menubar {
+      @apply bg-yellow-50 dark:bg-yellow-50 text-slate-700 dark:text-slate-700;
+    }
+
+    > .ProseMirror {
+      @apply text-slate-800 dark:text-slate-800;
+    }
   }
 }
 
 .editor-wrap {
-  margin-bottom: var(--space-normal);
+  @apply mb-4;
 }
 
 .message-editor {
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-normal);
-  padding: 0 var(--space-slab);
-  margin-bottom: 0;
+  @apply border border-solid border-slate-200 dark:border-slate-600 bg-white dark:bg-slate-900 rounded-md py-0 px-1 mb-0;
 }
 
 .editor_warning {
-  border: 1px solid var(--r-400);
+  @apply border border-solid border-red-400 dark:border-red-400;
 }
 
 .editor-warning__message {
-  color: var(--r-400);
-  font-weight: var(--font-weight-normal);
-  padding: var(--space-smaller) 0 0 0;
+  @apply text-red-400 dark:text-red-400 font-normal pt-1 pb-0 px-0;
 }
 </style>

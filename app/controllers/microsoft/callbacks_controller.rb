@@ -8,7 +8,7 @@ class Microsoft::CallbacksController < ApplicationController
     )
 
     inbox = find_or_create_inbox
-    ::Redis::Alfred.delete(users_data['email'])
+    ::Redis::Alfred.delete(users_data['email'].downcase)
     redirect_to app_microsoft_inbox_agents_url(account_id: account.id, inbox_id: inbox.id)
   rescue StandardError => e
     ChatwootExceptionTracker.new(e).capture_exception
@@ -31,7 +31,7 @@ class Microsoft::CallbacksController < ApplicationController
   end
 
   def account_id
-    ::Redis::Alfred.get(users_data['email'])
+    ::Redis::Alfred.get(users_data['email'].downcase)
   end
 
   def account
@@ -45,13 +45,18 @@ class Microsoft::CallbacksController < ApplicationController
     channel_email.inbox
   end
 
+  # Fallback name, for when name field is missing from users_data
+  def fallback_name
+    users_data['email'].split('@').first.parameterize.titleize
+  end
+
   def create_microsoft_channel_with_inbox
     ActiveRecord::Base.transaction do
       channel_email = Channel::Email.create!(email: users_data['email'], account: account)
       account.inboxes.create!(
         account: account,
         channel: channel_email,
-        name: users_data['name']
+        name: users_data['name'] || fallback_name
       )
       channel_email
     end

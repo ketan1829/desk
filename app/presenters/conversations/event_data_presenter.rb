@@ -15,6 +15,8 @@ class Conversations::EventDataPresenter < SimpleDelegator
       snoozed_until: snoozed_until,
       unread_count: unread_incoming_messages.count,
       first_reply_created_at: first_reply_created_at,
+      priority: priority,
+      waiting_since: waiting_since.to_i,
       **push_timestamps
     }
   end
@@ -38,7 +40,8 @@ class Conversations::EventDataPresenter < SimpleDelegator
     {
       agent_last_seen_at: agent_last_seen_at.to_i,
       contact_last_seen_at: contact_last_seen_at.to_i,
-      timestamp: last_activity_at.to_i
+      timestamp: last_activity_at.to_i,
+      created_at: created_at.to_i
     }
   end
 end

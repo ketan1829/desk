@@ -1,10 +1,10 @@
 <template>
-  <div class="settings--content">
-    <div class="pre-chat--title">
+  <div class="my-2 mx-8 text-base">
+    <div class="mt-6 mx-0 mb-3">
       {{ $t('INBOX_MGMT.PRE_CHAT_FORM.DESCRIPTION') }}
     </div>
-    <form @submit.prevent="updateInbox">
-      <label class="medium-3 columns">
+    <form class="flex flex-col" @submit.prevent="updateInbox">
+      <label class="w-[25%]">
         {{ $t('INBOX_MGMT.PRE_CHAT_FORM.ENABLE.LABEL') }}
         <select v-model="preChatFormEnabled">
           <option :value="true">
@@ -16,17 +16,19 @@
         </select>
       </label>
       <div v-if="preChatFormEnabled">
-        <label class="medium-3 columns">
-          {{ $t('INBOX_MGMT.PRE_CHAT_FORM.PRE_CHAT_MESSAGE.LABEL') }}
-          <textarea
-            v-model.trim="preChatMessage"
-            type="text"
+        <label class="w-[70%]">
+          <label>
+            {{ $t('INBOX_MGMT.PRE_CHAT_FORM.PRE_CHAT_MESSAGE.LABEL') }}
+          </label>
+          <woot-message-editor
+            v-model="preChatMessage"
+            class="message-editor"
             :placeholder="
               $t('INBOX_MGMT.PRE_CHAT_FORM.PRE_CHAT_MESSAGE.PLACEHOLDER')
             "
           />
         </label>
-        <div class="medium-8 columns">
+        <div class="w-[70%] mt-4">
           <label>{{ $t('INBOX_MGMT.PRE_CHAT_FORM.SET_FIELDS') }}</label>
           <table class="table table-striped w-full">
             <thead class="thead-dark">
@@ -64,10 +66,14 @@
           </table>
         </div>
       </div>
-      <woot-submit-button
-        :button-text="$t('INBOX_MGMT.SETTINGS_POPUP.UPDATE')"
-        :loading="uiFlags.isUpdating"
-      />
+      <div class="my-4 w-auto">
+        <woot-submit-button
+          :button-text="
+            $t('INBOX_MGMT.SETTINGS_POPUP.UPDATE_PRE_CHAT_FORM_SETTINGS')
+          "
+          :loading="uiFlags.isUpdating"
+        />
+      </div>
     </form>
   </div>
 </template>
@@ -76,10 +82,11 @@ import { mapGetters } from 'vuex';
 import alertMixin from 'shared/mixins/alertMixin';
 import PreChatFields from './PreChatFields.vue';
 import { getPreChatFields, standardFieldKeys } from 'dashboard/helper/preChat';
-
+import WootMessageEditor from 'dashboard/components/widgets/WootWriter/Editor';
 export default {
   components: {
     PreChatFields,
+    WootMessageEditor,
   },
   mixins: [alertMixin],
   props: {
@@ -165,10 +172,13 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.settings--content {
-  font-size: var(--font-size-default);
-}
-.pre-chat--title {
-  margin: var(--space-medium) 0 var(--space-slab);
+.message-editor {
+  @apply px-3;
+
+  ::v-deep {
+    .ProseMirror-menubar {
+      @apply rounded-tl-[4px];
+    }
+  }
 }
 </style>

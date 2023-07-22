@@ -1,7 +1,7 @@
 <template>
   <div class="agent-table-container">
     <ve-table
-      max-height="calc(100vh - 35rem)"
+      max-height="calc(100vh - 21.875rem)"
       :fixed-header="true"
       :columns="columns"
       :table-data="tableData"
@@ -32,6 +32,7 @@
 import { VeTable, VePagination } from 'vue-easytable';
 import Spinner from 'shared/components/Spinner.vue';
 import EmptyState from 'dashboard/components/widgets/EmptyState.vue';
+import rtlMixin from 'shared/mixins/rtlMixin';
 import Thumbnail from 'dashboard/components/widgets/Thumbnail.vue';
 
 export default {
@@ -42,6 +43,7 @@ export default {
     VeTable,
     VePagination,
   },
+  mixins: [rtlMixin],
   props: {
     agents: {
       type: Array,
@@ -83,7 +85,7 @@ export default {
             'OVERVIEW_REPORTS.AGENT_CONVERSATIONS.TABLE_HEADER.AGENT'
           ),
           fixed: 'left',
-          align: 'left',
+          align: this.isRTLView ? 'right' : 'left',
           width: 25,
           renderBodyCell: ({ row }) => (
             <div class="row-user-block">
@@ -94,7 +96,9 @@ export default {
                 status={row.status}
               />
               <div class="user-block">
-                <h6 class="title text-truncate">{row.agent}</h6>
+                <h6 class="title overflow-hidden whitespace-nowrap text-ellipsis">
+                  {row.agent}
+                </h6>
                 <span class="sub-title">{row.email}</span>
               </div>
             </div>
@@ -106,7 +110,7 @@ export default {
           title: this.$t(
             'OVERVIEW_REPORTS.AGENT_CONVERSATIONS.TABLE_HEADER.OPEN'
           ),
-          align: 'left',
+          align: this.isRTLView ? 'right' : 'left',
           width: 10,
         },
         {
@@ -115,7 +119,7 @@ export default {
           title: this.$t(
             'OVERVIEW_REPORTS.AGENT_CONVERSATIONS.TABLE_HEADER.UNATTENDED'
           ),
-          align: 'left',
+          align: this.isRTLView ? 'right' : 'left',
           width: 10,
         },
       ];
@@ -134,9 +138,7 @@ export default {
 
 <style lang="scss" scoped>
 .agent-table-container {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
+  @apply flex flex-col flex-1;
 
   .ve-table {
     &::v-deep {
@@ -152,48 +154,34 @@ export default {
   }
 
   &::v-deep .ve-pagination {
-    background-color: transparent;
+    @apply bg-transparent dark:bg-transparent;
   }
 
   &::v-deep .ve-pagination-select {
-    display: none;
+    @apply hidden;
   }
 
   .row-user-block {
-    align-items: center;
-    display: flex;
-    text-align: left;
+    @apply items-center flex text-left;
 
     .user-block {
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
+      @apply items-start flex flex-col min-w-0 my-0 mx-2;
+
       .title {
-        font-size: var(--font-size-small);
-        margin: var(--zero);
-        line-height: 1;
+        @apply text-sm m-0 leading-[1.2] text-slate-800 dark:text-slate-100;
       }
       .sub-title {
-        font-size: var(--font-size-mini);
+        @apply text-xs text-slate-600 dark:text-slate-200;
       }
-    }
-
-    .user-thumbnail-box {
-      margin-right: var(--space-small);
     }
   }
 
   .table-pagination {
-    margin-top: var(--space-normal);
-    text-align: right;
+    @apply mt-4 text-right;
   }
 }
 
 .agents-loader {
-  align-items: center;
-  display: flex;
-  font-size: var(--font-size-default);
-  justify-content: center;
-  padding: var(--space-large);
+  @apply items-center flex text-base justify-center p-8;
 }
 </style>

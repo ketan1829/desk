@@ -52,10 +52,14 @@ class ApplicationMailer < ActionMailer::Base
 
   def liquid_locals
     # expose variables you want to be exposed in liquid
-    {
+    locals = {
       global_config: GlobalConfig.get('BRAND_NAME', 'BRAND_URL'),
       action_url: @action_url
     }
+
+    locals.merge({ attachment_url: @attachment_url }) if @attachment_url
+    locals.merge({ failed_contacts: @failed_contacts, imported_contacts: @imported_contacts })
+    locals
   end
 
   def locale_from_account(account)
@@ -69,11 +73,11 @@ class ApplicationMailer < ActionMailer::Base
     Current.account = account if account.present?
   end
 
-  def switch_locale(&action)
+  def switch_locale(&)
     locale ||= locale_from_account(Current.account)
     locale ||= I18n.default_locale
     # ensure locale won't bleed into other requests
     # https://guides.rubyonrails.org/i18n.html#managing-the-locale-across-requests
-    I18n.with_locale(locale, &action)
+    I18n.with_locale(locale, &)
   end
 end

@@ -2,24 +2,28 @@
   <div class="modal-mask">
     <div
       v-on-clickaway="closeNotificationPanel"
-      class="notification-wrap flex-space-between"
+      class="flex-col h-[90vh] w-[32.5rem] flex justify-between z-10 rounded-md shadow-md absolute bg-white dark:bg-slate-800 left-14 rtl:left-auto rtl:right-14 m-4"
     >
-      <div class="header-wrap w-full flex-space-between">
-        <div class="header-title--wrap flex-view">
-          <span class="header-title">
+      <div
+        class="flex-row items-center border-b border-solid pt-5 pb-3 px-6 border-slate-50 dark:border-slate-700 w-full flex justify-between"
+      >
+        <div class="items-center flex">
+          <span class="text-xl font-bold text-slate-800 dark:text-slate-100">
             {{ $t('NOTIFICATIONS_PAGE.UNREAD_NOTIFICATION.TITLE') }}
           </span>
-          <span v-if="totalUnreadNotifications" class="total-count block-title">
+          <span
+            v-if="totalUnreadNotifications"
+            class="py-1 px-2 font-semibold text-slate-700 dark:text-slate-200 rounded-md text-xxs ml-2 mr-2 bg-slate-50 dark:bg-slate-700"
+          >
             {{ totalUnreadNotifications }}
           </span>
         </div>
-        <div class="flex-view">
+        <div class="flex gap-2">
           <woot-button
             v-if="!noUnreadNotificationAvailable"
             color-scheme="primary"
             variant="smooth"
             size="tiny"
-            class-names="action-button"
             :is-loading="uiFlags.isUpdating"
             @click="onMarkAllDoneClick"
           >
@@ -29,7 +33,6 @@
             color-scheme="secondary"
             variant="smooth"
             size="tiny"
-            class-names="action-button"
             icon="settings"
             @click="openAudioNotificationSettings"
           />
@@ -48,13 +51,15 @@
         :on-click-notification="openConversation"
         :in-last-page="inLastPage"
       />
-      <div v-if="records.length !== 0" class="footer-wrap flex-space-between">
-        <div class="flex-view">
+      <div
+        v-if="records.length !== 0"
+        class="items-center py-1 px-5 flex justify-between"
+      >
+        <div class="flex">
           <woot-button
             size="medium"
             variant="clear"
             color-scheme="secondary"
-            class-names="page-change--button"
             :is-disabled="inFirstPage"
             @click="onClickFirstPage"
           >
@@ -62,7 +67,7 @@
             <fluent-icon
               icon="chevron-left"
               size="16"
-              class="margin-left-minus-slab"
+              :class="notificationPanelFooterIconClass"
             />
           </woot-button>
           <woot-button
@@ -74,8 +79,10 @@
             @click="onClickPreviousPage"
           />
         </div>
-        <span class="page-count"> {{ currentPage }} - {{ lastPage }} </span>
-        <div class="flex-view">
+        <span class="text-xxs font-semibold text-slate-500 dark:text-slate-400">
+          {{ currentPage }} - {{ lastPage }}
+        </span>
+        <div class="flex">
           <woot-button
             color-scheme="secondary"
             variant="clear"
@@ -88,7 +95,6 @@
             size="medium"
             variant="clear"
             color-scheme="secondary"
-            class-names="page-change--button"
             :disabled="inLastPage"
             @click="onClickLastPage"
           >
@@ -96,7 +102,7 @@
             <fluent-icon
               icon="chevron-right"
               size="16"
-              class="margin-left-minus-slab"
+              :class="notificationPanelFooterIconClass"
             />
           </woot-button>
         </div>
@@ -109,6 +115,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import { mixin as clickaway } from 'vue-clickaway';
+import rtlMixin from 'shared/mixins/rtlMixin';
 
 import NotificationPanelList from './NotificationPanelList';
 
@@ -116,7 +123,7 @@ export default {
   components: {
     NotificationPanelList,
   },
-  mixins: [clickaway],
+  mixins: [clickaway, rtlMixin],
   data() {
     return {
       pageSize: 15,
@@ -129,6 +136,11 @@ export default {
       records: 'notifications/getNotifications',
       uiFlags: 'notifications/getUIFlags',
     }),
+    notificationPanelFooterIconClass() {
+      return this.isRTLView
+        ? 'margin-right-minus-slab'
+        : 'margin-left-minus-slab';
+    },
     totalUnreadNotifications() {
       return this.meta.unreadCount;
     },
@@ -229,68 +241,3 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
-.flex-view {
-  display: flex;
-}
-
-.flex-space-between {
-  display: flex;
-  justify-content: space-between;
-}
-
-.notification-wrap {
-  flex-direction: column;
-  height: 90vh;
-  width: 52rem;
-  background-color: var(--white);
-  border-radius: var(--border-radius-medium);
-  position: absolute;
-  left: var(--space-jumbo);
-  margin: var(--space-small);
-}
-.header-wrap {
-  flex-direction: row;
-  align-items: center;
-  border-bottom: 1px solid var(--s-50);
-  padding: var(--space-two) var(--space-medium) var(--space-slab)
-    var(--space-medium);
-
-  .header-title--wrap {
-    align-items: center;
-  }
-
-  .header-title {
-    font-size: var(--font-size-two);
-    font-weight: var(--font-weight-black);
-  }
-
-  .total-count {
-    padding: var(--space-smaller) var(--space-small);
-    background: var(--b-50);
-    border-radius: var(--border-radius-normal);
-    font-size: var(--font-size-micro);
-    font-weight: var(--font-weight-bold);
-    margin-left: var(--space-smaller);
-  }
-
-  .action-button {
-    margin-right: var(--space-small);
-  }
-}
-
-.page-count {
-  font-size: var(--font-size-micro);
-  font-weight: var(--font-weight-bold);
-  color: var(--s-500);
-}
-
-.footer-wrap {
-  align-items: center;
-  padding: var(--space-smaller) var(--space-two);
-}
-
-.page-change--button:hover {
-  background: var(--s-50);
-}
-</style>

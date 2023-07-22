@@ -19,11 +19,21 @@
   "REPLY_TIME": {
     "IN_A_FEW_MINUTES": "Normalmente responde em alguns minutos",
     "IN_A_FEW_HOURS": "Responde normalmente em algumas horas",
-    "IN_A_DAY": "Responde normalmente em um dia"
+    "IN_A_DAY": "Responde normalmente em um dia",
+    "BACK_IN": "We will be back online"
   },
+  "DAY_NAMES": [
+    "Domingo",
+    "Segunda-Feira",
+    "Terça-feira",
+    "Quarta-feira",
+    "Quinta-feira",
+    "Sexta-feira",
+    "Sábado"
+  ],
   "START_CONVERSATION": "Iniciar Conversa",
   "END_CONVERSATION": "Finalizar Conversa",
-  "CONTINUE_CONVERSATION": "Continuar a conversa",
+  "CONTINUE_CONVERSATION": "Continuar conversa",
   "START_NEW_CONVERSATION": "Iniciar uma nova conversa",
   "UNREAD_VIEW": {
     "VIEW_MESSAGES_BUTTON": "Ver novas mensagens",
@@ -56,7 +66,9 @@
         "LABEL": "Número de Telefone",
         "PLACEHOLDER": "Por favor, digite seu número de telefone",
         "REQUIRED_ERROR": "O número de telefone é obrigatório",
-        "VALID_ERROR": "Número de telefone deve ser do formato E.164, por exemplo: +1415555555"
+        "DIAL_CODE_VALID_ERROR": "Please select a country code",
+        "VALID_ERROR": "Please enter a valid phone number",
+        "DROPDOWN_EMPTY": "Nenhum resultado encontrado"
       },
       "MESSAGE": {
         "LABEL": "Messagem",
@@ -65,7 +77,8 @@
       }
     },
     "CAMPAIGN_HEADER": "Por favor, forneça seu nome e e-mail antes de iniciar a conversa",
-    "IS_REQUIRED": "é obrigatório"
+    "IS_REQUIRED": "é obrigatório",
+    "REQUIRED": "Obrigatório"
   },
   "FILE_SIZE_LIMIT": "O arquivo excede o limite de anexos {MAXIMUM_FILE_UPLOAD_SIZE}",
   "CHAT_FORM": {

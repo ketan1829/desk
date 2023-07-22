@@ -14,12 +14,14 @@
             "CONVERSATION_UPDATED": "Conversation Updated",
             "MESSAGE_CREATED": "Message created",
             "MESSAGE_UPDATED": "Message updated",
-            "WEBWIDGET_TRIGGERED": "Live chat widget opened by the user"
+            "WEBWIDGET_TRIGGERED": "Live chat widget opened by the user",
+            "CONTACT_CREATED": "Contact created",
+            "CONTACT_UPDATED": "Contact updated"
           }
         },
         "END_POINT": {
           "LABEL": "Webhook URL",
-          "PLACEHOLDER": "Example: https://example/api/webhook",
+          "PLACEHOLDER": "Example: %{webhookExampleURL}",
           "ERROR": "Please enter a valid URL"
         },
         "EDIT_SUBMIT": "Update webhook",
@@ -79,6 +81,47 @@
       "START_VIDEO_CALL_HELP_TEXT": "Start a new video call with the customer",
       "JOIN_ERROR": "There was an error joining the call, please try again",
       "CREATE_ERROR": "There was an error creating a meeting link, please try again"
+    },
+    "OPEN_AI": {
+      "AI_ASSIST": "AI Assist",
+      "WITH_AI": " %{option} with AI ",
+      "OPTIONS": {
+        "REPLY_SUGGESTION": "Reply Suggestion",
+        "SUMMARIZE": "Summarize",
+        "REPHRASE": "Improve Writing",
+        "FIX_SPELLING_GRAMMAR": "Fix Spelling and Grammar",
+        "SHORTEN": "Shorten",
+        "EXPAND": "Expand",
+        "MAKE_FRIENDLY": "Change message tone to friendly",
+        "MAKE_FORMAL": "Use formal tone",
+        "SIMPLIFY": "Simplify"
+      },
+      "ASSISTANCE_MODAL": {
+        "DRAFT_TITLE": "Draft content",
+        "GENERATED_TITLE": "Generated content",
+        "AI_WRITING": "AI is writing",
+        "BUTTONS": {
+          "APPLY": "Use this suggestion",
+          "CANCEL": "Cancel"
+        }
+      },
+      "TITLE": "Improve With AI",
+      "SUMMARY_TITLE": "Summary with AI",
+      "REPLY_TITLE": "Reply suggestion with AI",
+      "SUBTITLE": "An improved reply will be generated using AI, based on your current draft.",
+      "TONE": {
+        "TITLE": "Tone",
+        "OPTIONS": {
+          "PROFESSIONAL": "Professional",
+          "FRIENDLY": "Friendly"
+        }
+      },
+      "BUTTONS": {
+        "GENERATE": "Generate",
+        "GENERATING": "Generating...",
+        "CANCEL": "Cancel"
+      },
+      "GENERATE_ERROR": "There was an error processing the content, please try again"
     },
     "DELETE": {
       "BUTTON_TEXT": "Delete",

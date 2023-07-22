@@ -14,7 +14,9 @@
             "CONVERSATION_UPDATED": "Saruna Atjaunināta",
             "MESSAGE_CREATED": "Ziņojums izveidots",
             "MESSAGE_UPDATED": "Ziņojums atjaunināts",
-            "WEBWIDGET_TRIGGERED": "Lietotājs atvēra tiešsaistes tērzēšanas logrīku"
+            "WEBWIDGET_TRIGGERED": "Lietotājs atvēra tiešsaistes tērzēšanas logrīku",
+            "CONTACT_CREATED": "Kontaktpersona izveidota",
+            "CONTACT_UPDATED": "Kontaktpersona atjaunināta"
           }
         },
         "END_POINT": {
@@ -82,6 +84,25 @@
       "START_VIDEO_CALL_HELP_TEXT": "Sākt jaunu videozvanu ar klientu",
       "JOIN_ERROR": "Pievienojoties zvanam, radās kļūda. Lūdzu, mēģiniet vēlreiz",
       "CREATE_ERROR": "Veidojot sapulces saiti, radās kļūda. Lūdzu, mēģiniet vēlreiz"
+    },
+    "OPEN_AI": {
+      "TITLE": "Uzlabot ar AI",
+      "SUMMARY_TITLE": "Kopsavilkums ar AI",
+      "REPLY_TITLE": "Atbildes rekomendācija ar AI",
+      "SUBTITLE": "Izmantojot AI, tiks ģenerēta uzlabota atbilde, pamatojoties uz jūsu pašreizējo melnrakstu.",
+      "TONE": {
+        "TITLE": "Tonis",
+        "OPTIONS": {
+          "PROFESSIONAL": "Profesionāls",
+          "FRIENDLY": "Draudzīgs"
+        }
+      },
+      "BUTTONS": {
+        "GENERATE": "Ģenerēt",
+        "GENERATING": "Notiek ģenerēšana...",
+        "CANCEL": "Atcelt"
+      },
+      "GENERATE_ERROR": "Apstrādājot saturu, radās kļūda. Lūdzu, mēģiniet vēlreiz"
     },
     "DELETE": {
       "BUTTON_TEXT": "Dzēst",

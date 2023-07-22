@@ -2,7 +2,6 @@ module Liquidable
   extend ActiveSupport::Concern
 
   included do
-    acts_as_taggable_on :labels
     before_create :process_liquid_in_content
   end
 
@@ -13,12 +12,13 @@ module Liquidable
       'contact' => ContactDrop.new(conversation.contact),
       'agent' => UserDrop.new(sender),
       'conversation' => ConversationDrop.new(conversation),
-      'inbox' => InboxDrop.new(inbox)
+      'inbox' => InboxDrop.new(inbox),
+      'account' => AccountDrop.new(conversation.account)
     }
   end
 
   def liquid_processable_message?
-    content.present? && message_type == 'outgoing'
+    content.present? && (message_type == 'outgoing' || message_type == 'template')
   end
 
   def process_liquid_in_content

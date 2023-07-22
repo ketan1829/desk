@@ -21,6 +21,7 @@ pt:
   messages:
     reset_password_success: Legal! Pedido de redefinição de senha bem sucedido. Verifique seu e-mail para obter instruções.
     reset_password_failure: Uh ho! Não conseguimos encontrar nenhum usuário com o e-mail especificado.
+    inbox_deletetion_response: Seu pedido de exclusão da caixa de entrada será processado em algum momento.
   errors:
     validations:
       presence: não pode estar vazio
@@ -37,6 +38,8 @@ pt:
     contacts:
       import:
         failed: Arquivo está vazio
+      export:
+        success: We will notify you once contacts export file is ready to view.
       email:
         invalid: Email inválido
       phone_number:
@@ -55,8 +58,11 @@ pt:
         connection_closed_error: Connection closed.
       validations:
         name: should not start or end with symbols, and it should not have < > / \ @ characters.
+    custom_filters:
+      number_of_records: Limit reached. The maximum number of allowed custom filters for a user per account is 50.
   reports:
     period: Período do relatório de %{since} a %{until}
+    utc_warning: O relatório gerado está no fuso horário UTC
     agent_csv:
       agent_name: Nome do agente
       conversations_count: Número de conversas
@@ -78,6 +84,8 @@ pt:
       conversations_count: Número de conversas
       avg_first_response_time: Média do tempo de resposta (minutos)
       avg_resolution_time: Média do tempo de resolução (minutos)
+    conversation_traffic_csv:
+      timezone: Timezone
     default_group_by: dia
     csat:
       headers:
@@ -108,6 +116,11 @@ pt:
         pending: "Conversa marcada como pendente por %{user_name}"
         snoozed: "Conversa adiada por %{user_name}"
         auto_resolved: "Conversa auto-resolvida pelo sistema por causa dos %{duration} dias sem inatividade"
+        system_auto_open: System reopened the conversation due to a new incoming message.
+      priority:
+        added: '%{user_name} set the priority to %{new_priority}'
+        updated: '%{user_name} changed the priority from %{old_priority} to %{new_priority}'
+        removed: '%{user_name} removed the priority'
       assignee:
         self_assigned: "%{user_name} auto-atribuída esta conversa"
         assigned: "Atribuído a %{assignee_name} por %{user_name}"
@@ -129,8 +142,12 @@ pt:
     reply:
       email:
         header:
-          from_with_name: '%{assignee_name} de %{inbox_name} <%{from_email}>'
-          reply_with_name: '%{assignee_name} de %{inbox_name} <reply+%{reply_email}>'
+          from_with_name: "%{assignee_name} de %{inbox_name} <%{from_email}>"
+          reply_with_name: "%{assignee_name} de %{inbox_name} <reply+%{reply_email}>"
+      channel_email:
+        header:
+          reply_with_name: "%{assignee_name} de %{inbox_name} <%{from_email}>"
+          reply_with_inbox_name: "%{inbox_name} <%{from_email}>"
       email_subject: "Novas mensagens nesta conversa"
       transcript_subject: "Transcrição da conversa"
     survey:
@@ -155,11 +172,29 @@ pt:
     fullcontact:
       name: "Fullcontact"
       description: "A integração com o FullContact ajuda a enriquecer os perfis dos seus visitantes. Identifica os utilizadores assim que eles partilham o seu endereço de e-mail e ofereça um atendimento ao cliente mais personalizado. Ligue a sua conta ao FullContact utilizando apenas a sua chave API."
+    google_translate:
+      name: "Google Translate"
+      description: "Make it easier for agents to translate messages by adding a Google Translate Integration. Google translate helps to identify the language automatically and convert it to the language chosen by the agent/account admin."
+    openai:
+      name: "OpenAI"
+      description: "Integrate powerful AI features into Chatwoot by leveraging the GPT models from OpenAI."
   public_portal:
     search:
       search_placeholder: Search for article by title or body...
       empty_placeholder: Nenhum resultado encontrado.
       loading_placeholder: Searching...
       results_title: Search results
+    toc_header: 'On this page'
     hero:
       sub_title: Search for the articles here or browse the categories below.
+    common:
+      home: Principal
+      last_updated_on: Última atualização em %{last_updated_on}
+      view_all_articles: Ver todos os artigos
+      article: artigo
+      articles: artigos
+      no_articles: Não há artigos aqui
+    footer:
+      made_with: Feito com
+    header:
+      go_to_homepage: Ir para o site principal

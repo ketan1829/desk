@@ -35,7 +35,9 @@
     "REMOVE_SELECTION": "حذف انتخاب‌شده‌ها",
     "DOWNLOAD": "دانلود",
     "UNKNOWN_FILE_TYPE": "پرونده ناشناخته",
+    "SAVE_CONTACT": "ذخیره",
     "UPLOADING_ATTACHMENTS": "در حال بارگذاری پیوست‌ها...",
+    "REPLIED_TO_STORY": "Replied to your story",
     "SUCCESS_DELETE_MESSAGE": "پیام با موفقیت حذف شد",
     "FAIL_DELETE_MESSSAGE": "پیام حذف نشد! دوباره امتحان کنید",
     "NO_RESPONSE": "بدون پاسخ",
@@ -52,17 +54,41 @@
       "OPEN": "بیشتر",
       "CLOSE": "بستن",
       "DETAILS": "جزئیات",
+      "SNOOZED_UNTIL": "Snoozed until",
       "SNOOZED_UNTIL_TOMORROW": "تا فردا به تعویق افتاد",
       "SNOOZED_UNTIL_NEXT_WEEK": "تا هفته آینده به تعویق افتاد",
       "SNOOZED_UNTIL_NEXT_REPLY": "تا پاسخ بعدی به تعویق افتاد"
     },
     "RESOLVE_DROPDOWN": {
       "MARK_PENDING": "علامت گذاری به عنوان در انتظار",
+      "SNOOZE_UNTIL": "به تعویق انداختن",
       "SNOOZE": {
         "TITLE": "به تعویق انداختن تا",
         "NEXT_REPLY": "پاسخ بعدی",
         "TOMORROW": "فردا",
         "NEXT_WEEK": "هفته بعد"
+      }
+    },
+    "CUSTOM_SNOOZE": {
+      "TITLE": "به تعویق انداختن تا",
+      "APPLY": "به تعویق انداختن",
+      "CANCEL": "انصراف"
+    },
+    "PRIORITY": {
+      "TITLE": "اولویت",
+      "OPTIONS": {
+        "NONE": "هیچکدام",
+        "URGENT": "Urgent",
+        "HIGH": "High",
+        "MEDIUM": "Medium",
+        "LOW": "Low"
+      },
+      "CHANGE_PRIORITY": {
+        "SELECT_PLACEHOLDER": "هیچکدام",
+        "INPUT_PLACEHOLDER": "Select priority",
+        "NO_RESULTS": "نتیجه‌ای یافت نشد",
+        "SUCCESSFUL": "Changed priority of conversation id %{conversationId} to %{priority}",
+        "FAILED": "Couldn't change priority. Please try again."
       }
     },
     "CARD_CONTEXT_MENU": {
@@ -132,6 +158,14 @@
           "PLACEHOLDER": "ایمیل‌ها با کاما از هم جدا می‌شوند",
           "ERROR": "لطفا آدرس‌ ایمیل معتبر وارد کنید"
         }
+      },
+      "UNDEFINED_VARIABLES": {
+        "TITLE": "متغیرهای تعریف نشده",
+        "MESSAGE": "شما در پیام خود {undefinedVariablesCount} متغیر تعریف نشده دارید: {undefinedVariables}. آیا به هر حال می خواهید پیام را ارسال کنید؟",
+        "CONFIRM": {
+          "YES": "ارسال",
+          "CANCEL": "انصراف"
+        }
       }
     },
     "VISIBLE_TO_AGENTS": "یادداشت خصوصی: فقط برای شما و تیم شما قابل مشاهده است",
@@ -156,7 +190,16 @@
     "CONTEXT_MENU": {
       "COPY": "کپی",
       "DELETE": "حذف",
-      "CREATE_A_CANNED_RESPONSE": "اضافه کردن به پاسخ‌های آماده"
+      "CREATE_A_CANNED_RESPONSE": "اضافه کردن به پاسخ‌های آماده",
+      "TRANSLATE": "ترجمه",
+      "COPY_PERMALINK": "کپی پیوند پیام",
+      "LINK_COPIED": "نشانی اینترنتی پیام در کلیپ‌بورد کپی شد",
+      "DELETE_CONFIRMATION": {
+        "TITLE": "آیا از حذف این پیام مطمئن هستید؟",
+        "MESSAGE": "شما نمی توانید این عمل را لغو کنید",
+        "DELETE": "حذف",
+        "CANCEL": "انصراف"
+      }
     }
   },
   "EMAIL_TRANSCRIPT": {
@@ -244,5 +287,29 @@
     "BCC": "Bcc",
     "CC": "Cc",
     "SUBJECT": "موضوع"
+  },
+  "CONVERSATION_PARTICIPANTS": {
+    "SIDEBAR_MENU_TITLE": "شرکت کننده",
+    "SIDEBAR_TITLE": "شرکت کنندگان در گفتگو",
+    "NO_RECORDS_FOUND": "نتیجه‌ای یافت نشد",
+    "ADD_PARTICIPANTS": "شرکت کنندگان را انتخاب کنید",
+    "REMANING_PARTICIPANTS_TEXT": "+%{count} نفر دیگر",
+    "REMANING_PARTICIPANT_TEXT": "+%{count} دیگر",
+    "TOTAL_PARTICIPANTS_TEXT": "%{count} نفر شرکت می کنند.",
+    "TOTAL_PARTICIPANT_TEXT": "%{count} نفر شرکت می کند.",
+    "NO_PARTICIPANTS_TEXT": "هیچ کس شرکت نمی کند!.",
+    "WATCH_CONVERSATION": "به گفتگو بپیوندید",
+    "YOU_ARE_WATCHING": "شما شرکت می کنید",
+    "API": {
+      "ERROR_MESSAGE": "به روز رسانی نشد، دوباره امتحان کنید!",
+      "SUCCESS_MESSAGE": "شرکت کنندگان به روز شدند!"
+    }
+  },
+  "TRANSLATE_MODAL": {
+    "TITLE": "مشاهده محتوای ترجمه شده",
+    "DESC": "می‌توانید محتوای ترجمه شده را به هر زبان مشاهده کنید.",
+    "ORIGINAL_CONTENT": "محتوای اصلی",
+    "TRANSLATED_CONTENT": "مطالب ترجمه شده",
+    "NO_TRANSLATIONS_AVAILABLE": "هیچ ترجمه‌ای برای این مطلب موجود نیست"
   }
 }

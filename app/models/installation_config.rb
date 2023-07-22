@@ -19,11 +19,13 @@ class InstallationConfig < ApplicationRecord
   # https://discuss.rubyonrails.org/t/cve-2022-32224-possible-rce-escalation-bug-with-serialized-columns-in-active-record/81017
   # FIX ME : fixes breakage of installation config. we need to migrate.
   # Fix configuration in application.rb
-  serialize :serialized_value, HashWithIndifferentAccess
+  serialize :serialized_value, ActiveSupport::HashWithIndifferentAccess
 
   before_validation :set_lock
   validates :name, presence: true
 
+  # TODO: Get rid of default scope
+  # https://stackoverflow.com/a/1834250/939299
   default_scope { order(created_at: :desc) }
   scope :editable, -> { where(locked: false) }
 

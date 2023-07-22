@@ -8,10 +8,29 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+## Load the specific APM agent
+# We rely on DOTENV to load the environment variables
+# We need these environment variables to load the specific APM agent
+Dotenv::Railtie.load
+require 'ddtrace' if ENV.fetch('DD_TRACE_AGENT_URL', false).present?
+require 'elastic-apm' if ENV.fetch('ELASTIC_APM_SECRET_TOKEN', false).present?
+require 'scout_apm' if ENV.fetch('SCOUT_KEY', false).present?
+
+if ENV.fetch('NEW_RELIC_LICENSE_KEY', false).present?
+  require 'newrelic-sidekiq-metrics'
+  require 'newrelic_rpm'
+end
+
+if ENV.fetch('SENTRY_DSN', false).present?
+  require 'sentry-ruby'
+  require 'sentry-rails'
+  require 'sentry-sidekiq'
+end
+
 module Chatwoot
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.0
+    config.load_defaults 7.0
 
     config.eager_load_paths << Rails.root.join('lib')
     config.eager_load_paths << Rails.root.join('enterprise/lib')
@@ -32,7 +51,7 @@ module Chatwoot
     # https://stackoverflow.com/questions/72970170/upgrading-to-rails-6-1-6-1-causes-psychdisallowedclass-tried-to-load-unspecif
     # https://discuss.rubyonrails.org/t/cve-2022-32224-possible-rce-escalation-bug-with-serialized-columns-in-active-record/81017
     # FIX ME : fixes breakage of installation config. we need to migrate.
-    config.active_record.yaml_column_permitted_classes = [HashWithIndifferentAccess]
+    config.active_record.yaml_column_permitted_classes = [ActiveSupport::HashWithIndifferentAccess]
   end
 
   def self.config

@@ -1,5 +1,5 @@
 <template>
-  <div class="row app-wrapper">
+  <div class="h-full flex">
     <sidebar
       :route="currentRoute"
       @toggle-account-modal="toggleAccountModal"
@@ -18,7 +18,7 @@
       @open-popover="openPortalPopover"
       @open-modal="onClickOpenAddCategoryModal"
     />
-    <section class="app-content columns">
+    <section class="app-content flex-1 px-0 bg-white dark:bg-slate-900">
       <router-view />
       <command-bar />
       <account-selector
@@ -184,6 +184,15 @@ export default {
           ),
           toolTip: 'Archived',
           toStateName: 'list_archived_articles',
+        },
+        {
+          icon: 'settings',
+          label: 'HELP_CENTER.SETTINGS',
+          key: 'edit_portal_information',
+          toState: frontendURL(
+            `accounts/${this.accountId}/portals/${this.selectedPortalSlug}/edit`
+          ),
+          toStateName: 'edit_portal_information',
         },
       ];
     },

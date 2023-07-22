@@ -21,5 +21,21 @@ module SortHandler
         'grouped_conversations.message_type', 'grouped_conversations.created_at ASC'
       )
     end
+
+    def self.sort_on_priority
+      order(
+        Arel::Nodes::SqlLiteral.new(
+          sanitize_sql_for_order('CASE WHEN priority IS NULL THEN 0 ELSE priority END DESC, last_activity_at DESC')
+        )
+      )
+    end
+
+    def self.sort_on_waiting_since
+      order(
+        Arel::Nodes::SqlLiteral.new(
+          sanitize_sql_for_order('CASE WHEN waiting_since IS NULL THEN now() ELSE waiting_since END ASC, created_at ASC')
+        )
+      )
+    end
   end
 end

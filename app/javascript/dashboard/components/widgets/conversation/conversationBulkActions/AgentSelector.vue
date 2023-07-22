@@ -1,14 +1,8 @@
 <template>
-  <div class="bulk-action__agents">
-    <div class="triangle" :style="cssVars">
+  <div v-on-clickaway="onCloseAgentList" class="bulk-action__agents">
+    <div class="triangle">
       <svg height="12" viewBox="0 0 24 12" width="24">
-        <path
-          d="M20 12l-8-8-12 12"
-          fill="var(--white)"
-          fill-rule="evenodd"
-          stroke="var(--s-50)"
-          stroke-width="1px"
-        />
+        <path d="M20 12l-8-8-12 12" fill-rule="evenodd" stroke-width="1px" />
       </svg>
     </div>
     <div class="header flex-between">
@@ -50,7 +44,6 @@
                 :status="agent.availability_status"
                 :username="agent.name"
                 size="22px"
-                class="margin-right-small"
               />
               <span class="reports-option__title">{{ agent.name }}</span>
             </div>
@@ -105,14 +98,13 @@ import { mapGetters } from 'vuex';
 import Thumbnail from 'dashboard/components/widgets/Thumbnail.vue';
 import Spinner from 'shared/components/Spinner';
 import { mixin as clickaway } from 'vue-clickaway';
-import bulkActionsMixin from 'dashboard/mixins/bulkActionsMixin.js';
 
 export default {
   components: {
     Thumbnail,
     Spinner,
   },
-  mixins: [clickaway, bulkActionsMixin],
+  mixins: [clickaway],
   props: {
     selectedInboxes: {
       type: Array,
@@ -127,6 +119,7 @@ export default {
     return {
       query: '',
       selectedAgent: null,
+      goBackToAgentList: false,
     };
   },
   computed: {
@@ -170,6 +163,7 @@ export default {
       this.$emit('select', this.selectedAgent);
     },
     goBack() {
+      this.goBackToAgentList = true;
       this.selectedAgent = null;
     },
     assignAgent(agent) {
@@ -178,116 +172,85 @@ export default {
     onClose() {
       this.$emit('close');
     },
+    onCloseAgentList() {
+      if (this.selectedAgent === null && !this.goBackToAgentList) {
+        this.onClose();
+      }
+      this.goBackToAgentList = false;
+    },
   },
 };
 </script>
 
 <style scoped lang="scss">
 .bulk-action__agents {
-  background-color: var(--white);
-  border-radius: var(--border-radius-large);
-  border: 1px solid var(--s-50);
-  box-shadow: var(--shadow-dropdown-pane);
-  max-width: 75%;
-  position: absolute;
-  right: var(--space-small);
-  top: var(--space-larger);
-  transform-origin: top right;
-  width: auto;
-  z-index: var(--z-index-twenty);
-  min-width: var(--space-giga);
+  @apply max-w-[75%] absolute right-2 top-12 origin-top-right w-auto z-20 min-w-[15rem] bg-white dark:bg-slate-800 rounded-lg border border-solid border-slate-50 dark:border-slate-700 shadow-md;
   .header {
-    padding: var(--space-one);
+    @apply p-2.5;
 
     span {
-      font-size: var(--font-size-small);
-      font-weight: var(--font-weight-medium);
+      @apply text-sm font-medium;
     }
   }
 
   .container {
-    max-height: var(--space-giga);
-    overflow-y: auto;
+    @apply overflow-y-auto max-h-[15rem];
     .agent__list-container {
-      height: 100%;
+      @apply h-full;
     }
     .agent-list-search {
-      padding: 0 var(--space-one);
-      border: 1px solid var(--s-100);
-      border-radius: var(--border-radius-medium);
-      background-color: var(--s-50);
+      @apply py-0 px-2.5 bg-slate-50 dark:bg-slate-900 border border-solid border-slate-100 dark:border-slate-600/70 rounded-md;
       .search-icon {
-        color: var(--s-400);
+        @apply text-slate-400 dark:text-slate-200;
       }
 
       .agent--search_input {
-        border: 0;
-        font-size: var(--font-size-mini);
-        margin: 0;
-        background-color: transparent;
-        height: unset;
+        @apply border-0 text-xs m-0 dark:bg-transparent bg-transparent h-[unset];
       }
     }
   }
   .triangle {
-    display: block;
-    z-index: var(--z-index-one);
-    position: absolute;
-    top: calc(var(--space-slab) * -1);
     right: var(--triangle-position);
-    text-align: left;
+    @apply block z-10 absolute -top-3 text-left;
+
+    svg path {
+      @apply fill-white dark:fill-slate-800 stroke-slate-50 dark:stroke-slate-600/50;
+    }
   }
 }
 ul {
-  margin: 0;
-  list-style: none;
+  @apply m-0 list-none;
+
+  li {
+    &:last-child {
+      .agent-list-item {
+        @apply last:rounded-b-lg;
+      }
+    }
+  }
 }
 
 .agent-list-item {
-  display: flex;
-  align-items: center;
-  padding: var(--space-one);
-  cursor: pointer;
-  &:hover {
-    background-color: var(--s-50);
-  }
+  @apply flex items-center p-2.5 cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-900;
   span {
-    font-size: var(--font-size-small);
+    @apply text-sm;
   }
 }
 
 .agent-confirmation-container {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  padding: var(--space-one);
+  @apply flex flex-col h-full p-2.5;
   p {
-    flex-grow: 1;
+    @apply flex-grow;
   }
   .agent-confirmation-actions {
-    width: 100%;
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: var(--space-one);
+    @apply w-full grid grid-cols-2 gap-2.5;
   }
 }
 .search-container {
-  padding: 0 var(--space-one);
-  position: sticky;
-  top: 0;
-  z-index: var(--z-index-twenty);
-  background-color: var(--white);
+  @apply py-0 px-2.5 sticky top-0 z-20 bg-white dark:bg-slate-800;
 }
 
 .agent__list-loading {
-  height: calc(95% - var(--space-one));
-  margin: var(--space-one);
-  border-radius: var(--border-radius-medium);
-  background-color: var(--s-50);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  padding: var(--space-two);
+  @apply m-2.5 rounded-md bg-slate-25 dark:bg-slate-900 flex items-center justify-center flex-col p-5 h-[calc(95%-6.25rem)];
 }
 </style>

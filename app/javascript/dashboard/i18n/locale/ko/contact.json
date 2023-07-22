@@ -15,6 +15,7 @@
     "INITIATED_FROM": "시작 위치",
     "INITIATED_AT": "시작 시간",
     "IP_ADDRESS": "IP 주소",
+    "CREATED_AT_LABEL": "Created",
     "NEW_MESSAGE": "새 메시지",
     "CONVERSATIONS": {
       "NO_RECORDS_FOUND": "이 연락처와 관련된 이전 대화가 없습니다.",
@@ -32,7 +33,8 @@
       "LABEL_SELECT": {
         "TITLE": "라벨 추가하기",
         "PLACEHOLDER": "라벨 찾기",
-        "NO_RESULT": "라벨을 찾을 수 없습니다"
+        "NO_RESULT": "라벨을 찾을 수 없습니다",
+        "CREATE_LABEL": "Create new label"
       }
     },
     "MERGE_CONTACT": "연락처 합치기",
@@ -70,6 +72,13 @@
       "CANCEL": "취소"
     },
     "SUCCESS_MESSAGE": "연락처가 성공적으로 저장되었습니다",
+    "ERROR_MESSAGE": "오류가 발생했습니다. 다시 시도하십시오."
+  },
+  "EXPORT_CONTACTS": {
+    "BUTTON_LABEL": "Export",
+    "TITLE": "Export Contacts",
+    "DESC": "Export contacts to a CSV file.",
+    "SUCCESS_MESSAGE": "Export is in progress, You will be notified via email when export file is ready to dowanlod.",
     "ERROR_MESSAGE": "오류가 발생했습니다. 다시 시도하십시오."
   },
   "DELETE_NOTE": {
@@ -121,6 +130,7 @@
         "LABEL": "전화 번호",
         "HELP": "전화번호는 E.164 형식이여야 합니다. 예: +1415555555 [+][국가 코드][지역 코드][전화번호]",
         "ERROR": "전화번호는 비어있거나 E.164 형식이여야 합니다",
+        "DIAL_CODE_ERROR": "Please select a dial code from the list",
         "DUPLICATE": "이 전화번호는 다른 연락처에 사용 중입니다."
       },
       "LOCATION": {
@@ -130,6 +140,17 @@
       "COMPANY_NAME": {
         "PLACEHOLDER": "회사명 입력",
         "LABEL": "회사명"
+      },
+      "COUNTRY": {
+        "PLACEHOLDER": "Enter the country name",
+        "LABEL": "국가 이름",
+        "SELECT_PLACEHOLDER": "Select",
+        "REMOVE": "제거",
+        "SELECT_COUNTRY": "Select Country"
+      },
+      "CITY": {
+        "PLACEHOLDER": "Enter the city name",
+        "LABEL": "City Name"
       },
       "SOCIAL_PROFILES": {
         "FACEBOOK": {
@@ -170,6 +191,7 @@
       },
       "INBOX": {
         "LABEL": "받은 메시지함",
+        "PLACEHOLDER": "Choose source inbox",
         "ERROR": "받은 메시지함 선택"
       },
       "SUBJECT": {
@@ -197,6 +219,7 @@
     "FILTER_CONTACTS": "필터",
     "FILTER_CONTACTS_SAVE": "필터 저장하기",
     "FILTER_CONTACTS_DELETE": "필터 삭제하기",
+    "FILTER_CONTACTS_EDIT": "Edit segment",
     "LIST": {
       "LOADING_MESSAGE": "연락처를 불러오는 중...",
       "404": "검색과 일치하는 연락처 없음 🔍",
@@ -206,6 +229,7 @@
         "PHONE_NUMBER": "전화 번호",
         "CONVERSATIONS": "대화",
         "LAST_ACTIVITY": "지난 활동",
+        "CREATED_AT": "에 만들어짐",
         "COUNTRY": "국가",
         "CITY": "도시",
         "SOCIAL_PROFILES": "소셜 프로필",

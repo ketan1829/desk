@@ -53,10 +53,6 @@
           "ENABLE": "Create conversations from mentioned Tweets"
         }
       },
-      "MICROSOFT": {
-        "HELP": "To add your Microsoft account as a channel, you need to authenticate your Microsoft account by clicking on 'Sign in with Microsoft' ",
-        "ERROR_MESSAGE": "There was an error connecting to Microsoft, please try again"
-      },
       "WEBSITE_CHANNEL": {
         "TITLE": "ウェブサイトのチャンネル",
         "DESC": "ウェブサイトのためのチャネルを作成し、ウェブサイトウィジェットを介してあなたの顧客をサポートを開始してください。",
@@ -348,6 +344,17 @@
       "FINISH": {
         "TITLE": "ばっちりです！",
         "DESC": "FacebookページとChatwootとの統合が正常に完了しました。次回から、あなたのページに送信された顧客からのメッセージや会話は、自動的に受信トレイに表示されます。<br>また、ウェブサイトに簡単に追加できるウィジェットスクリプトを提供しています。 一度これをあなたのウェブサイトに設定すれば、 顧客は他のツールの助けを借りずにWebサイトから直接メッセージを送信でき、Chatwoot上に会話が表示されます。 <br><br>素敵でしょ？まあ、私たちはきっとそうしますけどね:)"
+      },
+      "EMAIL_PROVIDER": {
+        "TITLE": "Select your email provider",
+        "DESCRIPTION": "Select an email provider from the list below. If you don't see your email provider in the list, you can select the other provider option and provide the IMAP and SMTP Credentials."
+      },
+      "MICROSOFT": {
+        "TITLE": "Microsoft Email",
+        "DESCRIPTION": "Click on the Sign in with Microsoft button to get started. You will redirected to the email sign in page. Once you accept the requested permissions, you would be redirected back to the inbox creation step.",
+        "EMAIL_PLACEHOLDER": "Enter email address",
+        "HELP": "To add your Microsoft account as a channel, you need to authenticate your Microsoft account by clicking on 'Sign in with Microsoft' ",
+        "ERROR_MESSAGE": "There was an error connecting to Microsoft, please try again"
       }
     },
     "DETAILS": {
@@ -432,7 +439,8 @@
       "LABEL": "機能",
       "DISPLAY_FILE_PICKER": "ウィジェットにファイルピッカーを表示する",
       "DISPLAY_EMOJI_PICKER": "ウィジェットに絵文字ピッカーを表示する",
-      "ALLOW_END_CONVERSATION": "Allow users to end conversation from the widget"
+      "ALLOW_END_CONVERSATION": "Allow users to end conversation from the widget",
+      "USE_INBOX_AVATAR_FOR_BOT": "Use inbox name and avatar for the bot"
     },
     "SETTINGS_POPUP": {
       "MESSENGER_HEADING": "Messengerスクリプト",
@@ -456,6 +464,7 @@
       "AUTO_ASSIGNMENT_SUB_TEXT": "この受信トレイに追加された担当者への新しい会話の自動割り当てを有効または無効にします。",
       "HMAC_VERIFICATION": "User Identity Validation",
       "HMAC_DESCRIPTION": "In order to validate the user's identity, you can pass an `identifier_hash` for each user. You can generate a HMAC sha256 hash using the `identifier` with the key shown here.",
+      "HMAC_LINK_TO_DOCS": "You can read more here.",
       "HMAC_MANDATORY_VERIFICATION": "Enforce User Identity Validation",
       "HMAC_MANDATORY_DESCRIPTION": "If enabled, requests missing the `identifier_hash` will be rejected.",
       "INBOX_IDENTIFIER": "Inbox Identifier",
@@ -465,7 +474,21 @@
       "ALLOW_MESSAGES_AFTER_RESOLVED": "Allow messages after conversation resolved",
       "ALLOW_MESSAGES_AFTER_RESOLVED_SUB_TEXT": "Allow the end-users to send messages even after the conversation is resolved.",
       "WHATSAPP_SECTION_SUBHEADER": "This API Key is used for the integration with the WhatsApp APIs.",
-      "WHATSAPP_SECTION_TITLE": "API Key"
+      "WHATSAPP_SECTION_UPDATE_SUBHEADER": "Enter the updated key to be used for the integration with the WhatsApp APIs.",
+      "WHATSAPP_SECTION_TITLE": "API Key",
+      "WHATSAPP_SECTION_UPDATE_TITLE": "Update API Key",
+      "WHATSAPP_SECTION_UPDATE_PLACEHOLDER": "Enter the new API Key here",
+      "WHATSAPP_SECTION_UPDATE_BUTTON": "更新",
+      "WHATSAPP_WEBHOOK_TITLE": "Webhook Verify Token",
+      "WHATSAPP_WEBHOOK_SUBHEADER": "This token is used to verify the authenticity of the webhook endpoint.",
+      "UPDATE_PRE_CHAT_FORM_SETTINGS": "Update Pre Chat Form Settings"
+    },
+    "HELP_CENTER": {
+      "LABEL": "Help Center",
+      "PLACEHOLDER": "Select Help Center",
+      "SELECT_PLACEHOLDER": "Select Help Center",
+      "REMOVE": "Remove Help Center",
+      "SUB_TEXT": "Attach a Help Center with the inbox"
     },
     "AUTO_ASSIGNMENT": {
       "MAX_ASSIGNMENT_LIMIT": "Auto assignment limit",
@@ -512,7 +535,6 @@
       "UPDATE": "Update business hours settings",
       "TOGGLE_AVAILABILITY": "Enable business availability for this inbox",
       "UNAVAILABLE_MESSAGE_LABEL": "Unavailable message for visitors",
-      "UNAVAILABLE_MESSAGE_DEFAULT": "We are unavailable at the moment. Leave a message we will respond once we are back.",
       "TOGGLE_HELP": "Enabling business availability will show the available hours on live chat widget even if all the agents are offline. Outside available hours vistors can be warned with a message and a pre-chat form.",
       "DAY": {
         "ENABLE": "Enable availability for this day",
@@ -674,6 +696,10 @@
       },
       "BRANDING_TEXT": "Powered by Chatwoot",
       "SCRIPT_SETTINGS": "\n      window.chatwootSettings = {options};"
+    },
+    "EMAIL_PROVIDERS": {
+      "MICROSOFT": "Microsoft",
+      "OTHER_PROVIDERS": "Other Providers"
     }
   }
 }

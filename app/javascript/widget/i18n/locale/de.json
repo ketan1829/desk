@@ -19,8 +19,18 @@
   "REPLY_TIME": {
     "IN_A_FEW_MINUTES": "Wir antworten üblicherweise innerhalb weniger Minuten",
     "IN_A_FEW_HOURS": "Wir antworten üblicherweise innerhalb weniger Stunden",
-    "IN_A_DAY": "Wir antworten üblicherweise innerhalb eines Tages"
+    "IN_A_DAY": "Wir antworten üblicherweise innerhalb eines Tages",
+    "BACK_IN": "We will be back online"
   },
+  "DAY_NAMES": [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday"
+  ],
   "START_CONVERSATION": "Unterhaltung beginnen",
   "END_CONVERSATION": "Konversation beenden",
   "CONTINUE_CONVERSATION": "Konversation fortsetzen",
@@ -56,7 +66,9 @@
         "LABEL": "Telefonnummer",
         "PLACEHOLDER": "Bitte geben Sie ihre Telefonnummer ein",
         "REQUIRED_ERROR": "Telefonnummer ist erforderlich",
-        "VALID_ERROR": "Die Telefonnummer sollte im E.164-Format vorliegen, z. B.: +1415555555"
+        "DIAL_CODE_VALID_ERROR": "Please select a country code",
+        "VALID_ERROR": "Please enter a valid phone number",
+        "DROPDOWN_EMPTY": "Keine Ergebnisse gefunden"
       },
       "MESSAGE": {
         "LABEL": "Nachricht",
@@ -65,7 +77,8 @@
       }
     },
     "CAMPAIGN_HEADER": "Bitte geben Sie Ihren Namen und Ihre E-Mail-Adresse an, bevor Sie die Konversation beginnen",
-    "IS_REQUIRED": "erforderlich"
+    "IS_REQUIRED": "erforderlich",
+    "REQUIRED": "Benötigt"
   },
   "FILE_SIZE_LIMIT": "Die Datei überschreitet das Anhangslimit von {MAXIMUM_FILE_UPLOAD_SIZE}",
   "CHAT_FORM": {
@@ -74,8 +87,8 @@
     }
   },
   "EMOJI": {
-    "PLACEHOLDER": "Search emojis",
-    "NOT_FOUND": "No emoji match your search"
+    "PLACEHOLDER": "Emojis durchsuchen",
+    "NOT_FOUND": "Kein Emoji entspricht Ihrer Suche"
   },
   "CSAT": {
     "TITLE": "Bewerten Sie Ihre Konversation",
@@ -89,8 +102,8 @@
   },
   "INTEGRATIONS": {
     "DYTE": {
-      "CLICK_HERE_TO_JOIN": "Click here to join",
-      "LEAVE_THE_ROOM": "Leave the call"
+      "CLICK_HERE_TO_JOIN": "Klicke hier, um beizutreten",
+      "LEAVE_THE_ROOM": "Anruf verlassen"
     }
   }
 }

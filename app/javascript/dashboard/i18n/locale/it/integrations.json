@@ -4,7 +4,7 @@
     "WEBHOOK": {
       "SUBSCRIBED_EVENTS": "Eventi iscritti",
       "FORM": {
-        "CANCEL": "annulla",
+        "CANCEL": "Annulla",
         "DESC": "Gli eventi Webhook ti forniscono le informazioni in tempo reale su ciò che sta accadendo nel tuo account Chatwoot. Per favore inserisci un URL valido per configurare un callback.",
         "SUBSCRIPTIONS": {
           "LABEL": "Eventi",
@@ -14,7 +14,9 @@
             "CONVERSATION_UPDATED": "Conversazione aggiornata",
             "MESSAGE_CREATED": "Messaggio creato",
             "MESSAGE_UPDATED": "Messaggio aggiornato",
-            "WEBWIDGET_TRIGGERED": "Widget live chat aperto dall'utente"
+            "WEBWIDGET_TRIGGERED": "Widget live chat aperto dall'utente",
+            "CONTACT_CREATED": "Contact created",
+            "CONTACT_UPDATED": "Contact updated"
           }
         },
         "END_POINT": {
@@ -83,6 +85,25 @@
       "JOIN_ERROR": "There was an error joining the call, please try again",
       "CREATE_ERROR": "There was an error creating a meeting link, please try again"
     },
+    "OPEN_AI": {
+      "TITLE": "Improve With AI",
+      "SUMMARY_TITLE": "Summary with AI",
+      "REPLY_TITLE": "Reply suggestion with AI",
+      "SUBTITLE": "An improved reply will be generated using AI, based on your current draft.",
+      "TONE": {
+        "TITLE": "Tone",
+        "OPTIONS": {
+          "PROFESSIONAL": "Professional",
+          "FRIENDLY": "Friendly"
+        }
+      },
+      "BUTTONS": {
+        "GENERATE": "Generate",
+        "GENERATING": "Generating...",
+        "CANCEL": "Annulla"
+      },
+      "GENERATE_ERROR": "There was an error processing the content, please try again"
+    },
     "DELETE": {
       "BUTTON_TEXT": "Elimina",
       "API": {
@@ -118,14 +139,14 @@
       "CREATE": {
         "HEADER": "Aggiungi una nuova app dashboard",
         "FORM_SUBMIT": "Invia",
-        "FORM_CANCEL": "annulla",
+        "FORM_CANCEL": "Annulla",
         "API_SUCCESS": "App dashboard configurata con successo",
         "API_ERROR": "Non siamo riusciti a creare un'app. Riprova più tardi"
       },
       "UPDATE": {
         "HEADER": "Modifica app dashboard",
         "FORM_SUBMIT": "Aggiorna",
-        "FORM_CANCEL": "annulla",
+        "FORM_CANCEL": "Annulla",
         "API_SUCCESS": "App dashboard aggiornata con successo",
         "API_ERROR": "Non è stato possibile aggiornare l'app. Riprova più tardi"
       },

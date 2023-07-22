@@ -31,7 +31,7 @@
       "CHANNEL_NAME": {
         "LABEL": "Nama Kotak Masuk",
         "PLACEHOLDER": "Masukkan nama kotak masuk anda (mis: Acme Inc)",
-        "ERROR": "Please enter a valid inbox name"
+        "ERROR": "Harap masukkan nama inbox yang valid"
       },
       "WEBSITE_NAME": {
         "LABEL": "Nama Website",
@@ -52,10 +52,6 @@
         "TWEETS": {
           "ENABLE": "Create conversations from mentioned Tweets"
         }
-      },
-      "MICROSOFT": {
-        "HELP": "To add your Microsoft account as a channel, you need to authenticate your Microsoft account by clicking on 'Sign in with Microsoft' ",
-        "ERROR_MESSAGE": "There was an error connecting to Microsoft, please try again"
       },
       "WEBSITE_CHANNEL": {
         "TITLE": "Channel Website",
@@ -177,13 +173,13 @@
             "ERROR": "Bagian ini diperlukan"
           },
           "APPLICATION_ID": {
-            "LABEL": "Application ID",
+            "LABEL": "ID Aplikasi",
             "PLACEHOLDER": "Please enter your Bandwidth Application ID",
             "ERROR": "Bagian ini diperlukan"
           },
           "INBOX_NAME": {
             "LABEL": "Nama Kotak Masuk",
-            "PLACEHOLDER": "Please enter a inbox name",
+            "PLACEHOLDER": "Harap masukkan nama inbox",
             "ERROR": "Bagian ini diperlukan"
           },
           "PHONE_NUMBER": {
@@ -236,9 +232,9 @@
           "ERROR": "Please enter a valid value."
         },
         "API_KEY": {
-          "LABEL": "API key",
+          "LABEL": "API Key",
           "SUBTITLE": "Configure the WhatsApp API key.",
-          "PLACEHOLDER": "API key",
+          "PLACEHOLDER": "API Key",
           "ERROR": "Please enter a valid value."
         },
         "API_CALLBACK": {
@@ -348,6 +344,17 @@
       "FINISH": {
         "TITLE": "Berhasil!",
         "DESC": "Anda telah berhasil menyelesaikan integrasi Halaman Facebook Anda dengan Chatwoot. Saat pelanggan mengirim pesan ke Halaman Anda, percakapan akan otomatis muncul di kotak masuk Anda. <br> Kami juga menyediakan script widget yang dapat dengan mudah ditambahkan ke website Anda. Setelah ini aktif di website Anda, pelanggan dapat mengirimi Anda pesan langsung dari website Anda tanpa bantuan alat eksternal dan percakapan akan muncul di sini, di Chatwoot. <br> Keren, ya? Ya, kami pasti berusaha untuk :)"
+      },
+      "EMAIL_PROVIDER": {
+        "TITLE": "Select your email provider",
+        "DESCRIPTION": "Select an email provider from the list below. If you don't see your email provider in the list, you can select the other provider option and provide the IMAP and SMTP Credentials."
+      },
+      "MICROSOFT": {
+        "TITLE": "Microsoft Email",
+        "DESCRIPTION": "Click on the Sign in with Microsoft button to get started. You will redirected to the email sign in page. Once you accept the requested permissions, you would be redirected back to the inbox creation step.",
+        "EMAIL_PLACEHOLDER": "Enter email address",
+        "HELP": "To add your Microsoft account as a channel, you need to authenticate your Microsoft account by clicking on 'Sign in with Microsoft' ",
+        "ERROR_MESSAGE": "There was an error connecting to Microsoft, please try again"
       }
     },
     "DETAILS": {
@@ -432,7 +439,8 @@
       "LABEL": "Fitur",
       "DISPLAY_FILE_PICKER": "Tampilkan file picker di widget",
       "DISPLAY_EMOJI_PICKER": "Tampilkan pilihan emoji di widget",
-      "ALLOW_END_CONVERSATION": "Allow users to end conversation from the widget"
+      "ALLOW_END_CONVERSATION": "Allow users to end conversation from the widget",
+      "USE_INBOX_AVATAR_FOR_BOT": "Use inbox name and avatar for the bot"
     },
     "SETTINGS_POPUP": {
       "MESSENGER_HEADING": "Messenger Script",
@@ -456,6 +464,7 @@
       "AUTO_ASSIGNMENT_SUB_TEXT": "Mengaktifkan atau menonaktifkan penugasan otomatis percakapan baru ke agen yang ditambahkan ke kotak masuk ini.",
       "HMAC_VERIFICATION": "Validasi Identitas Pengguna",
       "HMAC_DESCRIPTION": "In order to validate the user's identity, you can pass an `identifier_hash` for each user. You can generate a HMAC sha256 hash using the `identifier` with the key shown here.",
+      "HMAC_LINK_TO_DOCS": "You can read more here.",
       "HMAC_MANDATORY_VERIFICATION": "Enforce User Identity Validation",
       "HMAC_MANDATORY_DESCRIPTION": "If enabled, requests missing the `identifier_hash` will be rejected.",
       "INBOX_IDENTIFIER": "Pengenal Kotak Masuk",
@@ -465,7 +474,21 @@
       "ALLOW_MESSAGES_AFTER_RESOLVED": "Allow messages after conversation resolved",
       "ALLOW_MESSAGES_AFTER_RESOLVED_SUB_TEXT": "Allow the end-users to send messages even after the conversation is resolved.",
       "WHATSAPP_SECTION_SUBHEADER": "This API Key is used for the integration with the WhatsApp APIs.",
-      "WHATSAPP_SECTION_TITLE": "API Key"
+      "WHATSAPP_SECTION_UPDATE_SUBHEADER": "Enter the updated key to be used for the integration with the WhatsApp APIs.",
+      "WHATSAPP_SECTION_TITLE": "API Key",
+      "WHATSAPP_SECTION_UPDATE_TITLE": "Update API Key",
+      "WHATSAPP_SECTION_UPDATE_PLACEHOLDER": "Enter the new API Key here",
+      "WHATSAPP_SECTION_UPDATE_BUTTON": "Perbarui",
+      "WHATSAPP_WEBHOOK_TITLE": "Webhook Verify Token",
+      "WHATSAPP_WEBHOOK_SUBHEADER": "This token is used to verify the authenticity of the webhook endpoint.",
+      "UPDATE_PRE_CHAT_FORM_SETTINGS": "Update Pre Chat Form Settings"
+    },
+    "HELP_CENTER": {
+      "LABEL": "Help Center",
+      "PLACEHOLDER": "Select Help Center",
+      "SELECT_PLACEHOLDER": "Select Help Center",
+      "REMOVE": "Remove Help Center",
+      "SUB_TEXT": "Attach a Help Center with the inbox"
     },
     "AUTO_ASSIGNMENT": {
       "MAX_ASSIGNMENT_LIMIT": "Auto assignment limit",
@@ -512,7 +535,6 @@
       "UPDATE": "Perbarui pengaturan jam kerja",
       "TOGGLE_AVAILABILITY": "Aktifkan ketersediaan bisnis untuk kotak masuk ini",
       "UNAVAILABLE_MESSAGE_LABEL": "Pesan tidak tersedia untuk pengunjung",
-      "UNAVAILABLE_MESSAGE_DEFAULT": "Kami tidak tersedia saat ini. Tinggalkan pesan kami akan merespon setelah kami kembali.",
       "TOGGLE_HELP": "Mengaktifkan ketersediaan bisnis akan menunjukkan jam yang tersedia di widget obrolan langsung meskipun semua agen sedang offline. Di luar jam buka yang tersedia, pengunjung dapat diperingatkan dengan pesan dan formulir pra-obrolan.",
       "DAY": {
         "ENABLE": "Aktifkan ketersediaan untuk hari ini",
@@ -674,6 +696,10 @@
       },
       "BRANDING_TEXT": "Powered by Chatwoot",
       "SCRIPT_SETTINGS": "\n      window.chatwootSettings = {options};"
+    },
+    "EMAIL_PROVIDERS": {
+      "MICROSOFT": "Microsoft",
+      "OTHER_PROVIDERS": "Other Providers"
     }
   }
 }

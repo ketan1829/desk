@@ -15,6 +15,7 @@
     "INITIATED_FROM": "Iniciada des de",
     "INITIATED_AT": "Iniciada a les",
     "IP_ADDRESS": "Adreça IP",
+    "CREATED_AT_LABEL": "Created",
     "NEW_MESSAGE": "Nou missatge",
     "CONVERSATIONS": {
       "NO_RECORDS_FOUND": "No hi han converses prèvies associades a aquest contacte.",
@@ -32,7 +33,8 @@
       "LABEL_SELECT": {
         "TITLE": "Afegir etiquetes",
         "PLACEHOLDER": "Cerca etiquetes",
-        "NO_RESULT": "No s'han trobat etiquetes"
+        "NO_RESULT": "No s'han trobat etiquetes",
+        "CREATE_LABEL": "Create new label"
       }
     },
     "MERGE_CONTACT": "Reagrupa contacte",
@@ -70,6 +72,13 @@
       "CANCEL": "Cancel·la"
     },
     "SUCCESS_MESSAGE": "Contactes desat correctament",
+    "ERROR_MESSAGE": "S'ha produït un error; tornau-ho a provar"
+  },
+  "EXPORT_CONTACTS": {
+    "BUTTON_LABEL": "Export",
+    "TITLE": "Export Contacts",
+    "DESC": "Export contacts to a CSV file.",
+    "SUCCESS_MESSAGE": "Export is in progress, You will be notified via email when export file is ready to dowanlod.",
     "ERROR_MESSAGE": "S'ha produït un error; tornau-ho a provar"
   },
   "DELETE_NOTE": {
@@ -121,6 +130,7 @@
         "LABEL": "Número de telèfon",
         "HELP": "Phone number should be of E.164 format eg: +1415555555 [+][country code][area code][local phone number]",
         "ERROR": "Phone number should be either empty or of E.164 format",
+        "DIAL_CODE_ERROR": "Please select a dial code from the list",
         "DUPLICATE": "This phone number is in use for another contact."
       },
       "LOCATION": {
@@ -130,6 +140,17 @@
       "COMPANY_NAME": {
         "PLACEHOLDER": "Introdueix el nom de la companyia",
         "LABEL": "Nom de la companyia"
+      },
+      "COUNTRY": {
+        "PLACEHOLDER": "Enter the country name",
+        "LABEL": "Nom del país",
+        "SELECT_PLACEHOLDER": "Select",
+        "REMOVE": "Suprimeix",
+        "SELECT_COUNTRY": "Select Country"
+      },
+      "CITY": {
+        "PLACEHOLDER": "Enter the city name",
+        "LABEL": "City Name"
       },
       "SOCIAL_PROFILES": {
         "FACEBOOK": {
@@ -170,6 +191,7 @@
       },
       "INBOX": {
         "LABEL": "Inbox",
+        "PLACEHOLDER": "Choose source inbox",
         "ERROR": "Select an inbox"
       },
       "SUBJECT": {
@@ -197,6 +219,7 @@
     "FILTER_CONTACTS": "Filter",
     "FILTER_CONTACTS_SAVE": "Save filter",
     "FILTER_CONTACTS_DELETE": "Delete filter",
+    "FILTER_CONTACTS_EDIT": "Edit segment",
     "LIST": {
       "LOADING_MESSAGE": "Carregant contactes...",
       "404": "No hi ha cap contacte que coincideixi amb la vostra cerca 🔍",
@@ -206,6 +229,7 @@
         "PHONE_NUMBER": "Número de telèfon",
         "CONVERSATIONS": "Converses",
         "LAST_ACTIVITY": "Last Activity",
+        "CREATED_AT": "Created At",
         "COUNTRY": "Country",
         "CITY": "City",
         "SOCIAL_PROFILES": "Social Profiles",

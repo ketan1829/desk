@@ -15,6 +15,7 @@
     "INITIATED_FROM": "Aloitettu lähteestä",
     "INITIATED_AT": "Aloitettu lähteestä",
     "IP_ADDRESS": "IP-osoite",
+    "CREATED_AT_LABEL": "Created",
     "NEW_MESSAGE": "Uusi viesti",
     "CONVERSATIONS": {
       "NO_RECORDS_FOUND": "Tähän yhteystietoon ei liity aikaisempia keskusteluja.",
@@ -32,7 +33,8 @@
       "LABEL_SELECT": {
         "TITLE": "Add Labels",
         "PLACEHOLDER": "Search labels",
-        "NO_RESULT": "No labels found"
+        "NO_RESULT": "No labels found",
+        "CREATE_LABEL": "Create new label"
       }
     },
     "MERGE_CONTACT": "Yhdistä yhteystieto",
@@ -70,6 +72,13 @@
       "CANCEL": "Peruuta"
     },
     "SUCCESS_MESSAGE": "Contacts saved successfully",
+    "ERROR_MESSAGE": "Tapahtui virhe, yritä uudelleen"
+  },
+  "EXPORT_CONTACTS": {
+    "BUTTON_LABEL": "Export",
+    "TITLE": "Export Contacts",
+    "DESC": "Export contacts to a CSV file.",
+    "SUCCESS_MESSAGE": "Export is in progress, You will be notified via email when export file is ready to dowanlod.",
     "ERROR_MESSAGE": "Tapahtui virhe, yritä uudelleen"
   },
   "DELETE_NOTE": {
@@ -121,6 +130,7 @@
         "LABEL": "Puhelinnumero",
         "HELP": "Phone number should be of E.164 format eg: +1415555555 [+][country code][area code][local phone number]",
         "ERROR": "Phone number should be either empty or of E.164 format",
+        "DIAL_CODE_ERROR": "Please select a dial code from the list",
         "DUPLICATE": "This phone number is in use for another contact."
       },
       "LOCATION": {
@@ -130,6 +140,17 @@
       "COMPANY_NAME": {
         "PLACEHOLDER": "Anna yrityksen nimi",
         "LABEL": "Yrityksen nimi"
+      },
+      "COUNTRY": {
+        "PLACEHOLDER": "Enter the country name",
+        "LABEL": "Country Name",
+        "SELECT_PLACEHOLDER": "Select",
+        "REMOVE": "Poista",
+        "SELECT_COUNTRY": "Select Country"
+      },
+      "CITY": {
+        "PLACEHOLDER": "Enter the city name",
+        "LABEL": "City Name"
       },
       "SOCIAL_PROFILES": {
         "FACEBOOK": {
@@ -170,6 +191,7 @@
       },
       "INBOX": {
         "LABEL": "Inbox",
+        "PLACEHOLDER": "Choose source inbox",
         "ERROR": "Select an inbox"
       },
       "SUBJECT": {
@@ -197,6 +219,7 @@
     "FILTER_CONTACTS": "Filter",
     "FILTER_CONTACTS_SAVE": "Save filter",
     "FILTER_CONTACTS_DELETE": "Poista suodatin",
+    "FILTER_CONTACTS_EDIT": "Edit segment",
     "LIST": {
       "LOADING_MESSAGE": "Ladataan yhteystietoja...",
       "404": "Ei hakua vastaavia yhteystietoja 🔍",
@@ -206,6 +229,7 @@
         "PHONE_NUMBER": "Puhelinnumero",
         "CONVERSATIONS": "Keskustelut",
         "LAST_ACTIVITY": "Last Activity",
+        "CREATED_AT": "Created At",
         "COUNTRY": "Country",
         "CITY": "City",
         "SOCIAL_PROFILES": "Social Profiles",

@@ -53,10 +53,6 @@
           "ENABLE": "സൂചിപ്പിച്ച ട്വീറ്റുകളിൽ നിന്ന് സംഭാഷണങ്ങൾ സൃഷ്ടിക്കുക"
         }
       },
-      "MICROSOFT": {
-        "HELP": "To add your Microsoft account as a channel, you need to authenticate your Microsoft account by clicking on 'Sign in with Microsoft' ",
-        "ERROR_MESSAGE": "There was an error connecting to Microsoft, please try again"
-      },
       "WEBSITE_CHANNEL": {
         "TITLE": "വെബ്‌സൈറ്റ് ചാനൽ",
         "DESC": "നിങ്ങളുടെ വെബ്‌സൈറ്റിനായി ഒരു ചാനൽ സൃഷ്‌ടിച്ച് ഞങ്ങളുടെ വെബ്‌സൈറ്റ് വിജറ്റ് വഴി ഉപഭോക്താക്കളെ പിന്തുണയ്ക്കാൻ ആരംഭിക്കുക.",
@@ -348,6 +344,17 @@
       "FINISH": {
         "TITLE": "പൊളിച്ചു അടുക്കി!",
         "DESC": "നിങ്ങളുടെ ഫേസ്ബുക്ക് പേജ് ചാറ്റ് വൂട്ടുമായി സമന്വയിപ്പിക്കുന്നത് നിങ്ങൾ വിജയകരമായി പൂർത്തിയാക്കി. അടുത്ത തവണ ഒരു ഉപയോക്താവ് നിങ്ങളുടെ പേജിലേക്ക് സന്ദേശമയയ്ക്കുമ്പോൾ, സംഭാഷണം ഓട്ടോമാറ്റിക്കലി നിങ്ങളുടെ ഇൻ‌ബോക്സിൽ ദൃശ്യമാകും. <br> നിങ്ങൾക്ക് എളുപ്പത്തിൽ സംയോജിപ്പിക്കാൻ കഴിയുന്ന ഒരു വിജറ്റ് സ്ക്രിപ്റ്റും ഞങ്ങൾ നിങ്ങൾക്ക് നൽകുന്നു. ഇത് നിങ്ങളുടെ വെബ്‌സൈറ്റിലേക്ക് ചേർക്കുക. ഇത് നിങ്ങളുടെ വെബ്‌സൈറ്റിൽ തത്സമയമായിക്കഴിഞ്ഞാൽ, ഉപയോക്താക്കൾക്ക് നിങ്ങളുടെ വെബ്‌സൈറ്റിൽ നിന്ന് നിങ്ങൾക്ക് സന്ദേശം അയയ്‌ക്കാൻ കഴിയും, ഒപ്പം സംഭാഷണം ചാറ്റ് വൂട്ടിൽ തന്നെ ദൃശ്യമാകും. <br> കൊള്ളാം, അല്ലേ? :)"
+      },
+      "EMAIL_PROVIDER": {
+        "TITLE": "Select your email provider",
+        "DESCRIPTION": "Select an email provider from the list below. If you don't see your email provider in the list, you can select the other provider option and provide the IMAP and SMTP Credentials."
+      },
+      "MICROSOFT": {
+        "TITLE": "Microsoft Email",
+        "DESCRIPTION": "Click on the Sign in with Microsoft button to get started. You will redirected to the email sign in page. Once you accept the requested permissions, you would be redirected back to the inbox creation step.",
+        "EMAIL_PLACEHOLDER": "Enter email address",
+        "HELP": "To add your Microsoft account as a channel, you need to authenticate your Microsoft account by clicking on 'Sign in with Microsoft' ",
+        "ERROR_MESSAGE": "There was an error connecting to Microsoft, please try again"
       }
     },
     "DETAILS": {
@@ -432,7 +439,8 @@
       "LABEL": "Features",
       "DISPLAY_FILE_PICKER": "Display file picker on the widget",
       "DISPLAY_EMOJI_PICKER": "Display emoji picker on the widget",
-      "ALLOW_END_CONVERSATION": "Allow users to end conversation from the widget"
+      "ALLOW_END_CONVERSATION": "Allow users to end conversation from the widget",
+      "USE_INBOX_AVATAR_FOR_BOT": "Use inbox name and avatar for the bot"
     },
     "SETTINGS_POPUP": {
       "MESSENGER_HEADING": "മെസഞ്ചർ സ്ക്രിപ്റ്റ്",
@@ -456,6 +464,7 @@
       "AUTO_ASSIGNMENT_SUB_TEXT": "പുതിയ സംഭാഷണങ്ങളിൽ ലഭ്യമായ ഏജന്റുമാരുടെ ഓട്ടോമാറ്റിക് അസൈൻമെന്റ് പ്രാപ്തമാക്കുകയോ അപ്രാപ്തമാക്കുകയോ ചെയ്യുക",
       "HMAC_VERIFICATION": "User Identity Validation",
       "HMAC_DESCRIPTION": "In order to validate the user's identity, you can pass an `identifier_hash` for each user. You can generate a HMAC sha256 hash using the `identifier` with the key shown here.",
+      "HMAC_LINK_TO_DOCS": "You can read more here.",
       "HMAC_MANDATORY_VERIFICATION": "Enforce User Identity Validation",
       "HMAC_MANDATORY_DESCRIPTION": "If enabled, requests missing the `identifier_hash` will be rejected.",
       "INBOX_IDENTIFIER": "Inbox Identifier",
@@ -465,7 +474,21 @@
       "ALLOW_MESSAGES_AFTER_RESOLVED": "സംഭാഷണം പരിഹരിച്ചതിന് ശേഷം സന്ദേശങ്ങൾ അനുവദിക്കുക",
       "ALLOW_MESSAGES_AFTER_RESOLVED_SUB_TEXT": "സംഭാഷണം പരിഹരിച്ചതിന് ശേഷവും സന്ദേശങ്ങൾ അയയ്ക്കാൻ അന്തിമ ഉപയോക്താക്കളെ അനുവദിക്കുക.",
       "WHATSAPP_SECTION_SUBHEADER": "This API Key is used for the integration with the WhatsApp APIs.",
-      "WHATSAPP_SECTION_TITLE": "API Key"
+      "WHATSAPP_SECTION_UPDATE_SUBHEADER": "Enter the updated key to be used for the integration with the WhatsApp APIs.",
+      "WHATSAPP_SECTION_TITLE": "API Key",
+      "WHATSAPP_SECTION_UPDATE_TITLE": "Update API Key",
+      "WHATSAPP_SECTION_UPDATE_PLACEHOLDER": "Enter the new API Key here",
+      "WHATSAPP_SECTION_UPDATE_BUTTON": "അപ്‌ഡേറ്റ്",
+      "WHATSAPP_WEBHOOK_TITLE": "Webhook Verify Token",
+      "WHATSAPP_WEBHOOK_SUBHEADER": "This token is used to verify the authenticity of the webhook endpoint.",
+      "UPDATE_PRE_CHAT_FORM_SETTINGS": "Update Pre Chat Form Settings"
+    },
+    "HELP_CENTER": {
+      "LABEL": "Help Center",
+      "PLACEHOLDER": "Select Help Center",
+      "SELECT_PLACEHOLDER": "Select Help Center",
+      "REMOVE": "Remove Help Center",
+      "SUB_TEXT": "Attach a Help Center with the inbox"
     },
     "AUTO_ASSIGNMENT": {
       "MAX_ASSIGNMENT_LIMIT": "Auto assignment limit",
@@ -512,7 +535,6 @@
       "UPDATE": "Update business hours settings",
       "TOGGLE_AVAILABILITY": "Enable business availability for this inbox",
       "UNAVAILABLE_MESSAGE_LABEL": "Unavailable message for visitors",
-      "UNAVAILABLE_MESSAGE_DEFAULT": "We are unavailable at the moment. Leave a message we will respond once we are back.",
       "TOGGLE_HELP": "Enabling business availability will show the available hours on live chat widget even if all the agents are offline. Outside available hours vistors can be warned with a message and a pre-chat form.",
       "DAY": {
         "ENABLE": "Enable availability for this day",
@@ -674,6 +696,10 @@
       },
       "BRANDING_TEXT": "പ്രായോജകർ Chatwoot",
       "SCRIPT_SETTINGS": "\n      window.chatwootSettings = {options};"
+    },
+    "EMAIL_PROVIDERS": {
+      "MICROSOFT": "Microsoft",
+      "OTHER_PROVIDERS": "Other Providers"
     }
   }
 }

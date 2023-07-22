@@ -15,14 +15,15 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     services:
       postgres:
-        image: postgres:10.8
+        image: postgres:15.3
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: ""
           POSTGRES_DB: postgres
+          POSTGRES_HOST_AUTH_METHOD: trust
         ports:
           - 5432:5432
         # needed because the postgres container does not provide a healthcheck
@@ -47,8 +48,11 @@ jobs:
 
     - uses: ruby/setup-ruby@v1
       with:
-        ruby-version: 3.0.4 # Not needed with a .ruby-version file
         bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16
 
     - name: yarn
       run: yarn install
@@ -71,3 +75,10 @@ jobs:
     - name: Run backend tests
       run: |
         bundle exec rspec --profile=10 --format documentation
+
+    - name: Upload rails log folder
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: rails-log-folder
+        path: log

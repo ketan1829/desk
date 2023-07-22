@@ -14,7 +14,9 @@
             "CONVERSATION_UPDATED": "Conversa Atualizada",
             "MESSAGE_CREATED": "Mensagem criada",
             "MESSAGE_UPDATED": "Mensagem atualizada",
-            "WEBWIDGET_TRIGGERED": "Widget de chat aberto pelo usuário"
+            "WEBWIDGET_TRIGGERED": "Widget de chat aberto pelo usuário",
+            "CONTACT_CREATED": "Contato criado",
+            "CONTACT_UPDATED": "Contato atualizado"
           }
         },
         "END_POINT": {
@@ -82,6 +84,25 @@
       "START_VIDEO_CALL_HELP_TEXT": "Iniciar uma nova chamada de vídeo com o cliente",
       "JOIN_ERROR": "Houve um erro ao entrar na chamada, por favor tente novamente",
       "CREATE_ERROR": "Houve um erro ao criar o link da reunião, por favor tente novamente"
+    },
+    "OPEN_AI": {
+      "TITLE": "Melhore com IA",
+      "SUMMARY_TITLE": "Resumo com IA",
+      "REPLY_TITLE": "Responder sugestão com IA",
+      "SUBTITLE": "Uma resposta melhor será gerada usando AI, com base no seu rascunho atual.",
+      "TONE": {
+        "TITLE": "Tom",
+        "OPTIONS": {
+          "PROFESSIONAL": "Profissional",
+          "FRIENDLY": "Amigável"
+        }
+      },
+      "BUTTONS": {
+        "GENERATE": "Gerar",
+        "GENERATING": "Gerando...",
+        "CANCEL": "Cancelar"
+      },
+      "GENERATE_ERROR": "Ocorreu um erro ao processar o conteúdo, por favor, tente novamente"
     },
     "DELETE": {
       "BUTTON_TEXT": "Excluir",

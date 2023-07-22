@@ -28,6 +28,17 @@
       "SAVING": "Speichern...",
       "SAVED": "Gespeichert"
     },
+    "ARTICLE_EDITOR": {
+      "IMAGE_UPLOAD": {
+        "TITLE": "Bild hochladen",
+        "UPLOADING": "Hochladen...",
+        "SUCCESS": "Bild erfolgreich hochgeladen",
+        "ERROR": "Fehler beim Hochladen des Bildes",
+        "ERROR_FILE_SIZE": "Bildgröße sollte kleiner als {size}MB sein",
+        "ERROR_FILE_FORMAT": "Bildformat sollte jpg, jpeg oder png sein",
+        "ERROR_FILE_DIMENSIONS": "Bildgröße sollte kleiner als 2000 x 2000 sein"
+      }
+    },
     "ARTICLE_SETTINGS": {
       "TITLE": "Artikeleinstellungen",
       "FORM": {
@@ -62,6 +73,14 @@
         "ARCHIVE": "Artikel archivieren",
         "DELETE": "Artikel löschen"
       }
+    },
+    "ARTICLE_SEARCH_RESULT": {
+      "UNCATEGORIZED": "Uncategorized",
+      "INSERT_ARTICLE": "Insert",
+      "NO_RESULT": "No articles found",
+      "COPY_LINK": "Copy article link to clipboard",
+      "OPEN_LINK": "Open article in new tab",
+      "PREVIEW_LINK": "Preview article"
     },
     "PORTAL": {
       "HEADER": "Portale",

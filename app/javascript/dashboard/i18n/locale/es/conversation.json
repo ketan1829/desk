@@ -35,7 +35,9 @@
     "REMOVE_SELECTION": "Eliminar selección",
     "DOWNLOAD": "Descargar",
     "UNKNOWN_FILE_TYPE": "Archivo desconocido",
+    "SAVE_CONTACT": "Guardar",
     "UPLOADING_ATTACHMENTS": "Subiendo archivos adjuntos...",
+    "REPLIED_TO_STORY": "Respondió a su historia",
     "SUCCESS_DELETE_MESSAGE": "Mensaje eliminado correctamente",
     "FAIL_DELETE_MESSSAGE": "¡No se pudo eliminar el mensaje! Inténtalo de nuevo",
     "NO_RESPONSE": "No hay respuesta",
@@ -52,17 +54,41 @@
       "OPEN": "Más",
       "CLOSE": "Cerrar",
       "DETAILS": "detalles",
+      "SNOOZED_UNTIL": "Snoozed until",
       "SNOOZED_UNTIL_TOMORROW": "Pospuesto hasta mañana",
       "SNOOZED_UNTIL_NEXT_WEEK": "Pospuesto hasta la próxima semana",
       "SNOOZED_UNTIL_NEXT_REPLY": "Posponer hasta la siguiente respuesta"
     },
     "RESOLVE_DROPDOWN": {
       "MARK_PENDING": "Marcar como pendiente",
+      "SNOOZE_UNTIL": "Posponer",
       "SNOOZE": {
         "TITLE": "Posponer hasta",
         "NEXT_REPLY": "Siguiente respuesta",
         "TOMORROW": "Mañana",
         "NEXT_WEEK": "Próxima semana"
+      }
+    },
+    "CUSTOM_SNOOZE": {
+      "TITLE": "Posponer hasta",
+      "APPLY": "Posponer",
+      "CANCEL": "Cancelar"
+    },
+    "PRIORITY": {
+      "TITLE": "Prioridad",
+      "OPTIONS": {
+        "NONE": "Ninguna",
+        "URGENT": "Urgente",
+        "HIGH": "Alta",
+        "MEDIUM": "Media",
+        "LOW": "Baja"
+      },
+      "CHANGE_PRIORITY": {
+        "SELECT_PLACEHOLDER": "Ninguna",
+        "INPUT_PLACEHOLDER": "Seleccionar prioridad",
+        "NO_RESULTS": "No se encontraron resultados",
+        "SUCCESSFUL": "Se ha cambiado la prioridad del id de conversación %{conversationId} a %{priority}",
+        "FAILED": "No se pudo cambiar la prioridad. Por favor, inténtelo de nuevo."
       }
     },
     "CARD_CONTEXT_MENU": {
@@ -132,6 +158,14 @@
           "PLACEHOLDER": "Correos separados por comas",
           "ERROR": "Por favor, introduzca correo válido"
         }
+      },
+      "UNDEFINED_VARIABLES": {
+        "TITLE": "Variables indefinidas",
+        "MESSAGE": "Tienes {undefinedVariablesCount} variables no definidas en tu mensaje: {undefinedVariables}. ¿Quieres enviar el mensaje de todos modos?",
+        "CONFIRM": {
+          "YES": "Enviar",
+          "CANCEL": "Cancelar"
+        }
       }
     },
     "VISIBLE_TO_AGENTS": "Nota privada: solo visible para ti y tu equipo",
@@ -156,7 +190,16 @@
     "CONTEXT_MENU": {
       "COPY": "Copiar",
       "DELETE": "Eliminar",
-      "CREATE_A_CANNED_RESPONSE": "Añadir a respuestas predefinidas"
+      "CREATE_A_CANNED_RESPONSE": "Añadir a respuestas predefinidas",
+      "TRANSLATE": "Traducir",
+      "COPY_PERMALINK": "Copiar el enlace al mensaje",
+      "LINK_COPIED": "URL del mensaje copiado al portapapeles",
+      "DELETE_CONFIRMATION": {
+        "TITLE": "¿Está seguro que desea eliminar este mensaje?",
+        "MESSAGE": "No puede deshacer esta acción",
+        "DELETE": "Eliminar",
+        "CANCEL": "Cancelar"
+      }
     }
   },
   "EMAIL_TRANSCRIPT": {
@@ -244,5 +287,29 @@
     "BCC": "Bcc",
     "CC": "Cc",
     "SUBJECT": "Asunto"
+  },
+  "CONVERSATION_PARTICIPANTS": {
+    "SIDEBAR_MENU_TITLE": "Participar",
+    "SIDEBAR_TITLE": "Participantes de la conversación",
+    "NO_RECORDS_FOUND": "No se encontraron resultados",
+    "ADD_PARTICIPANTS": "Seleccionar participantes",
+    "REMANING_PARTICIPANTS_TEXT": "+%{count} más",
+    "REMANING_PARTICIPANT_TEXT": "+%{count} más",
+    "TOTAL_PARTICIPANTS_TEXT": "%{count} personas están participando.",
+    "TOTAL_PARTICIPANT_TEXT": "%{count} personas están participando.",
+    "NO_PARTICIPANTS_TEXT": "Nadie está participando!.",
+    "WATCH_CONVERSATION": "Abrir conversación",
+    "YOU_ARE_WATCHING": "Estás participando",
+    "API": {
+      "ERROR_MESSAGE": "No se pudo actualizar, ¡inténtelo de nuevo!",
+      "SUCCESS_MESSAGE": "¡Participantes actualizados!"
+    }
+  },
+  "TRANSLATE_MODAL": {
+    "TITLE": "Ver contenido traducido",
+    "DESC": "Puedes ver el contenido traducido en cada lenguaje.",
+    "ORIGINAL_CONTENT": "Contenido original",
+    "TRANSLATED_CONTENT": "Contenido traducido",
+    "NO_TRANSLATIONS_AVAILABLE": "No hay traducciones disponibles para este contenido"
   }
 }

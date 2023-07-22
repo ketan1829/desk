@@ -5,10 +5,14 @@ RSpec.describe 'Public Articles API', type: :request do
   let(:agent) { create(:user, account: account, role: :agent) }
   let!(:portal) { create(:portal, slug: 'test-portal', config: { allowed_locales: %w[en es] }, custom_domain: 'www.example.com') }
   let!(:category) { create(:category, name: 'category', portal: portal, account_id: account.id, locale: 'en', slug: 'category_slug') }
-  let!(:category_2) { create(:category, name: 'category', portal: portal, account_id: account.id, locale: 'es', slug: 'category_2_slug') }
-  let!(:article) { create(:article, category: category, portal: portal, account_id: account.id, author_id: agent.id) }
+  let!(:category_2) { create(:category, name: 'category', portal: portal, account_id: account.id, locale: 'es', slug: 'category_slug') }
+  let!(:article) do
+    create(:article, category: category, portal: portal, account_id: account.id, author_id: agent.id,
+                     content: 'This is a *test* content with ^markdown^')
+  end
 
   before do
+    ENV['HELPCENTER_URL'] = ENV.fetch('FRONTEND_URL', nil)
     create(:article, category: category, portal: portal, account_id: account.id, author_id: agent.id)
     create(:article, category: category, portal: portal, account_id: account.id, author_id: agent.id, associated_article_id: article.id)
     create(:article, category: category_2, portal: portal, account_id: account.id, author_id: agent.id, associated_article_id: article.id)
@@ -17,7 +21,7 @@ RSpec.describe 'Public Articles API', type: :request do
 
   describe 'GET /public/api/v1/portals/:slug/articles' do
     it 'Fetch all articles in the portal' do
-      get "/hc/#{portal.slug}/#{category.locale}/#{category.slug}/articles"
+      get "/hc/#{portal.slug}/#{category.locale}/categories/#{category.slug}/articles"
 
       expect(response).to have_http_status(:success)
     end
@@ -31,7 +35,7 @@ RSpec.describe 'Public Articles API', type: :request do
                         content: 'this is some test and funny content')
       expect(article2.id).not_to be_nil
 
-      get "/hc/#{portal.slug}/#{category.locale}/#{category.slug}/articles",
+      get "/hc/#{portal.slug}/#{category.locale}/categories/#{category.slug}/articles",
           headers: agent.create_new_auth_token,
           params: { query: 'funny' }
       expect(response).to have_http_status(:success)
@@ -40,8 +44,15 @@ RSpec.describe 'Public Articles API', type: :request do
 
   describe 'GET /public/api/v1/portals/:slug/articles/:id' do
     it 'Fetch article with the id' do
-      get "/hc/#{portal.slug}/#{category.locale}/#{category.slug}/#{article.id}"
+      get "/hc/#{portal.slug}/articles/#{article.slug}"
+      expect(response).to have_http_status(:success)
+      expect(response.body).to include(ChatwootMarkdownRenderer.new(article.content).render_article)
+      expect(article.reload.views).to eq 1
+    end
 
+    it 'returns the article with the id with a different locale' do
+      article_in_locale = create(:article, category: category_2, portal: portal, account_id: account.id, author_id: agent.id)
+      get "/hc/#{portal.slug}/articles/#{article_in_locale.slug}"
       expect(response).to have_http_status(:success)
     end
   end

@@ -21,6 +21,7 @@ ar:
   messages:
     reset_password_success: تم إرسال طلب إعادة تعيين كلمة المرور. يرجى مراجعة بريدك الإلكتروني للحصول على التعليمات.
     reset_password_failure: أوه! لم نتمكن من العثور على أي مستخدم بعنوان البريد الإلكتروني المحدد.
+    inbox_deletetion_response: Your inbox deletion request will be processed in some time.
   errors:
     validations:
       presence: يجب ألا يكون فارغاً
@@ -37,6 +38,8 @@ ar:
     contacts:
       import:
         failed: الملف فارغ
+      export:
+        success: We will notify you once contacts export file is ready to view.
       email:
         invalid: إيميل غير صالح
       phone_number:
@@ -55,8 +58,11 @@ ar:
         connection_closed_error: تم إغلاق الاتصال.
       validations:
         name: لا ينبغي أن تبدأ أو تنتهي بالرموز، ولا ينبغي أن يكون أقل من > / \ أحرف @ .
+    custom_filters:
+      number_of_records: Limit reached. The maximum number of allowed custom filters for a user per account is 50.
   reports:
     period: فترة التبليغ %{since} إلى %{until}
+    utc_warning: The report generated is in UTC timezone
     agent_csv:
       agent_name: اسم الموظف
       conversations_count: عدد المحادثات
@@ -78,6 +84,8 @@ ar:
       conversations_count: عدد المحادثات
       avg_first_response_time: متوسط وقت الرد الأول (الدقائق)
       avg_resolution_time: متوسط وقت المحادثة (الدقائق)
+    conversation_traffic_csv:
+      timezone: Timezone
     default_group_by: اليوم
     csat:
       headers:
@@ -108,6 +116,11 @@ ar:
         pending: "تم تحديث حالة المحادثة لـ\"معلقة\" بواسطة %{user_name}"
         snoozed: "تم تأجيل المحادثة بواسطة %{user_name}"
         auto_resolved: "تم وضع علامة على المحادثة كمحلولة من قبل بالنظام بسبب %{duration} أيام من عدم النشاط"
+        system_auto_open: System reopened the conversation due to a new incoming message.
+      priority:
+        added: '%{user_name} set the priority to %{new_priority}'
+        updated: '%{user_name} changed the priority from %{old_priority} to %{new_priority}'
+        removed: '%{user_name} removed the priority'
       assignee:
         self_assigned: "%{user_name} تم تعيينه تلقائياً لهذه المحادثة"
         assigned: "تم إسنادها إلى %{assignee_name} بواسطة %{user_name}"
@@ -129,8 +142,12 @@ ar:
     reply:
       email:
         header:
-          from_with_name: '%{assignee_name} من %{inbox_name} <%{from_email}>'
-          reply_with_name: '%{assignee_name} من %{inbox_name} <%{reply_email}>'
+          from_with_name: "%{assignee_name} من %{inbox_name} <%{from_email}>"
+          reply_with_name: "%{assignee_name} من %{inbox_name} <%{reply_email}>"
+      channel_email:
+        header:
+          reply_with_name: "%{assignee_name} من %{inbox_name} <%{from_email}>"
+          reply_with_inbox_name: "%{inbox_name} <%{from_email}>"
       email_subject: "رسائل جديدة في هذه المحادثة"
       transcript_subject: "نص المحادثة"
     survey:
@@ -155,11 +172,29 @@ ar:
     fullcontact:
       name: "الاتصال الكامل"
       description: "التكامل الكامل يساعد على إثراء ملفات تعريف الزوار. تحديد المستخدمين بمجرد مشاركتهم عنوان البريد الإلكتروني الخاص بهم وتقديم خدمة العملاء الخاصة بهم. قم بتوصيل اتصالك الكامل بحسابك عن طريق مشاركة مفتاح API للاتصال الكامل."
+    google_translate:
+      name: "Google Translate"
+      description: "Make it easier for agents to translate messages by adding a Google Translate Integration. Google translate helps to identify the language automatically and convert it to the language chosen by the agent/account admin."
+    openai:
+      name: "OpenAI"
+      description: "Integrate powerful AI features into Chatwoot by leveraging the GPT models from OpenAI."
   public_portal:
     search:
       search_placeholder: Search for article by title or body...
       empty_placeholder: لم يتم العثور على النتائج.
       loading_placeholder: يبحث...
       results_title: Search results
+    toc_header: 'On this page'
     hero:
       sub_title: Search for the articles here or browse the categories below.
+    common:
+      home: الرئيسية
+      last_updated_on: Last updated on %{last_updated_on}
+      view_all_articles: View all articles
+      article: article
+      articles: المقالات
+      no_articles: There are no articles here
+    footer:
+      made_with: Made with
+    header:
+      go_to_homepage: Go to the main site

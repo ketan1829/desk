@@ -34,6 +34,22 @@ RSpec.describe User do
 
     it { expect(user.pubsub_token).not_to be_nil }
     it { expect(user.saved_changes.keys).not_to eq('pubsub_token') }
+
+    context 'rotates the pubsub_token' do
+      it 'changes the pubsub_token when password changes' do
+        pubsub_token = user.pubsub_token
+        user.password = Faker::Internet.password(special_characters: true)
+        user.save!
+        expect(user.pubsub_token).not_to eq(pubsub_token)
+      end
+
+      it 'will not change pubsub_token when other attributes change' do
+        pubsub_token = user.pubsub_token
+        user.name = Faker::Name.name
+        user.save!
+        expect(user.pubsub_token).to eq(pubsub_token)
+      end
+    end
   end
 
   describe 'hmac_identifier' do
@@ -87,6 +103,13 @@ RSpec.describe User do
     it 'mutates the value' do
       user.email = 'user@example.com'
       expect(user.will_save_change_to_email?).to be true
+    end
+  end
+
+  context 'when the supplied email is uppercase' do
+    it 'downcases the email on save' do
+      new_user = create(:user, email: 'Test123@test.com')
+      expect(new_user.email).to eq('test123@test.com')
     end
   end
 end

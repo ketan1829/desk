@@ -3,7 +3,7 @@
 ### Usage #####
 #
 #   # Seed an account with all data types in this class
-#   Seeders::AccountSeeder.new(account: @Account.find(1)).perform!
+#   Seeders::AccountSeeder.new(account: Account.find(1)).perform!
 #
 #
 ############################################################
@@ -12,7 +12,7 @@ class Seeders::AccountSeeder
   def initialize(account:)
     raise 'Account Seeding is not allowed.' unless ENV.fetch('ENABLE_ACCOUNT_SEEDING', !Rails.env.production?)
 
-    @account_data = HashWithIndifferentAccess.new(YAML.safe_load(File.read(Rails.root.join('lib/seeders/seed_data.yml'))))
+    @account_data = ActiveSupport::HashWithIndifferentAccess.new(YAML.safe_load(Rails.root.join('lib/seeders/seed_data.yml').read))
     @account = account
   end
 
@@ -89,13 +89,23 @@ class Seeders::AccountSeeder
     conversation = contact_inbox.conversations.create!(account: contact_inbox.inbox.account, contact: contact_inbox.contact,
                                                        inbox: contact_inbox.inbox, assignee: assignee)
     create_messages(conversation: conversation, messages: conversation_data['messages'])
+    conversation.update_labels(conversation_data[:labels]) if conversation_data[:labels].present?
+    conversation.update!(priority: conversation_data[:priority]) if conversation_data[:priority].present?
   end
 
   def create_messages(conversation:, messages:)
     messages.each do |message_data|
-      sender = User.find_by(email: message_data['sender']) if message_data['sender'].present?
+      sender = find_message_sender(conversation, message_data)
       conversation.messages.create!(message_data.slice('content', 'message_type').merge(account: conversation.inbox.account, sender: sender,
                                                                                         inbox: conversation.inbox))
+    end
+  end
+
+  def find_message_sender(conversation, message_data)
+    if message_data['message_type'] == 'incoming'
+      User.find_by(email: message_data['sender']) if message_data['sender'].present?
+    else
+      conversation.contact
     end
   end
 

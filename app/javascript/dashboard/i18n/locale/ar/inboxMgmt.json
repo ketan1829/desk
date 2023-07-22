@@ -53,10 +53,6 @@
           "ENABLE": "إنشاء محادثات من التغريدات المشار إليها"
         }
       },
-      "MICROSOFT": {
-        "HELP": "To add your Microsoft account as a channel, you need to authenticate your Microsoft account by clicking on 'Sign in with Microsoft' ",
-        "ERROR_MESSAGE": "There was an error connecting to Microsoft, please try again"
-      },
       "WEBSITE_CHANNEL": {
         "TITLE": "قناة الموقع",
         "DESC": "قم بإنشاء قناة تواصل لموقع الويب الخاص بك وابدأ في استقبال الرسائل من عملائك عبر صندوق الدردشة المباشرة.",
@@ -348,6 +344,17 @@
       "FINISH": {
         "TITLE": "تم!",
         "DESC": "لقد تم بنجاح ربط صفحة فيسبوك الخاصة بك مع Chatwoot. في المرة القادمة التي يرسل فيها العملاء رسالة إلى صفحتك، ستظهر المحادثة تلقائيًا على صندوق الوارد الخاص بك هنا.<br>نحن نزودك أيضًا بالكود النصي لصندوق دردشة الماسنجر والذي يمكنك إضافته بسهولة إلى الموقع الخاص بك لاستقبال الرسائل من الزوار كذلك. بمجرد أن يتم ذلك على موقع الويب الخاص بك، يمكن للعملاء مراسلتك من موقع الويب الخاص بك بدون الحاجة لأي أدوات خارجية وستظهر المحادثة هنا على Chatwoot.<br>رائع، أليس كذلك؟ نحن بالتأكيد نحاول أن نكون الأفضل :)"
+      },
+      "EMAIL_PROVIDER": {
+        "TITLE": "Select your email provider",
+        "DESCRIPTION": "Select an email provider from the list below. If you don't see your email provider in the list, you can select the other provider option and provide the IMAP and SMTP Credentials."
+      },
+      "MICROSOFT": {
+        "TITLE": "Microsoft Email",
+        "DESCRIPTION": "Click on the Sign in with Microsoft button to get started. You will redirected to the email sign in page. Once you accept the requested permissions, you would be redirected back to the inbox creation step.",
+        "EMAIL_PLACEHOLDER": "Enter email address",
+        "HELP": "To add your Microsoft account as a channel, you need to authenticate your Microsoft account by clicking on 'Sign in with Microsoft' ",
+        "ERROR_MESSAGE": "There was an error connecting to Microsoft, please try again"
       }
     },
     "DETAILS": {
@@ -432,7 +439,8 @@
       "LABEL": "الخصائص",
       "DISPLAY_FILE_PICKER": "عرض أداة انتقاء الملفات في الـ widget",
       "DISPLAY_EMOJI_PICKER": "عرض منتقي الرموز التعبيرية على الـ widget",
-      "ALLOW_END_CONVERSATION": "السماح للمستخدمين بإنهاء المحادثة من عنصر واجهة المستخدم"
+      "ALLOW_END_CONVERSATION": "السماح للمستخدمين بإنهاء المحادثة من عنصر واجهة المستخدم",
+      "USE_INBOX_AVATAR_FOR_BOT": "Use inbox name and avatar for the bot"
     },
     "SETTINGS_POPUP": {
       "MESSENGER_HEADING": "كود \"الماسنجر\"",
@@ -456,6 +464,7 @@
       "AUTO_ASSIGNMENT_SUB_TEXT": "تمكين أو تعطيل الإسناد التلقائي للمحادثات الجديدة إلى الموظفين المضافين إلى قناة التواصل هذه.",
       "HMAC_VERIFICATION": "التحقق من هوية المستخدم",
       "HMAC_DESCRIPTION": "من أجل التحقق من هوية المستخدم، يمكنك تمرير 'IDer_hash` لكل مستخدم. يمكنك إنشاء تجزئة HMAC sha256 باستخدام \"المعرف\" مع المفتاح المعروض هنا.",
+      "HMAC_LINK_TO_DOCS": "You can read more here.",
       "HMAC_MANDATORY_VERIFICATION": "فرض التحقق من هوية المستخدم",
       "HMAC_MANDATORY_DESCRIPTION": "في حالة التمكين، سيتم رفض الطلبات المفقودة 'IDer_hash'.",
       "INBOX_IDENTIFIER": "معرف صندوق الوارد",
@@ -465,7 +474,21 @@
       "ALLOW_MESSAGES_AFTER_RESOLVED": "السماح بالرسائل بعد حل المحادثة",
       "ALLOW_MESSAGES_AFTER_RESOLVED_SUB_TEXT": "السماح للمستخدمين النهائيين بإرسال رسائل حتى بعد تسوية المحادثة.",
       "WHATSAPP_SECTION_SUBHEADER": "يتم استخدام مفتاح API هذا للتكامل مع واتسب APIs.",
-      "WHATSAPP_SECTION_TITLE": "مفتاح API"
+      "WHATSAPP_SECTION_UPDATE_SUBHEADER": "Enter the updated key to be used for the integration with the WhatsApp APIs.",
+      "WHATSAPP_SECTION_TITLE": "مفتاح API",
+      "WHATSAPP_SECTION_UPDATE_TITLE": "Update API Key",
+      "WHATSAPP_SECTION_UPDATE_PLACEHOLDER": "Enter the new API Key here",
+      "WHATSAPP_SECTION_UPDATE_BUTTON": "تحديث",
+      "WHATSAPP_WEBHOOK_TITLE": "رمز التحقق من Webhook",
+      "WHATSAPP_WEBHOOK_SUBHEADER": "This token is used to verify the authenticity of the webhook endpoint.",
+      "UPDATE_PRE_CHAT_FORM_SETTINGS": "Update Pre Chat Form Settings"
+    },
+    "HELP_CENTER": {
+      "LABEL": "Help Center",
+      "PLACEHOLDER": "Select Help Center",
+      "SELECT_PLACEHOLDER": "Select Help Center",
+      "REMOVE": "Remove Help Center",
+      "SUB_TEXT": "Attach a Help Center with the inbox"
     },
     "AUTO_ASSIGNMENT": {
       "MAX_ASSIGNMENT_LIMIT": "حد الإسناد التلقائي",
@@ -512,7 +535,6 @@
       "UPDATE": "تحديث إعدادات ساعات العمل",
       "TOGGLE_AVAILABILITY": "تمكين توافر العمل لهذا البريد الوارد",
       "UNAVAILABLE_MESSAGE_LABEL": "رسالة غير متاح للزائرين",
-      "UNAVAILABLE_MESSAGE_DEFAULT": "نحن غير متوفرين في هذه اللحظة. اترك رسالة سنرد عليها بمجرد عودتنا.",
       "TOGGLE_HELP": "تمكين توفر العمل سيظهر الساعات المتاحة على أداة الدردشة المباشرة حتى لو كان جميع الوكلاء غير متصلين بالإنترنت. خارج الساعات المتاحة يمكن تحذير الزوار برسالة ونموذج ما قبل الدردشة.",
       "DAY": {
         "ENABLE": "تمكين التوفر لهذا اليوم",
@@ -674,6 +696,10 @@
       },
       "BRANDING_TEXT": "مدعوم بواسطة Chatwoot",
       "SCRIPT_SETTINGS": "\n      window.chatwootSettings = {options};"
+    },
+    "EMAIL_PROVIDERS": {
+      "MICROSOFT": "Microsoft",
+      "OTHER_PROVIDERS": "Other Providers"
     }
   }
 }

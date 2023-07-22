@@ -35,15 +35,17 @@
     "REMOVE_SELECTION": "Auswahl entfernen",
     "DOWNLOAD": "Herunterladen",
     "UNKNOWN_FILE_TYPE": "Unbekannte Datei",
+    "SAVE_CONTACT": "Speichern",
     "UPLOADING_ATTACHMENTS": "Anhänge werden hochgeladen...",
+    "REPLIED_TO_STORY": "Auf deine Geschichte geantwortet",
     "SUCCESS_DELETE_MESSAGE": "Nachricht erfolgreich gelöscht",
     "FAIL_DELETE_MESSSAGE": "Nachricht konnte nicht gelöscht werden! Versuchen Sie es erneut",
     "NO_RESPONSE": "Keine Antwort",
     "RATING_TITLE": "Bewertung",
     "FEEDBACK_TITLE": "Feedback",
     "CARD": {
-      "SHOW_LABELS": "Show labels",
-      "HIDE_LABELS": "Hide labels"
+      "SHOW_LABELS": "Label anzeigen",
+      "HIDE_LABELS": "Labels ausblenden"
     },
     "HEADER": {
       "RESOLVE_ACTION": "Fall schließen",
@@ -52,12 +54,14 @@
       "OPEN": "Mehr",
       "CLOSE": "Schließen",
       "DETAILS": "Einzelheiten",
+      "SNOOZED_UNTIL": "Schlummern bis",
       "SNOOZED_UNTIL_TOMORROW": "Schlummern bis morgen",
       "SNOOZED_UNTIL_NEXT_WEEK": "Schlummern bis nächste Woche",
       "SNOOZED_UNTIL_NEXT_REPLY": "Schlummern bis zur nächsten Antwort"
     },
     "RESOLVE_DROPDOWN": {
       "MARK_PENDING": "Als ausstehend markieren",
+      "SNOOZE_UNTIL": "Schlummern",
       "SNOOZE": {
         "TITLE": "Schlummern bis",
         "NEXT_REPLY": "Bei Antwort",
@@ -65,10 +69,32 @@
         "NEXT_WEEK": "Nächste Woche"
       }
     },
+    "CUSTOM_SNOOZE": {
+      "TITLE": "Schlummern bis",
+      "APPLY": "Schlummern",
+      "CANCEL": "Stornieren"
+    },
+    "PRIORITY": {
+      "TITLE": "Priorität",
+      "OPTIONS": {
+        "NONE": "Keine",
+        "URGENT": "Dringend",
+        "HIGH": "Hoch",
+        "MEDIUM": "Mittel",
+        "LOW": "Niedrig"
+      },
+      "CHANGE_PRIORITY": {
+        "SELECT_PLACEHOLDER": "Keine",
+        "INPUT_PLACEHOLDER": "Priorität auswählen",
+        "NO_RESULTS": "Keine Ergebnisse gefunden",
+        "SUCCESSFUL": "Priorität der Konversations-ID %{conversationId} zu %{priority} geändert",
+        "FAILED": "Priorität konnte nicht geändert werden. Bitte versuchen Sie es erneut."
+      }
+    },
     "CARD_CONTEXT_MENU": {
       "PENDING": "Als ausstehend markieren",
       "RESOLVED": "Als gelöst markieren",
-      "MARK_AS_UNREAD": "Mark as unread",
+      "MARK_AS_UNREAD": "Als ungelesen markieren",
       "REOPEN": "Konversation wieder öffnen",
       "SNOOZE": {
         "TITLE": "Erinnern",
@@ -132,6 +158,14 @@
           "PLACEHOLDER": "E-Mails, durch Kommas getrennt",
           "ERROR": "Bitte geben Sie eine gültige E-Mail-Adresse ein"
         }
+      },
+      "UNDEFINED_VARIABLES": {
+        "TITLE": "Undefinierte Variablen",
+        "MESSAGE": "Sie haben {undefinedVariablesCount} undefinierte Variablen in Ihrer Nachricht: {undefinedVariables}. Möchten Sie die Nachricht trotzdem senden?",
+        "CONFIRM": {
+          "YES": "Senden",
+          "CANCEL": "Stornieren"
+        }
       }
     },
     "VISIBLE_TO_AGENTS": "Privater Hinweis: Nur für Sie und Ihr Team sichtbar",
@@ -156,7 +190,16 @@
     "CONTEXT_MENU": {
       "COPY": "Kopieren",
       "DELETE": "Löschen",
-      "CREATE_A_CANNED_RESPONSE": "Zu vorgefertigten Antworten hinzufügen"
+      "CREATE_A_CANNED_RESPONSE": "Zu vorgefertigten Antworten hinzufügen",
+      "TRANSLATE": "Übersetzen",
+      "COPY_PERMALINK": "Link zur Nachricht kopieren",
+      "LINK_COPIED": "URL der Nachricht in die Zwischenablage kopiert",
+      "DELETE_CONFIRMATION": {
+        "TITLE": "Sind Sie sicher, dass Sie diese Nachricht löschen möchten?",
+        "MESSAGE": "Sie können diese Aktion nicht rückgängig machen",
+        "DELETE": "Löschen",
+        "CANCEL": "Stornieren"
+      }
     }
   },
   "EMAIL_TRANSCRIPT": {
@@ -244,5 +287,29 @@
     "BCC": "Bcc",
     "CC": "Cc",
     "SUBJECT": "Betreff"
+  },
+  "CONVERSATION_PARTICIPANTS": {
+    "SIDEBAR_MENU_TITLE": "Zugewiesen",
+    "SIDEBAR_TITLE": "Konversationsteilnehmer",
+    "NO_RECORDS_FOUND": "Keine Ergebnisse gefunden",
+    "ADD_PARTICIPANTS": "Teilnehmer wählen",
+    "REMANING_PARTICIPANTS_TEXT": "+%{count} andere",
+    "REMANING_PARTICIPANT_TEXT": "+%{count} andere",
+    "TOTAL_PARTICIPANTS_TEXT": "%{count} Personen nehmen teil.",
+    "TOTAL_PARTICIPANT_TEXT": "%{count} Person nimmt teil.",
+    "NO_PARTICIPANTS_TEXT": "Niemand nimmt teil!.",
+    "WATCH_CONVERSATION": "Konversation beitreten",
+    "YOU_ARE_WATCHING": "Sie nehmen teil",
+    "API": {
+      "ERROR_MESSAGE": "Konnte nicht aktualisiert werden, versuche Sie es noch einmal!",
+      "SUCCESS_MESSAGE": "Teilnehmer aktualisiert!"
+    }
+  },
+  "TRANSLATE_MODAL": {
+    "TITLE": "Übersetzten Inhalt anzeigen",
+    "DESC": "Sie können den übersetzten Inhalt in jeder Sprache ansehen.",
+    "ORIGINAL_CONTENT": "Originalinhalt",
+    "TRANSLATED_CONTENT": "Übersetzter Inhalt",
+    "NO_TRANSLATIONS_AVAILABLE": "Für diesen Inhalt sind keine Übersetzungen verfügbar"
   }
 }

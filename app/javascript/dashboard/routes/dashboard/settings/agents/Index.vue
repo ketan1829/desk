@@ -1,8 +1,8 @@
 <template>
-  <div class="column content-box">
+  <div class="flex-1 overflow-auto p-4">
     <woot-button
       color-scheme="success"
-      class-names="button--fixed-right-top"
+      class-names="button--fixed-top"
       icon="add-circle"
       @click="openAddPopup()"
     >
@@ -10,8 +10,8 @@
     </woot-button>
 
     <!-- List Agents -->
-    <div class="row">
-      <div class="small-8 columns with-right-space ">
+    <div class="flex flex-row gap-4">
+      <div class="w-[60%]">
         <woot-loading-state
           v-if="uiFlags.isFetching"
           :message="$t('AGENT_MGMT.LOADING')"
@@ -85,7 +85,7 @@
           </table>
         </div>
       </div>
-      <div class="small-4 columns">
+      <div class="w-[34%]">
         <span
           v-dompurify-html="
             useInstallationName(
@@ -108,6 +108,7 @@
         :name="currentAgent.name"
         :type="currentAgent.role"
         :email="currentAgent.email"
+        :availability="currentAgent.availability_status"
         :on-close="hideEditPopup"
       />
     </woot-modal>

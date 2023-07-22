@@ -2,7 +2,6 @@ class MessageTemplates::HookExecutionService
   pattr_initialize [:message!]
 
   def perform
-    return if inbox.agent_bot_inbox&.active?
     return if conversation.campaign.present?
 
     trigger_templates
@@ -71,3 +70,4 @@ class MessageTemplates::HookExecutionService
     true
   end
 end
+MessageTemplates::HookExecutionService.prepend_mod_with('MessageTemplates::HookExecutionService')

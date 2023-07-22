@@ -35,7 +35,9 @@
     "REMOVE_SELECTION": "Remover Seleção",
     "DOWNLOAD": "Baixar",
     "UNKNOWN_FILE_TYPE": "Arquivo Desconhecido",
+    "SAVE_CONTACT": "Salvar",
     "UPLOADING_ATTACHMENTS": "Enviando anexos...",
+    "REPLIED_TO_STORY": "Respondido ao seu story",
     "SUCCESS_DELETE_MESSAGE": "Mensagem excluída com sucesso",
     "FAIL_DELETE_MESSSAGE": "Não foi possível excluir a mensagem! Tente novamente",
     "NO_RESPONSE": "Sem resposta",
@@ -48,21 +50,45 @@
     "HEADER": {
       "RESOLVE_ACTION": "Resolver",
       "REOPEN_ACTION": "Reabrir",
-      "OPEN_ACTION": "Abertas",
+      "OPEN_ACTION": "Abrir",
       "OPEN": "Mais",
       "CLOSE": "Fechar",
       "DETAILS": "detalhes",
+      "SNOOZED_UNTIL": "Snoozed until",
       "SNOOZED_UNTIL_TOMORROW": "Adiado até amanhã",
       "SNOOZED_UNTIL_NEXT_WEEK": "Adiada até a próxima semana",
       "SNOOZED_UNTIL_NEXT_REPLY": "Adiado até a próxima resposta"
     },
     "RESOLVE_DROPDOWN": {
       "MARK_PENDING": "Marcar como pendente",
+      "SNOOZE_UNTIL": "Adiar",
       "SNOOZE": {
         "TITLE": "Suspender até",
         "NEXT_REPLY": "Próxima resposta",
         "TOMORROW": "Amanhã",
         "NEXT_WEEK": "Próxima semana"
+      }
+    },
+    "CUSTOM_SNOOZE": {
+      "TITLE": "Suspender até",
+      "APPLY": "Adiar",
+      "CANCEL": "Cancelar"
+    },
+    "PRIORITY": {
+      "TITLE": "Prioridade",
+      "OPTIONS": {
+        "NONE": "Nenhuma",
+        "URGENT": "Urgente",
+        "HIGH": "Alta",
+        "MEDIUM": "Média",
+        "LOW": "Baixa"
+      },
+      "CHANGE_PRIORITY": {
+        "SELECT_PLACEHOLDER": "Nenhuma",
+        "INPUT_PLACEHOLDER": "Selecionar prioridade",
+        "NO_RESULTS": "Nenhum resultado encontrado",
+        "SUCCESSFUL": "Alterada a prioridade do ID da conversa %{conversationId} para %{priority}",
+        "FAILED": "Não foi possível alterar a prioridade. Por favor, tente novamente."
       }
     },
     "CARD_CONTEXT_MENU": {
@@ -132,6 +158,14 @@
           "PLACEHOLDER": "E-mails separados por vírgulas",
           "ERROR": "Por favor, insira endereços de e-mail válidos"
         }
+      },
+      "UNDEFINED_VARIABLES": {
+        "TITLE": "Variáveis não definidas",
+        "MESSAGE": "Você tem {undefinedVariablesCount} variáveis não definidas em sua mensagem: {undefinedVariables}. Gostaria de enviar a mensagem mesmo assim?",
+        "CONFIRM": {
+          "YES": "Enviar",
+          "CANCEL": "Cancelar"
+        }
       }
     },
     "VISIBLE_TO_AGENTS": "Mensagem Privada: Apenas visível para você e sua equipe",
@@ -156,7 +190,16 @@
     "CONTEXT_MENU": {
       "COPY": "Copiar",
       "DELETE": "Excluir",
-      "CREATE_A_CANNED_RESPONSE": "Adicionar às respostas prontas"
+      "CREATE_A_CANNED_RESPONSE": "Adicionar às respostas prontas",
+      "TRANSLATE": "Traduzir",
+      "COPY_PERMALINK": "Copiar link para a mensagem",
+      "LINK_COPIED": "URL da mensagem copiada para a área de transferência",
+      "DELETE_CONFIRMATION": {
+        "TITLE": "Você tem certeza que deseja excluir esta mensagem?",
+        "MESSAGE": "Você não pode desfazer essa ação",
+        "DELETE": "Excluir",
+        "CANCEL": "Cancelar"
+      }
     }
   },
   "EMAIL_TRANSCRIPT": {
@@ -244,5 +287,29 @@
     "BCC": "CCO",
     "CC": "Cc",
     "SUBJECT": "Assunto"
+  },
+  "CONVERSATION_PARTICIPANTS": {
+    "SIDEBAR_MENU_TITLE": "Participantes",
+    "SIDEBAR_TITLE": "Participantes da conversa",
+    "NO_RECORDS_FOUND": "Nenhum resultado encontrado",
+    "ADD_PARTICIPANTS": "Selecionar participantes",
+    "REMANING_PARTICIPANTS_TEXT": "+%{count} participantes",
+    "REMANING_PARTICIPANT_TEXT": "+%{count} participante",
+    "TOTAL_PARTICIPANTS_TEXT": "%{count} pessoas estão participando.",
+    "TOTAL_PARTICIPANT_TEXT": "%{count} pessoa está participando.",
+    "NO_PARTICIPANTS_TEXT": "Ninguém está participando!",
+    "WATCH_CONVERSATION": "Participar da conversa",
+    "YOU_ARE_WATCHING": "Você está participando",
+    "API": {
+      "ERROR_MESSAGE": "Não foi possível atualizar, tente novamente!",
+      "SUCCESS_MESSAGE": "Participantes atualizados!"
+    }
+  },
+  "TRANSLATE_MODAL": {
+    "TITLE": "Ver conteúdo traduzido",
+    "DESC": "Você pode visualizar o conteúdo traduzido em cada idioma.",
+    "ORIGINAL_CONTENT": "Conteúdo original",
+    "TRANSLATED_CONTENT": "Conteúdo Traduzido",
+    "NO_TRANSLATIONS_AVAILABLE": "Nenhuma tradução está disponível para este conteúdo"
   }
 }

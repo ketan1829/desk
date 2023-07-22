@@ -38,12 +38,12 @@
       </file-upload>
       <woot-button
         v-if="showAudioRecorderButton"
+        v-tooltip.top-end="$t('CONVERSATION.REPLYBOX.TIP_AUDIORECORDER_ICON')"
         :icon="!isRecordingAudio ? 'microphone' : 'microphone-off'"
         emoji="🎤"
         :color-scheme="!isRecordingAudio ? 'secondary' : 'alert'"
         variant="smooth"
         size="small"
-        :title="$t('CONVERSATION.REPLYBOX.TIP_AUDIORECORDER_ICON')"
         @click="toggleAudioRecorder"
       />
       <woot-button
@@ -91,13 +91,19 @@
         v-if="(isAWebWidgetInbox || isAPIInbox) && !isOnPrivateNote"
         :conversation-id="conversationId"
       />
+      <AIAssistanceButton
+        :conversation-id="conversationId"
+        :is-private-note="isOnPrivateNote"
+        :message="message"
+        @replace-text="replaceText"
+      />
       <transition name="modal-fade">
         <div
           v-show="$refs.upload && $refs.upload.dropActive"
           class="modal-mask"
         >
           <fluent-icon icon="cloud-backup" />
-          <h4 class="page-sub-title">
+          <h4 class="page-sub-title text-slate-600 dark:text-slate-200">
             {{ $t('CONVERSATION.REPLYBOX.DRAG_DROP') }}
           </h4>
         </div>
@@ -129,12 +135,13 @@ import {
   ALLOWED_FILE_TYPES_FOR_TWILIO_WHATSAPP,
 } from 'shared/constants/messages';
 import VideoCallButton from '../VideoCallButton';
+import AIAssistanceButton from '../AIAssistanceButton.vue';
 import { REPLY_EDITOR_MODES } from './constants';
 import { mapGetters } from 'vuex';
 
 export default {
   name: 'ReplyBottomPanel',
-  components: { FileUpload, VideoCallButton },
+  components: { FileUpload, VideoCallButton, AIAssistanceButton },
   mixins: [eventListenerMixins, uiSettingsMixin, inboxMixin],
   props: {
     mode: {
@@ -216,6 +223,10 @@ export default {
     conversationId: {
       type: Number,
       required: true,
+    },
+    message: {
+      type: String,
+      default: '',
     },
   },
   computed: {
@@ -303,54 +314,44 @@ export default {
         send_with_signature: !this.sendWithSignature,
       });
     },
+    replaceText(text) {
+      this.$emit('replace-text', text);
+    },
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .bottom-box {
-  display: flex;
-  justify-content: space-between;
-  padding: var(--space-slab) var(--space-normal);
+  @apply flex justify-between py-3 px-4;
 
   &.is-note-mode {
-    background: var(--y-50);
+    @apply bg-yellow-50 dark:bg-yellow-50;
   }
 }
 
-.left-wrap .button {
-  margin-right: var(--space-small);
-}
-
 .left-wrap {
-  align-items: center;
-  display: flex;
+  @apply items-center flex gap-2;
 }
 
 .right-wrap {
-  display: flex;
+  @apply flex;
 }
 
 ::v-deep .file-uploads {
   label {
-    cursor: pointer;
+    @apply cursor-pointer;
   }
   &:hover .button {
-    background: var(--s-100);
+    @apply dark:bg-slate-800 bg-slate-100;
   }
 }
 
 .modal-mask {
-  color: var(--s-600);
-  background: var(--white-transparent);
-  flex-direction: column;
-}
-
-.page-sub-title {
-  color: var(--s-600);
+  @apply text-slate-600 dark:text-slate-200 bg-white_transparent dark:bg-black_transparent flex-col;
 }
 
 .icon {
-  font-size: 8rem;
+  @apply text-[5rem];
 }
 </style>

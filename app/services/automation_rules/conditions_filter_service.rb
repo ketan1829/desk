@@ -27,9 +27,19 @@ class AutomationRules::ConditionsFilterService < FilterService
     end
 
     records = base_relation.where(@query_string, @filter_values.with_indifferent_access)
+
     records = perform_attribute_changed_filter(records) if @attribute_changed_query_filter.any?
 
     records.any?
+  end
+
+  def filter_operation(query_hash, current_index)
+    if query_hash[:filter_operator] == 'starts_with'
+      @filter_values["value_#{current_index}"] = "#{string_filter_values(query_hash)}%"
+      like_filter_string(query_hash[:filter_operator], current_index)
+    else
+      super
+    end
   end
 
   def apply_filter(query_hash, current_index)
@@ -83,6 +93,8 @@ class AutomationRules::ConditionsFilterService < FilterService
   def message_query_string(current_filter, query_hash, current_index)
     attribute_key = query_hash['attribute_key']
     query_operator = query_hash['query_operator']
+
+    attribute_key = 'processed_message_content' if attribute_key == 'content'
 
     filter_operator_value = filter_operation(query_hash, current_index)
 

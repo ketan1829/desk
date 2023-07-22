@@ -53,10 +53,6 @@
           "ENABLE": "Create conversations from mentioned Tweets"
         }
       },
-      "MICROSOFT": {
-        "HELP": "To add your Microsoft account as a channel, you need to authenticate your Microsoft account by clicking on 'Sign in with Microsoft' ",
-        "ERROR_MESSAGE": "There was an error connecting to Microsoft, please try again"
-      },
       "WEBSITE_CHANNEL": {
         "TITLE": "Website csatorna",
         "DESC": "Hozz létre egy csatornát a websiteodnak és kezdd el az ügyfeleid támogatását a website widgeten keresztül.",
@@ -348,6 +344,17 @@
       "FINISH": {
         "TITLE": "Sikerült!",
         "DESC": "Sikeresen integráltad a Facebook oldaladat a Chatwoottal. Legközelebb amikor egy ügyfél üzenetet ír az oldaladra, a beszélgetés automatiksuan megjelenik az inboxodban.<br> Ezen kívül egy widget kódot biztosítunk számodra, amelyet könnyen hozzáadhatsz a weboldaladhoz. Amint ez kiélesítésre kerül, az ügyfelek üzenetet küldhetnek Neked a weboldaladról bármilyen külső eszköz igénybevétele nélkül és ez a beszélgetés itt a Chatwootban fog megjelenni. <br>Menő, nem? Hát megpróbáljuk :)"
+      },
+      "EMAIL_PROVIDER": {
+        "TITLE": "Select your email provider",
+        "DESCRIPTION": "Select an email provider from the list below. If you don't see your email provider in the list, you can select the other provider option and provide the IMAP and SMTP Credentials."
+      },
+      "MICROSOFT": {
+        "TITLE": "Microsoft Email",
+        "DESCRIPTION": "Click on the Sign in with Microsoft button to get started. You will redirected to the email sign in page. Once you accept the requested permissions, you would be redirected back to the inbox creation step.",
+        "EMAIL_PLACEHOLDER": "Enter email address",
+        "HELP": "To add your Microsoft account as a channel, you need to authenticate your Microsoft account by clicking on 'Sign in with Microsoft' ",
+        "ERROR_MESSAGE": "There was an error connecting to Microsoft, please try again"
       }
     },
     "DETAILS": {
@@ -432,7 +439,8 @@
       "LABEL": "Lehetőségek",
       "DISPLAY_FILE_PICKER": "File választó megjelenítése a widgeten",
       "DISPLAY_EMOJI_PICKER": "Emoji választó megjelenítése a widgeten",
-      "ALLOW_END_CONVERSATION": "Allow users to end conversation from the widget"
+      "ALLOW_END_CONVERSATION": "Allow users to end conversation from the widget",
+      "USE_INBOX_AVATAR_FOR_BOT": "Use inbox name and avatar for the bot"
     },
     "SETTINGS_POPUP": {
       "MESSENGER_HEADING": "Messenger szkript",
@@ -456,6 +464,7 @@
       "AUTO_ASSIGNMENT_SUB_TEXT": "Bekapcsolása vagy kikapcsolása az inboxhoz kapcsolódó automatikus ügynökhozzárendelésnek új beszélgetések esetén.",
       "HMAC_VERIFICATION": "Felhasználói fiók validálás",
       "HMAC_DESCRIPTION": "In order to validate the user's identity, you can pass an `identifier_hash` for each user. You can generate a HMAC sha256 hash using the `identifier` with the key shown here.",
+      "HMAC_LINK_TO_DOCS": "You can read more here.",
       "HMAC_MANDATORY_VERIFICATION": "Enforce User Identity Validation",
       "HMAC_MANDATORY_DESCRIPTION": "If enabled, requests missing the `identifier_hash` will be rejected.",
       "INBOX_IDENTIFIER": "Inbox Identifier",
@@ -465,7 +474,21 @@
       "ALLOW_MESSAGES_AFTER_RESOLVED": "Allow messages after conversation resolved",
       "ALLOW_MESSAGES_AFTER_RESOLVED_SUB_TEXT": "Allow the end-users to send messages even after the conversation is resolved.",
       "WHATSAPP_SECTION_SUBHEADER": "This API Key is used for the integration with the WhatsApp APIs.",
-      "WHATSAPP_SECTION_TITLE": "API Key"
+      "WHATSAPP_SECTION_UPDATE_SUBHEADER": "Enter the updated key to be used for the integration with the WhatsApp APIs.",
+      "WHATSAPP_SECTION_TITLE": "API Key",
+      "WHATSAPP_SECTION_UPDATE_TITLE": "Update API Key",
+      "WHATSAPP_SECTION_UPDATE_PLACEHOLDER": "Enter the new API Key here",
+      "WHATSAPP_SECTION_UPDATE_BUTTON": "Frissítés",
+      "WHATSAPP_WEBHOOK_TITLE": "Webhook Verify Token",
+      "WHATSAPP_WEBHOOK_SUBHEADER": "This token is used to verify the authenticity of the webhook endpoint.",
+      "UPDATE_PRE_CHAT_FORM_SETTINGS": "Update Pre Chat Form Settings"
+    },
+    "HELP_CENTER": {
+      "LABEL": "Help Center",
+      "PLACEHOLDER": "Select Help Center",
+      "SELECT_PLACEHOLDER": "Select Help Center",
+      "REMOVE": "Remove Help Center",
+      "SUB_TEXT": "Attach a Help Center with the inbox"
     },
     "AUTO_ASSIGNMENT": {
       "MAX_ASSIGNMENT_LIMIT": "Auto assignment limit",
@@ -512,7 +535,6 @@
       "UPDATE": "Nyitvatartási idő beállítások szerkesztése",
       "TOGGLE_AVAILABILITY": "Nyitvatartási idő beállítások engedélyezése erre az inboxra",
       "UNAVAILABLE_MESSAGE_LABEL": "Unavailable message for visitors",
-      "UNAVAILABLE_MESSAGE_DEFAULT": "Nem vagyunk elérhetőek jelen pillanatban. Hagyj üzenetet és reagálunk amint visszatértünk.",
       "TOGGLE_HELP": "A nyitvatartási idő megmutatja az elérhetőségetek idejét az élő chat widgeten akkor is ha minden ügynök offline. A nyitvatartási időben a vendégek figyelmeztetést kaphatnak üzenettel és chat előtti űrlappal.",
       "DAY": {
         "ENABLE": "Elérhetőség bekapcsolása erre a napra",
@@ -674,6 +696,10 @@
       },
       "BRANDING_TEXT": "Chatwoot",
       "SCRIPT_SETTINGS": "\n      window.chatwootSettings = {options};"
+    },
+    "EMAIL_PROVIDERS": {
+      "MICROSOFT": "Microsoft",
+      "OTHER_PROVIDERS": "Other Providers"
     }
   }
 }

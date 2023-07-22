@@ -53,10 +53,6 @@
           "ENABLE": "Crea conversazioni dai Tweet menzionati"
         }
       },
-      "MICROSOFT": {
-        "HELP": "To add your Microsoft account as a channel, you need to authenticate your Microsoft account by clicking on 'Sign in with Microsoft' ",
-        "ERROR_MESSAGE": "There was an error connecting to Microsoft, please try again"
-      },
       "WEBSITE_CHANNEL": {
         "TITLE": "Canale sito web",
         "DESC": "Crea un canale per il tuo sito web ed inizia a sostenere i tuoi clienti tramite il nostro widget per siti web.",
@@ -280,7 +276,7 @@
         },
         "EMAIL": {
           "LABEL": "email",
-          "SUBTITLE": "Email dove i tuoi clienti ti inviano i ticket di supporto",
+          "SUBTITLE": "Email dove i tuoi clienti inviano i ticket di supporto.",
           "PLACEHOLDER": "email"
         },
         "SUBMIT_BUTTON": "Crea un canale email",
@@ -348,6 +344,17 @@
       "FINISH": {
         "TITLE": "Azzeccato!",
         "DESC": "Hai completato con successo l'integrazione della tua pagina Facebook con il Chatwoot. La prossima volta che un cliente invia un messaggio alla tua pagina, la conversazione apparirà automaticamente nella tua casella.<br>Ti forniamo anche uno script per widget che puoi facilmente aggiungere al tuo sito web. Una volta dal vivo sul tuo sito web, i clienti possono inviarti messaggi direttamente dal tuo sito web senza l'aiuto di alcuno strumento esterno e la conversazione apparirà proprio qui, su Chatwoot.<br>Bello, eh? Beh, cerchiamo di esserlo :)"
+      },
+      "EMAIL_PROVIDER": {
+        "TITLE": "Select your email provider",
+        "DESCRIPTION": "Select an email provider from the list below. If you don't see your email provider in the list, you can select the other provider option and provide the IMAP and SMTP Credentials."
+      },
+      "MICROSOFT": {
+        "TITLE": "Microsoft Email",
+        "DESCRIPTION": "Click on the Sign in with Microsoft button to get started. You will redirected to the email sign in page. Once you accept the requested permissions, you would be redirected back to the inbox creation step.",
+        "EMAIL_PLACEHOLDER": "Enter email address",
+        "HELP": "To add your Microsoft account as a channel, you need to authenticate your Microsoft account by clicking on 'Sign in with Microsoft' ",
+        "ERROR_MESSAGE": "There was an error connecting to Microsoft, please try again"
       }
     },
     "DETAILS": {
@@ -432,7 +439,8 @@
       "LABEL": "Funzionalità",
       "DISPLAY_FILE_PICKER": "Visualizza il selettore di file sul widget",
       "DISPLAY_EMOJI_PICKER": "Visualizza il selettore emoji sul widget",
-      "ALLOW_END_CONVERSATION": "Consenti agli utenti di terminare la conversazione dal widget"
+      "ALLOW_END_CONVERSATION": "Consenti agli utenti di terminare la conversazione dal widget",
+      "USE_INBOX_AVATAR_FOR_BOT": "Use inbox name and avatar for the bot"
     },
     "SETTINGS_POPUP": {
       "MESSENGER_HEADING": "Script Messenger",
@@ -456,6 +464,7 @@
       "AUTO_ASSIGNMENT_SUB_TEXT": "Abilita o disabilita l'assegnazione automatica di nuove conversazioni agli agenti aggiunti a questa casella.",
       "HMAC_VERIFICATION": "Convalida identità utente",
       "HMAC_DESCRIPTION": "Al fine di convalidare l'identità dell'utente, è possibile passare un `identifier_hash` per ogni utente. Puoi generare un hash HMAC sha256 usando il `identificatore` con la chiave mostrata qui.",
+      "HMAC_LINK_TO_DOCS": "You can read more here.",
       "HMAC_MANDATORY_VERIFICATION": "Forza la convalida identità utente",
       "HMAC_MANDATORY_DESCRIPTION": "Se abilitata, le richieste mancanti del file `identifier_hash` saranno respinte.",
       "INBOX_IDENTIFIER": "Identificatore casella",
@@ -465,7 +474,21 @@
       "ALLOW_MESSAGES_AFTER_RESOLVED": "Consenti messaggi dopo la risoluzione della conversazione",
       "ALLOW_MESSAGES_AFTER_RESOLVED_SUB_TEXT": "Consenti agli utenti finali di inviare messaggi anche dopo la risoluzione della conversazione.",
       "WHATSAPP_SECTION_SUBHEADER": "Questa chiave API viene utilizzata per l'integrazione con le API WhatsApp.",
-      "WHATSAPP_SECTION_TITLE": "Chiave API"
+      "WHATSAPP_SECTION_UPDATE_SUBHEADER": "Enter the updated key to be used for the integration with the WhatsApp APIs.",
+      "WHATSAPP_SECTION_TITLE": "Chiave API",
+      "WHATSAPP_SECTION_UPDATE_TITLE": "Update API Key",
+      "WHATSAPP_SECTION_UPDATE_PLACEHOLDER": "Enter the new API Key here",
+      "WHATSAPP_SECTION_UPDATE_BUTTON": "Aggiorna",
+      "WHATSAPP_WEBHOOK_TITLE": "Webhook verifica token",
+      "WHATSAPP_WEBHOOK_SUBHEADER": "This token is used to verify the authenticity of the webhook endpoint.",
+      "UPDATE_PRE_CHAT_FORM_SETTINGS": "Update Pre Chat Form Settings"
+    },
+    "HELP_CENTER": {
+      "LABEL": "Help Center",
+      "PLACEHOLDER": "Select Help Center",
+      "SELECT_PLACEHOLDER": "Select Help Center",
+      "REMOVE": "Remove Help Center",
+      "SUB_TEXT": "Attach a Help Center with the inbox"
     },
     "AUTO_ASSIGNMENT": {
       "MAX_ASSIGNMENT_LIMIT": "Limite assegnazione automatica",
@@ -512,7 +535,6 @@
       "UPDATE": "Aggiorna le impostazioni dell'orario di lavoro",
       "TOGGLE_AVAILABILITY": "Abilita la disponibilità aziendale per questa casella",
       "UNAVAILABLE_MESSAGE_LABEL": "Messaggio non disponibile per i visitatori",
-      "UNAVAILABLE_MESSAGE_DEFAULT": "Non siamo disponibili al momento. Lascia un messaggio che risponderemo una volta tornati.",
       "TOGGLE_HELP": "Abilitare la disponibilità aziendale mostrerà le ore disponibili sul widget chat live anche se tutti gli agenti sono offline. Al di fuori delle ore disponibili visori possono essere avvisati con un messaggio e un modulo di pre-chat.",
       "DAY": {
         "ENABLE": "Abilita disponibilità per questo giorno",
@@ -674,6 +696,10 @@
       },
       "BRANDING_TEXT": "Offerto da Chatwoot",
       "SCRIPT_SETTINGS": "\n      window.chatwootSettings = {options};"
+    },
+    "EMAIL_PROVIDERS": {
+      "MICROSOFT": "Microsoft",
+      "OTHER_PROVIDERS": "Other Providers"
     }
   }
 }

@@ -14,7 +14,9 @@
             "CONVERSATION_UPDATED": "Conversation Updated",
             "MESSAGE_CREATED": "Message created",
             "MESSAGE_UPDATED": "Message updated",
-            "WEBWIDGET_TRIGGERED": "Live chat widget opened by the user"
+            "WEBWIDGET_TRIGGERED": "Live chat widget opened by the user",
+            "CONTACT_CREATED": "Contact created",
+            "CONTACT_UPDATED": "Contact updated"
           }
         },
         "END_POINT": {
@@ -82,6 +84,25 @@
       "START_VIDEO_CALL_HELP_TEXT": "Start a new video call with the customer",
       "JOIN_ERROR": "There was an error joining the call, please try again",
       "CREATE_ERROR": "There was an error creating a meeting link, please try again"
+    },
+    "OPEN_AI": {
+      "TITLE": "Improve With AI",
+      "SUMMARY_TITLE": "Summary with AI",
+      "REPLY_TITLE": "Reply suggestion with AI",
+      "SUBTITLE": "An improved reply will be generated using AI, based on your current draft.",
+      "TONE": {
+        "TITLE": "Tone",
+        "OPTIONS": {
+          "PROFESSIONAL": "Professional",
+          "FRIENDLY": "Friendly"
+        }
+      },
+      "BUTTONS": {
+        "GENERATE": "Generate",
+        "GENERATING": "Generating...",
+        "CANCEL": "Annuleren"
+      },
+      "GENERATE_ERROR": "There was an error processing the content, please try again"
     },
     "DELETE": {
       "BUTTON_TEXT": "Verwijderen",

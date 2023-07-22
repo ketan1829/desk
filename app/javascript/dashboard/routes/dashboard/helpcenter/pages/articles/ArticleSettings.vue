@@ -1,7 +1,7 @@
 <template>
   <transition name="popover-animation">
     <div class="article-settings--container">
-      <h3 class="block-title">
+      <h3 class="text-base text-slate-800 dark:text-slate-100">
         {{ $t('HELP_CENTER.ARTICLE_SETTINGS.TITLE') }}
       </h3>
       <div class="form-wrap">
@@ -87,6 +87,9 @@
             track-by="name"
             :multiple="true"
             :taggable="true"
+            :close-on-select="false"
+            @search-change="handleSearchChange"
+            @close="onBlur"
             @tag="addTagValue"
           />
         </label>
@@ -136,6 +139,7 @@ export default {
       metaDescription: '',
       metaTags: [],
       metaOptions: [],
+      tagInputValue: '',
     };
   },
   computed: {
@@ -184,12 +188,21 @@ export default {
       }));
     },
     addTagValue(tagValue) {
-      const tag = {
-        name: tagValue,
-      };
-      this.metaTags.push(tag);
-      this.$refs.tagInput.$el.focus();
+      const tags = tagValue
+        .split(',')
+        .map(tag => tag.trim())
+        .filter(tag => tag && !this.allTags.includes(tag));
+
+      this.metaTags.push(...this.formattedTags({ tags: [...new Set(tags)] }));
       this.saveArticle();
+    },
+    handleSearchChange(value) {
+      this.tagInputValue = value;
+    },
+    onBlur() {
+      if (this.tagInputValue) {
+        this.addTagValue(this.tagInputValue);
+      }
     },
     onClickSelectCategory({ id }) {
       this.$emit('save-article', { category_id: id });
@@ -212,48 +225,36 @@ export default {
 
 <style lang="scss" scoped>
 .article-settings--container {
-  flex: 0.3;
-  min-width: var(--space-giga);
-  max-width: 36rem;
-  overflow-y: auto;
-  border-left: 1px solid var(--color-border-light);
-  margin-left: var(--space-normal);
-  padding-left: var(--space-normal);
-  padding-top: var(--space-small);
-  padding-bottom: var(--space-small);
+  @apply flex-[0.3] min-w-[15rem] max-w-[22.5rem] py-2 pl-4 rtl:pl-0 rtl:pr-4 ml-4 rtl:ml-0 rtl:mr-4 overflow-y-auto border-l rtl:border-r rtl:border-l-0 border-solid border-slate-50 dark:border-slate-700;
 
   .form-wrap {
-    margin-top: var(--space-normal);
-    margin-bottom: var(--space-medium);
+    @apply mt-4 mb-6;
 
     textarea {
-      font-size: var(--font-size-small);
+      @apply text-sm;
     }
   }
 
   .action-buttons {
-    display: flex;
-    flex-direction: column;
+    @apply flex flex-col;
   }
 }
 ::v-deep {
   .multiselect {
-    margin-bottom: 0;
+    @apply mb-0;
   }
   .multiselect__content-wrapper {
-    display: none;
+    @apply hidden;
   }
   .multiselect--active .multiselect__tags {
-    border-radius: var(--border-radius-normal);
     padding-right: var(--space-small) !important;
+    @apply rounded-md;
   }
   .multiselect__placeholder {
-    color: var(--s-300);
-    padding-top: var(--space-small);
-    margin-bottom: 0;
+    @apply text-slate-300 dark:text-slate-200 pt-2 mb-0;
   }
   .multiselect__select {
-    display: none;
+    @apply hidden;
   }
 }
 </style>

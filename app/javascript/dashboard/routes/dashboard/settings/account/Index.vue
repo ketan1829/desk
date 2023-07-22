@@ -1,14 +1,18 @@
 <template>
-  <div class="columns profile--settings">
+  <div class="flex-grow flex-shrink min-w-0 p-6 overflow-auto">
     <form v-if="!uiFlags.isFetchingItem" @submit.prevent="updateAccount">
-      <div class="small-12 row profile--settings--row">
-        <div class="columns small-3">
-          <h4 class="block-title">
+      <div
+        class="flex flex-row p-4 border-b border-slate-25 dark:border-slate-700"
+      >
+        <div
+          class="flex-grow-0 flex-shrink-0 flex-[25%] min-w-0 py-4 pr-6 pl-0"
+        >
+          <h4 class="block-title text-black-900 dark:text-slate-200">
             {{ $t('GENERAL_SETTINGS.FORM.GENERAL_SECTION.TITLE') }}
           </h4>
           <p>{{ $t('GENERAL_SETTINGS.FORM.GENERAL_SECTION.NOTE') }}</p>
         </div>
-        <div class="columns small-9 medium-5">
+        <div class="p-4 flex-grow-0 flex-shrink-0 flex-[50%]">
           <label :class="{ error: $v.name.$error }">
             {{ $t('GENERAL_SETTINGS.FORM.NAME.LABEL') }}
             <input
@@ -39,12 +43,12 @@
           <label v-if="featureInboundEmailEnabled">
             {{ $t('GENERAL_SETTINGS.FORM.FEATURES.INBOUND_EMAIL_ENABLED') }}
           </label>
-          <label v-if="featureCustomDomainEmailEnabled">
+          <label v-if="featureCustomReplyDomainEnabled">
             {{
               $t('GENERAL_SETTINGS.FORM.FEATURES.CUSTOM_EMAIL_DOMAIN_ENABLED')
             }}
           </label>
-          <label v-if="featureCustomDomainEmailEnabled">
+          <label v-if="featureCustomReplyDomainEnabled">
             {{ $t('GENERAL_SETTINGS.FORM.DOMAIN.LABEL') }}
             <input
               v-model="domain"
@@ -52,7 +56,7 @@
               :placeholder="$t('GENERAL_SETTINGS.FORM.DOMAIN.PLACEHOLDER')"
             />
           </label>
-          <label v-if="featureCustomDomainEmailEnabled">
+          <label v-if="featureCustomReplyEmailEnabled">
             {{ $t('GENERAL_SETTINGS.FORM.SUPPORT_EMAIL.LABEL') }}
             <input
               v-model="supportEmail"
@@ -82,20 +86,24 @@
         </div>
       </div>
 
-      <div class="profile--settings--row row">
-        <div class="columns small-3">
-          <h4 class="block-title">
+      <div
+        class="p-4 border-slate-25 dark:border-slate-700 text-black-900 dark:text-slate-300 row"
+      >
+        <div
+          class="flex-grow-0 flex-shrink-0 flex-[25%] min-w-0 py-4 pr-6 pl-0"
+        >
+          <h4 class="block-title text-black-900 dark:text-slate-200">
             {{ $t('GENERAL_SETTINGS.FORM.ACCOUNT_ID.TITLE') }}
           </h4>
           <p>
             {{ $t('GENERAL_SETTINGS.FORM.ACCOUNT_ID.NOTE') }}
           </p>
         </div>
-        <div class="columns small-9 medium-5">
+        <div class="p-4 flex-grow-0 flex-shrink-0 flex-[50%]">
           <woot-code :script="getAccountId" />
         </div>
       </div>
-      <div class="current-version">
+      <div class="text-sm text-center p-4">
         <div>{{ `v${globalConfig.appVersion}` }}</div>
         <div v-if="hasAnUpdateAvailable && globalConfig.displayManifest">
           {{
@@ -104,10 +112,13 @@
             })
           }}
         </div>
+        <div class="build-id">
+          <div>{{ `Build ${globalConfig.gitSha}` }}</div>
+        </div>
       </div>
 
       <woot-submit-button
-        class="button nice success button--fixed-right-top"
+        class="button nice success button--fixed-top"
         :button-text="$t('GENERAL_SETTINGS.SUBMIT')"
         :loading="isUpdating"
       />
@@ -125,9 +136,11 @@ import configMixin from 'shared/mixins/configMixin';
 import accountMixin from '../../../../mixins/account';
 import { FEATURE_FLAGS } from '../../../../featureFlags';
 const semver = require('semver');
+import uiSettingsMixin from 'dashboard/mixins/uiSettings';
+import { getLanguageDirection } from 'dashboard/components/widgets/conversation/advancedFilterItems/languages';
 
 export default {
-  mixins: [accountMixin, alertMixin, configMixin],
+  mixins: [accountMixin, alertMixin, configMixin, uiSettingsMixin],
   data() {
     return {
       id: '',
@@ -190,8 +203,16 @@ export default {
       return !!this.features.inbound_emails;
     },
 
-    featureCustomDomainEmailEnabled() {
-      return this.featureInboundEmailEnabled && !!this.customEmailDomainEnabled;
+    featureCustomReplyDomainEnabled() {
+      return (
+        this.featureInboundEmailEnabled && !!this.features.custom_reply_domain
+      );
+    },
+
+    featureCustomReplyEmailEnabled() {
+      return (
+        this.featureInboundEmailEnabled && !!this.features.custom_reply_email
+      );
     },
 
     getAccountId() {
@@ -213,7 +234,6 @@ export default {
           id,
           domain,
           support_email,
-          custom_email_domain_enabled,
           features,
           auto_resolve_duration,
           latest_chatwoot_version: latestChatwootVersion,
@@ -225,7 +245,6 @@ export default {
         this.id = id;
         this.domain = domain;
         this.supportEmail = support_email;
-        this.customEmailDomainEnabled = custom_email_domain_enabled;
         this.features = features;
         this.autoResolveDuration = auto_resolve_duration;
         this.latestChatwootVersion = latestChatwootVersion;
@@ -249,38 +268,20 @@ export default {
           auto_resolve_duration: this.autoResolveDuration,
         });
         this.$root.$i18n.locale = this.locale;
+        this.getAccount(this.id).locale = this.locale;
+        this.updateDirectionView(this.locale);
         this.showAlert(this.$t('GENERAL_SETTINGS.UPDATE.SUCCESS'));
       } catch (error) {
         this.showAlert(this.$t('GENERAL_SETTINGS.UPDATE.ERROR'));
       }
     },
+
+    updateDirectionView(locale) {
+      const isRTLSupported = getLanguageDirection(locale);
+      this.updateUISettings({
+        rtl_view: isRTLSupported,
+      });
+    },
   },
 };
 </script>
-
-<style lang="scss">
-@import '~dashboard/assets/scss/variables.scss';
-@import '~dashboard/assets/scss/mixins.scss';
-
-.profile--settings {
-  padding: 24px;
-  overflow: auto;
-}
-
-.profile--settings--row {
-  @include border-normal-bottom;
-  padding: $space-normal;
-  .small-3 {
-    padding: $space-normal $space-medium $space-normal 0;
-  }
-  .small-9 {
-    padding: $space-normal;
-  }
-}
-
-.current-version {
-  font-size: var(--font-size-small);
-  text-align: center;
-  padding: var(--space-normal);
-}
-</style>

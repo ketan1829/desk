@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe ::Conversations::FilterService do
+describe Conversations::FilterService do
   subject(:filter_service) { described_class }
 
   let!(:account) { create(:account) }
@@ -367,6 +367,33 @@ describe ::Conversations::FilterService do
           result = filter_service.new(params, user_1).perform
           expect(result[:conversations].length).to be expected_count
         end
+      end
+    end
+  end
+
+  describe '#perform on date filter with no current account' do
+    before do
+      Current.account = nil
+    end
+
+    context 'with query present' do
+      let!(:params) { { payload: [], page: 1 } }
+
+      it 'filter by created_at' do
+        params[:payload] = [
+          {
+            attribute_key: 'created_at',
+            filter_operator: 'is_greater_than',
+            values: ['2022-01-20'],
+            query_operator: nil,
+            custom_attribute_type: ''
+          }.with_indifferent_access
+        ]
+        result = filter_service.new(params, user_1, account).perform
+        expected_count = Conversation.where('created_at > ?', DateTime.parse('2022-01-20')).count
+
+        expect(Current.account).to be_nil
+        expect(result[:conversations].length).to be expected_count
       end
     end
   end

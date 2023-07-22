@@ -53,10 +53,6 @@
           "ENABLE": "Δημιουργία συνομιλιών από τα αναφερόμενα Tweets"
         }
       },
-      "MICROSOFT": {
-        "HELP": "To add your Microsoft account as a channel, you need to authenticate your Microsoft account by clicking on 'Sign in with Microsoft' ",
-        "ERROR_MESSAGE": "There was an error connecting to Microsoft, please try again"
-      },
       "WEBSITE_CHANNEL": {
         "TITLE": "Κανάλι Ιστοσελίδας",
         "DESC": "Δημιουργήστε ένα κανάλι Ιστοσελίδα για να υποστηρίξετε τους πελάτες σας μέσω του πρόσθετου επικοινωνίας (widget) που θα εγκαταστήσετε στην ιστοσελίδα σας.",
@@ -348,6 +344,17 @@
       "FINISH": {
         "TITLE": "Το καρφώσατε!",
         "DESC": "Ολοκληρώσατε με επιτυχία την ενσωμάτωση της σελίδας σας στο Facebook με το Chatwoot. Την επόμενη φορά που ένας πελάτης στέλνει μηνύματα στη σελίδα σας, η συνομιλία θα εμφανιστεί αυτόματα στα εισερχόμενά σας. <br> Σας παρέχουμε επίσης ένα σενάριο widget που μπορείτε εύκολα να προσθέσετε στον ιστότοπό σας. Μόλις δημοσιευτεί ζωντανά στον ιστότοπό σας, οι πελάτες μπορούν να σας στείλουν μηνύματα απευθείας από τον ιστότοπό σας χωρίς τη βοήθεια εξωτερικού εργαλείου και η συνομιλία θα εμφανιστεί εδώ, στο Chatwoot. <br> Ωραία, ε; Λοιπόν, σίγουρα προσπαθούμε να είμαστε :)"
+      },
+      "EMAIL_PROVIDER": {
+        "TITLE": "Select your email provider",
+        "DESCRIPTION": "Select an email provider from the list below. If you don't see your email provider in the list, you can select the other provider option and provide the IMAP and SMTP Credentials."
+      },
+      "MICROSOFT": {
+        "TITLE": "Microsoft Email",
+        "DESCRIPTION": "Click on the Sign in with Microsoft button to get started. You will redirected to the email sign in page. Once you accept the requested permissions, you would be redirected back to the inbox creation step.",
+        "EMAIL_PLACEHOLDER": "Enter email address",
+        "HELP": "To add your Microsoft account as a channel, you need to authenticate your Microsoft account by clicking on 'Sign in with Microsoft' ",
+        "ERROR_MESSAGE": "There was an error connecting to Microsoft, please try again"
       }
     },
     "DETAILS": {
@@ -432,7 +439,8 @@
       "LABEL": "Χαρακτηριστικά",
       "DISPLAY_FILE_PICKER": "Να εμφανίζεται η επιλογή αρχείου στο widget",
       "DISPLAY_EMOJI_PICKER": "Να εμφανίζεται ο επιλογές emoji στο widget",
-      "ALLOW_END_CONVERSATION": "Επιτρέψτε στους χρήστες να τερματίσουν τη συνομιλία από το widget"
+      "ALLOW_END_CONVERSATION": "Επιτρέψτε στους χρήστες να τερματίσουν τη συνομιλία από το widget",
+      "USE_INBOX_AVATAR_FOR_BOT": "Use inbox name and avatar for the bot"
     },
     "SETTINGS_POPUP": {
       "MESSENGER_HEADING": "Κώδικας (Script)",
@@ -456,6 +464,7 @@
       "AUTO_ASSIGNMENT_SUB_TEXT": "Ενεργοποιήστε ή απενεργοποιήστε την αυτόματη αντιστοίχιση των νέων συζητήσεων στους πράκτορες αυτού του κιβωτίου.",
       "HMAC_VERIFICATION": "Επικύρωση Ταυτότητας Χρήστη",
       "HMAC_DESCRIPTION": "Για λόγους επικύρωσης της ταυτότητας των χρηστών, το SDK σας επιτρέπει να περάσετε ένα `identity_hash` για κάθε χρήστη. Μπορείτε να δημιουργήσετε HMAC χρησιμοποιώντας το 'sha256' με το κλειδί που εμφανίζεται εδώ.",
+      "HMAC_LINK_TO_DOCS": "You can read more here.",
       "HMAC_MANDATORY_VERIFICATION": "Επιβολή Επαλήθευσης Ταυτότητας Χρήστη",
       "HMAC_MANDATORY_DESCRIPTION": "Αν ενεργοποιηθεί, τα αιτήματα που χωρίς το `identifier_hash` θα απορριφθούν.",
       "INBOX_IDENTIFIER": "Αναγνωριστικό Εισερχόμενων",
@@ -465,7 +474,21 @@
       "ALLOW_MESSAGES_AFTER_RESOLVED": "Επιτρέψτε τα μηνύματα μετά την επίλυση της συνομιλίας",
       "ALLOW_MESSAGES_AFTER_RESOLVED_SUB_TEXT": "Επιτρέψτε στους τελικούς χρήστες να στέλνουν μηνύματα ακόμη και μετά την επίλυση της συζήτησης.",
       "WHATSAPP_SECTION_SUBHEADER": "Αυτό το κλειδί API χρησιμοποιείται για την ενσωμάτωση με τα API WhatsApp.",
-      "WHATSAPP_SECTION_TITLE": "Κλειδί API"
+      "WHATSAPP_SECTION_UPDATE_SUBHEADER": "Enter the updated key to be used for the integration with the WhatsApp APIs.",
+      "WHATSAPP_SECTION_TITLE": "Κλειδί API",
+      "WHATSAPP_SECTION_UPDATE_TITLE": "Update API Key",
+      "WHATSAPP_SECTION_UPDATE_PLACEHOLDER": "Enter the new API Key here",
+      "WHATSAPP_SECTION_UPDATE_BUTTON": "Ενημέρωση",
+      "WHATSAPP_WEBHOOK_TITLE": "Token Επαλήθευσης Webhook",
+      "WHATSAPP_WEBHOOK_SUBHEADER": "This token is used to verify the authenticity of the webhook endpoint.",
+      "UPDATE_PRE_CHAT_FORM_SETTINGS": "Update Pre Chat Form Settings"
+    },
+    "HELP_CENTER": {
+      "LABEL": "Help Center",
+      "PLACEHOLDER": "Select Help Center",
+      "SELECT_PLACEHOLDER": "Select Help Center",
+      "REMOVE": "Remove Help Center",
+      "SUB_TEXT": "Attach a Help Center with the inbox"
     },
     "AUTO_ASSIGNMENT": {
       "MAX_ASSIGNMENT_LIMIT": "Αυτόματο όριο ανάθεσης",
@@ -512,7 +535,6 @@
       "UPDATE": "Ενημέρωση ρυθμίσεων ωραρίου",
       "TOGGLE_AVAILABILITY": "Ενεργοποίηση διαθεσιμότητας ωραρίου για αυτό το κιβώτιο εισερχομένων",
       "UNAVAILABLE_MESSAGE_LABEL": "Μήνυμα μη διαθεσιμότητας για τους επισκέπτες",
-      "UNAVAILABLE_MESSAGE_DEFAULT": "Δεν είμαστε διαθέσιμοι αυτή τη στιγμή. Αφήστε ένα μήνυμα που θα απαντήσουμε όταν επιστρέψουμε.",
       "TOGGLE_HELP": "Η ενεργοποίηση της διαθεσιμότητας ωραρίου θα δείξει τις διαθέσιμες ώρες στο widget συνομιλίας ακόμα και αν όλοι οι πράκτορες είναι εκτός σύνδεσης. Εκτός των διαθέσιμων ωρών οι επισκέπτες μπορούν να προειδοποιηθούν με ένα μήνυμα και μια φόρμα προ-συνομιλίας.",
       "DAY": {
         "ENABLE": "Ενεργοποιήσετε τη διαθεσιμότητα για αυτήν την ημέρα",
@@ -674,6 +696,10 @@
       },
       "BRANDING_TEXT": "με την δύναμη του Chatwoot",
       "SCRIPT_SETTINGS": "\n      window.chatwootSettings = {options};"
+    },
+    "EMAIL_PROVIDERS": {
+      "MICROSOFT": "Microsoft",
+      "OTHER_PROVIDERS": "Other Providers"
     }
   }
 }

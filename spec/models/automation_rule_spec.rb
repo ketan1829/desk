@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe AutomationRule, type: :model do
+RSpec.describe AutomationRule do
   describe 'associations' do
     let(:account) { create(:account) }
     let(:params) do
@@ -47,6 +47,13 @@ RSpec.describe AutomationRule, type: :model do
     it 'returns valid record' do
       rule = FactoryBot.build(:automation_rule, params)
       expect(rule.valid?).to be true
+    end
+
+    it 'returns invalid record' do
+      params[:conditions][0].delete('query_operator')
+      rule = FactoryBot.build(:automation_rule, params)
+      expect(rule.valid?).to be false
+      expect(rule.errors.messages[:conditions]).to eq(['Automation conditions should have query operator.'])
     end
   end
 end

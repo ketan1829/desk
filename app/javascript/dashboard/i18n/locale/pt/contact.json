@@ -15,6 +15,7 @@
     "INITIATED_FROM": "Iniciado de",
     "INITIATED_AT": "Iniciado em",
     "IP_ADDRESS": "Endereço IP",
+    "CREATED_AT_LABEL": "Criado",
     "NEW_MESSAGE": "Nova mensagem",
     "CONVERSATIONS": {
       "NO_RECORDS_FOUND": "Não há conversas anteriores associadas a este contato.",
@@ -32,7 +33,8 @@
       "LABEL_SELECT": {
         "TITLE": "Adicionar Etiquetas",
         "PLACEHOLDER": "Procurar Etiquetas",
-        "NO_RESULT": "Nenhuma Etiqueta encontrada"
+        "NO_RESULT": "Nenhuma Etiqueta encontrada",
+        "CREATE_LABEL": "Create new label"
       }
     },
     "MERGE_CONTACT": "Unir contacto",
@@ -72,11 +74,18 @@
     "SUCCESS_MESSAGE": "Contactos guardados com sucesso",
     "ERROR_MESSAGE": "Ocorreu um erro, por favor tente novamente"
   },
+  "EXPORT_CONTACTS": {
+    "BUTTON_LABEL": "Export",
+    "TITLE": "Export Contacts",
+    "DESC": "Export contacts to a CSV file.",
+    "SUCCESS_MESSAGE": "Export is in progress, You will be notified via email when export file is ready to dowanlod.",
+    "ERROR_MESSAGE": "Ocorreu um erro, por favor tente novamente"
+  },
   "DELETE_NOTE": {
     "CONFIRM": {
       "TITLE": "Confirmar Exclusão",
-      "MESSAGE": "Are you want sure to delete this note?",
-      "YES": "Yes, Delete it",
+      "MESSAGE": "Tem certeza que deseja excluir esta nota?",
+      "YES": "Sim, excluir",
       "NO": "Não, mantenha isso"
     }
   },
@@ -121,6 +130,7 @@
         "LABEL": "Número de Telefone",
         "HELP": "O número de telefone deve ter o formato E.164, por exemplo: +1415555555 [+][código do país][código de área] [número de telefone local]",
         "ERROR": "O número de telefone deve estar vazio ou no formato E.164",
+        "DIAL_CODE_ERROR": "Please select a dial code from the list",
         "DUPLICATE": "Este número está a ser usado por outro contacto."
       },
       "LOCATION": {
@@ -130,6 +140,17 @@
       "COMPANY_NAME": {
         "PLACEHOLDER": "Digite o nome da empresa",
         "LABEL": "Nome da empresa"
+      },
+      "COUNTRY": {
+        "PLACEHOLDER": "Enter the country name",
+        "LABEL": "Nome do País",
+        "SELECT_PLACEHOLDER": "Selecionar",
+        "REMOVE": "Excluir",
+        "SELECT_COUNTRY": "Select Country"
+      },
+      "CITY": {
+        "PLACEHOLDER": "Enter the city name",
+        "LABEL": "City Name"
       },
       "SOCIAL_PROFILES": {
         "FACEBOOK": {
@@ -152,8 +173,8 @@
     },
     "DELETE_AVATAR": {
       "API": {
-        "SUCCESS_MESSAGE": "Contact avatar deleted successfully",
-        "ERROR_MESSAGE": "Could not delete the contact avatar. Please try again later."
+        "SUCCESS_MESSAGE": "Avatar de contato removido com sucesso",
+        "ERROR_MESSAGE": "Não foi possível remover o avatar do contato. Por favor, tente novamente mais tarde."
       }
     },
     "SUCCESS_MESSAGE": "Contato guardado com sucesso",
@@ -170,6 +191,7 @@
       },
       "INBOX": {
         "LABEL": "Caixa de Entrada",
+        "PLACEHOLDER": "Choose source inbox",
         "ERROR": "Selecione uma caixa de entrada"
       },
       "SUBJECT": {
@@ -197,6 +219,7 @@
     "FILTER_CONTACTS": "Filtro",
     "FILTER_CONTACTS_SAVE": "Guardar filtro",
     "FILTER_CONTACTS_DELETE": "Apagar filtro",
+    "FILTER_CONTACTS_EDIT": "Edit segment",
     "LIST": {
       "LOADING_MESSAGE": "A carregar contactos...",
       "404": "Nenhum contacto corresponde à sua pesquisa 🔍",
@@ -206,6 +229,7 @@
         "PHONE_NUMBER": "Número de telefone",
         "CONVERSATIONS": "Conversas",
         "LAST_ACTIVITY": "Última atividade",
+        "CREATED_AT": "Criado Em",
         "COUNTRY": "País",
         "CITY": "Cidade",
         "SOCIAL_PROFILES": "Perfis Redes Sociais",

@@ -36,12 +36,12 @@ RSpec.describe 'Microsoft Authorization API', type: :request do
         response_url = microsoft_service.microsoft_client.auth_code.authorize_url(
           {
             redirect_uri: "#{ENV.fetch('FRONTEND_URL', 'http://localhost:3000')}/microsoft/callback",
-            scope: 'offline_access https://outlook.office.com/IMAP.AccessAsUser.All https://outlook.office.com/SMTP.Send openid',
+            scope: 'offline_access https://outlook.office.com/IMAP.AccessAsUser.All https://outlook.office.com/SMTP.Send openid profile',
             prompt: 'consent'
           }
         )
-        expect(JSON.parse(response.body)['url']).to eq response_url
-        expect(::Redis::Alfred.get(administrator.email)).to eq(account.id.to_s)
+        expect(response.parsed_body['url']).to eq response_url
+        expect(Redis::Alfred.get(administrator.email)).to eq(account.id.to_s)
       end
     end
   end

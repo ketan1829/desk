@@ -30,6 +30,29 @@
       },
       "snoozed": {
         "TEXT": "Erinnern"
+      },
+      "all": {
+        "TEXT": "Alle"
+      }
+    },
+    "VIEW_FILTER": "Aussicht",
+    "SORT_TOOLTIP_LABEL": "Konversationen sortieren",
+    "CHAT_SORT": {
+      "STATUS": "Status",
+      "ORDER_BY": "Sortieren nach"
+    },
+    "CHAT_SORT_FILTER_ITEMS": {
+      "latest": {
+        "TEXT": "Letzte Aktivität"
+      },
+      "sort_on_created_at": {
+        "TEXT": "Erstellt am"
+      },
+      "sort_on_priority": {
+        "TEXT": "Priorität"
+      },
+      "sort_on_waiting_since": {
+        "TEXT": "Pending Response"
       }
     },
     "ATTACHMENTS": {
@@ -52,13 +75,31 @@
         "CONTENT": "hat eine URL geteilt"
       }
     },
+    "CHAT_SORT_BY_FILTER": {
+      "TITLE": "Konversationen sortieren",
+      "DROPDOWN_TITLE": "Sortieren nach",
+      "ITEMS": {
+        "LATEST": {
+          "NAME": "Letzte Aktivität am",
+          "LABEL": "Letzte Aktivität"
+        },
+        "CREATED_AT": {
+          "NAME": "Erstellt am",
+          "LABEL": "Erstellt am"
+        },
+        "LAST_USER_MESSAGE_AT": {
+          "NAME": "Letzte Benutzernachricht am",
+          "LABEL": "Letzte Nachricht"
+        }
+      }
+    },
     "RECEIVED_VIA_EMAIL": "Per E-Mail empfangen",
     "VIEW_TWEET_IN_TWITTER": "Tweet auf Twitter anzeigen",
     "REPLY_TO_TWEET": "Auf diesen Tweet antworten",
     "LINK_TO_STORY": "Zur Instagram-Geschichte",
     "SENT": "Erfolgreich gesendet",
-    "READ": "Read successfully",
-    "DELIVERED": "Delivered successfully",
+    "READ": "Erfolgreich gelesen",
+    "DELIVERED": "Erfolgreich versendet",
     "NO_MESSAGES": "Keine Nachrichten",
     "NO_CONTENT": "Kein Inhalt verfügbar",
     "HIDE_QUOTED_TEXT": "Zitierten Text ausblenden",

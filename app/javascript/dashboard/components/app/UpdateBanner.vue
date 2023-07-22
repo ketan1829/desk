@@ -1,7 +1,6 @@
 <template>
   <banner
     v-if="shouldShowBanner"
-    class="update-banner"
     color-scheme="primary"
     :banner-message="bannerMessage"
     href-link="https://github.com/chatwoot/chatwoot/releases"
@@ -12,7 +11,8 @@
 </template>
 <script>
 import Banner from 'dashboard/components/ui/Banner.vue';
-import { LocalStorage, LOCAL_STORAGE_KEYS } from '../../helper/localStorage';
+import { LOCAL_STORAGE_KEYS } from 'dashboard/constants/localStorage';
+import { LocalStorage } from 'shared/helpers/localStorage';
 import { mapGetters } from 'vuex';
 import adminMixin from 'dashboard/mixins/isAdmin';
 import { hasAnUpdateAvailable } from './versionCheckHelper';

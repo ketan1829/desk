@@ -4,6 +4,8 @@
     "LOADING_CHART": "Carregando dados do gráfico...",
     "NO_ENOUGH_DATA": "Não existem dados suficientes para gerar o relatório. Tente novamente mais tarde.",
     "DOWNLOAD_AGENT_REPORTS": "Baixar relatórios de agentes",
+    "DATA_FETCHING_FAILED": "Failed to fetch data, please try again later.",
+    "SUMMARY_FETCHING_FAILED": "Failed to fetch summary, please try again later.",
     "METRICS": {
       "CONVERSATIONS": {
         "NAME": "Conversas",
@@ -33,6 +35,14 @@
         "NAME": "Contagem de Resolução",
         "DESC": "( Total )"
       }
+    },
+    "DATE_RANGE_OPTIONS": {
+      "LAST_7_DAYS": "Últimos 7 dias",
+      "LAST_30_DAYS": "Últimos 30 dias",
+      "LAST_3_MONTHS": "Últimos 3 meses",
+      "LAST_6_MONTHS": "Últimos 6 meses",
+      "LAST_YEAR": "Ano passado",
+      "CUSTOM_DATE_RANGE": "Intervalo de datas personalizado"
     },
     "DATE_RANGE": [
       {
@@ -66,6 +76,12 @@
     },
     "GROUP_BY_FILTER_DROPDOWN_LABEL": "Agrupar por",
     "DURATION_FILTER_LABEL": "Duração",
+    "GROUPING_OPTIONS": {
+      "DAY": "Dia",
+      "WEEK": "Semana",
+      "MONTH": "Mês",
+      "YEAR": "Ano"
+    },
     "GROUP_BY_DAY_OPTIONS": [
       {
         "id": 1,
@@ -388,6 +404,7 @@
     "HEADER": "Relatórios CSAT",
     "NO_RECORDS": "Não há respostas de pesquisa em CSAT disponíveis.",
     "DOWNLOAD": "Baixar relatórios de CSAT",
+    "DOWNLOAD_FAILED": "Failed to download CSAT Reports",
     "FILTERS": {
       "AGENTS": {
         "PLACEHOLDER": "Escolher agentes"
@@ -420,11 +437,17 @@
     "HEADER": "Visão geral",
     "LIVE": "Disponível",
     "ACCOUNT_CONVERSATIONS": {
-      "HEADER": "Abrir Conversas",
+      "HEADER": "Conversas Abertas",
       "LOADING_MESSAGE": "Carregando métricas de conversa...",
       "OPEN": "Abertas",
       "UNATTENDED": "Não atendidas",
       "UNASSIGNED": "Não atribuída"
+    },
+    "CONVERSATION_HEATMAP": {
+      "HEADER": "Tráfego de conversa",
+      "NO_CONVERSATIONS": "Não há conversas",
+      "CONVERSATION": "%{count} conversa",
+      "CONVERSATIONS": "%{count} conversas"
     },
     "AGENT_CONVERSATIONS": {
       "HEADER": "Conversas por agentes",
@@ -443,5 +466,14 @@
       "BUSY": "Ocupado",
       "OFFLINE": "Desconectado"
     }
+  },
+  "DAYS_OF_WEEK": {
+    "SUNDAY": "Domingo",
+    "MONDAY": "Segunda-Feira",
+    "TUESDAY": "Terça-feira",
+    "WEDNESDAY": "Quarta-feira",
+    "THURSDAY": "Quinta-feira",
+    "FRIDAY": "Sexta-feira",
+    "SATURDAY": "Sábado"
   }
 }

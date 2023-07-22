@@ -1,7 +1,10 @@
 <template>
-  <footer v-if="isFooterVisible" class="footer">
+  <footer
+    v-if="isFooterVisible"
+    class="bg-white dark:bg-slate-800 h-[60px] border-t border-solid border-slate-75 dark:border-slate-700/50 flex items-center justify-between py-0 px-4"
+  >
     <div class="left-aligned-wrap">
-      <div class="page-meta">
+      <div class="text-xs text-slate-600 dark:text-slate-200">
         <strong>{{ firstIndex }}</strong>
         - <strong>{{ lastIndex }}</strong> of
         <strong>{{ totalCount }}</strong> items
@@ -24,7 +27,7 @@
           <fluent-icon
             icon="chevron-left"
             size="18"
-            class="margin-left-minus-slab"
+            :class="pageFooterIconClass"
           />
         </woot-button>
         <woot-button
@@ -65,7 +68,7 @@
           <fluent-icon
             icon="chevron-right"
             size="18"
-            class="margin-left-minus-slab"
+            :class="pageFooterIconClass"
           />
         </woot-button>
       </div>
@@ -74,8 +77,11 @@
 </template>
 
 <script>
+import rtlMixin from 'shared/mixins/rtlMixin';
+
 export default {
   components: {},
+  mixins: [rtlMixin],
   props: {
     currentPage: {
       type: Number,
@@ -91,6 +97,11 @@ export default {
     },
   },
   computed: {
+    pageFooterIconClass() {
+      return this.isRTLView
+        ? 'margin-right-minus-slab'
+        : 'margin-left-minus-slab';
+    },
     isFooterVisible() {
       return this.totalCount && !(this.firstIndex > this.totalCount);
     },
@@ -153,22 +164,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.footer {
-  height: 60px;
-  border-top: 1px solid var(--color-border);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 var(--space-normal);
-}
-.page-meta {
-  font-size: var(--font-size-mini);
-}
-
 .goto-first,
 .goto-last {
   i:last-child {
-    margin-left: var(--space-minus-smaller);
+    @apply -ml-1;
   }
 }
 </style>

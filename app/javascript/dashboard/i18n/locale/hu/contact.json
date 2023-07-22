@@ -15,6 +15,7 @@
     "INITIATED_FROM": "Kezdeményezve",
     "INITIATED_AT": "Kezdeményezve",
     "IP_ADDRESS": "IP cím",
+    "CREATED_AT_LABEL": "Created",
     "NEW_MESSAGE": "Új üzenet",
     "CONVERSATIONS": {
       "NO_RECORDS_FOUND": "Nincs megelőző beszélgetés ezzel a kontakttal.",
@@ -32,7 +33,8 @@
       "LABEL_SELECT": {
         "TITLE": "Címkék hozzáadása",
         "PLACEHOLDER": "Címkék keresése",
-        "NO_RESULT": "Nem találtunk címkét"
+        "NO_RESULT": "Nem találtunk címkét",
+        "CREATE_LABEL": "Create new label"
       }
     },
     "MERGE_CONTACT": "Kapcsolattartók összevonása",
@@ -70,6 +72,13 @@
       "CANCEL": "Mégse"
     },
     "SUCCESS_MESSAGE": "Kontaktok sikeresen elmentve",
+    "ERROR_MESSAGE": "Hiba történt, kérjük próbáld újra"
+  },
+  "EXPORT_CONTACTS": {
+    "BUTTON_LABEL": "Export",
+    "TITLE": "Export Contacts",
+    "DESC": "Export contacts to a CSV file.",
+    "SUCCESS_MESSAGE": "Export is in progress, You will be notified via email when export file is ready to dowanlod.",
     "ERROR_MESSAGE": "Hiba történt, kérjük próbáld újra"
   },
   "DELETE_NOTE": {
@@ -121,6 +130,7 @@
         "LABEL": "Telefonszám",
         "HELP": "A telefonszámnak E.164 formátumúnak kell lennie, pl: +[+][országkód][körzetszám][helyi telefonszám]",
         "ERROR": "A telefonszámnak üresnek vagy E.164 formátumúnak kell lennie",
+        "DIAL_CODE_ERROR": "Please select a dial code from the list",
         "DUPLICATE": "Ez a telefonszám már egy másik kontakthoz tartozik."
       },
       "LOCATION": {
@@ -130,6 +140,17 @@
       "COMPANY_NAME": {
         "PLACEHOLDER": "Cégnév megadása",
         "LABEL": "Cégnév"
+      },
+      "COUNTRY": {
+        "PLACEHOLDER": "Enter the country name",
+        "LABEL": "Country Name",
+        "SELECT_PLACEHOLDER": "Select",
+        "REMOVE": "Eltávolítás",
+        "SELECT_COUNTRY": "Select Country"
+      },
+      "CITY": {
+        "PLACEHOLDER": "Enter the city name",
+        "LABEL": "City Name"
       },
       "SOCIAL_PROFILES": {
         "FACEBOOK": {
@@ -170,6 +191,7 @@
       },
       "INBOX": {
         "LABEL": "Fiók",
+        "PLACEHOLDER": "Choose source inbox",
         "ERROR": "Válassz egy fiókot"
       },
       "SUBJECT": {
@@ -197,6 +219,7 @@
     "FILTER_CONTACTS": "Szűrő",
     "FILTER_CONTACTS_SAVE": "Save filter",
     "FILTER_CONTACTS_DELETE": "Delete filter",
+    "FILTER_CONTACTS_EDIT": "Edit segment",
     "LIST": {
       "LOADING_MESSAGE": "Kontaktok betöltése...",
       "404": "Nincs a keresésnek megfelelő kontakt 🔍",
@@ -206,6 +229,7 @@
         "PHONE_NUMBER": "Telefonszám",
         "CONVERSATIONS": "Beszélgetések",
         "LAST_ACTIVITY": "Utolsó aktivitás",
+        "CREATED_AT": "Created At",
         "COUNTRY": "Ország",
         "CITY": "Város",
         "SOCIAL_PROFILES": "Social media profilok",

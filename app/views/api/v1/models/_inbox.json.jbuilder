@@ -16,6 +16,15 @@ json.timezone resource.timezone
 json.callback_webhook_url resource.callback_webhook_url
 json.allow_messages_after_resolved resource.allow_messages_after_resolved
 json.lock_to_single_conversation resource.lock_to_single_conversation
+json.sender_name_type resource.sender_name_type
+json.business_name resource.business_name
+
+if resource.portal.present?
+  json.help_center do
+    json.name resource.portal.name
+    json.slug resource.portal.slug
+  end
+end
 
 ## Channel specific settings
 ## TODO : Clean up and move the attributes into channel sub section

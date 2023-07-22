@@ -15,6 +15,7 @@
     "INITIATED_FROM": "سے شروع کیا گیا۔",
     "INITIATED_AT": "پر شروع کیا گیا۔",
     "IP_ADDRESS": "آئی پی ایڈریس",
+    "CREATED_AT_LABEL": "Created",
     "NEW_MESSAGE": "نیا پیغام",
     "CONVERSATIONS": {
       "NO_RECORDS_FOUND": "اس کانٹیکٹ سے وابستہ کوئی پچھلی بات چیت موجود نہیں ہے۔.",
@@ -32,7 +33,8 @@
       "LABEL_SELECT": {
         "TITLE": "لیبلز شامل کریں۔",
         "PLACEHOLDER": "لیبل تلاش کریں۔",
-        "NO_RESULT": "کوئی لیبل نہیں ملے"
+        "NO_RESULT": "کوئی لیبل نہیں ملے",
+        "CREATE_LABEL": "Create new label"
       }
     },
     "MERGE_CONTACT": "کانٹیکٹ ضم کریں۔",
@@ -70,6 +72,13 @@
       "CANCEL": "منسوخ کریں۔"
     },
     "SUCCESS_MESSAGE": "کانٹیکٹ کامیابی سے محفوظ ہو گیا۔",
+    "ERROR_MESSAGE": "ایک خامی تھی، براہ کرم دوبارہ کوشش کریں۔"
+  },
+  "EXPORT_CONTACTS": {
+    "BUTTON_LABEL": "Export",
+    "TITLE": "Export Contacts",
+    "DESC": "Export contacts to a CSV file.",
+    "SUCCESS_MESSAGE": "Export is in progress, You will be notified via email when export file is ready to dowanlod.",
     "ERROR_MESSAGE": "ایک خامی تھی، براہ کرم دوبارہ کوشش کریں۔"
   },
   "DELETE_NOTE": {
@@ -119,8 +128,9 @@
       "PHONE_NUMBER": {
         "PLACEHOLDER": "کانٹیکٹ کا فون نمبر درج کریں۔",
         "LABEL": "فون نمبر",
-        "HELP": "فون نمبر E.164 فارمیٹ کا ہونا چاہیے جیسے: +1415555555 [+][ملک کا کوڈ][علاقہ کا کوڈ][مقامی فون نمبر]",
+        "HELP": "Phone number should be of E.164 format eg: +1415555555 [+][country code][area code][local phone number]. You can select the dial code from the dropdown.",
         "ERROR": "فون نمبر یا تو خالی یا E.164 فارمیٹ کا ہونا چاہیے۔",
+        "DIAL_CODE_ERROR": "Please select a dial code from the list",
         "DUPLICATE": "یہ فون نمبر دوسرے کانٹیکٹ کے لیے استعمال میں ہے۔."
       },
       "LOCATION": {
@@ -130,6 +140,17 @@
       "COMPANY_NAME": {
         "PLACEHOLDER": "کمپنی کا نام درج کریں۔",
         "LABEL": "کمپنی کا نام"
+      },
+      "COUNTRY": {
+        "PLACEHOLDER": "Enter the country name",
+        "LABEL": "Country Name",
+        "SELECT_PLACEHOLDER": "Select",
+        "REMOVE": "Remove",
+        "SELECT_COUNTRY": "Select Country"
+      },
+      "CITY": {
+        "PLACEHOLDER": "Enter the city name",
+        "LABEL": "City Name"
       },
       "SOCIAL_PROFILES": {
         "FACEBOOK": {
@@ -169,7 +190,8 @@
         "LABEL": "کو"
       },
       "INBOX": {
-        "LABEL": "ان باکس",
+        "LABEL": "Via Inbox",
+        "PLACEHOLDER": "Choose source inbox",
         "ERROR": "ایک ان باکس منتخب کریں۔"
       },
       "SUBJECT": {
@@ -197,6 +219,7 @@
     "FILTER_CONTACTS": "فلٹر",
     "FILTER_CONTACTS_SAVE": "فلٹر محفوظ کریں۔",
     "FILTER_CONTACTS_DELETE": "فلٹر کو حذف کریں۔",
+    "FILTER_CONTACTS_EDIT": "Edit segment",
     "LIST": {
       "LOADING_MESSAGE": "کانٹیکٹس لوڈ ہو رہے ہیں...",
       "404": "کوئی کانٹیکٹ آپ کی تلاش سے میل نہیں کھاتا 🔍",
@@ -206,6 +229,7 @@
         "PHONE_NUMBER": "فون نمبر",
         "CONVERSATIONS": "مکالمات",
         "LAST_ACTIVITY": "آخری سرگرمی",
+        "CREATED_AT": "Created At",
         "COUNTRY": "ملک",
         "CITY": "شہر",
         "SOCIAL_PROFILES": "سوشل پروفائلز",
