@@ -33,7 +33,7 @@ const state = {
   createNewAccountFromDashboard,
   directUploadsEnabled: directUploadsEnabled === 'true',
   disableUserProfileUpdate: disableUserProfileUpdate === 'true',
-  displayManifest,
+  displayManifest: false,
   gitSha,
   hCaptchaSiteKey,
   installationName: 'Atiriri WhatsApp',
