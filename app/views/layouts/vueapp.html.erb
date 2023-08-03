@@ -76,7 +76,7 @@
         g.src=BASE_URL+"/packs/js/sdk.js"; g.defer=true; g.async=true;
         s.parentNode.insertBefore(g,s);
         g.onload=function(){
-          window.chatwootSDK.run({
+          window.lifeelSDK.run({
             websiteToken: '<%= @global_config['CHATWOOT_INBOX_TOKEN'] %>',
             baseUrl: BASE_URL,
           });

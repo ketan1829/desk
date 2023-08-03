@@ -32,15 +32,15 @@ window.chatwootSettings = {
   g.async = true;
   s.parentNode.insertBefore(g,s);
   g.onload=function(){
-    window.chatwootSDK.run({
+    window.lifeelSDK.run({
       websiteToken: '<%= @web_widget.website_token %>',
       baseUrl: BASE_URL
     })
   }
 })(document,"script");
 
-window.addEventListener('chatwoot:ready', function() {
-  console.log('chatwoot:ready', window.$chatwoot);
+window.addEventListener('lifeel:ready', function() {
+  console.log('lifeel:ready', window.$chatwoot);
   if (window.location.search.includes('setUser')) {
     window.$chatwoot.setUser('<%= user_id %>', {
       identifier_hash: '<%= user_hash %>',
@@ -51,12 +51,12 @@ window.addEventListener('chatwoot:ready', function() {
   }
 })
 
-window.addEventListener('chatwoot:error', function(e) {
-  console.log('chatwoot:error', e.detail)
+window.addEventListener('lifeel:error', function(e) {
+  console.log('lifeel:error', e.detail)
 })
 
 
-window.addEventListener('chatwoot:on-message', function(e) {
-  console.log('chatwoot:on-message', e.detail)
+window.addEventListener('lifeel:on-message', function(e) {
+  console.log('lifeel:on-message', e.detail)
 })
 </script>

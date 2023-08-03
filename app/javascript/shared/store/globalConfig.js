@@ -26,7 +26,7 @@ const state = {
   apiChannelThumbnail,
   appVersion,
   azureAppId,
-  brandName: 'Atiriri WhatsApp',
+  brandName: 'Book|Keeper Help Center',
   chatwootInboxToken,
   csmlEditorHost,
   deploymentEnv,
@@ -36,11 +36,11 @@ const state = {
   displayManifest: false,
   gitSha,
   hCaptchaSiteKey,
-  installationName: 'Atiriri WhatsApp',
+  installationName: 'Book|Keeper Help Center',
   logo,
   logoThumbnail,
-  privacyURL,
-  termsURL,
+  privacyURL: 'https://www.aspen-cap.com/',
+  termsURL: 'https://www.aspen-cap.com/',
   widgetBrandURL,
 };
 
