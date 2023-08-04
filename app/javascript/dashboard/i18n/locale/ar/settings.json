@@ -53,7 +53,7 @@
       },
       "ACCESS_TOKEN": {
         "TITLE": "رمز المصادقة",
-        "NOTE": "يمكن استخدام هذا رمز المصادقة إذا كنت تبني تطبيقات API للتكامل مع Book|Keeper Help Center"
+        "NOTE": "يمكن استخدام هذا رمز المصادقة إذا كنت تبني تطبيقات API للتكامل مع Atiriri WhatsApp"
       },
       "AUDIO_NOTIFICATIONS_SECTION": {
         "TITLE": "الإشعارات الصوتية",

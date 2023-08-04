@@ -47,7 +47,7 @@
         "CUSTOM_EMAIL_DOMAIN_ENABLED": "You can receive emails in your custom domain now."
       }
     },
-    "UPDATE_CHATWOOT": "An update %{latestChatwootVersion} for Book|Keeper Help Center is available. Please update your instance.",
+    "UPDATE_CHATWOOT": "An update %{latestChatwootVersion} for Atiriri WhatsApp is available. Please update your instance.",
     "LEARN_MORE": "Learn more"
   },
   "FORMS": {
@@ -88,7 +88,7 @@
   },
   "NETWORK": {
     "NOTIFICATION": {
-      "TEXT": "Disconnected from Book|Keeper Help Center"
+      "TEXT": "Disconnected from Atiriri WhatsApp"
     },
     "BUTTON": {
       "REFRESH": "Refresh"

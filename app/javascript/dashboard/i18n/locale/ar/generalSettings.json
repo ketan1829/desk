@@ -47,7 +47,7 @@
         "CUSTOM_EMAIL_DOMAIN_ENABLED": "يمكنك تلقي رسائل البريد الإلكتروني في النطاق المخصص الخاص بك الآن."
       }
     },
-    "UPDATE_CHATWOOT": "يتوفر تحديث %{latestChatwootVersion} لـ Book|Keeper Help Center. الرجاء التحديث.",
+    "UPDATE_CHATWOOT": "يتوفر تحديث %{latestChatwootVersion} لـ Atiriri WhatsApp. الرجاء التحديث.",
     "LEARN_MORE": "اعرف المزيد"
   },
   "FORMS": {
@@ -88,7 +88,7 @@
   },
   "NETWORK": {
     "NOTIFICATION": {
-      "TEXT": "قطع الاتصال من Book|Keeper Help Center"
+      "TEXT": "قطع الاتصال من Atiriri WhatsApp"
     },
     "BUTTON": {
       "REFRESH": "تحديث"
