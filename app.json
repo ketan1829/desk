@@ -1,7 +1,7 @@
 {
-  "name": "Atiriri WhatsApp",
-  "description": "Atiriri WhatsApp is a customer support tool for instant messaging channels",
-  "website": "https://www.engage.atiriri.africa/",
+  "name": "LifeelSpace",
+  "description": "LifeelSpace is a customer support tool for instant messaging channels",
+  "website": "https://www.lifeelbot.com/",
   "logo": "https://staging.book-keeper.org/brand-assets/logo_thumbnail.svg",
   "success_url": "/",
   "env": {
@@ -18,11 +18,11 @@
       "value": "production"
     },
     "FRONTEND_URL": {
-      "description": "Public root URL of the Atiriri WhatsApp installation. This will be used in the emails.",
+      "description": "Public root URL of the LifeelSpace installation. This will be used in the emails.",
       "value": "https://CHANGE.herokuapp.com"
     },
     "INSTALLATION_ENV": {
-      "description": "Installation method used for Atiriri WhatsApp.",
+      "description": "Installation method used for LifeelSpace.",
       "value": "heroku"
     },
     "REDIS_OPENSSL_VERIFY_MODE":{

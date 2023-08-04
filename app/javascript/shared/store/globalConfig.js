@@ -26,7 +26,7 @@ const state = {
   apiChannelThumbnail,
   appVersion,
   azureAppId,
-  brandName: 'Atiriri WhatsApp',
+  brandName: 'LifeelSpace',
   chatwootInboxToken,
   csmlEditorHost,
   deploymentEnv,
@@ -36,11 +36,11 @@ const state = {
   displayManifest: false,
   gitSha,
   hCaptchaSiteKey,
-  installationName: 'Atiriri WhatsApp',
+  installationName: 'LifeelSpace',
   logo,
   logoThumbnail,
-  privacyURL: 'https://www.engage.atiriri.africa/',
-  termsURL: 'https://www.engage.atiriri.africa/',
+  privacyURL: 'https://www.lifeelbot.com/',
+  termsURL: 'https://www.lifeelbot.com/',
   widgetBrandURL,
 };
 

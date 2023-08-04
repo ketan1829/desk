@@ -47,7 +47,7 @@
         "CUSTOM_EMAIL_DOMAIN_ENABLED": "يمكنك تلقي رسائل البريد الإلكتروني في النطاق المخصص الخاص بك الآن."
       }
     },
-    "UPDATE_CHATWOOT": "يتوفر تحديث %{latestChatwootVersion} لـ Atiriri WhatsApp. الرجاء التحديث.",
+    "UPDATE_CHATWOOT": "يتوفر تحديث %{latestChatwootVersion} لـ LifeelSpace. الرجاء التحديث.",
     "LEARN_MORE": "اعرف المزيد"
   },
   "FORMS": {
@@ -88,7 +88,7 @@
   },
   "NETWORK": {
     "NOTIFICATION": {
-      "TEXT": "قطع الاتصال من Atiriri WhatsApp"
+      "TEXT": "قطع الاتصال من LifeelSpace"
     },
     "BUTTON": {
       "REFRESH": "تحديث"
