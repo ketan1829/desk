@@ -3,12 +3,19 @@ import MessageFormatter from '../helpers/MessageFormatter';
 export default {
   methods: {
     formatMessage(message, isATweet, isAPrivateNote) {
-      const messageFormatter = new MessageFormatter(
+
+      if(message.includes("http")){
+        return message        
+      }else{
+        const messageFormatter = new MessageFormatter(
         message,
         isATweet,
         isAPrivateNote
       );
       return messageFormatter.formattedMessage;
+      }
+      
+      
     },
     getPlainText(message, isATweet) {
       const messageFormatter = new MessageFormatter(message, isATweet);
