@@ -75,6 +75,10 @@
             <bubble-file v-else :url="attachment.data_url" />
           </div>
         </div>
+        <link-preview
+          v-if="isMyUrl"
+          :message="message"
+        />
         <bubble-actions
           :id="data.id"
           :sender="data.sender"
@@ -149,6 +153,8 @@ import { MESSAGE_TYPE, MESSAGE_STATUS } from 'shared/constants/messages';
 import { generateBotMessageContent } from './helpers/botMessageContentHelper';
 import { BUS_EVENTS } from 'shared/constants/busEvents';
 import { ACCOUNT_EVENTS } from 'dashboard/helper/AnalyticsHelper/events';
+import LinkPreview from './bubble/Linkpreview';
+
 
 export default {
   components: {
@@ -165,6 +171,7 @@ export default {
     ContextMenu,
     Spinner,
     instagramImageErrorPlaceholder,
+    LinkPreview,
   },
   mixins: [alertMixin, messageFormatterMixin, contentTypeMixin],
   props: {
@@ -206,6 +213,9 @@ export default {
         this.isEmailContentType ||
         this.isAnIntegrationMessage
       );
+    },
+    isMyUrl(){
+      return this.data.content.includes("http");
     },
     emailMessageContent() {
       const {
