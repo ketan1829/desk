@@ -34,8 +34,12 @@
             :url="storyUrl"
           />
         </blockquote>
+        <link-preview
+          v-if="isMyUrl"
+          :message="message"
+        />
         <bubble-text
-          v-if="data.content"
+          v-else-if="data.content"
           :message="message"
           :is-email="isEmailContentType"
           :display-quoted-button="displayQuotedButton"
@@ -75,10 +79,6 @@
             <bubble-file v-else :url="attachment.data_url" />
           </div>
         </div>
-        <link-preview
-          v-if="isMyUrl"
-          :message="message"
-        />
         <bubble-actions
           :id="data.id"
           :sender="data.sender"
