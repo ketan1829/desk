@@ -39,7 +39,7 @@
           :message="message"
         />
         <bubble-text
-          v-else-if="data.content"
+          v-if="data.content"
           :message="message"
           :is-email="isEmailContentType"
           :display-quoted-button="displayQuotedButton"
