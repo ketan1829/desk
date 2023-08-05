@@ -47,7 +47,7 @@
         "CUSTOM_EMAIL_DOMAIN_ENABLED": "Du kan modtage e-mails på dit brugerdefinerede domæne nu."
       }
     },
-    "UPDATE_CHATWOOT": "En opdatering %{latestChatwootVersion} til LifeelSpace er tilgængelig. Opdater venligst din instans.",
+    "UPDATE_CHATWOOT": "En opdatering %{latestChatwootVersion} til Aligned er tilgængelig. Opdater venligst din instans.",
     "LEARN_MORE": "Lær mere"
   },
   "FORMS": {
@@ -88,7 +88,7 @@
   },
   "NETWORK": {
     "NOTIFICATION": {
-      "TEXT": "Afbrudt fra LifeelSpace"
+      "TEXT": "Afbrudt fra Aligned"
     },
     "BUTTON": {
       "REFRESH": "Opdater"

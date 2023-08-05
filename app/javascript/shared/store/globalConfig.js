@@ -26,7 +26,7 @@ const state = {
   apiChannelThumbnail,
   appVersion,
   azureAppId,
-  brandName: 'LifeelSpace',
+  brandName: 'Aligned',
   chatwootInboxToken,
   csmlEditorHost,
   deploymentEnv,
@@ -36,11 +36,11 @@ const state = {
   displayManifest: false,
   gitSha,
   hCaptchaSiteKey,
-  installationName: 'LifeelSpace',
+  installationName: 'Aligned',
   logo,
   logoThumbnail,
-  privacyURL: 'https://www.lifeelbot.com/',
-  termsURL: 'https://www.lifeelbot.com/',
+  privacyURL: 'https://www.aligned-cloud.com/',
+  termsURL: 'https://www.aligned-cloud.com/',
   widgetBrandURL,
 };
 

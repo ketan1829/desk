@@ -47,7 +47,7 @@
         "CUSTOM_EMAIL_DOMAIN_ENABLED": "Nyní můžete přijímat e-maily na vaši vlastní doménu."
       }
     },
-    "UPDATE_CHATWOOT": "Je dostupná aktualizace %{latestChatwootVersion} pro LifeelSpace. Aktualizujte prosím svou instanci.",
+    "UPDATE_CHATWOOT": "Je dostupná aktualizace %{latestChatwootVersion} pro Aligned. Aktualizujte prosím svou instanci.",
     "LEARN_MORE": "Learn more"
   },
   "FORMS": {
@@ -88,7 +88,7 @@
   },
   "NETWORK": {
     "NOTIFICATION": {
-      "TEXT": "Disconnected from LifeelSpace"
+      "TEXT": "Disconnected from Aligned"
     },
     "BUTTON": {
       "REFRESH": "Refresh"
