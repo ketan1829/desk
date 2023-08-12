@@ -40,9 +40,9 @@ window.chatwootSettings = {
 })(document,"script");
 
 window.addEventListener('lifeel:ready', function() {
-  console.log('lifeel:ready', window.$chatwoot);
+  console.log('lifeel:ready', window.$lifeel);
   if (window.location.search.includes('setUser')) {
-    window.$chatwoot.setUser('<%= user_id %>', {
+    window.$lifeel.setUser('<%= user_id %>', {
       identifier_hash: '<%= user_hash %>',
       email: 'jane@example.com',
       name: 'Jane Doe',

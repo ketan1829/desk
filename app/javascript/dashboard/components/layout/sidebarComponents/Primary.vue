@@ -93,7 +93,7 @@ export default {
       this.$emit('toggle-accounts');
     },
     toggleSupportChatWindow() {
-      window.$chatwoot.toggle();
+      window.$lifeel.toggle();
     },
     openNotificationPanel() {
       this.$emit('open-notification-panel');
