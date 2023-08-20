@@ -65,7 +65,7 @@ const runSDK = ({ baseUrl, websiteToken }) => {
     },
 
     toggleMessageInput(visibility){
-      let inputElement = document.querySelector('.chat-message--input');
+      let inputElement = IFrameHelper.getAppFrame().contentWindow.querySelector('.chat-message--input');
       if (inputElement) {
         console.log("element is ready")
         inputElement.style.display = visibility;
