@@ -67,7 +67,10 @@ const runSDK = ({ baseUrl, websiteToken }) => {
     toggleMessageInput(visibility){
       let inputElement = document.querySelector('.chat-message--input');
       if (inputElement) {
-        inputElement.disabled = visibility;
+        console.log("element is ready")
+        inputElement.style.display = visibility;
+      }else{
+        console.log("element not ready")
       }
     },
 
