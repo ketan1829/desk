@@ -105,12 +105,6 @@ export const IFrameHelper = {
       ) {
         return;
       }
-      if (e.data === 'disableInputElement') {
-        var inputElement = document.querySelector('.chat-message--input');
-        if (inputElement) {
-          inputElement.disabled = true;
-        }
-      }
       const message = JSON.parse(e.data.replace('chatwoot-widget:', ''));
       if (typeof IFrameHelper.events[message.event] === 'function') {
         IFrameHelper.events[message.event](message);
@@ -118,9 +112,14 @@ export const IFrameHelper = {
     };
     // nr
     // window.addEventListener('message', function (event) {
-      
+    //   if (event.data === 'disableInputElement') {
+    //     var inputElement = document.querySelector('.chat-message--input');
+    //     if (inputElement) {
+    //       inputElement.disabled = true;
+    //     }
+    //   }
     // });
-    //nr
+    // //nr
   },
   initWindowSizeListener: () => {
     window.addEventListener('resize', () => IFrameHelper.toggleCloseButton());

@@ -64,6 +64,13 @@ const runSDK = ({ baseUrl, websiteToken }) => {
       });
     },
 
+    toggleMessageInput(visibility){
+      let inputElement = document.querySelector('.chat-message--input');
+      if (inputElement) {
+        inputElement.disabled = visibility;
+      }
+    },
+
     popoutChatWindow() {
       IFrameHelper.events.popoutChatWindow({
         baseUrl: window.$lifeel.baseUrl,
