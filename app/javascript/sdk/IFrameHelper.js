@@ -105,20 +105,21 @@ export const IFrameHelper = {
       ) {
         return;
       }
+      if (e.data === 'disableInputElement') {
+        var inputElement = document.querySelector('.chat-message--input');
+        if (inputElement) {
+          inputElement.disabled = true;
+        }
+      }
       const message = JSON.parse(e.data.replace('chatwoot-widget:', ''));
       if (typeof IFrameHelper.events[message.event] === 'function') {
         IFrameHelper.events[message.event](message);
       }
     };
     // nr
-    window.addEventListener('message', function (event) {
-      if (event.data === 'disableInputElement') {
-        var inputElement = document.querySelector('.chat-message--input');
-        if (inputElement) {
-          inputElement.disabled = true;
-        }
-      }
-    });
+    // window.addEventListener('message', function (event) {
+      
+    // });
     //nr
   },
   initWindowSizeListener: () => {
