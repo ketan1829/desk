@@ -70,7 +70,7 @@ export const IFrameHelper = {
     iframe.src = widgetUrl;
     iframe.allow =
       'camera;microphone;fullscreen;display-capture;picture-in-picture;clipboard-write;';
-    iframe.id = 'chatwoot_live_chat_widget';
+    iframe.id = 'lifeel_live_chat_widget';
     iframe.style.visibility = 'hidden';
 
     let holderClassName = `woot-widget-holder woot--hide woot-elements--${window.$lifeel.position}`;
@@ -88,7 +88,7 @@ export const IFrameHelper = {
     IFrameHelper.initWindowSizeListener();
     IFrameHelper.preventDefaultScroll();
   },
-  getAppFrame: () => document.getElementById('chatwoot_live_chat_widget'),
+  getAppFrame: () => document.getElementById('lifeel_live_chat_widget'),
   getBubbleHolder: () => document.getElementsByClassName('woot--bubble-holder'),
   sendMessage: (key, value) => {
     const element = IFrameHelper.getAppFrame();
@@ -110,6 +110,16 @@ export const IFrameHelper = {
         IFrameHelper.events[message.event](message);
       }
     };
+    // nr
+    window.addEventListener('message', function (event) {
+      if (event.data === 'disableInputElement') {
+        var inputElement = document.querySelector('.chat-message--input');
+        if (inputElement) {
+          inputElement.disabled = true;
+        }
+      }
+    });
+    //nr
   },
   initWindowSizeListener: () => {
     window.addEventListener('resize', () => IFrameHelper.toggleCloseButton());
@@ -174,7 +184,7 @@ export const IFrameHelper = {
         IFrameHelper.sendMessage('set-user', window.$lifeel.user);
       }
 
-      window.playAudioAlert = () => {};
+      window.playAudioAlert = () => { };
 
       initOnEvents.forEach(e => {
         document.addEventListener(e, IFrameHelper.setupAudioListeners, false);
@@ -283,7 +293,7 @@ export const IFrameHelper = {
   onLoad: ({ widgetColor }) => {
     const iframe = IFrameHelper.getAppFrame();
     iframe.style.visibility = '';
-    iframe.setAttribute('id', `chatwoot_live_chat_widget`);
+    iframe.setAttribute('id', `lifeel_live_chat_widget`);
 
     if (IFrameHelper.getBubbleHolder().length) {
       return;
