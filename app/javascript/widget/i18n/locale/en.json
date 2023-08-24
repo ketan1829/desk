@@ -70,7 +70,7 @@
       },
       "MESSAGE": {
         "LABEL": "Message",
-        "PLACEHOLDER": "Please enter your message",
+        "PLACEHOLDER": "Type m and click or tap Start Conversation",
         "ERROR": "Message too short"
       }
     },

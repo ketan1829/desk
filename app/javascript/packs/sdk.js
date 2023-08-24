@@ -64,15 +64,15 @@ const runSDK = ({ baseUrl, websiteToken }) => {
       });
     },
 
-    toggleMessageInput(visibility){
-      let inputElement = IFrameHelper.getAppFrame().contentWindow.querySelector('.chat-message--input');
-      if (inputElement) {
-        console.log("element is ready")
-        inputElement.style.display = visibility;
-      }else{
-        console.log("element not ready")
-      }
-    },
+    // toggleMessageInput(visibility){
+    //   //let inputElement = IFrameHelper.getAppFrame().contentWindow.querySelector('.chat-message--input');
+    //   if (inputElement) {
+    //     console.log("element is ready")
+    //     inputElement.style.display = visibility;
+    //   }else{
+    //     console.log("element not ready")
+    //   }
+    // },
 
     popoutChatWindow() {
       IFrameHelper.events.popoutChatWindow({
