@@ -18,7 +18,7 @@ export default {
       },
     },
     placeholder: {
-      defaultValue: 'Please enter your message',
+      defaultValue: 'Type m and click or tap Start Conversation',
       control: {
         type: 'text',
       },
