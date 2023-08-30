@@ -172,7 +172,7 @@
     "FILE_SIZE_LIMIT": "Filen overskrider grænsen på {MAXIMUM_SUPPORTED_FILE_UPLOAD_SIZE} for vedhæftede filer",
     "MESSAGE_ERROR": "Kunne ikke sende denne besked, prøv igen senere",
     "SENT_BY": "Sendt af:",
-    "BOT": "Bot",
+    "BOT": "PROFITIZE",
     "SEND_FAILED": "Kunne ikke sende besked! Prøv igen",
     "TRY_AGAIN": "prøv igen",
     "ASSIGNMENT": {
