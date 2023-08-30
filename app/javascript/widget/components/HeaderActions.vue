@@ -6,11 +6,19 @@
       :title="$t('END_CONVERSATION')"
       @click="resolveConversation"
     >
-      <fluent-icon
+      <!-- <fluent-icon
         icon="sign-out"
         size="22"
         :class="$dm('text-black-900', 'dark:text-slate-50')"
       />
+      -->
+
+      <img
+        src="/assets/aspen/end_conv.png"
+        alt="Sign Out"
+        class="aspen-icon-image"
+      />
+
     </button>
     <button
       v-if="showPopoutButton"
@@ -130,6 +138,11 @@ export default {
   }
   .rn-close-button {
     display: block !important;
+  }
+
+  .aspen-icon-image {
+    width: 22px;
+    height: auto;
   }
 }
 </style>
