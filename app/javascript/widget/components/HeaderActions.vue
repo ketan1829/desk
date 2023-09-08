@@ -17,6 +17,7 @@
         src="/assets/aspen/end_conv.png"
         alt="Sign Out"
         class="aspen-icon-image"
+        :class="$dm('text-black-900', 'dark:text-slate-50')"
       />
 
     </button>
@@ -47,6 +48,7 @@
         src="/assets/aspen/end_conv.png"
         alt="Sign Out"
         class="aspen-icon-image"
+        :class="$dm('text-black-900', 'dark:text-slate-50')"
       />
     </button>
   </div>
