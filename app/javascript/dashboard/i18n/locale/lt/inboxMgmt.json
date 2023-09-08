@@ -685,7 +685,7 @@
       },
       "FOOTER": {
         "START_CONVERSATION_BUTTON_TEXT": "Pradėti Pokalbį",
-        "CHAT_INPUT_PLACEHOLDER": "Type your message"
+        "CHAT_INPUT_PLACEHOLDER": "Type 'm' to start conversation"
       },
       "BODY": {
         "TEAM_AVAILABILITY": {
