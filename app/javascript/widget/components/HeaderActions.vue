@@ -146,7 +146,7 @@ export default {
   }
 
   .aspen-icon-image {
-    width: 22px;
+    width: 58px;
     height: auto;
   }
 }
