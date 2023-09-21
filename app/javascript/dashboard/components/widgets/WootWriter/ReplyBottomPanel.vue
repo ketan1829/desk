@@ -288,7 +288,7 @@ export default {
       }
     },
     showMessageSignatureButton() {
-      return !this.isOnPrivateNote && this.isAnEmailChannel;
+      return !this.isOnPrivateNote;
     },
     sendWithSignature() {
       const { send_with_signature: isEnabled } = this.uiSettings;
@@ -326,7 +326,7 @@ export default {
   @apply flex justify-between py-3 px-4;
 
   &.is-note-mode {
-    @apply bg-yellow-50 dark:bg-yellow-50;
+    @apply bg-yellow-100 dark:bg-yellow-800;
   }
 }
 
@@ -342,7 +342,7 @@ export default {
   label {
     @apply cursor-pointer;
   }
-  &:hover .button {
+  &:hover button {
     @apply dark:bg-slate-800 bg-slate-100;
   }
 }

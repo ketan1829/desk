@@ -4,7 +4,7 @@ ruby '3.2.2'
 
 ##-- base gems for rails --##
 gem 'rack-cors', require: 'rack/cors'
-gem 'rails', '~> 7.0.5.1'
+gem 'rails', '~> 7.0.8.0'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
 
@@ -34,7 +34,7 @@ gem 'commonmarker'
 # Validate Data against JSON Schema
 gem 'json_schemer'
 # Rack middleware for blocking & throttling abusive requests
-gem 'rack-attack'
+gem 'rack-attack', '>= 6.7.0'
 # a utility tool for streaming, flexible and safe downloading of remote files
 gem 'down'
 # authentication type to fetch and send mail over oauth2.0
@@ -108,14 +108,14 @@ gem 'elastic-apm', require: false
 gem 'newrelic_rpm', require: false
 gem 'newrelic-sidekiq-metrics', require: false
 gem 'scout_apm', require: false
-gem 'sentry-rails', '>= 5.10.0', require: false
+gem 'sentry-rails', '>= 5.11.0', require: false
 gem 'sentry-ruby', require: false
-gem 'sentry-sidekiq', '>= 5.10.0', require: false
+gem 'sentry-sidekiq', '>= 5.11.0', require: false
 
 ##-- background job processing --##
-gem 'sidekiq'
+gem 'sidekiq', '>= 7.1.3'
 # We want cron jobs
-gem 'sidekiq-cron'
+gem 'sidekiq-cron', '>= 1.10.1'
 
 ##-- Push notification service --##
 gem 'fcm'
@@ -153,7 +153,7 @@ gem 'stripe'
 gem 'faker'
 
 # Include logrange conditionally in intializer using env variable
-gem 'lograge', '~> 0.12.0', require: false
+gem 'lograge', '~> 0.13.0', require: false
 
 # worked with microsoft refresh token
 gem 'omniauth-oauth2'
@@ -188,7 +188,7 @@ group :development do
   gem 'bullet'
   gem 'letter_opener'
   gem 'scss_lint', require: false
-  gem 'web-console'
+  gem 'web-console', '>= 4.2.1'
 
   # used in swagger build
   gem 'json_refs'
@@ -197,7 +197,7 @@ group :development do
   gem 'squasher'
 
   # profiling
-  gem 'rack-mini-profiler', require: false
+  gem 'rack-mini-profiler', '>= 3.1.1', require: false
   gem 'stackprof'
 end
 

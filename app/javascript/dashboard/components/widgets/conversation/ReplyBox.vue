@@ -2,8 +2,9 @@
   <div class="reply-box" :class="replyBoxClass">
     <banner
       v-if="showSelfAssignBanner"
-      action-button-variant="link"
+      action-button-variant="clear"
       color-scheme="secondary"
+      class="banner--self-assign"
       :banner-message="$t('CONVERSATION.NOT_ASSIGNED_TO_YOU')"
       :has-action-button="true"
       :action-button-label="$t('CONVERSATION.ASSIGN_TO_ME')"
@@ -52,6 +53,9 @@
         class="input"
         :placeholder="messagePlaceHolder"
         :min-height="4"
+        :signature="signatureToApply"
+        :allow-signature="true"
+        :send-with-signature="sendWithSignature"
         @typing-off="onTypingOff"
         @typing-on="onTypingOn"
         @focus="onFocus"
@@ -68,6 +72,8 @@
         :min-height="4"
         :enable-variables="true"
         :variables="messageVariables"
+        :signature="signatureToApply"
+        :allow-signature="true"
         @typing-off="onTypingOff"
         @typing-on="onTypingOn"
         @focus="onFocus"
@@ -85,16 +91,10 @@
       />
     </div>
     <div
-      v-if="isSignatureEnabledForInbox"
-      v-tooltip="$t('CONVERSATION.FOOTER.MESSAGE_SIGN_TOOLTIP')"
+      v-if="isSignatureEnabledForInbox && !isSignatureAvailable"
       class="message-signature-wrap"
     >
-      <p
-        v-if="isSignatureAvailable"
-        v-dompurify-html="formatMessage(messageSignature)"
-        class="message-signature"
-      />
-      <p v-else class="message-signature">
+      <p class="message-signature">
         {{ $t('CONVERSATION.FOOTER.MESSAGE_SIGNATURE_NOT_CONFIGURED') }}
         <router-link :to="profilePath">
           {{ $t('CONVERSATION.FOOTER.CLICK_HERE') }}
@@ -183,6 +183,12 @@ import wootConstants from 'dashboard/constants/globals';
 import { isEditorHotKeyEnabled } from 'dashboard/mixins/uiSettings';
 import { CONVERSATION_EVENTS } from '../../../helper/AnalyticsHelper/events';
 import rtlMixin from 'shared/mixins/rtlMixin';
+import {
+  appendSignature,
+  removeSignature,
+  replaceSignature,
+  extractTextFromMarkdown,
+} from 'dashboard/helper/editorHelper';
 
 const EmojiInput = () => import('shared/components/emoji/EmojiInput');
 
@@ -470,10 +476,10 @@ export default {
       );
     },
     isSignatureEnabledForInbox() {
-      return !this.isPrivate && this.isAnEmailChannel && this.sendWithSignature;
+      return !this.isPrivate && this.sendWithSignature;
     },
     isSignatureAvailable() {
-      return !!this.messageSignature;
+      return !!this.signatureToApply;
     },
     sendWithSignature() {
       const { send_with_signature: isEnabled } = this.uiSettings;
@@ -512,6 +518,12 @@ export default {
         conversation: this.currentChat,
       });
       return variables;
+    },
+    // ensure that the signature is plain text depending on `showRichContentEditor`
+    signatureToApply() {
+      return this.showRichContentEditor
+        ? this.messageSignature
+        : extractTextFromMarkdown(this.messageSignature);
     },
   },
   watch: {
@@ -580,6 +592,23 @@ export default {
       this.updateUISettings({
         display_rich_content_editor: !this.showRichContentEditor,
       });
+
+      const plainTextSignature = extractTextFromMarkdown(this.messageSignature);
+
+      if (!this.showRichContentEditor && this.messageSignature) {
+        // remove the old signature -> extract text from markdown -> attach new signature
+        let message = removeSignature(this.message, this.messageSignature);
+        message = extractTextFromMarkdown(message);
+        message = appendSignature(message, plainTextSignature);
+
+        this.message = message;
+      } else {
+        this.message = replaceSignature(
+          this.message,
+          plainTextSignature,
+          this.messageSignature
+        );
+      }
     },
     saveDraft(conversationId, replyType) {
       if (this.message || this.message === '') {
@@ -599,8 +628,21 @@ export default {
     getFromDraft() {
       if (this.conversationIdByRoute) {
         const key = `draft-${this.conversationIdByRoute}-${this.replyType}`;
-        this.message = this.$store.getters['draftMessages/get'](key) || '';
+        const messageFromStore =
+          this.$store.getters['draftMessages/get'](key) || '';
+
+        // ensure that the message has signature set based on the ui setting
+        this.message = this.toggleSignatureForDraft(messageFromStore);
       }
+    },
+    toggleSignatureForDraft(message) {
+      if (this.isPrivate) {
+        return message;
+      }
+
+      return this.sendWithSignature
+        ? appendSignature(message, this.signatureToApply)
+        : removeSignature(message, this.signatureToApply);
     },
     removeFromDraft() {
       if (this.conversationIdByRoute) {
@@ -693,19 +735,14 @@ export default {
         return;
       }
       if (!this.showMentions) {
-        let newMessage = this.message;
-        if (this.isSignatureEnabledForInbox && this.messageSignature) {
-          newMessage += '\n\n' + this.messageSignature;
-        }
-
         const isOnWhatsApp =
           this.isATwilioWhatsAppChannel ||
           this.isAWhatsAppCloudChannel ||
           this.is360DialogWhatsAppChannel;
         if (isOnWhatsApp && !this.isPrivate) {
-          this.sendMessageAsMultipleMessages(newMessage);
+          this.sendMessageAsMultipleMessages(this.message);
         } else {
-          const messagePayload = this.getMessagePayload(newMessage);
+          const messagePayload = this.getMessagePayload(this.message);
           this.sendMessage(messagePayload);
         }
 
@@ -723,6 +760,15 @@ export default {
       messages.forEach(messagePayload => {
         this.sendMessage(messagePayload);
       });
+    },
+    sendMessageAnalyticsData(isPrivate) {
+      // Analytics data for message signature is enabled or not in channels
+      return isPrivate
+        ? this.$track(CONVERSATION_EVENTS.SENT_PRIVATE_NOTE)
+        : this.$track(CONVERSATION_EVENTS.SENT_MESSAGE, {
+            channelType: this.channelType,
+            signatureEnabled: this.sendWithSignature,
+          });
     },
     async onSendReply() {
       const undefinedVariables = getUndefinedVariablesInMessage({
@@ -757,6 +803,7 @@ export default {
         bus.$emit(BUS_EVENTS.SCROLL_TO_MESSAGE);
         bus.$emit(BUS_EVENTS.MESSAGE_SENT);
         this.removeFromDraft();
+        this.sendMessageAnalyticsData(messagePayload.private);
       } catch (error) {
         const errorMessage =
           error?.response?.data?.error || this.$t('CONVERSATION.MESSAGE_ERROR');
@@ -817,6 +864,10 @@ export default {
     },
     clearMessage() {
       this.message = '';
+      if (this.sendWithSignature && !this.isPrivate) {
+        // if signature is enabled, append it to the message
+        this.message = appendSignature(this.message, this.signatureToApply);
+      }
       this.attachedFiles = [];
       this.isRecordingAudio = false;
     },
@@ -1094,6 +1145,10 @@ export default {
   @apply mb-0;
 }
 
+.banner--self-assign {
+  @apply py-2;
+}
+
 .message-signature-wrap {
   @apply my-0 mx-4 px-1 flex max-h-[8vh] items-baseline justify-between hover:bg-slate-25 dark:hover:bg-slate-800 border border-dashed border-slate-100 dark:border-slate-700 rounded-sm overflow-auto;
 }
@@ -1110,7 +1165,7 @@ export default {
   @apply border-t border-slate-50 dark:border-slate-700 bg-white dark:bg-slate-900;
 
   &.is-private {
-    @apply bg-yellow-50 dark:bg-yellow-50;
+    @apply bg-yellow-50 dark:bg-yellow-200;
   }
 }
 .send-button {
@@ -1122,41 +1177,29 @@ export default {
 }
 
 .emoji-dialog {
-  top: unset;
-  bottom: -40px;
-  left: -320px;
-  right: unset;
+  @apply top-[unset] -bottom-10 -left-80 right-[unset];
 
   &::before {
-    right: var(--space-minus-normal);
-    bottom: var(--space-small);
     transform: rotate(270deg);
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.08));
+    @apply -right-4 bottom-2 rtl:right-0 rtl:-left-4;
   }
 }
 
 .emoji-dialog--rtl {
-  left: unset;
-  right: -320px;
+  @apply left-[unset] -right-80;
   &::before {
-    left: var(--space-minus-normal);
     transform: rotate(90deg);
-    right: 0;
-    bottom: var(--space-small);
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.08));
   }
 }
 
 .emoji-dialog--expanded {
-  left: unset;
-  bottom: var(--space-jumbo);
-  position: absolute;
-  z-index: var(--z-index-normal);
+  @apply left-[unset] bottom-0 absolute z-[100];
 
   &::before {
     transform: rotate(0deg);
-    left: var(--space-smaller);
-    bottom: var(--space-minus-small);
+    @apply left-1 -bottom-2;
   }
 }
 .message-signature {

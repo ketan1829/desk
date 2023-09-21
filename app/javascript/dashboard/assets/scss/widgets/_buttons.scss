@@ -1,5 +1,5 @@
 .button {
-  @apply items-center inline-flex h-10 mb-0;
+  @apply items-center inline-flex h-10 mb-0 gap-2;
 
   .button__content {
     @apply w-full;
@@ -14,17 +14,9 @@
     @apply px-2 py-0;
   }
 
-  .icon--emoji + .button__content {
-    @apply pl-2 rtl:pr-2 rtl:pl-0;
-  }
-
-  .icon--font + .button__content {
-    @apply pl-2 rtl:pr-2 rtl:pl-0;
-  }
-
   // @TODDO - Remove after moving all buttons to woot-button
   .icon + .button__content {
-    @apply pl-2 w-auto rtl:pr-2 rtl:pl-0;
+    @apply w-auto;
   }
 
   &.expanded {
@@ -64,19 +56,19 @@
       @apply bg-slate-75 dark:bg-slate-900 border-slate-100 dark:border-slate-700;
 
       &.secondary {
-        @apply border-slate-100 dark:border-slate-700;
+        @apply border-slate-100 dark:border-slate-700 text-slate-800 dark:text-slate-100;
       }
 
       &.success {
-        @apply border-slate-100 dark:border-slate-700;
+        @apply border-slate-100 dark:border-slate-700 text-green-800 dark:text-green-100;
       }
 
       &.alert {
-        @apply border-slate-100 dark:border-slate-700;
+        @apply border-slate-100 dark:border-slate-700 text-red-700 dark:text-red-100;
       }
 
       &.warning {
-        @apply border-slate-100 dark:border-slate-700;
+        @apply border-slate-100 dark:border-slate-700 text-yellow-700 dark:text-yellow-700;
       }
     }
   }
@@ -90,7 +82,7 @@
     }
 
     &.success {
-      @apply bg-green-50 dark:bg-green-700 text-green-700 dark:text-green-100 hover:bg-green-100 dark:hover:bg-green-800;
+      @apply bg-green-50 dark:bg-green-700 text-green-700 dark:text-green-100 hover:bg-green-100 dark:hover:bg-green-800 hover:text-green-800 dark:hover:text-green-100;
     }
 
     &.alert {
@@ -118,26 +110,26 @@
     }
 
     &.warning {
-      @apply text-yellow-700 dark:text-yellow-700;
+      @apply text-yellow-700 dark:text-yellow-600;
     }
 
     &:hover {
       @apply hover:bg-woot-50 dark:hover:bg-woot-900/50 hover:text-woot-500 dark:hover:text-woot-100;
 
       &.secondary {
-        @apply hover:bg-slate-50 dark:hover:bg-slate-700;
+        @apply hover:bg-slate-50 dark:hover:bg-slate-700 hover:text-slate-800 dark:hover:text-slate-100;
       }
 
       &.success {
-        @apply hover:bg-green-50 dark:hover:bg-green-800;
+        @apply hover:bg-green-50 dark:hover:bg-green-800 hover:text-green-800 dark:hover:text-green-100;
       }
 
       &.alert {
-        @apply hover:bg-red-50 dark:hover:bg-red-800;
+        @apply hover:bg-red-50 dark:hover:bg-red-800 hover:text-red-700 dark:hover:text-red-100;
       }
 
       &.warning {
-        @apply hover:bg-yellow-50 dark:hover:bg-yellow-100;
+        @apply hover:bg-yellow-100 dark:hover:bg-yellow-800 hover:text-yellow-700 dark:hover:text-yellow-600;
       }
     }
 
@@ -157,18 +149,10 @@
   // Sizes
   &.tiny {
     @apply h-6;
-
-    .icon + .button__content {
-      @apply pl-1 rtl:pr-1 rtl:pl-0;
-    }
   }
 
   &.small {
     @apply h-8 pb-1 pt-1;
-
-    .icon + .button__content {
-      @apply pl-1 rtl:pr-1 rtl:pl-0;
-    }
   }
 
   &.large {
