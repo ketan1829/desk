@@ -16,8 +16,8 @@
         <article-hero
           v-if="
             !articleUiFlags.isFetching &&
-              !articleUiFlags.isError &&
-              popularArticles.length
+            !articleUiFlags.isError &&
+            popularArticles.length
           "
           :articles="popularArticles"
           @view="openArticleInArticleViewer"
@@ -34,11 +34,12 @@
 </template>
 
 <script>
-import TeamAvailability from 'widget/components/TeamAvailability';
-import ArticleHero from 'widget/components/ArticleHero';
-import ArticleCardSkeletonLoader from 'widget/components/ArticleCardSkeletonLoader';
+import TeamAvailability from 'widget/components/TeamAvailability.vue';
+import ArticleHero from 'widget/components/ArticleHero.vue';
+import ArticleCardSkeletonLoader from 'widget/components/ArticleCardSkeletonLoader.vue';
 
 import { mapGetters } from 'vuex';
+import darkModeMixin from 'widget/mixins/darkModeMixin';
 import routerMixin from 'widget/mixins/routerMixin';
 import configMixin from 'widget/mixins/configMixin';
 
@@ -49,7 +50,7 @@ export default {
     TeamAvailability,
     ArticleCardSkeletonLoader,
   },
-  mixins: [configMixin, routerMixin],
+  mixins: [configMixin, routerMixin, darkModeMixin],
   props: {
     hasFetched: {
       type: Boolean,
@@ -69,6 +70,9 @@ export default {
       popularArticles: 'article/popularArticles',
       articleUiFlags: 'article/uiFlags',
     }),
+    widgetLocale() {
+      return this.$i18n.locale || 'en';
+    },
     portal() {
       return window.chatwootWebChannel.portal;
     },
@@ -79,12 +83,26 @@ export default {
         this.popularArticles.length
       );
     },
+    defaultLocale() {
+      const widgetLocale = this.widgetLocale;
+      const { allowed_locales: allowedLocales, default_locale: defaultLocale } =
+        this.portal.config;
+
+      // IMPORTANT: Variation strict locale matching, Follow iso_639_1_code
+      // If the exact match of a locale is available in the list of portal locales, return it
+      // Else return the default locale. Eg: `es` will not work if `es_ES` is available in the list
+      if (allowedLocales.includes(widgetLocale)) {
+        return widgetLocale;
+      }
+      return defaultLocale;
+    },
   },
   mounted() {
     if (this.portal && this.popularArticles.length === 0) {
+      const locale = this.defaultLocale;
       this.$store.dispatch('article/fetch', {
         slug: this.portal.slug,
-        locale: 'en',
+        locale,
       });
     }
   },
@@ -96,15 +114,20 @@ export default {
       return this.replaceRoute('messages');
     },
     openArticleInArticleViewer(link) {
+      let linkToOpen = `${link}?show_plain_layout=true`;
+      const isDark = this.prefersDarkMode;
+      if (isDark) {
+        linkToOpen = `${linkToOpen}&theme=dark`;
+      }
       this.$router.push({
         name: 'article-viewer',
-        params: { link: `${link}?show_plain_layout=true` },
+        params: { link: linkToOpen },
       });
     },
     viewAllArticles() {
+      const locale = this.defaultLocale;
       const {
         portal: { slug },
-        locale = 'en',
       } = window.chatwootWebChannel;
       this.openArticleInArticleViewer(`/hc/${slug}/${locale}`);
     },
