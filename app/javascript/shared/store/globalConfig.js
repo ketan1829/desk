@@ -30,7 +30,7 @@ const state = {
   brandName: "Mimin",
   chatwootInboxToken,
   csmlEditorHost,
-  deploymentEnv: "cloud",
+  deploymentEnv,
   createNewAccountFromDashboard,
   directUploadsEnabled: directUploadsEnabled === 'true',
   disableUserProfileUpdate: disableUserProfileUpdate === 'true',
