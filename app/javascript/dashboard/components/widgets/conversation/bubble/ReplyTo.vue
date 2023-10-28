@@ -2,10 +2,10 @@
   <div
     class="px-2 py-1.5 rounded-sm min-w-[10rem] mb-2"
     :class="{
-      'bg-slate-100 dark:bg-slate-600 dark:text-slate-50':
+      'bg-slate-50 dark:bg-slate-600 dark:text-slate-50':
         messageType === MESSAGE_TYPE.INCOMING,
       'bg-woot-600 text-woot-50': messageType === MESSAGE_TYPE.OUTGOING,
-      '-mx-2': message.content,
+      '-mx-2': !parentHasAttachments,
     }"
   >
     <message-preview
@@ -32,6 +32,10 @@ export default {
     },
     messageType: {
       type: Number,
+      required: true,
+    },
+    parentHasAttachments: {
+      type: Boolean,
       required: true,
     },
   },
