@@ -73,11 +73,11 @@ export const IFrameHelper = {
     iframe.id = 'chatwoot_live_chat_widget';
     iframe.style.visibility = 'hidden';
 
-    let holderClassName = `woot-widget-holder woot--hide woot-elements--${window.$chatwoot.position}`;
-    if (window.$chatwoot.hideMessageBubble) {
+    let holderClassName = `woot-widget-holder woot--hide woot-elements--${window.$lifeel.position}`;
+    if (window.$lifeel.hideMessageBubble) {
       holderClassName += ` woot-widget--without-bubble`;
     }
-    if (isFlatWidgetStyle(window.$chatwoot.widgetStyle)) {
+    if (isFlatWidgetStyle(window.$lifeel.widgetStyle)) {
       holderClassName += ` woot-widget-holder--flat`;
     }
 
@@ -139,7 +139,7 @@ export const IFrameHelper = {
   },
 
   setupAudioListeners: () => {
-    const { baseUrl = '' } = window.$chatwoot;
+    const { baseUrl = '' } = window.$lifeel;
     getAlertAudio(baseUrl, { type: 'widget', alertTone: 'ding' }).then(() =>
       initOnEvents.forEach(event => {
         document.removeEventListener(
@@ -153,16 +153,16 @@ export const IFrameHelper = {
 
   events: {
     loaded: message => {
-      updateAuthCookie(message.config.authToken, window.$chatwoot.baseDomain);
-      window.$chatwoot.hasLoaded = true;
+      updateAuthCookie(message.config.authToken, window.$lifeel.baseDomain);
+      window.$lifeel.hasLoaded = true;
       const campaignsSnoozedTill = Cookies.get('cw_snooze_campaigns_till');
       IFrameHelper.sendMessage('config-set', {
-        locale: window.$chatwoot.locale,
-        position: window.$chatwoot.position,
-        hideMessageBubble: window.$chatwoot.hideMessageBubble,
-        showPopoutButton: window.$chatwoot.showPopoutButton,
-        widgetStyle: window.$chatwoot.widgetStyle,
-        darkMode: window.$chatwoot.darkMode,
+        locale: window.$lifeel.locale,
+        position: window.$lifeel.position,
+        hideMessageBubble: window.$lifeel.hideMessageBubble,
+        showPopoutButton: window.$lifeel.showPopoutButton,
+        widgetStyle: window.$lifeel.widgetStyle,
+        darkMode: window.$lifeel.darkMode,
         campaignsSnoozedTill,
       });
       IFrameHelper.onLoad({
@@ -170,8 +170,8 @@ export const IFrameHelper = {
       });
       IFrameHelper.toggleCloseButton();
 
-      if (window.$chatwoot.user) {
-        IFrameHelper.sendMessage('set-user', window.$chatwoot.user);
+      if (window.$lifeel.user) {
+        IFrameHelper.sendMessage('set-user', window.$lifeel.user);
       }
 
       window.playAudioAlert = () => {};
@@ -180,7 +180,7 @@ export const IFrameHelper = {
         document.addEventListener(e, IFrameHelper.setupAudioListeners, false);
       });
 
-      if (!window.$chatwoot.resetTriggered) {
+      if (!window.$lifeel.resetTriggered) {
         dispatchWindowEvent({ eventName: CHATWOOT_READY });
       }
     },
@@ -195,15 +195,15 @@ export const IFrameHelper = {
       dispatchWindowEvent({ eventName: CHATWOOT_ON_MESSAGE, data });
     },
     setBubbleLabel(message) {
-      setBubbleText(window.$chatwoot.launcherTitle || message.label);
+      setBubbleText(window.$lifeel.launcherTitle || message.label);
     },
 
     setAuthCookie({ data: { widgetAuthToken } }) {
-      updateAuthCookie(widgetAuthToken, window.$chatwoot.baseDomain);
+      updateAuthCookie(widgetAuthToken, window.$lifeel.baseDomain);
     },
 
     setCampaignReadOn() {
-      updateCampaignReadStatus(window.$chatwoot.baseDomain);
+      updateCampaignReadStatus(window.$lifeel.baseDomain);
     },
 
     toggleBubble: state => {
@@ -219,7 +219,7 @@ export const IFrameHelper = {
 
     popoutChatWindow: ({ baseUrl, websiteToken, locale }) => {
       const cwCookie = Cookies.get('cw_conversation');
-      window.$chatwoot.toggle('close');
+      window.$lifeel.toggle('close');
       popoutChatWindow(baseUrl, websiteToken, locale, cwCookie);
     },
 
@@ -253,7 +253,7 @@ export const IFrameHelper = {
 
     resetUnreadMode: () => removeUnreadClass(),
     handleNotificationDot: event => {
-      if (window.$chatwoot.hideMessageBubble) {
+      if (window.$lifeel.hideMessageBubble) {
         return;
       }
 
@@ -288,13 +288,13 @@ export const IFrameHelper = {
     if (IFrameHelper.getBubbleHolder().length) {
       return;
     }
-    createBubbleHolder(window.$chatwoot.hideMessageBubble);
+    createBubbleHolder(window.$lifeel.hideMessageBubble);
     onLocationChangeListener();
 
     let className = 'woot-widget-bubble';
-    let closeBtnClassName = `woot-elements--${window.$chatwoot.position} woot-widget-bubble woot--close woot--hide`;
+    let closeBtnClassName = `woot-elements--${window.$lifeel.position} woot-widget-bubble woot--close woot--hide`;
 
-    if (isFlatWidgetStyle(window.$chatwoot.widgetStyle)) {
+    if (isFlatWidgetStyle(window.$lifeel.widgetStyle)) {
       className += ' woot-widget-bubble--flat';
       closeBtnClassName += ' woot-widget-bubble--flat';
     }

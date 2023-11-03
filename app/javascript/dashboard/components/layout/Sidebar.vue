@@ -199,7 +199,7 @@ export default {
       return this.$route.name === routeName;
     },
     toggleSupportChatWindow() {
-      window.$chatwoot.toggle();
+      window.$lifeel.toggle();
     },
     toggleAccountModal() {
       this.$emit('toggle-account-modal');

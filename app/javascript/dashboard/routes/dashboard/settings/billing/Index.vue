@@ -82,8 +82,8 @@ export default {
       this.$store.dispatch('accounts/checkout');
     },
     onToggleChatWindow() {
-      if (window.$chatwoot) {
-        window.$chatwoot.toggle();
+      if (window.$lifeel) {
+        window.$lifeel.toggle();
       }
     },
   },
