@@ -1,6 +1,6 @@
 {
   "LOGIN": {
-    "TITLE": "Login to Mimin",
+    "TITLE": "Login to Book | Keeper",
     "EMAIL": {
       "LABEL": "Email",
       "PLACEHOLDER": "example@companyname.com",
@@ -12,7 +12,7 @@
     },
     "API": {
       "SUCCESS_MESSAGE": "Login successful",
-      "ERROR_MESSAGE": "Could not connect to Mimin server. Please try again.",
+      "ERROR_MESSAGE": "Could not connect to Book | Keeper server. Please try again.",
       "UNAUTH": "Username or password is incorrect. Please try again."
     },
     "OAUTH": {

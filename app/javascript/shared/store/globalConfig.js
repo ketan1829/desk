@@ -27,7 +27,7 @@ const state = {
   apiChannelThumbnail,
   appVersion,
   azureAppId,
-  brandName: "Mimin",
+  brandName: "Book | Keeper",
   chatwootInboxToken,
   csmlEditorHost,
   deploymentEnv,
@@ -37,13 +37,13 @@ const state = {
   displayManifest: false,
   gitSha,
   hCaptchaSiteKey,
-  installationName: "Mimin",
+  installationName: "Book | Keeper",
   logo,
   logoDark,
   logoThumbnail,
   privacyURL,
   termsURL,
-  widgetBrandURL: "Mimin.io",
+  widgetBrandURL: "Aspen-cap.com",
 };
 
 export const getters = {
