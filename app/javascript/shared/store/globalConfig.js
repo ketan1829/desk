@@ -27,7 +27,7 @@ const state = {
   apiChannelThumbnail,
   appVersion,
   azureAppId,
-  brandName: "Mimin",
+  brandName: "LifeelSpace",
   chatwootInboxToken,
   csmlEditorHost,
   deploymentEnv,
@@ -37,13 +37,13 @@ const state = {
   displayManifest: false,
   gitSha,
   hCaptchaSiteKey,
-  installationName: "Mimin",
+  installationName: "LifeelSpace",
   logo,
   logoDark,
   logoThumbnail,
   privacyURL,
   termsURL,
-  widgetBrandURL: "Mimin.io",
+  widgetBrandURL: "space.lifeel.in",
 };
 
 export const getters = {

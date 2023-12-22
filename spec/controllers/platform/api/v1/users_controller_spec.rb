@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Platform Users API', type: :request do
-  let!(:user) { create(:user, email: 'dev+testing@chatwoot.com', custom_attributes: { test: 'test' }) }
+  let!(:user) { create(:user, email: 'dev+testing@lifeel.in', custom_attributes: { test: 'test' }) }
 
   describe 'GET /platform/api/v1/users/{user_id}' do
     context 'when it is an unauthenticated platform app' do

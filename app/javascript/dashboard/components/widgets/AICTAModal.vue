@@ -101,7 +101,7 @@ export default {
       }
     },
     openOpenAIDoc() {
-      window.open('https://www.chatwoot.com/blog/v2-17', '_blank');
+      window.open('https://@lifeel.in/blog/v2-17', '_blank');
     },
   },
 };
