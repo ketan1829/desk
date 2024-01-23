@@ -1,6 +1,6 @@
 {
-  "name": "Book | Keeper",
-  "description": "Book | Keeper is a customer support tool for instant messaging channels",
+  "name": "PROFITIZE",
+  "description": "PROFITIZE is a customer support tool for instant messaging channels",
   "website": "https://www.Aspen-cap.com/",
   "logo": "https://aspen3-web.deploy.lifeel.in/brand-assets/logo_thumbnail.svg",
   "success_url": "/",
@@ -18,11 +18,11 @@
       "value": "production"
     },
     "FRONTEND_URL": {
-      "description": "Public root URL of the Book | Keeper installation. This will be used in the emails.",
+      "description": "Public root URL of the PROFITIZE installation. This will be used in the emails.",
       "value": "https://CHANGE.herokuapp.com"
     },
     "INSTALLATION_ENV": {
-      "description": "Installation method used for Book | Keeper.",
+      "description": "Installation method used for PROFITIZE.",
       "value": "heroku"
     },
     "REDIS_OPENSSL_VERIFY_MODE":{
