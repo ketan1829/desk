@@ -25,6 +25,7 @@
 # Indexes
 #
 #  index_contacts_on_account_id                          (account_id)
+#  index_contacts_on_account_id_and_last_activity_at     (account_id,last_activity_at DESC NULLS LAST)
 #  index_contacts_on_blocked                             (blocked)
 #  index_contacts_on_lower_email_account_id              (lower((email)::text), account_id)
 #  index_contacts_on_name_email_phone_number_identifier  (name,email,phone_number,identifier) USING gin
@@ -61,6 +62,7 @@ class Contact < ApplicationRecord
   after_create_commit :dispatch_create_event, :ip_lookup
   after_update_commit :dispatch_update_event
   after_destroy_commit :dispatch_destroy_event
+  before_save :sync_contact_attributes
 
   enum contact_type: { visitor: 0, lead: 1, customer: 2 }
 
@@ -168,7 +170,7 @@ class Contact < ApplicationRecord
   end
 
   def self.from_email(email)
-    find_by(email: email.downcase)
+    find_by(email: email&.downcase)
   end
 
   private
@@ -204,6 +206,10 @@ class Contact < ApplicationRecord
   def prepare_jsonb_attributes
     self.additional_attributes = {} if additional_attributes.blank?
     self.custom_attributes = {} if custom_attributes.blank?
+  end
+
+  def sync_contact_attributes
+    ::Contacts::SyncAttributes.new(self).perform
   end
 
   def dispatch_create_event

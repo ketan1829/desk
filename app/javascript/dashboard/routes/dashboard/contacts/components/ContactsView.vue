@@ -1,5 +1,5 @@
 <template>
-  <div class="w-full flex flex-row">
+  <div class="flex flex-row w-full">
     <div class="flex flex-col h-full" :class="wrapClass">
       <contacts-header
         :search-query="searchQuery"
@@ -25,6 +25,7 @@
         @on-sort-change="onSortChange"
       />
       <table-footer
+        class="border-t border-slate-75 dark:border-slate-700/50"
         :current-page="Number(meta.currentPage)"
         :total-count="meta.count"
         :page-size="15"
@@ -80,6 +81,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { useAlert } from 'dashboard/composables';
 
 import ContactsHeader from './Header.vue';
 import ContactsTable from './ContactsTable.vue';
@@ -93,7 +95,6 @@ import filterQueryGenerator from '../../../../helper/filterQueryGenerator';
 import AddCustomViews from 'dashboard/routes/dashboard/customviews/AddCustomViews.vue';
 import DeleteCustomViews from 'dashboard/routes/dashboard/customviews/DeleteCustomViews.vue';
 import { CONTACTS_EVENTS } from '../../../../helper/AnalyticsHelper/events';
-import alertMixin from 'shared/mixins/alertMixin';
 import countries from 'shared/constants/countries.js';
 import { generateValuesForEditCustomViews } from 'dashboard/helper/customViewsHelper';
 
@@ -112,7 +113,6 @@ export default {
     AddCustomViews,
     DeleteCustomViews,
   },
-  mixins: [alertMixin],
   props: {
     label: { type: String, default: '' },
     segmentsId: {
@@ -390,13 +390,22 @@ export default {
       this.fetchContacts(this.pageParameter);
     },
     onExportSubmit() {
+      let query = { payload: [] };
+
+      if (this.hasActiveSegments) {
+        query = this.activeSegment.query;
+      } else if (this.hasAppliedFilters) {
+        query = filterQueryGenerator(this.getAppliedContactFilters);
+      }
+
       try {
-        this.$store.dispatch('contacts/export');
-        this.showAlert(this.$t('EXPORT_CONTACTS.SUCCESS_MESSAGE'));
+        this.$store.dispatch('contacts/export', {
+          ...query,
+          label: this.label,
+        });
+        useAlert(this.$t('EXPORT_CONTACTS.SUCCESS_MESSAGE'));
       } catch (error) {
-        this.showAlert(
-          error.message || this.$t('EXPORT_CONTACTS.ERROR_MESSAGE')
-        );
+        useAlert(error.message || this.$t('EXPORT_CONTACTS.ERROR_MESSAGE'));
       }
     },
     setParamsForEditSegmentModal() {

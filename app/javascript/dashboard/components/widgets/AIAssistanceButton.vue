@@ -35,14 +35,13 @@
 </template>
 <script>
 import { mapGetters } from 'vuex';
+import { useAdmin } from 'dashboard/composables/useAdmin';
+import { useUISettings } from 'dashboard/composables/useUISettings';
 import AICTAModal from './AICTAModal.vue';
 import AIAssistanceModal from './AIAssistanceModal.vue';
-import adminMixin from 'dashboard/mixins/aiMixin';
-import aiMixin from 'dashboard/mixins/isAdmin';
+import aiMixin from 'dashboard/mixins/aiMixin';
 import { CMD_AI_ASSIST } from 'dashboard/routes/dashboard/commands/commandBarBusEvents';
-import eventListenerMixins from 'shared/mixins/eventListenerMixins';
-import { buildHotKeys } from 'shared/helpers/KeyboardHelpers';
-import uiSettingsMixin from 'dashboard/mixins/uiSettings';
+import keyboardEventListenerMixins from 'shared/mixins/keyboardEventListenerMixins';
 import AIAssistanceCTAButton from './AIAssistanceCTAButton.vue';
 
 export default {
@@ -51,7 +50,17 @@ export default {
     AICTAModal,
     AIAssistanceCTAButton,
   },
-  mixins: [aiMixin, eventListenerMixins, adminMixin, uiSettingsMixin],
+  mixins: [aiMixin, keyboardEventListenerMixins],
+  setup() {
+    const { uiSettings, updateUISettings } = useUISettings();
+    const { isAdmin } = useAdmin();
+
+    return {
+      uiSettings,
+      updateUISettings,
+      isAdmin,
+    };
+  },
   data: () => ({
     showAIAssistanceModal: false,
     showAICtaModal: false,
@@ -82,19 +91,22 @@ export default {
   },
 
   mounted() {
-    bus.$on(CMD_AI_ASSIST, this.onAIAssist);
+    this.$emitter.on(CMD_AI_ASSIST, this.onAIAssist);
     this.initialMessage = this.draftMessage;
   },
 
   methods: {
-    onKeyDownHandler(event) {
-      const keyPattern = buildHotKeys(event);
-      const shouldRevertTheContent =
-        ['meta+z', 'ctrl+z'].includes(keyPattern) && !!this.initialMessage;
-      if (shouldRevertTheContent) {
-        this.$emit('replace-text', this.initialMessage);
-        this.initialMessage = '';
-      }
+    getKeyboardEvents() {
+      return {
+        '$mod+KeyZ': {
+          action: () => {
+            if (this.initialMessage) {
+              this.$emit('replace-text', this.initialMessage);
+              this.initialMessage = '';
+            }
+          },
+        },
+      };
     },
     hideAIAssistanceModal() {
       this.recordAnalytics('DISMISS_AI_SUGGESTION', {

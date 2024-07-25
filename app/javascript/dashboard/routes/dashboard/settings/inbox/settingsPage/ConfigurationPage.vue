@@ -104,10 +104,6 @@
     </div>
     <imap-settings :inbox="inbox" />
     <smtp-settings v-if="inbox.imap_enabled" :inbox="inbox" />
-    <microsoft-reauthorize
-      v-if="inbox.microsoft_reauthorization"
-      :inbox="inbox"
-    />
   </div>
   <div v-else-if="isAWhatsAppChannel && !isATwilioChannel">
     <div v-if="inbox.provider_config" class="mx-8">
@@ -130,7 +126,7 @@
         "
       >
         <div
-          class="whatsapp-settings--content items-center flex flex-1 justify-between mt-2"
+          class="flex items-center justify-between flex-1 mt-2 whatsapp-settings--content"
         >
           <woot-input
             v-model.trim="whatsAppInboxAPIKey"
@@ -155,12 +151,11 @@
 </template>
 
 <script>
-import alertMixin from 'shared/mixins/alertMixin';
+import { useAlert } from 'dashboard/composables';
 import inboxMixin from 'shared/mixins/inboxMixin';
 import SettingsSection from '../../../../../components/SettingsSection.vue';
 import ImapSettings from '../ImapSettings.vue';
 import SmtpSettings from '../SmtpSettings.vue';
-import MicrosoftReauthorize from '../channels/microsoft/Reauthorize.vue';
 import { required } from 'vuelidate/lib/validators';
 
 export default {
@@ -168,9 +163,8 @@ export default {
     SettingsSection,
     ImapSettings,
     SmtpSettings,
-    MicrosoftReauthorize,
   },
-  mixins: [inboxMixin, alertMixin],
+  mixins: [inboxMixin],
   props: {
     inbox: {
       type: Object,
@@ -211,9 +205,9 @@ export default {
           },
         };
         await this.$store.dispatch('inboxes/updateInbox', payload);
-        this.showAlert(this.$t('INBOX_MGMT.EDIT.API.SUCCESS_MESSAGE'));
+        useAlert(this.$t('INBOX_MGMT.EDIT.API.SUCCESS_MESSAGE'));
       } catch (error) {
-        this.showAlert(this.$t('INBOX_MGMT.EDIT.API.ERROR_MESSAGE'));
+        useAlert(this.$t('INBOX_MGMT.EDIT.API.ERROR_MESSAGE'));
       }
     },
     async updateWhatsAppInboxAPIKey() {
@@ -230,9 +224,9 @@ export default {
         };
 
         await this.$store.dispatch('inboxes/updateInbox', payload);
-        this.showAlert(this.$t('INBOX_MGMT.EDIT.API.SUCCESS_MESSAGE'));
+        useAlert(this.$t('INBOX_MGMT.EDIT.API.SUCCESS_MESSAGE'));
       } catch (error) {
-        this.showAlert(this.$t('INBOX_MGMT.EDIT.API.ERROR_MESSAGE'));
+        useAlert(this.$t('INBOX_MGMT.EDIT.API.ERROR_MESSAGE'));
       }
     },
   },

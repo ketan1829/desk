@@ -17,7 +17,7 @@
       @error="onImgError"
       @click="onClick"
     />
-    <audio v-else-if="isAudio" controls class="skip-context-menu">
+    <audio v-else-if="isAudio" controls class="skip-context-menu mb-0.5">
       <source :src="`${dataUrl}?t=${Date.now()}`" />
     </audio>
     <gallery-view
@@ -40,6 +40,7 @@ const ALLOWED_FILE_TYPES = {
   IMAGE: 'image',
   VIDEO: 'video',
   AUDIO: 'audio',
+  IG_REEL: 'ig_reel',
 };
 
 export default {
@@ -66,7 +67,10 @@ export default {
       return this.attachment.file_type === ALLOWED_FILE_TYPES.IMAGE;
     },
     isVideo() {
-      return this.attachment.file_type === ALLOWED_FILE_TYPES.VIDEO;
+      return (
+        this.attachment.file_type === ALLOWED_FILE_TYPES.VIDEO ||
+        this.attachment.file_type === ALLOWED_FILE_TYPES.IG_REEL
+      );
     },
     isAudio() {
       return this.attachment.file_type === ALLOWED_FILE_TYPES.AUDIO;

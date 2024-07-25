@@ -78,12 +78,9 @@ const MAXIMUM_FILE_UPLOAD_SIZE = 4; // in MB
 import {
   hasPressedEnterAndNotCmdOrShift,
   hasPressedCommandAndEnter,
-  hasPressedAltAndPKey,
-  hasPressedAltAndLKey,
 } from 'shared/helpers/KeyboardHelpers';
-import eventListenerMixins from 'shared/mixins/eventListenerMixins';
-import uiSettingsMixin from 'dashboard/mixins/uiSettings';
-import { isEditorHotKeyEnabled } from 'dashboard/mixins/uiSettings';
+import keyboardEventListenerMixins from 'shared/mixins/keyboardEventListenerMixins';
+import { useUISettings } from 'dashboard/composables/useUISettings';
 import {
   replaceVariablesInMessage,
   createTypingIndicator,
@@ -91,7 +88,7 @@ import {
 import { CONVERSATION_EVENTS } from '../../../helper/AnalyticsHelper/events';
 import { checkFileSizeLimit } from 'shared/helpers/FileHelper';
 import { uploadFile } from 'dashboard/helper/uploadHelper';
-import alertMixin from 'shared/mixins/alertMixin';
+import { useAlert } from 'dashboard/composables';
 import {
   MESSAGE_EDITOR_MENU_OPTIONS,
   MESSAGE_EDITOR_IMAGE_RESIZES,
@@ -121,7 +118,7 @@ const createState = (
 export default {
   name: 'WootMessageEditor',
   components: { TagAgents, CannedResponse, VariableList },
-  mixins: [eventListenerMixins, uiSettingsMixin, alertMixin],
+  mixins: [keyboardEventListenerMixins],
   props: {
     value: { type: String, default: '' },
     editorId: { type: String, default: '' },
@@ -140,6 +137,19 @@ export default {
     allowSignature: { type: Boolean, default: false },
     channelType: { type: String, default: '' },
     showImageResizeToolbar: { type: Boolean, default: false }, // A kill switch to show or hide the image toolbar
+  },
+  setup() {
+    const {
+      uiSettings,
+      isEditorHotKeyEnabled,
+      fetchSignatureFlagFromUISettings,
+    } = useUISettings();
+
+    return {
+      uiSettings,
+      isEditorHotKeyEnabled,
+      fetchSignatureFlagFromUISettings,
+    };
   },
   data() {
     return {
@@ -280,7 +290,7 @@ export default {
       // this is considered the source of truth, we watch this property
       // on change, we toggle the signature in the editor
       if (this.allowSignature && !this.isPrivate && this.channelType) {
-        return this.fetchSignatureFlagFromUiSettings(this.channelType);
+        return this.fetchSignatureFlagFromUISettings(this.channelType);
       }
 
       return false;
@@ -354,10 +364,16 @@ export default {
     // Components using this
     // 1. SearchPopover.vue
 
-    bus.$on(BUS_EVENTS.INSERT_INTO_RICH_EDITOR, this.insertContentIntoEditor);
+    this.$emitter.on(
+      BUS_EVENTS.INSERT_INTO_RICH_EDITOR,
+      this.insertContentIntoEditor
+    );
   },
   beforeDestroy() {
-    bus.$off(BUS_EVENTS.INSERT_INTO_RICH_EDITOR, this.insertContentIntoEditor);
+    this.$emitter.off(
+      BUS_EVENTS.INSERT_INTO_RICH_EDITOR,
+      this.insertContentIntoEditor
+    );
   },
   methods: {
     reloadState(content = this.value) {
@@ -517,18 +533,26 @@ export default {
       }
     },
     isEnterToSendEnabled() {
-      return isEditorHotKeyEnabled(this.uiSettings, 'enter');
+      return this.isEditorHotKeyEnabled('enter');
     },
     isCmdPlusEnterToSendEnabled() {
-      return isEditorHotKeyEnabled(this.uiSettings, 'cmd_enter');
+      return this.isEditorHotKeyEnabled('cmd_enter');
     },
-    handleKeyEvents(e) {
-      if (hasPressedAltAndPKey(e)) {
-        this.focusEditorInputField();
-      }
-      if (hasPressedAltAndLKey(e)) {
-        this.focusEditorInputField();
-      }
+    getKeyboardEvents() {
+      return {
+        'Alt+KeyP': {
+          action: () => {
+            this.focusEditorInputField();
+          },
+          allowOnFocusedInput: true,
+        },
+        'Alt+KeyL': {
+          action: () => {
+            this.focusEditorInputField();
+          },
+          allowOnFocusedInput: true,
+        },
+      };
     },
     focusEditorInputField(pos = 'end') {
       const { tr } = this.editorView.state;
@@ -599,7 +623,7 @@ export default {
       if (checkFileSizeLimit(file, MAXIMUM_FILE_UPLOAD_SIZE)) {
         this.uploadImageToStorage(file);
       } else {
-        this.showAlert(
+        useAlert(
           this.$t(
             'PROFILE_SETTINGS.FORM.MESSAGE_SIGNATURE_SECTION.IMAGE_UPLOAD_SIZE_ERROR',
             {
@@ -617,13 +641,13 @@ export default {
         if (fileUrl) {
           this.onImageInsertInEditor(fileUrl);
         }
-        this.showAlert(
+        useAlert(
           this.$t(
             'PROFILE_SETTINGS.FORM.MESSAGE_SIGNATURE_SECTION.IMAGE_UPLOAD_SUCCESS'
           )
         );
       } catch (error) {
-        this.showAlert(
+        useAlert(
           this.$t(
             'PROFILE_SETTINGS.FORM.MESSAGE_SIGNATURE_SECTION.IMAGE_UPLOAD_ERROR'
           )

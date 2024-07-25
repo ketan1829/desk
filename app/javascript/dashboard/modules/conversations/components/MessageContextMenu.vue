@@ -104,9 +104,8 @@
   </div>
 </template>
 <script>
-import alertMixin from 'shared/mixins/alertMixin';
+import { useAlert } from 'dashboard/composables';
 import { mapGetters } from 'vuex';
-import { mixin as clickaway } from 'vue-clickaway';
 import messageFormatterMixin from 'shared/mixins/messageFormatterMixin';
 import AddCannedModal from 'dashboard/routes/dashboard/settings/canned/AddCanned.vue';
 import { copyTextToClipboard } from 'shared/helpers/clipboard';
@@ -124,7 +123,7 @@ export default {
     TranslateModal,
     MenuItem,
   },
-  mixins: [alertMixin, clickaway, messageFormatterMixin],
+  mixins: [messageFormatterMixin],
   props: {
     message: {
       type: Object,
@@ -184,12 +183,12 @@ export default {
       await copyTextToClipboard(
         `${fullConversationURL}?messageId=${this.messageId}`
       );
-      this.showAlert(this.$t('CONVERSATION.CONTEXT_MENU.LINK_COPIED'));
+      useAlert(this.$t('CONVERSATION.CONTEXT_MENU.LINK_COPIED'));
       this.handleClose();
     },
     async handleCopy() {
       await copyTextToClipboard(this.plainTextContent);
-      this.showAlert(this.$t('CONTACT_PANEL.COPY_SUCCESSFUL'));
+      useAlert(this.$t('CONTACT_PANEL.COPY_SUCCESSFUL'));
       this.handleClose();
     },
     showCannedResponseModal() {
@@ -234,10 +233,10 @@ export default {
           conversationId: this.conversationId,
           messageId: this.messageId,
         });
-        this.showAlert(this.$t('CONVERSATION.SUCCESS_DELETE_MESSAGE'));
+        useAlert(this.$t('CONVERSATION.SUCCESS_DELETE_MESSAGE'));
         this.handleClose();
       } catch (error) {
-        this.showAlert(this.$t('CONVERSATION.FAIL_DELETE_MESSSAGE'));
+        useAlert(this.$t('CONVERSATION.FAIL_DELETE_MESSSAGE'));
       }
     },
     closeDeleteModal() {

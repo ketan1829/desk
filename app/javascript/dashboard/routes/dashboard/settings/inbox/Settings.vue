@@ -21,6 +21,9 @@
       </woot-tabs>
     </setting-intro-banner>
 
+    <microsoft-reauthorize v-if="microsoftUnauthorized" :inbox="inbox" />
+    <facebook-reauthorize v-if="facebookUnauthorized" :inbox="inbox" />
+
     <div v-if="selectedTabKey === 'inbox_settings'" class="mx-8">
       <settings-section
         :title="$t('INBOX_MGMT.SETTINGS_POPUP.INBOX_UPDATE_TITLE')"
@@ -287,7 +290,7 @@
         <label v-if="isAWebWidgetInbox">
           {{ $t('INBOX_MGMT.FEATURES.LABEL') }}
         </label>
-        <div v-if="isAWebWidgetInbox" class="pt-2 pb-4 flex gap-2">
+        <div v-if="isAWebWidgetInbox" class="flex gap-2 pt-2 pb-4">
           <input
             v-model="selectedFeatureFlags"
             type="checkbox"
@@ -298,7 +301,7 @@
             {{ $t('INBOX_MGMT.FEATURES.DISPLAY_FILE_PICKER') }}
           </label>
         </div>
-        <div v-if="isAWebWidgetInbox" class="pb-4 flex gap-2">
+        <div v-if="isAWebWidgetInbox" class="flex gap-2 pb-4">
           <input
             v-model="selectedFeatureFlags"
             type="checkbox"
@@ -309,7 +312,7 @@
             {{ $t('INBOX_MGMT.FEATURES.DISPLAY_EMOJI_PICKER') }}
           </label>
         </div>
-        <div v-if="isAWebWidgetInbox" class="pb-4 flex gap-2">
+        <div v-if="isAWebWidgetInbox" class="flex gap-2 pb-4">
           <input
             v-model="selectedFeatureFlags"
             type="checkbox"
@@ -320,7 +323,7 @@
             {{ $t('INBOX_MGMT.FEATURES.ALLOW_END_CONVERSATION') }}
           </label>
         </div>
-        <div v-if="isAWebWidgetInbox" class="pb-4 flex gap-2">
+        <div v-if="isAWebWidgetInbox" class="flex gap-2 pb-4">
           <input
             v-model="selectedFeatureFlags"
             type="checkbox"
@@ -397,7 +400,6 @@
           @click="updateInbox"
         />
       </settings-section>
-      <facebook-reauthorize v-if="isAFacebookInbox" :inbox-id="inbox.id" />
     </div>
 
     <div v-if="selectedTabKey === 'collaborators'" class="mx-8">
@@ -425,7 +427,7 @@
 import { mapGetters } from 'vuex';
 import { shouldBeUrl } from 'shared/helpers/Validators';
 import configMixin from 'shared/mixins/configMixin';
-import alertMixin from 'shared/mixins/alertMixin';
+import { useAlert } from 'dashboard/composables';
 import SettingIntroBanner from 'dashboard/components/widgets/SettingIntroBanner.vue';
 import SettingsSection from '../../../../components/SettingsSection.vue';
 import inboxMixin from 'shared/mixins/inboxMixin';
@@ -435,6 +437,7 @@ import WeeklyAvailability from './components/WeeklyAvailability.vue';
 import GreetingsEditor from 'shared/components/GreetingsEditor.vue';
 import ConfigurationPage from './settingsPage/ConfigurationPage.vue';
 import CollaboratorsPage from './settingsPage/CollaboratorsPage.vue';
+import MicrosoftReauthorize from './channels/microsoft/Reauthorize.vue';
 import WidgetBuilder from './WidgetBuilder.vue';
 import BotConfiguration from './components/BotConfiguration.vue';
 import { FEATURE_FLAGS } from '../../../../featureFlags';
@@ -453,8 +456,9 @@ export default {
     WeeklyAvailability,
     WidgetBuilder,
     SenderNameExamplePreview,
+    MicrosoftReauthorize,
   },
-  mixins: [alertMixin, configMixin, inboxMixin],
+  mixins: [configMixin, inboxMixin],
   data() {
     return {
       avatarFile: null,
@@ -537,7 +541,8 @@ export default {
         this.isALineChannel ||
         this.isAPIInbox ||
         (this.isAnEmailChannel && !this.inbox.provider) ||
-        (this.isAnEmailChannel && this.inbox.provider === 'microsoft') ||
+        this.isAMicrosoftInbox ||
+        this.isAGoogleInbox ||
         this.isAWhatsAppChannel ||
         this.isAWebWidgetInbox
       ) {
@@ -589,7 +594,9 @@ export default {
       return this.inbox.name;
     },
     canLocktoSingleConversation() {
-      return this.isASmsInbox || this.isAWhatsAppChannel;
+      return (
+        this.isASmsInbox || this.isAWhatsAppChannel || this.isAFacebookInbox
+      );
     },
     inboxNameLabel() {
       if (this.isAWebWidgetInbox) {
@@ -611,6 +618,12 @@ export default {
       )
         return true;
       return false;
+    },
+    microsoftUnauthorized() {
+      return this.isAMicrosoftInbox && this.inbox.reauthorization_required;
+    },
+    facebookUnauthorized() {
+      return this.isAFacebookInbox && this.inbox.reauthorization_required;
     },
   },
   watch: {
@@ -707,11 +720,9 @@ export default {
           payload.avatar = this.avatarFile;
         }
         await this.$store.dispatch('inboxes/updateInbox', payload);
-        this.showAlert(this.$t('INBOX_MGMT.EDIT.API.SUCCESS_MESSAGE'));
+        useAlert(this.$t('INBOX_MGMT.EDIT.API.SUCCESS_MESSAGE'));
       } catch (error) {
-        this.showAlert(
-          error.message || this.$t('INBOX_MGMT.EDIT.API.ERROR_MESSAGE')
-        );
+        useAlert(error.message || this.$t('INBOX_MGMT.EDIT.API.ERROR_MESSAGE'));
       }
     },
     handleImageUpload({ file, url }) {
@@ -726,9 +737,9 @@ export default {
         );
         this.avatarFile = null;
         this.avatarUrl = '';
-        this.showAlert(this.$t('INBOX_MGMT.DELETE.API.AVATAR_SUCCESS_MESSAGE'));
+        useAlert(this.$t('INBOX_MGMT.DELETE.API.AVATAR_SUCCESS_MESSAGE'));
       } catch (error) {
-        this.showAlert(
+        useAlert(
           error.message
             ? error.message
             : this.$t('INBOX_MGMT.DELETE.API.AVATAR_ERROR_MESSAGE')

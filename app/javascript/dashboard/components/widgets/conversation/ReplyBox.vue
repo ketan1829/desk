@@ -100,7 +100,7 @@
       <attachment-preview
         class="flex-col mt-4"
         :attachments="attachedFiles"
-        :remove-attachment="removeAttachment"
+        @remove-attachment="removeAttachment"
       />
     </div>
     <message-signature-missing-alert
@@ -153,8 +153,9 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { mixin as clickaway } from 'vue-clickaway';
-import alertMixin from 'shared/mixins/alertMixin';
+import { useAlert } from 'dashboard/composables';
+import { useUISettings } from 'dashboard/composables/useUISettings';
+import keyboardEventListenerMixins from 'shared/mixins/keyboardEventListenerMixins';
 
 import CannedResponse from './CannedResponse.vue';
 import ReplyToMessage from './ReplyToMessage.vue';
@@ -178,13 +179,10 @@ import {
   replaceVariablesInMessage,
 } from '@chatwoot/utils';
 import WhatsappTemplates from './WhatsappTemplates/Modal.vue';
-import { buildHotKeys } from 'shared/helpers/KeyboardHelpers';
 import { MESSAGE_MAX_LENGTH } from 'shared/helpers/MessageTypeHelper';
 import inboxMixin, { INBOX_FEATURES } from 'shared/mixins/inboxMixin';
-import uiSettingsMixin from 'dashboard/mixins/uiSettings';
 import { trimContent, debounce } from '@chatwoot/utils';
 import wootConstants from 'dashboard/constants/globals';
-import { isEditorHotKeyEnabled } from 'dashboard/mixins/uiSettings';
 import { CONVERSATION_EVENTS } from '../../../helper/AnalyticsHelper/events';
 import rtlMixin from 'shared/mixins/rtlMixin';
 import fileUploadMixin from 'dashboard/mixins/fileUploadMixin';
@@ -198,7 +196,7 @@ import {
 import { LOCAL_STORAGE_KEYS } from 'dashboard/constants/localStorage';
 import { LocalStorage } from 'shared/helpers/localStorage';
 
-const EmojiInput = () => import('shared/components/emoji/EmojiInput');
+const EmojiInput = () => import('shared/components/emoji/EmojiInput.vue');
 
 export default {
   components: {
@@ -218,19 +216,32 @@ export default {
     ArticleSearchPopover,
   },
   mixins: [
-    clickaway,
     inboxMixin,
-    uiSettingsMixin,
-    alertMixin,
     messageFormatterMixin,
     rtlMixin,
     fileUploadMixin,
+    keyboardEventListenerMixins,
   ],
   props: {
     popoutReplyBox: {
       type: Boolean,
       default: false,
     },
+  },
+  setup() {
+    const {
+      uiSettings,
+      updateUISettings,
+      isEditorHotKeyEnabled,
+      fetchSignatureFlagFromUISettings,
+    } = useUISettings();
+
+    return {
+      uiSettings,
+      updateUISettings,
+      isEditorHotKeyEnabled,
+      fetchSignatureFlagFromUISettings,
+    };
   },
   data() {
     return {
@@ -311,7 +322,7 @@ export default {
             agentId,
           })
           .then(() => {
-            this.showAlert(this.$t('CONVERSATION.CHANGE_AGENT'));
+            useAlert(this.$t('CONVERSATION.CHANGE_AGENT'));
           });
       },
     },
@@ -407,7 +418,7 @@ export default {
       if (this.isPrivate) {
         sendMessageText = this.$t('CONVERSATION.REPLYBOX.CREATE');
       }
-      const keyLabel = isEditorHotKeyEnabled(this.uiSettings, 'cmd_enter')
+      const keyLabel = this.isEditorHotKeyEnabled('cmd_enter')
         ? '(⌘ + ↵)'
         : '(↵)';
       return `${sendMessageText} ${keyLabel}`;
@@ -480,7 +491,7 @@ export default {
       return !!this.signatureToApply;
     },
     sendWithSignature() {
-      return this.fetchSignatureFlagFromUiSettings(this.channelType);
+      return this.fetchSignatureFlagFromUISettings(this.channelType);
     },
     editorMessageKey() {
       const { editor_message_key: isEnabled } = this.uiSettings;
@@ -502,11 +513,10 @@ export default {
       return `draft-${this.conversationIdByRoute}-${this.replyType}`;
     },
     audioRecordFormat() {
-      if (
-        this.isAWhatsAppChannel ||
-        this.isAPIInbox ||
-        this.isATelegramChannel
-      ) {
+      if (this.isAWhatsAppChannel || this.isATelegramChannel) {
+        return AUDIO_FORMATS.MP3;
+      }
+      if (this.isAPIInbox) {
         return AUDIO_FORMATS.OGG;
       }
       return AUDIO_FORMATS.WAV;
@@ -598,12 +608,15 @@ export default {
     );
 
     this.fetchAndSetReplyTo();
-    bus.$on(BUS_EVENTS.TOGGLE_REPLY_TO_MESSAGE, this.fetchAndSetReplyTo);
+    this.$emitter.on(
+      BUS_EVENTS.TOGGLE_REPLY_TO_MESSAGE,
+      this.fetchAndSetReplyTo
+    );
 
     // A hacky fix to solve the drag and drop
     // Is showing on top of new conversation modal drag and drop
     // TODO need to find a better solution
-    bus.$on(
+    this.$emitter.on(
       BUS_EVENTS.NEW_CONVERSATION_MODAL,
       this.onNewConversationModalActive
     );
@@ -611,10 +624,13 @@ export default {
   destroyed() {
     document.removeEventListener('paste', this.onPaste);
     document.removeEventListener('keydown', this.handleKeyEvents);
-    bus.$off(BUS_EVENTS.TOGGLE_REPLY_TO_MESSAGE, this.fetchAndSetReplyTo);
+    this.$emitter.off(
+      BUS_EVENTS.TOGGLE_REPLY_TO_MESSAGE,
+      this.fetchAndSetReplyTo
+    );
   },
   beforeDestroy() {
-    bus.$off(
+    this.$emitter.off(
       BUS_EVENTS.NEW_CONVERSATION_MODAL,
       this.onNewConversationModalActive
     );
@@ -627,7 +643,7 @@ export default {
         const lines = title.split('\n');
         const nonEmptyLines = lines.filter(line => line.trim() !== '');
         const filteredMarkdown = nonEmptyLines.join(' ');
-        bus.$emit(
+        this.$emitter.emit(
           BUS_EVENTS.INSERT_INTO_RICH_EDITOR,
           `[${filteredMarkdown}](${url})`
         );
@@ -701,24 +717,41 @@ export default {
         this.$store.dispatch('draftMessages/delete', { key });
       }
     },
-    handleKeyEvents(e) {
-      const keyCode = buildHotKeys(e);
-      if (keyCode === 'escape') {
-        this.hideEmojiPicker();
-        this.hideMentions();
-      } else if (keyCode === 'meta+k') {
-        const ninja = document.querySelector('ninja-keys');
-        ninja.open();
-        e.preventDefault();
-      } else if (keyCode === 'enter' && this.isAValidEvent('enter')) {
-        this.onSendReply();
-        e.preventDefault();
-      } else if (
-        ['meta+enter', 'ctrl+enter'].includes(keyCode) &&
-        this.isAValidEvent('cmd_enter')
-      ) {
-        this.onSendReply();
-      }
+    getKeyboardEvents() {
+      return {
+        Escape: {
+          action: () => {
+            this.hideEmojiPicker();
+            this.hideMentions();
+          },
+          allowOnFocusedInput: true,
+        },
+        '$mod+KeyK': {
+          action: e => {
+            e.preventDefault();
+            const ninja = document.querySelector('ninja-keys');
+            ninja.open();
+          },
+          allowOnFocusedInput: true,
+        },
+        Enter: {
+          action: e => {
+            if (this.isAValidEvent('enter')) {
+              this.onSendReply();
+              e.preventDefault();
+            }
+          },
+          allowOnFocusedInput: true,
+        },
+        '$mod+Enter': {
+          action: () => {
+            if (this.isAValidEvent('cmd_enter')) {
+              this.onSendReply();
+            }
+          },
+          allowOnFocusedInput: true,
+        },
+      };
     },
     isAValidEvent(selectedKey) {
       return (
@@ -727,7 +760,7 @@ export default {
         !this.showCannedMenu &&
         !this.showVariablesMenu &&
         this.isFocused &&
-        isEditorHotKeyEnabled(this.uiSettings, selectedKey)
+        this.isEditorHotKeyEnabled(selectedKey)
       );
     },
     onPaste(e) {
@@ -852,14 +885,14 @@ export default {
           'createPendingMessageAndSend',
           messagePayload
         );
-        bus.$emit(BUS_EVENTS.SCROLL_TO_MESSAGE);
-        bus.$emit(BUS_EVENTS.MESSAGE_SENT);
+        this.$emitter.emit(BUS_EVENTS.SCROLL_TO_MESSAGE);
+        this.$emitter.emit(BUS_EVENTS.MESSAGE_SENT);
         this.removeFromDraft();
         this.sendMessageAnalyticsData(messagePayload.private);
       } catch (error) {
         const errorMessage =
           error?.response?.data?.error || this.$t('CONVERSATION.MESSAGE_ERROR');
-        this.showAlert(errorMessage);
+        useAlert(errorMessage);
       }
     },
     async onSendWhatsAppReply(messagePayload) {
@@ -937,6 +970,13 @@ export default {
       this.bccEmails = '';
       this.toEmails = '';
     },
+    clearRecorder() {
+      this.isRecordingAudio = false;
+      // Only clear the recorded audio when we click toggle button.
+      this.attachedFiles = this.attachedFiles.filter(
+        file => !file?.isRecordedAudio
+      );
+    },
     toggleEmojiPicker() {
       this.showEmojiPicker = !this.showEmojiPicker;
     },
@@ -944,8 +984,7 @@ export default {
       this.isRecordingAudio = !this.isRecordingAudio;
       this.isRecorderAudioStopped = !this.isRecordingAudio;
       if (!this.isRecordingAudio) {
-        this.clearMessage();
-        this.clearEmailField();
+        this.clearRecorder();
       }
     },
     toggleAudioRecorderPlayPause() {
@@ -989,7 +1028,13 @@ export default {
       }
     },
     onFinishRecorder(file) {
-      return file && this.onFileUpload(file);
+      // Added a new key isRecordedAudio to the file to find it's and recorded audio
+      // Because to filter and show only non recorded audio and other attachments
+      const autoRecordedFile = {
+        ...file,
+        isRecordedAudio: true,
+      };
+      return file && this.onFileUpload(autoRecordedFile);
     },
     toggleTyping(status) {
       const conversationId = this.currentChat.id;
@@ -1015,13 +1060,12 @@ export default {
           isPrivate: this.isPrivate,
           thumb: reader.result,
           blobSignedId: blob ? blob.signed_id : undefined,
+          isRecordedAudio: file?.isRecordedAudio || false,
         });
       };
     },
-    removeAttachment(itemIndex) {
-      this.attachedFiles = this.attachedFiles.filter(
-        (item, index) => itemIndex !== index
-      );
+    removeAttachment(attachments) {
+      this.attachedFiles = attachments;
     },
     setReplyToInPayload(payload) {
       if (this.inReplyTo?.id) {
@@ -1168,7 +1212,7 @@ export default {
     resetReplyToMessage() {
       const replyStorageKey = LOCAL_STORAGE_KEYS.MESSAGE_REPLY_TO;
       LocalStorage.deleteFromJsonStore(replyStorageKey, this.conversationId);
-      bus.$emit(BUS_EVENTS.TOGGLE_REPLY_TO_MESSAGE);
+      this.$emitter.emit(BUS_EVENTS.TOGGLE_REPLY_TO_MESSAGE);
     },
     onNewConversationModalActive(isActive) {
       // Issue is if the new conversation modal is open and we drag and drop the file
@@ -1226,6 +1270,7 @@ export default {
     }
   }
 }
+
 .send-button {
   @apply mb-0;
 }
@@ -1250,6 +1295,7 @@ export default {
 
 .emoji-dialog--rtl {
   @apply left-[unset] -right-80;
+
   &::before {
     transform: rotate(90deg);
     filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.08));

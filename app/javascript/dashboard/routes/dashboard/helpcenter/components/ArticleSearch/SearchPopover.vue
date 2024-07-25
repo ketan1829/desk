@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed flex items-center justify-center w-screen h-screen bg-modal-backdrop-light dark:bg-modal-backdrop-dark top-0 left-0 z-50"
+    class="fixed top-0 left-0 z-50 flex items-center justify-center w-screen h-screen bg-modal-backdrop-light dark:bg-modal-backdrop-dark"
   >
     <div
       v-on-clickaway="onClose"
@@ -34,11 +34,8 @@
 
 <script>
 import { debounce } from '@chatwoot/utils';
-import { mixin as clickaway } from 'vue-clickaway';
-import {
-  isEscape,
-  isActiveElementTypeable,
-} from 'shared/helpers/KeyboardHelpers';
+import { useAlert } from 'dashboard/composables';
+import keyboardEventListenerMixins from 'shared/mixins/keyboardEventListenerMixins';
 
 import SearchHeader from './Header.vue';
 import SearchResults from './SearchResults.vue';
@@ -46,7 +43,6 @@ import ArticleView from './ArticleView.vue';
 import ArticlesAPI from 'dashboard/api/helpCenter/articles';
 import { buildPortalArticleURL } from 'dashboard/helper/portalHelper';
 import portalMixin from '../../mixins/portalMixin';
-import alertMixin from 'shared/mixins/alertMixin';
 
 export default {
   name: 'ArticleSearchPopover',
@@ -55,7 +51,7 @@ export default {
     SearchResults,
     ArticleView,
   },
-  mixins: [clickaway, portalMixin, alertMixin],
+  mixins: [portalMixin, keyboardEventListenerMixins],
   props: {
     selectedPortalSlug: {
       type: String,
@@ -97,10 +93,6 @@ export default {
   mounted() {
     this.fetchArticlesByQuery(this.searchQuery);
     this.debounceSearch = debounce(this.fetchArticlesByQuery, 500, false);
-    document.body.addEventListener('keydown', this.closeOnEsc);
-  },
-  beforeDestroy() {
-    document.body.removeEventListener('keydown', this.closeOnEsc);
   },
   methods: {
     generateArticleUrl(article) {
@@ -153,16 +145,18 @@ export default {
       const article = this.activeArticle(id || this.activeId);
 
       this.$emit('insert', article);
-      this.showAlert(
-        this.$t('HELP_CENTER.ARTICLE_SEARCH.SUCCESS_ARTICLE_INSERTED')
-      );
+      useAlert(this.$t('HELP_CENTER.ARTICLE_SEARCH.SUCCESS_ARTICLE_INSERTED'));
       this.onClose();
     },
-    closeOnEsc(e) {
-      if (isEscape(e) && !isActiveElementTypeable(e)) {
-        e.preventDefault();
-        this.onClose();
-      }
+    getKeyboardEvents() {
+      return {
+        Escape: {
+          action: () => {
+            this.onClose();
+          },
+          allowOnFocusedInput: true,
+        },
+      };
     },
   },
 };

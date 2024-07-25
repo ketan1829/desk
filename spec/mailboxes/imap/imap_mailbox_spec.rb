@@ -54,6 +54,22 @@ RSpec.describe Imap::ImapMailbox do
       end
     end
 
+    context 'when a new email with invalid from' do
+      let(:inbound_mail) { create_inbound_email_from_mail(from: 'invalidemail', to: 'imap@gmail.com', subject: 'Hello!') }
+
+      it 'does not create a new conversation' do
+        expect { class_instance.process(inbound_mail.mail, channel) }.not_to raise_error
+      end
+    end
+
+    context 'when an auto reply email' do
+      let(:auto_reply_mail) { create_inbound_email_from_fixture('auto_reply.eml') }
+
+      it 'does not create a new conversation' do
+        expect { class_instance.process(auto_reply_mail.mail, channel) }.not_to change(Conversation, :count)
+      end
+    end
+
     context 'when a reply for existing email conversation' do
       let(:prev_conversation) { create(:conversation, account: account, inbox: channel.inbox, assignee: agent) }
       let(:reply_mail) do

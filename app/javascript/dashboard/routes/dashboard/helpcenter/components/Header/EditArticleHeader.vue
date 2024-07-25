@@ -108,15 +108,13 @@
 </template>
 
 <script>
-import alertMixin from 'shared/mixins/alertMixin';
-import { mixin as clickaway } from 'vue-clickaway';
+import { useAlert } from 'dashboard/composables';
 import wootConstants from 'dashboard/constants/globals';
 import { PORTALS_EVENTS } from '../../../../../helper/AnalyticsHelper/events';
 
 const { ARTICLE_STATUS_TYPES } = wootConstants;
 
 export default {
-  mixins: [alertMixin, clickaway],
   props: {
     isSidebarOpen: {
       type: Boolean,
@@ -201,7 +199,7 @@ export default {
         this.alertMessage =
           error?.message || this.statusUpdateErrorMessage(status);
       } finally {
-        this.showAlert(this.alertMessage);
+        useAlert(this.alertMessage);
       }
     },
     statusUpdateSuccessMessage(status) {

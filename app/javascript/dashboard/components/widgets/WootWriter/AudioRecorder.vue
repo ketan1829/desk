@@ -5,12 +5,13 @@
 </template>
 
 <script>
+import getUuid from 'widget/helpers/uuid';
 import 'video.js/dist/video-js.css';
 import 'videojs-record/dist/css/videojs.record.css';
 
 import videojs from 'video.js';
 
-import alertMixin from '../../../../shared/mixins/alertMixin';
+import { useAlert } from 'dashboard/composables';
 
 import Recorder from 'opus-recorder';
 
@@ -28,16 +29,35 @@ import OpusRecorderEngine from 'videojs-record/dist/plugins/videojs.record.opus-
 
 import { format, addSeconds } from 'date-fns';
 import { AUDIO_FORMATS } from 'shared/constants/messages';
+import { convertWavToMp3 } from './utils/mp3ConversionUtils';
 
 WaveSurfer.microphone = MicrophonePlugin;
 
+const RECORDER_CONFIG = {
+  [AUDIO_FORMATS.WAV]: {
+    audioMimeType: 'audio/wav',
+    audioWorkerURL: waveWorker,
+  },
+  [AUDIO_FORMATS.MP3]: {
+    audioMimeType: 'audio/wav',
+    audioWorkerURL: waveWorker,
+  },
+  [AUDIO_FORMATS.OGG]: {
+    audioMimeType: 'audio/ogg',
+    audioWorkerURL: encoderWorker,
+  },
+};
+
 export default {
   name: 'WootAudioRecorder',
-  mixins: [alertMixin],
   props: {
     audioRecordFormat: {
       type: String,
       default: AUDIO_FORMATS.WAV,
+    },
+    isAWhatsAppChannel: {
+      type: Boolean,
+      default: false,
     },
   },
   data() {
@@ -88,14 +108,7 @@ export default {
             audioSampleRate: 48000,
             audioBitRate: 128,
             audioEngine: 'opus-recorder',
-            ...(this.audioRecordFormat === AUDIO_FORMATS.WAV && {
-              audioMimeType: 'audio/wav',
-              audioWorkerURL: waveWorker,
-            }),
-            ...(this.audioRecordFormat === AUDIO_FORMATS.OGG && {
-              audioMimeType: 'audio/ogg',
-              audioWorkerURL: encoderWorker,
-            }),
+            ...RECORDER_CONFIG[this.audioRecordFormat],
           },
         },
       },
@@ -133,7 +146,11 @@ export default {
   methods: {
     deviceReady() {
       if (this.player.record().engine instanceof OpusRecorderEngine) {
-        if (this.audioRecordFormat === AUDIO_FORMATS.WAV) {
+        if (
+          [AUDIO_FORMATS.WAV, AUDIO_FORMATS.MP3].includes(
+            this.audioRecordFormat
+          )
+        ) {
           this.player.record().engine.audioType = 'audio/wav';
         }
       }
@@ -145,12 +162,16 @@ export default {
     stopRecord() {
       this.fireStateRecorderChanged('stopped');
     },
-    finishRecord() {
-      const file = new File(
-        [this.player.recordedData],
-        this.player.recordedData.name,
-        { type: this.player.recordedData.type }
-      );
+    async finishRecord() {
+      let recordedContent = this.player.recordedData;
+      let fileName = this.player.recordedData.name;
+      let type = this.player.recordedData.type;
+      if (this.audioRecordFormat === AUDIO_FORMATS.MP3) {
+        recordedContent = await convertWavToMp3(this.player.recordedData);
+        fileName = `${getUuid()}.mp3`;
+        type = AUDIO_FORMATS.MP3;
+      }
+      const file = new File([recordedContent], fileName, { type });
       this.fireRecorderBlob(file);
     },
     progressRecord() {
@@ -166,14 +187,10 @@ export default {
         deviceErrorName?.includes('notallowederror') ||
         deviceErrorName?.includes('permissiondeniederror')
       ) {
-        this.showAlert(
-          this.$t('CONVERSATION.REPLYBOX.TIP_AUDIORECORDER_PERMISSION')
-        );
+        useAlert(this.$t('CONVERSATION.REPLYBOX.TIP_AUDIORECORDER_PERMISSION'));
         this.fireStateRecorderChanged('notallowederror');
       } else {
-        this.showAlert(
-          this.$t('CONVERSATION.REPLYBOX.TIP_AUDIORECORDER_ERROR')
-        );
+        useAlert(this.$t('CONVERSATION.REPLYBOX.TIP_AUDIORECORDER_ERROR'));
       }
     },
     formatTimeProgress() {
@@ -231,7 +248,20 @@ export default {
     @apply bg-transparent max-h-60 min-h-[3rem] pt-4 px-0 pb-0 resize-none;
   }
 }
-.video-js .vjs-control-bar {
-  background-color: transparent;
+
+// Added to override the default text and bg style to support dark and light mode.
+.video-js .vjs-control-bar,
+.vjs-record.video-js .vjs-control.vjs-record-indicator:before {
+  @apply text-slate-600 dark:text-slate-200 bg-transparent dark:bg-transparent;
+}
+
+// Added to fix  div overlays the screen and takes over the button clicks
+// https://github.com/collab-project/videojs-record/issues/688
+// https://github.com/collab-project/videojs-record/pull/709
+.vjs-record.video-js .vjs-control.vjs-record-indicator.vjs-hidden,
+.vjs-record.video-js .vjs-control.vjs-record-indicator,
+.vjs-record.video-js .vjs-control.vjs-record-indicator:before,
+.vjs-record.video-js .vjs-control.vjs-record-indicator:after {
+  @apply pointer-events-none;
 }
 </style>

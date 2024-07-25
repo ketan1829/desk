@@ -5,14 +5,24 @@
         v-model="name"
         :class="{ error: $v.name.$error }"
         class="w-full"
+        :styles="{
+          borderRadius: '12px',
+          padding: '6px 12px',
+          fontSize: '14px',
+        }"
         :label="$t('SLA.FORM.NAME.LABEL')"
         :placeholder="$t('SLA.FORM.NAME.PLACEHOLDER')"
-        :error="getSlaNameErrorMessage"
+        :error="slaNameErrorMessage"
         @input="$v.name.$touch"
       />
       <woot-input
         v-model="description"
         class="w-full"
+        :styles="{
+          borderRadius: '12px',
+          padding: '6px 12px',
+          fontSize: '14px',
+        }"
         :label="$t('SLA.FORM.DESCRIPTION.LABEL')"
         :placeholder="$t('SLA.FORM.DESCRIPTION.PLACEHOLDER')"
       />
@@ -29,22 +39,28 @@
         @isInValid="handleIsInvalid(index, $event)"
       />
 
-      <div class="flex items-center w-full gap-2">
-        <input id="sla_bh" v-model="onlyDuringBusinessHours" type="checkbox" />
-        <label for="sla_bh">
+      <div
+        class="mt-3 flex h-10 items-center text-sm w-full gap-2 border border-solid border-slate-200 dark:border-slate-600 px-3 py-1.5 rounded-xl justify-between"
+      >
+        <span for="sla_bh" class="text-slate-700 dark:text-slate-200">
           {{ $t('SLA.FORM.BUSINESS_HOURS.PLACEHOLDER') }}
-        </label>
+        </span>
+        <woot-switch id="sla_bh" v-model="onlyDuringBusinessHours" />
       </div>
 
-      <div class="flex items-center justify-end w-full gap-2 px-0 py-2">
+      <div class="flex items-center justify-end w-full gap-2 mt-8">
+        <woot-button
+          class="px-4 rounded-xl button clear outline-woot-200/50 outline"
+          @click.prevent="onClose"
+        >
+          {{ $t('SLA.FORM.CANCEL') }}
+        </woot-button>
         <woot-button
           :is-disabled="isSubmitDisabled"
+          class="px-4 rounded-xl"
           :is-loading="uiFlags.isUpdating"
         >
           {{ submitLabel }}
-        </woot-button>
-        <woot-button class="button clear" @click.prevent="onClose">
-          {{ $t('SLA.FORM.CANCEL') }}
         </woot-button>
       </div>
     </form>
@@ -54,7 +70,6 @@
 <script>
 import { mapGetters } from 'vuex';
 import { convertSecondsToTimeUnit } from '@chatwoot/utils';
-import validationMixin from './validationMixin';
 import validations from './validations';
 import SlaTimeInput from './SlaTimeInput.vue';
 
@@ -62,7 +77,6 @@ export default {
   components: {
     SlaTimeInput,
   },
-  mixins: [validationMixin],
   props: {
     selectedResponse: {
       type: Object,
@@ -113,6 +127,17 @@ export default {
         this.isSlaTimeInputsInvalid ||
         this.uiFlags.isUpdating
       );
+    },
+    slaNameErrorMessage() {
+      let errorMessage = '';
+      if (this.$v.name.$error) {
+        if (!this.$v.name.required) {
+          errorMessage = this.$t('SLA.FORM.NAME.REQUIRED_ERROR');
+        } else if (!this.$v.name.minLength) {
+          errorMessage = this.$t('SLA.FORM.NAME.MINIMUM_LENGTH_ERROR');
+        }
+      }
+      return errorMessage;
     },
   },
   mounted() {

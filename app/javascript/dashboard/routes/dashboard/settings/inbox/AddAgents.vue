@@ -2,7 +2,7 @@
   <div
     class="border border-slate-25 dark:border-slate-800/60 bg-white dark:bg-slate-900 h-full p-6 w-full max-w-full md:w-3/4 md:max-w-[75%] flex-shrink-0 flex-grow-0"
   >
-    <form class="mx-0 flex flex-wrap" @submit.prevent="addAgents()">
+    <form class="flex flex-wrap mx-0" @submit.prevent="addAgents()">
       <div class="w-full">
         <page-header
           :header-title="$t('INBOX_MGMT.ADD.AGENTS.TITLE')"
@@ -47,6 +47,7 @@
 <script>
 /* eslint no-console: 0 */
 import { mapGetters } from 'vuex';
+import { useAlert } from 'dashboard/composables';
 
 import InboxMembersAPI from '../../../../api/inboxMembers';
 import router from '../../../index';
@@ -98,7 +99,7 @@ export default {
           },
         });
       } catch (error) {
-        bus.$emit('newToastMessage', error.message);
+        useAlert(error.message);
       }
       this.isCreating = false;
     },
