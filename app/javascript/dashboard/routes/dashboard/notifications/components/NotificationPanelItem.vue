@@ -1,3 +1,42 @@
+<script>
+import Thumbnail from 'dashboard/components/widgets/Thumbnail.vue';
+import { dynamicTime } from 'shared/helpers/timeHelper';
+
+export default {
+  components: {
+    Thumbnail,
+  },
+  props: {
+    notificationItem: {
+      type: Object,
+      default: () => {},
+    },
+  },
+  emits: ['openNotification'],
+  computed: {
+    notificationAssignee() {
+      const { primary_actor: primaryActor } = this.notificationItem;
+      return primaryActor?.meta?.assignee;
+    },
+    hasNotificationAssignee() {
+      return !!this.notificationAssignee;
+    },
+    notificationAssigneeName() {
+      return this.notificationAssignee?.name || '';
+    },
+    notificationAssigneeThumbnail() {
+      return this.notificationAssignee?.thumbnail || '';
+    },
+  },
+  methods: {
+    dynamicTime,
+    onClickOpenNotification() {
+      this.$emit('openNotification', this.notificationItem);
+    },
+  },
+};
+</script>
+
 <template>
   <div class="w-full">
     <woot-button
@@ -40,7 +79,7 @@
               </span>
             </div>
             <div v-if="hasNotificationAssignee">
-              <thumbnail
+              <Thumbnail
                 :src="notificationAssigneeThumbnail"
                 size="16px"
                 :username="notificationAssigneeName"
@@ -64,41 +103,3 @@
     </woot-button>
   </div>
 </template>
-
-<script>
-import Thumbnail from 'dashboard/components/widgets/Thumbnail.vue';
-import { dynamicTime } from 'shared/helpers/timeHelper';
-
-export default {
-  components: {
-    Thumbnail,
-  },
-  props: {
-    notificationItem: {
-      type: Object,
-      default: () => {},
-    },
-  },
-  computed: {
-    notificationAssignee() {
-      const { primary_actor: primaryActor } = this.notificationItem;
-      return primaryActor?.meta?.assignee;
-    },
-    hasNotificationAssignee() {
-      return !!this.notificationAssignee;
-    },
-    notificationAssigneeName() {
-      return this.notificationAssignee?.name || '';
-    },
-    notificationAssigneeThumbnail() {
-      return this.notificationAssignee?.thumbnail || '';
-    },
-  },
-  methods: {
-    dynamicTime,
-    onClickOpenNotification() {
-      this.$emit('open-notification', this.notificationItem);
-    },
-  },
-};
-</script>

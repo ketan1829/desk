@@ -1,5 +1,59 @@
+<script>
+import { mapGetters } from 'vuex';
+import { useAlert } from 'dashboard/composables';
+import { CONTACTS_EVENTS } from '../../../../helper/AnalyticsHelper/events';
+import Modal from '../../../../components/Modal.vue';
+import { useTrack } from 'dashboard/composables';
+
+export default {
+  components: {
+    Modal,
+  },
+  props: {
+    onClose: {
+      type: Function,
+      default: () => {},
+    },
+  },
+  data() {
+    return {
+      show: true,
+      file: '',
+    };
+  },
+  computed: {
+    ...mapGetters({
+      uiFlags: 'contacts/getUIFlags',
+    }),
+    csvUrl() {
+      return '/downloads/import-contacts-sample.csv';
+    },
+  },
+  mounted() {
+    useTrack(CONTACTS_EVENTS.IMPORT_MODAL_OPEN);
+  },
+  methods: {
+    async uploadFile() {
+      try {
+        if (!this.file) return;
+        await this.$store.dispatch('contacts/import', this.file);
+        this.onClose();
+        useAlert(this.$t('IMPORT_CONTACTS.SUCCESS_MESSAGE'));
+        useTrack(CONTACTS_EVENTS.IMPORT_SUCCESS);
+      } catch (error) {
+        useAlert(error.message || this.$t('IMPORT_CONTACTS.ERROR_MESSAGE'));
+        useTrack(CONTACTS_EVENTS.IMPORT_FAILURE);
+      }
+    },
+    handleFileUpload() {
+      this.file = this.$refs.file.files[0];
+    },
+  },
+};
+</script>
+
 <template>
-  <modal :show.sync="show" :on-close="onClose">
+  <Modal v-model:show="show" :on-close="onClose">
     <div class="flex flex-col h-auto overflow-auto">
       <woot-modal-header :header-title="$t('IMPORT_CONTACTS.TITLE')">
         <p>
@@ -38,58 +92,5 @@
         </div>
       </div>
     </div>
-  </modal>
+  </Modal>
 </template>
-
-<script>
-import { mapGetters } from 'vuex';
-import { useAlert } from 'dashboard/composables';
-import { CONTACTS_EVENTS } from '../../../../helper/AnalyticsHelper/events';
-import Modal from '../../../../components/Modal.vue';
-
-export default {
-  components: {
-    Modal,
-  },
-  props: {
-    onClose: {
-      type: Function,
-      default: () => {},
-    },
-  },
-  data() {
-    return {
-      show: true,
-      file: '',
-    };
-  },
-  computed: {
-    ...mapGetters({
-      uiFlags: 'contacts/getUIFlags',
-    }),
-    csvUrl() {
-      return '/downloads/import-contacts-sample.csv';
-    },
-  },
-  mounted() {
-    this.$track(CONTACTS_EVENTS.IMPORT_MODAL_OPEN);
-  },
-  methods: {
-    async uploadFile() {
-      try {
-        if (!this.file) return;
-        await this.$store.dispatch('contacts/import', this.file);
-        this.onClose();
-        useAlert(this.$t('IMPORT_CONTACTS.SUCCESS_MESSAGE'));
-        this.$track(CONTACTS_EVENTS.IMPORT_SUCCESS);
-      } catch (error) {
-        useAlert(error.message || this.$t('IMPORT_CONTACTS.ERROR_MESSAGE'));
-        this.$track(CONTACTS_EVENTS.IMPORT_FAILURE);
-      }
-    },
-    handleFileUpload() {
-      this.file = this.$refs.file.files[0];
-    },
-  },
-};
-</script>

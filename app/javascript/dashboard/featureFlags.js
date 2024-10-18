@@ -16,7 +16,6 @@ export const FEATURE_FLAGS = {
   TEAM_MANAGEMENT: 'team_management',
   VOICE_RECORDER: 'voice_recorder',
   AUDIT_LOGS: 'audit_logs',
-  INSERT_ARTICLE_IN_REPLY: 'insert_article_in_reply',
   INBOX_VIEW: 'inbox_view',
   SLA: 'sla',
   RESPONSE_BOT: 'response_bot',
@@ -31,4 +30,6 @@ export const FEATURE_FLAGS = {
   INBOUND_EMAILS: 'inbound_emails',
   IP_LOOKUP: 'ip_lookup',
   LINEAR: 'linear_integration',
+  CAPTAIN: 'captain_integration',
+  CUSTOM_ROLES: 'custom_roles',
 };

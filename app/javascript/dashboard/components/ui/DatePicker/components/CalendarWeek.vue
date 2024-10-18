@@ -31,22 +31,22 @@ const props = defineProps({
 });
 
 const emit = defineEmits([
-  'update-hovered-end-date',
-  'select-date',
+  'updateHoveredEndDate',
+  'selectDate',
   'prev',
   'next',
-  'set-view',
+  'setView',
 ]);
 
 const { START_CALENDAR } = CALENDAR_TYPES;
 const { MONTH } = CALENDAR_PERIODS;
 
 const emitHoveredEndDate = day => {
-  emit('update-hovered-end-date', day);
+  emit('updateHoveredEndDate', day);
 };
 
 const emitSelectDate = day => {
-  emit('select-date', day);
+  emit('selectDate', day);
 };
 const onClickPrev = () => {
   emit('prev');
@@ -57,7 +57,7 @@ const onClickNext = () => {
 };
 
 const setViewMode = (type, mode) => {
-  emit('set-view', type, mode);
+  emit('setView', type, mode);
 };
 
 const weeks = calendarType => {

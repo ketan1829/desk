@@ -48,7 +48,7 @@
         "CUSTOM_EMAIL_DOMAIN_ENABLED": "اکنون می‌توانید ایمیل‌ها را در دامنه سفارشی خود دریافت کنید."
       }
     },
-    "UPDATE_CHATWOOT": "به روزرسانی%{latestChatwootVersion} برای Chatwoot در دسترس است. لطفا نمونه خود را به روز کنید.",
+    "UPDATE_CHATWOOT": "به روزرسانی{latestChatwootVersion} برای Chatwoot در دسترس است. لطفا نمونه خود را به روز کنید.",
     "LEARN_MORE": "بیشتر بدانید",
     "PAYMENT_PENDING": "پرداخت شما در حال پردازش است. لطفاً اطلاعات پرداخت خود را برای ادامه استفاده از Chatwoot به روز کنید",
     "LIMITS_UPGRADE": "حساب شما از محدودیت های استفاده فراتر رفته است، لطفاً برای ادامه استفاده از Chatwoot برنامه خود را ارتقا دهید",
@@ -95,7 +95,9 @@
   },
   "NETWORK": {
     "NOTIFICATION": {
-      "OFFLINE": "آفلاین"
+      "OFFLINE": "آفلاین",
+      "RECONNECTING": "Reconnecting...",
+      "RECONNECT_SUCCESS": "Reconnected"
     },
     "BUTTON": {
       "REFRESH": "تازه کردن"
@@ -154,7 +156,7 @@
       "UNTIL_TOMORROW": "تا فردا",
       "UNTIL_NEXT_MONTH": "تا ماه آینده",
       "AN_HOUR_FROM_NOW": "از حالا تا یک ساعت دیگر",
-      "CUSTOM": "سفارشی...",
+      "UNTIL_CUSTOM_TIME": "سفارشی...",
       "CHANGE_APPEARANCE": "تغییر ظاهر",
       "LIGHT_MODE": "روشن",
       "DARK_MODE": "تیره",

@@ -1,18 +1,6 @@
-<template>
-  <PortalSettingsBasicForm
-    :is-submitting="uiFlags.isCreating"
-    :submit-button-text="
-      $t(
-        'HELP_CENTER.PORTAL.ADD.CREATE_FLOW_PAGE.BASIC_SETTINGS_PAGE.CREATE_BASIC_SETTING_BUTTON'
-      )
-    "
-    @submit="createPortal"
-  />
-</template>
-
 <script>
 import { mapGetters } from 'vuex';
-import { useAlert } from 'dashboard/composables';
+import { useAlert, useTrack } from 'dashboard/composables';
 
 import PortalSettingsBasicForm from 'dashboard/routes/dashboard/helpcenter/components/PortalSettingsBasicForm.vue';
 import { PORTALS_EVENTS } from '../../../../../helper/AnalyticsHelper/events';
@@ -55,8 +43,8 @@ export default {
         const analyticsPayload = {
           has_custom_domain: portal.domain !== '',
         };
-        this.$track(PORTALS_EVENTS.ONBOARD_BASIC_INFORMATION, analyticsPayload);
-        this.$track(PORTALS_EVENTS.CREATE_PORTAL, analyticsPayload);
+        useTrack(PORTALS_EVENTS.ONBOARD_BASIC_INFORMATION, analyticsPayload);
+        useTrack(PORTALS_EVENTS.CREATE_PORTAL, analyticsPayload);
       } catch (error) {
         this.alertMessage =
           error?.message ||
@@ -68,3 +56,15 @@ export default {
   },
 };
 </script>
+
+<template>
+  <PortalSettingsBasicForm
+    :is-submitting="uiFlags.isCreating"
+    :submit-button-text="
+      $t(
+        'HELP_CENTER.PORTAL.ADD.CREATE_FLOW_PAGE.BASIC_SETTINGS_PAGE.CREATE_BASIC_SETTING_BUTTON'
+      )
+    "
+    @submit="createPortal"
+  />
+</template>

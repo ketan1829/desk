@@ -1,21 +1,18 @@
 import { frontendURL } from '../../../../helper/URLHelper';
-const SettingsContent = () => import('../Wrapper.vue');
+const SettingsWrapper = () => import('../SettingsWrapper.vue');
 const Automation = () => import('./Index.vue');
 
 export default {
   routes: [
     {
       path: frontendURL('accounts/:accountId/settings/automation'),
-      component: SettingsContent,
-      props: {
-        headerTitle: 'AUTOMATION.HEADER',
-        icon: 'automation',
-        showNewButton: false,
-      },
+      component: SettingsWrapper,
       children: [
         {
           path: '',
-          redirect: 'list',
+          redirect: to => {
+            return { name: 'automation_list', params: to.params };
+          },
         },
         {
           path: 'list',

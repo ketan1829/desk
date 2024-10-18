@@ -239,6 +239,7 @@
     "REPORTS": "Segnalazioni",
     "SETTINGS": "Impostazioni",
     "CONTACTS": "Contatti",
+    "CAPTAIN": "Captain",
     "HOME": "Home",
     "AGENTS": "Agenti",
     "AGENT_BOTS": "Bots",
@@ -276,9 +277,10 @@
     "REPORTS_TEAM": "Team",
     "SET_AVAILABILITY_TITLE": "Imposta te stesso come",
     "SLA": "SLA",
+    "CUSTOM_ROLES": "Custom Roles",
     "BETA": "Beta",
     "REPORTS_OVERVIEW": "Panoramica",
-    "FACEBOOK_REAUTHORIZE": "La tua connessione a Facebook è scaduta, ricollegati alla tua pagina Facebook per continuare i servizi",
+    "REAUTHORIZE": "Your inbox connection has expired, please reconnect\n to continue receiving and sending messages",
     "HELP_CENTER": {
       "TITLE": "Help Center",
       "ALL_ARTICLES": "Tutti gli articoli",
@@ -299,7 +301,7 @@
     "TITLE": "Fatturazione",
     "CURRENT_PLAN": {
       "TITLE": "Piano attuale",
-      "PLAN_NOTE": "Sei attualmente abbonato al piano **%{plan}** con **%{quantity}** licenze"
+      "PLAN_NOTE": "Sei attualmente abbonato al piano **{plan}** con **{quantity}** licenze"
     },
     "MANAGE_SUBSCRIPTION": {
       "TITLE": "Gestisci il tuo abbonamento",

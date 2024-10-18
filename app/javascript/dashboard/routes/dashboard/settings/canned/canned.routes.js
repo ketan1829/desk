@@ -1,28 +1,28 @@
 import { frontendURL } from '../../../../helper/URLHelper';
-
-const SettingsContent = () => import('../Wrapper.vue');
+import {
+  ROLES,
+  CONVERSATION_PERMISSIONS,
+} from 'dashboard/constants/permissions.js';
+const SettingsWrapper = () => import('../SettingsWrapper.vue');
 const CannedHome = () => import('./Index.vue');
 
 export default {
   routes: [
     {
       path: frontendURL('accounts/:accountId/settings/canned-response'),
-      component: SettingsContent,
-      props: {
-        headerTitle: 'CANNED_MGMT.HEADER',
-        icon: 'chat-multiple',
-        showNewButton: false,
-      },
+      component: SettingsWrapper,
       children: [
         {
           path: '',
-          redirect: 'list',
+          redirect: to => {
+            return { name: 'canned_list', params: to.params };
+          },
         },
         {
           path: 'list',
           name: 'canned_list',
           meta: {
-            permissions: ['administrator', 'agent'],
+            permissions: [...ROLES, ...CONVERSATION_PERMISSIONS],
           },
           component: CannedHome,
         },

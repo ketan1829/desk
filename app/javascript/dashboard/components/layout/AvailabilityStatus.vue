@@ -1,50 +1,3 @@
-<template>
-  <woot-dropdown-menu>
-    <woot-dropdown-header :title="$t('SIDEBAR.SET_AVAILABILITY_TITLE')" />
-    <woot-dropdown-item
-      v-for="status in availabilityStatuses"
-      :key="status.value"
-      class="flex items-baseline"
-    >
-      <woot-button
-        size="small"
-        :color-scheme="status.disabled ? '' : 'secondary'"
-        :variant="status.disabled ? 'smooth' : 'clear'"
-        class-names="status-change--dropdown-button"
-        @click="changeAvailabilityStatus(status.value)"
-      >
-        <availability-status-badge :status="status.value" />
-        {{ status.label }}
-      </woot-button>
-    </woot-dropdown-item>
-    <woot-dropdown-divider />
-    <woot-dropdown-item class="flex items-center justify-between p-2 m-0">
-      <div class="flex items-center">
-        <fluent-icon
-          v-tooltip.right-start="$t('SIDEBAR.SET_AUTO_OFFLINE.INFO_TEXT')"
-          icon="info"
-          size="14"
-          class="mt-px"
-        />
-
-        <span
-          class="mx-1 my-0 text-xs font-medium text-slate-600 dark:text-slate-100"
-        >
-          {{ $t('SIDEBAR.SET_AUTO_OFFLINE.TEXT') }}
-        </span>
-      </div>
-
-      <woot-switch
-        size="small"
-        class="mx-1 mt-px mb-0"
-        :value="currentUserAutoOffline"
-        @input="updateAutoOffline"
-      />
-    </woot-dropdown-item>
-    <woot-dropdown-divider />
-  </woot-dropdown-menu>
-</template>
-
 <script>
 import { mapGetters } from 'vuex';
 import { useAlert } from 'dashboard/composables';
@@ -78,26 +31,29 @@ export default {
       currentAccountId: 'getCurrentAccountId',
       currentUserAutoOffline: 'getCurrentUserAutoOffline',
     }),
+    statusList() {
+      return [
+        this.$t('PROFILE_SETTINGS.FORM.AVAILABILITY.STATUS.ONLINE'),
+        this.$t('PROFILE_SETTINGS.FORM.AVAILABILITY.STATUS.BUSY'),
+        this.$t('PROFILE_SETTINGS.FORM.AVAILABILITY.STATUS.OFFLINE'),
+      ];
+    },
     availabilityDisplayLabel() {
       const availabilityIndex = AVAILABILITY_STATUS_KEYS.findIndex(
         key => key === this.currentUserAvailability
       );
-      return this.$t('PROFILE_SETTINGS.FORM.AVAILABILITY.STATUSES_LIST')[
-        availabilityIndex
-      ];
+      return this.statusList[availabilityIndex];
     },
     currentUserAvailability() {
       return this.getCurrentUserAvailability;
     },
     availabilityStatuses() {
-      return this.$t('PROFILE_SETTINGS.FORM.AVAILABILITY.STATUSES_LIST').map(
-        (statusLabel, index) => ({
-          label: statusLabel,
-          value: AVAILABILITY_STATUS_KEYS[index],
-          disabled:
-            this.currentUserAvailability === AVAILABILITY_STATUS_KEYS[index],
-        })
-      );
+      return this.statusList.map((statusLabel, index) => ({
+        label: statusLabel,
+        value: AVAILABILITY_STATUS_KEYS[index],
+        disabled:
+          this.currentUserAvailability === AVAILABILITY_STATUS_KEYS[index],
+      }));
     },
   },
 
@@ -136,3 +92,50 @@ export default {
   },
 };
 </script>
+
+<template>
+  <WootDropdownMenu>
+    <WootDropdownHeader :title="$t('SIDEBAR.SET_AVAILABILITY_TITLE')" />
+    <WootDropdownItem
+      v-for="status in availabilityStatuses"
+      :key="status.value"
+      class="flex items-baseline"
+    >
+      <woot-button
+        size="small"
+        :color-scheme="status.disabled ? '' : 'secondary'"
+        :variant="status.disabled ? 'smooth' : 'clear'"
+        class="status-change--dropdown-button"
+        @click="changeAvailabilityStatus(status.value)"
+      >
+        <AvailabilityStatusBadge :status="status.value" />
+        {{ status.label }}
+      </woot-button>
+    </WootDropdownItem>
+    <WootDropdownDivider />
+    <WootDropdownItem class="flex items-center justify-between p-2 m-0">
+      <div class="flex items-center">
+        <fluent-icon
+          v-tooltip.right-start="$t('SIDEBAR.SET_AUTO_OFFLINE.INFO_TEXT')"
+          icon="info"
+          size="14"
+          class="mt-px"
+        />
+
+        <span
+          class="mx-1 my-0 text-xs font-medium text-slate-600 dark:text-slate-100"
+        >
+          {{ $t('SIDEBAR.SET_AUTO_OFFLINE.TEXT') }}
+        </span>
+      </div>
+
+      <woot-switch
+        size="small"
+        class="mx-1 mt-px mb-0"
+        :model-value="currentUserAutoOffline"
+        @input="updateAutoOffline"
+      />
+    </WootDropdownItem>
+    <WootDropdownDivider />
+  </WootDropdownMenu>
+</template>

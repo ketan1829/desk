@@ -239,6 +239,7 @@
     "REPORTS": "Rapoarte",
     "SETTINGS": "Setări",
     "CONTACTS": "Contacte",
+    "CAPTAIN": "Captain",
     "HOME": "Acasa",
     "AGENTS": "Agenți",
     "AGENT_BOTS": "Boți",
@@ -276,9 +277,10 @@
     "REPORTS_TEAM": "Echipa",
     "SET_AVAILABILITY_TITLE": "Setați-vă ca",
     "SLA": "SLA",
+    "CUSTOM_ROLES": "Custom Roles",
     "BETA": "Beta",
     "REPORTS_OVERVIEW": "Prezentare generală",
-    "FACEBOOK_REAUTHORIZE": "Conexiunea ta de Facebook a expirat, te rugăm să-ți reconectezi pagina de Facebook pentru a continua serviciile",
+    "REAUTHORIZE": "Your inbox connection has expired, please reconnect\n to continue receiving and sending messages",
     "HELP_CENTER": {
       "TITLE": "Asistenta",
       "ALL_ARTICLES": "Toate articolele",
@@ -299,7 +301,7 @@
     "TITLE": "Facturare",
     "CURRENT_PLAN": {
       "TITLE": "Pentru acest plan nu sunt disponibile extraoptiuni",
-      "PLAN_NOTE": "În prezent sunteți abonat la planul **%{plan}** cu licențe **%{quantity}**"
+      "PLAN_NOTE": "În prezent sunteți abonat la planul **{plan}** cu licențe **{quantity}**"
     },
     "MANAGE_SUBSCRIPTION": {
       "TITLE": "Gestionați-vă abonamentul",

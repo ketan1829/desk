@@ -1,25 +1,5 @@
-<!-- eslint-disable vue/no-mutating-props -->
-<template>
-  <woot-modal :show.sync="show" :on-close="onClose">
-    <woot-modal-header
-      :header-title="$t('MERGE_CONTACTS.TITLE')"
-      :header-content="$t('MERGE_CONTACTS.DESCRIPTION')"
-    />
-
-    <merge-contact
-      :primary-contact="primaryContact"
-      :is-searching="isSearching"
-      :is-merging="uiFlags.isMerging"
-      :search-results="searchResults"
-      @search="onContactSearch"
-      @cancel="onClose"
-      @submit="onMergeContacts"
-    />
-  </woot-modal>
-</template>
-
 <script>
-import { useAlert } from 'dashboard/composables';
+import { useAlert, useTrack } from 'dashboard/composables';
 import MergeContact from 'dashboard/modules/contact/components/MergeContact.vue';
 
 import ContactAPI from 'dashboard/api/contacts';
@@ -30,15 +10,16 @@ import { CONTACTS_EVENTS } from '../../helper/AnalyticsHelper/events';
 export default {
   components: { MergeContact },
   props: {
-    primaryContact: {
-      type: Object,
-      required: true,
-    },
     show: {
       type: Boolean,
       default: false,
     },
+    primaryContact: {
+      type: Object,
+      required: true,
+    },
   },
+  emits: ['close', 'update:show'],
   data() {
     return {
       isSearching: false,
@@ -49,6 +30,14 @@ export default {
     ...mapGetters({
       uiFlags: 'contacts/getUIFlags',
     }),
+    localShow: {
+      get() {
+        return this.show;
+      },
+      set(value) {
+        this.$emit('update:show', value);
+      },
+    },
   },
 
   methods: {
@@ -73,7 +62,7 @@ export default {
       }
     },
     async onMergeContacts(parentContactId) {
-      this.$track(CONTACTS_EVENTS.MERGED_CONTACTS);
+      useTrack(CONTACTS_EVENTS.MERGED_CONTACTS);
       try {
         await this.$store.dispatch('contacts/merge', {
           childId: this.primaryContact.id,
@@ -88,4 +77,22 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped></style>
+
+<template>
+  <woot-modal v-model:show="localShow" :on-close="onClose">
+    <woot-modal-header
+      :header-title="$t('MERGE_CONTACTS.TITLE')"
+      :header-content="$t('MERGE_CONTACTS.DESCRIPTION')"
+    />
+
+    <MergeContact
+      :primary-contact="primaryContact"
+      :is-searching="isSearching"
+      :is-merging="uiFlags.isMerging"
+      :search-results="searchResults"
+      @search="onContactSearch"
+      @cancel="onClose"
+      @submit="onMergeContacts"
+    />
+  </woot-modal>
+</template>

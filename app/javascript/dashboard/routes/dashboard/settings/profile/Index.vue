@@ -1,91 +1,10 @@
-<template>
-  <div class="grid py-16 px-5 font-inter mx-auto gap-16 sm:max-w-[720px]">
-    <div class="flex flex-col gap-6">
-      <h2 class="text-2xl font-medium text-ash-900">
-        {{ $t('PROFILE_SETTINGS.TITLE') }}
-      </h2>
-      <user-profile-picture
-        :src="avatarUrl"
-        :name="name"
-        size="72px"
-        @change="updateProfilePicture"
-        @delete="deleteProfilePicture"
-      />
-      <user-basic-details
-        :name="name"
-        :display-name="displayName"
-        :email="email"
-        :email-enabled="!globalConfig.disableUserProfileUpdate"
-        @update-user="updateProfile"
-      />
-    </div>
-
-    <form-section
-      :title="$t('PROFILE_SETTINGS.FORM.MESSAGE_SIGNATURE_SECTION.TITLE')"
-      :description="$t('PROFILE_SETTINGS.FORM.MESSAGE_SIGNATURE_SECTION.NOTE')"
-    >
-      <message-signature
-        :message-signature="messageSignature"
-        @update-signature="updateSignature"
-      />
-    </form-section>
-    <form-section
-      :title="$t('PROFILE_SETTINGS.FORM.SEND_MESSAGE.TITLE')"
-      :description="$t('PROFILE_SETTINGS.FORM.SEND_MESSAGE.NOTE')"
-    >
-      <div
-        class="flex flex-col justify-between w-full gap-5 sm:gap-4 sm:flex-row"
-      >
-        <button
-          v-for="hotKey in hotKeys"
-          :key="hotKey.key"
-          class="px-0 reset-base"
-        >
-          <hot-key-card
-            :key="hotKey.title"
-            :title="hotKey.title"
-            :description="hotKey.description"
-            :light-image="hotKey.lightImage"
-            :dark-image="hotKey.darkImage"
-            :active="isEditorHotKeyEnabled(hotKey.key)"
-            @click="toggleHotKey(hotKey.key)"
-          />
-        </button>
-      </div>
-    </form-section>
-    <form-section :title="$t('PROFILE_SETTINGS.FORM.PASSWORD_SECTION.TITLE')">
-      <change-password v-if="!globalConfig.disableUserProfileUpdate" />
-    </form-section>
-    <form-section
-      :title="$t('PROFILE_SETTINGS.FORM.AUDIO_NOTIFICATIONS_SECTION.TITLE')"
-      :description="
-        $t('PROFILE_SETTINGS.FORM.AUDIO_NOTIFICATIONS_SECTION.NOTE')
-      "
-    >
-      <audio-notifications />
-    </form-section>
-    <form-section :title="$t('PROFILE_SETTINGS.FORM.NOTIFICATIONS.TITLE')">
-      <notification-preferences />
-    </form-section>
-    <form-section
-      :title="$t('PROFILE_SETTINGS.FORM.ACCESS_TOKEN.TITLE')"
-      :description="
-        useInstallationName(
-          $t('PROFILE_SETTINGS.FORM.ACCESS_TOKEN.NOTE'),
-          globalConfig.installationName
-        )
-      "
-    >
-      <access-token :value="currentUser.access_token" @on-copy="onCopyToken" />
-    </form-section>
-  </div>
-</template>
 <script>
 import { mapGetters } from 'vuex';
 import { useAlert } from 'dashboard/composables';
 import { useUISettings } from 'dashboard/composables/useUISettings';
 import { clearCookiesOnLogout } from 'dashboard/store/utils/api.js';
 import { copyTextToClipboard } from 'shared/helpers/clipboard';
+import { parseAPIErrorResponse } from 'dashboard/store/utils/api';
 import globalConfigMixin from 'shared/mixins/globalConfigMixin';
 import UserProfilePicture from './UserProfilePicture.vue';
 import UserBasicDetails from './UserBasicDetails.vue';
@@ -96,12 +15,18 @@ import NotificationPreferences from './NotificationPreferences.vue';
 import AudioNotifications from './AudioNotifications.vue';
 import FormSection from 'dashboard/components/FormSection.vue';
 import AccessToken from './AccessToken.vue';
+import Policy from 'dashboard/components/policy.vue';
+import {
+  ROLES,
+  CONVERSATION_PERMISSIONS,
+} from 'dashboard/constants/permissions.js';
 
 export default {
   components: {
     MessageSignature,
     FormSection,
     UserProfilePicture,
+    Policy,
     UserBasicDetails,
     HotKeyCard,
     ChangePassword,
@@ -153,6 +78,8 @@ export default {
             '/assets/images/dashboard/profile/hot-key-ctrl-enter-dark.svg',
         },
       ],
+      notificationPermissions: [...ROLES, ...CONVERSATION_PERMISSIONS],
+      audioNotificationPermissions: [...ROLES, ...CONVERSATION_PERMISSIONS],
     };
   },
   computed: {
@@ -183,9 +110,7 @@ export default {
 
         return true; // return the value so that the status can be known
       } catch (error) {
-        alertMessage = error?.response?.data?.error
-          ? error.response.data.error
-          : errorMessage;
+        alertMessage = parseAPIErrorResponse(error) || errorMessage;
 
         return false; // return the value so that the status can be known
       } finally {
@@ -255,3 +180,93 @@ export default {
   },
 };
 </script>
+
+<template>
+  <div class="grid py-16 px-5 font-inter mx-auto gap-16 sm:max-w-[720px]">
+    <div class="flex flex-col gap-6">
+      <h2 class="text-2xl font-medium text-ash-900">
+        {{ $t('PROFILE_SETTINGS.TITLE') }}
+      </h2>
+      <UserProfilePicture
+        :src="avatarUrl"
+        :name="name"
+        size="72px"
+        @change="updateProfilePicture"
+        @delete="deleteProfilePicture"
+      />
+      <UserBasicDetails
+        :name="name"
+        :display-name="displayName"
+        :email="email"
+        :email-enabled="!globalConfig.disableUserProfileUpdate"
+        @update-user="updateProfile"
+      />
+    </div>
+
+    <FormSection
+      :title="$t('PROFILE_SETTINGS.FORM.MESSAGE_SIGNATURE_SECTION.TITLE')"
+      :description="$t('PROFILE_SETTINGS.FORM.MESSAGE_SIGNATURE_SECTION.NOTE')"
+    >
+      <MessageSignature
+        :message-signature="messageSignature"
+        @update-signature="updateSignature"
+      />
+    </FormSection>
+    <FormSection
+      :title="$t('PROFILE_SETTINGS.FORM.SEND_MESSAGE.TITLE')"
+      :description="$t('PROFILE_SETTINGS.FORM.SEND_MESSAGE.NOTE')"
+    >
+      <div
+        class="flex flex-col justify-between w-full gap-5 sm:gap-4 sm:flex-row"
+      >
+        <button
+          v-for="hotKey in hotKeys"
+          :key="hotKey.key"
+          class="px-0 reset-base"
+        >
+          <HotKeyCard
+            :key="hotKey.title"
+            :title="hotKey.title"
+            :description="hotKey.description"
+            :light-image="hotKey.lightImage"
+            :dark-image="hotKey.darkImage"
+            :active="isEditorHotKeyEnabled(hotKey.key)"
+            @click="toggleHotKey(hotKey.key)"
+          />
+        </button>
+      </div>
+    </FormSection>
+    <FormSection
+      v-if="!globalConfig.disableUserProfileUpdate"
+      :title="$t('PROFILE_SETTINGS.FORM.PASSWORD_SECTION.TITLE')"
+    >
+      <ChangePassword />
+    </FormSection>
+    <Policy :permissions="audioNotificationPermissions">
+      <FormSection
+        :title="$t('PROFILE_SETTINGS.FORM.AUDIO_NOTIFICATIONS_SECTION.TITLE')"
+        :description="
+          $t('PROFILE_SETTINGS.FORM.AUDIO_NOTIFICATIONS_SECTION.NOTE')
+        "
+      >
+        <AudioNotifications />
+      </FormSection>
+    </Policy>
+    <Policy :permissions="notificationPermissions">
+      <FormSection :title="$t('PROFILE_SETTINGS.FORM.NOTIFICATIONS.TITLE')">
+        <NotificationPreferences />
+      </FormSection>
+    </Policy>
+    <FormSection
+      :title="$t('PROFILE_SETTINGS.FORM.ACCESS_TOKEN.TITLE')"
+      :description="
+        useInstallationName(
+          $t('PROFILE_SETTINGS.FORM.ACCESS_TOKEN.NOTE'),
+          globalConfig.installationName
+        )
+      "
+    >
+      <AccessToken :value="currentUser.access_token" @on-copy="onCopyToken" />
+    </FormSection>
+  </div>
+</template>

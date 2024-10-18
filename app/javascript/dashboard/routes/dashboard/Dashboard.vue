@@ -1,45 +1,5 @@
-<template>
-  <div
-    class="flex flex-wrap flex-grow-0 w-full h-full max-w-full min-h-0 ml-auto mr-auto app-wrapper dark:text-slate-300"
-  >
-    <sidebar
-      :route="currentRoute"
-      :show-secondary-sidebar="isSidebarOpen"
-      @open-notification-panel="openNotificationPanel"
-      @toggle-account-modal="toggleAccountModal"
-      @open-key-shortcut-modal="toggleKeyShortcutModal"
-      @close-key-shortcut-modal="closeKeyShortcutModal"
-      @show-add-label-popup="showAddLabelPopup"
-    />
-    <section class="flex flex-1 h-full min-h-0 px-0 overflow-hidden">
-      <router-view />
-      <command-bar />
-      <account-selector
-        :show-account-modal="showAccountModal"
-        @close-account-modal="toggleAccountModal"
-        @show-create-account-modal="openCreateAccountModal"
-      />
-      <add-account-modal
-        :show="showCreateAccountModal"
-        @close-account-create-modal="closeCreateAccountModal"
-      />
-      <woot-key-shortcut-modal
-        :show.sync="showShortcutModal"
-        @close="closeKeyShortcutModal"
-        @clickaway="closeKeyShortcutModal"
-      />
-      <notification-panel
-        v-if="isNotificationPanel"
-        @close="closeNotificationPanel"
-      />
-      <woot-modal :show.sync="showAddLabelModal" :on-close="hideAddLabelPopup">
-        <add-label-modal @close="hideAddLabelPopup" />
-      </woot-modal>
-    </section>
-  </div>
-</template>
-
 <script>
+import { defineAsyncComponent } from 'vue';
 import Sidebar from '../../components/layout/Sidebar.vue';
 import { BUS_EVENTS } from 'shared/constants/busEvents';
 import WootKeyShortcutModal from 'dashboard/components/widgets/modal/WootKeyShortcutModal.vue';
@@ -49,7 +9,10 @@ import AddLabelModal from 'dashboard/routes/dashboard/settings/labels/AddLabel.v
 import NotificationPanel from 'dashboard/routes/dashboard/notifications/components/NotificationPanel.vue';
 import { useUISettings } from 'dashboard/composables/useUISettings';
 import wootConstants from 'dashboard/constants/globals';
-const CommandBar = () => import('./commands/commandbar.vue');
+const CommandBar = defineAsyncComponent(
+  () => import('./commands/commandbar.vue')
+);
+import { emitter } from 'shared/helpers/mitt';
 
 export default {
   components: {
@@ -77,6 +40,7 @@ export default {
       showShortcutModal: false,
       isNotificationPanel: false,
       displayLayoutType: '',
+      hasBanner: '',
     };
   },
   computed: {
@@ -116,15 +80,22 @@ export default {
   },
   mounted() {
     this.handleResize();
+    this.$nextTick(this.checkBanner);
     window.addEventListener('resize', this.handleResize);
-    this.$emitter.on(BUS_EVENTS.TOGGLE_SIDEMENU, this.toggleSidebar);
+    window.addEventListener('resize', this.checkBanner);
+    emitter.on(BUS_EVENTS.TOGGLE_SIDEMENU, this.toggleSidebar);
   },
-  beforeDestroy() {
+  unmounted() {
     window.removeEventListener('resize', this.handleResize);
-    this.$emitter.off(BUS_EVENTS.TOGGLE_SIDEMENU, this.toggleSidebar);
+    window.removeEventListener('resize', this.checkBanner);
+    emitter.off(BUS_EVENTS.TOGGLE_SIDEMENU, this.toggleSidebar);
   },
 
   methods: {
+    checkBanner() {
+      this.hasBanner =
+        document.getElementsByClassName('woot-banner').length > 0;
+    },
     handleResize() {
       const { SMALL_SCREEN_BREAKPOINT, LAYOUT_TYPES } = wootConstants;
       let throttled = false;
@@ -181,3 +152,46 @@ export default {
   },
 };
 </script>
+
+<template>
+  <div class="flex flex-wrap app-wrapper dark:text-slate-300">
+    <Sidebar
+      :route="currentRoute"
+      :has-banner="hasBanner"
+      :show-secondary-sidebar="isSidebarOpen"
+      @open-notification-panel="openNotificationPanel"
+      @toggle-account-modal="toggleAccountModal"
+      @open-key-shortcut-modal="toggleKeyShortcutModal"
+      @close-key-shortcut-modal="closeKeyShortcutModal"
+      @show-add-label-popup="showAddLabelPopup"
+    />
+    <main class="flex flex-1 h-full min-h-0 px-0 overflow-hidden">
+      <router-view />
+      <CommandBar />
+      <AccountSelector
+        :show-account-modal="showAccountModal"
+        @close-account-modal="toggleAccountModal"
+        @show-create-account-modal="openCreateAccountModal"
+      />
+      <AddAccountModal
+        :show="showCreateAccountModal"
+        @close-account-create-modal="closeCreateAccountModal"
+      />
+      <WootKeyShortcutModal
+        v-model:show="showShortcutModal"
+        @close="closeKeyShortcutModal"
+        @clickaway="closeKeyShortcutModal"
+      />
+      <NotificationPanel
+        v-if="isNotificationPanel"
+        @close="closeNotificationPanel"
+      />
+      <woot-modal
+        v-model:show="showAddLabelModal"
+        :on-close="hideAddLabelPopup"
+      >
+        <AddLabelModal @close="hideAddLabelPopup" />
+      </woot-modal>
+    </main>
+  </div>
+</template>

@@ -239,6 +239,7 @@
     "REPORTS": "Laporan",
     "SETTINGS": "Pengaturan",
     "CONTACTS": "Kontak",
+    "CAPTAIN": "Captain",
     "HOME": "Beranda",
     "AGENTS": "Agen",
     "AGENT_BOTS": "Bot Agen",
@@ -276,9 +277,10 @@
     "REPORTS_TEAM": "Tim",
     "SET_AVAILABILITY_TITLE": "Atur diri anda sebagai",
     "SLA": "SLA",
+    "CUSTOM_ROLES": "Custom Roles",
     "BETA": "Beta",
     "REPORTS_OVERVIEW": "Gambaran",
-    "FACEBOOK_REAUTHORIZE": "Koneksi Facebook Anda telah kedaluwarsa, hubungkan kembali halaman Facebook Anda untuk melanjutkan layanan",
+    "REAUTHORIZE": "Your inbox connection has expired, please reconnect\n to continue receiving and sending messages",
     "HELP_CENTER": {
       "TITLE": "Pusat Bantuan",
       "ALL_ARTICLES": "Semua Artikel",
@@ -299,7 +301,7 @@
     "TITLE": "Pembayaran",
     "CURRENT_PLAN": {
       "TITLE": "Paket Saat Ini",
-      "PLAN_NOTE": "Anda saat ini berlangganan paket **%{plan}** dengan **%{quantity}** lisensi"
+      "PLAN_NOTE": "Anda saat ini berlangganan paket **{plan}** dengan **{quantity}** lisensi"
     },
     "MANAGE_SUBSCRIPTION": {
       "TITLE": "Kelola langganan Anda",

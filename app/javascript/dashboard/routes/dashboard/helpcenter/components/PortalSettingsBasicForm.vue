@@ -2,8 +2,8 @@
 import { useVuelidate } from '@vuelidate/core';
 import { required, minLength } from '@vuelidate/validators';
 
-import { defineComponent, reactive, computed, onMounted } from 'vue';
-import { useI18n } from 'dashboard/composables/useI18n';
+import { defineOptions, reactive, computed, onMounted } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { useAlert } from 'dashboard/composables';
 
 import { convertToCategorySlug } from 'dashboard/helper/commons.js';
@@ -14,15 +14,6 @@ import { checkFileSizeLimit } from 'shared/helpers/FileHelper';
 import { uploadFile } from 'dashboard/helper/uploadHelper';
 import { isDomain } from 'shared/helpers/Validators';
 import SettingsLayout from './Layout/SettingsLayout.vue';
-
-const { EXAMPLE_URL } = wootConstants;
-const MAXIMUM_FILE_UPLOAD_SIZE = 4; // in MB
-
-const { t } = useI18n();
-
-defineComponent({
-  name: 'PortalSettingsBasicForm',
-});
 
 const props = defineProps({
   portal: {
@@ -38,6 +29,16 @@ const props = defineProps({
     default: '',
   },
 });
+const emit = defineEmits(['submit', 'deleteLogo']);
+
+defineOptions({
+  name: 'PortalSettingsBasicForm',
+});
+
+const { EXAMPLE_URL } = wootConstants;
+const MAXIMUM_FILE_UPLOAD_SIZE = 4; // in MB
+
+const { t } = useI18n();
 
 const state = reactive({
   name: '',
@@ -97,8 +98,6 @@ const showDeleteButton = computed(() => {
   return hasValidAvatarUrl(state.logoUrl);
 });
 
-const emit = defineEmits(['submit', 'delete-logo']);
-
 onMounted(() => {
   const portal = props.portal || {};
   state.name = portal.name || '';
@@ -135,7 +134,7 @@ function onSubmitClick() {
 async function deleteAvatar() {
   state.logoUrl = '';
   state.avatarBlobId = '';
-  emit('delete-logo');
+  emit('deleteLogo');
 }
 
 async function uploadLogoToStorage(file) {
@@ -173,7 +172,7 @@ function onFileChange({ file }) {
           <woot-avatar-uploader
             :label="$t('HELP_CENTER.PORTAL.ADD.LOGO.LABEL')"
             :src="state.logoUrl"
-            @change="onFileChange"
+            @on-avatar-select="onFileChange"
           />
           <div v-if="showDeleteButton" class="avatar-delete-btn">
             <woot-button
@@ -202,7 +201,7 @@ function onFileChange({ file }) {
           :placeholder="$t('HELP_CENTER.PORTAL.ADD.NAME.PLACEHOLDER')"
           :help-text="$t('HELP_CENTER.PORTAL.ADD.NAME.HELP_TEXT')"
           @blur="v$.name.$touch"
-          @input="onNameChange"
+          @update:model-value="onNameChange"
         />
       </div>
       <div class="mb-4">

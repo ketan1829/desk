@@ -1,14 +1,10 @@
-<template>
-  <inbox-reconnection-required class="mx-8 mt-5" @reauthorize="startLogin" />
-</template>
-
 <script>
 /* global FB */
-import InboxReconnectionRequired from '../components/InboxReconnectionRequired';
+import InboxReconnectionRequired from '../components/InboxReconnectionRequired.vue';
 import { useAlert } from 'dashboard/composables';
 
 import { loadScript } from 'dashboard/helper/DOMHelpers';
-import * as Sentry from '@sentry/browser';
+import * as Sentry from '@sentry/vue';
 
 export default {
   components: {
@@ -102,8 +98,12 @@ export default {
 };
 </script>
 
+<template>
+  <InboxReconnectionRequired class="mx-8 mt-5" @reauthorize="startLogin" />
+</template>
+
 <style lang="scss" scoped>
-@import '~dashboard/assets/scss/variables';
+@import 'dashboard/assets/scss/variables';
 
 .fb--login {
   img {

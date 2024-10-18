@@ -1,83 +1,52 @@
+<script setup>
+import { computed, defineEmits } from 'vue';
+import { debounce } from '@chatwoot/utils';
+import ResizableTextArea from 'shared/components/ResizableTextArea.vue';
+import FullEditor from 'dashboard/components/widgets/WootWriter/FullEditor.vue';
+import { ARTICLE_EDITOR_MENU_OPTIONS } from 'dashboard/constants/editor';
+
+const { article } = defineProps({
+  article: {
+    type: Object,
+    default: () => ({}),
+  },
+});
+const emit = defineEmits(['saveArticle']);
+
+const saveArticle = debounce(value => emit('saveArticle', value), 400, false);
+
+const articleTitle = computed({
+  get: () => article.title,
+  set: title => {
+    saveArticle({ title });
+  },
+});
+
+const articleContent = computed({
+  get: () => article.content,
+  set: content => {
+    saveArticle({ content });
+  },
+});
+</script>
+
 <template>
   <div class="edit-article--container">
-    <resizable-text-area
+    <ResizableTextArea
       v-model="articleTitle"
       type="text"
       :rows="1"
       class="article-heading"
       :placeholder="$t('HELP_CENTER.EDIT_ARTICLE.TITLE_PLACEHOLDER')"
-      @focus="onFocus"
-      @blur="onBlur"
-      @input="onTitleInput"
     />
-    <woot-article-editor
+    <FullEditor
       v-model="articleContent"
       class="article-content"
       :placeholder="$t('HELP_CENTER.EDIT_ARTICLE.CONTENT_PLACEHOLDER')"
-      :enabled-menu-options="customEditorMenuOptions"
-      @focus="onFocus"
-      @blur="onBlur"
-      @input="onContentInput"
+      :enabled-menu-options="ARTICLE_EDITOR_MENU_OPTIONS"
     />
   </div>
 </template>
-
-<script>
-import { debounce } from '@chatwoot/utils';
-import ResizableTextArea from 'shared/components/ResizableTextArea.vue';
-import WootArticleEditor from 'dashboard/components/widgets/WootWriter/FullEditor.vue';
-import { ARTICLE_EDITOR_MENU_OPTIONS } from 'dashboard/constants/editor';
-
-export default {
-  components: {
-    WootArticleEditor,
-    ResizableTextArea,
-  },
-  props: {
-    article: {
-      type: Object,
-      default: () => ({}),
-    },
-    isSettingsSidebarOpen: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  data() {
-    return {
-      articleTitle: '',
-      articleContent: '',
-      saveArticle: () => {},
-      customEditorMenuOptions: ARTICLE_EDITOR_MENU_OPTIONS,
-    };
-  },
-  mounted() {
-    this.articleTitle = this.article.title;
-    this.articleContent = this.article.content;
-    this.saveArticle = debounce(
-      values => {
-        this.$emit('save-article', values);
-      },
-      300,
-      false
-    );
-  },
-  methods: {
-    onFocus() {
-      this.$emit('focus');
-    },
-    onBlur() {
-      this.$emit('blur');
-    },
-    onTitleInput() {
-      this.saveArticle({ title: this.articleTitle });
-    },
-    onContentInput() {
-      this.saveArticle({ content: this.articleContent });
-    },
-  },
-};
-</script>
 
 <style lang="scss" scoped>
 .edit-article--container {
