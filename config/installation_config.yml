@@ -14,7 +14,7 @@
 
 # ------- Branding Related Config ------- #
 - name: INSTALLATION_NAME
-  value: 'Chatwoot'
+  value: 'LifeelSpace'
   display_title: 'Installation Name'
   description: 'The installation wide name that would be used in the dashboard, title etc.'
 - name: LOGO_THUMBNAIL
@@ -38,21 +38,21 @@
   display_title: 'Widget Brand URL'
   description: 'The URL that would be used in the widget under the section “Powered By”'
 - name: BRAND_NAME
-  value: 'Chatwoot'
+  value: 'LifeelSpace'
   display_title: 'Brand Name'
   description: 'The name that would be used in emails and the widget'
 - name: TERMS_URL
-  value: 'https://www.chatwoot.com/terms-of-service'
+  value: 'https://www.lifeel.in/terms-of-service'
   display_title: 'Terms URL'
   description: 'The terms of service URL displayed in Signup Page'
 - name: PRIVACY_URL
-  value: 'https://www.chatwoot.com/privacy-policy'
+  value: 'https://www.lifeel.in/privacy-policy'
   display_title: 'Privacy URL'
   description: 'The privacy policy URL displayed in the app'
 - name: DISPLAY_MANIFEST
-  value: true
-  display_title: 'Chatwoot Metadata'
-  description: 'Display default Chatwoot metadata like favicons and upgrade warnings'
+  value: false
+  display_title: 'LifeelSpace Metadata'
+  description: 'Display default LifeelSpace metadata like favicons and upgrade warnings'
   type: boolean
 # ------- End of Branding Related Config ------- #
 
@@ -137,16 +137,16 @@
 - name: CHATWOOT_INBOX_TOKEN
   value:
   display_title: 'Inbox Token'
-  description: 'The Chatwoot Inbox Token for Contact Support in Cloud'
+  description: 'The LifeelSpace Inbox Token for Contact Support in Cloud'
   locked: false
 - name: CHATWOOT_INBOX_HMAC_KEY
   value:
   display_title: 'Inbox HMAC Key'
-  description: 'The Chatwoot Inbox HMAC Key for Contact Support in Cloud'
+  description: 'The LifeelSpace Inbox HMAC Key for Contact Support in Cloud'
   locked: false
 - name: CHATWOOT_CLOUD_PLANS
   display_title: 'Cloud Plans'
-  value:
+  value: 100
   description: 'Config to store stripe plans for cloud'
 - name: CHATWOOT_CLOUD_PLAN_FEATURES
   display_title: 'Planwise Features List'
@@ -154,11 +154,11 @@
   description: 'Config to features and their associated plans'
 - name: DEPLOYMENT_ENV
   value: self-hosted
-  description: 'The deployment environment of the installation, to differentiate between Chatwoot cloud and self-hosted'
+  description: 'The deployment environment of the installation, to differentiate between LifeelSpace cloud and self-hosted'
 - name: ANALYTICS_TOKEN
   value:
   display_title: 'Analytics Token'
-  description: 'The June.so analytics token for Chatwoot cloud'
+  description: 'The June.so analytics token for LifeelSpace cloud'
 - name: CLEARBIT_API_KEY
   value:
   display_title: 'Clearbit API Key'
