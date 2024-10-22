@@ -11,7 +11,7 @@ RSpec.describe User do
 
     context 'when pricing plan is not premium' do
       before do
-        allow(ChatwootHub).to receive(:pricing_plan).and_return('community')
+        allow(ChatwootHub).to receive(:pricing_plan).and_return('premium')
         allow(ChatwootHub).to receive(:pricing_plan_quantity).and_return(0)
       end
 

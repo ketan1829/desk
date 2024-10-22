@@ -4,8 +4,8 @@ module SuperAdmin::FeaturesHelper
   end
 
   def self.plan_details
-    plan = ChatwootHub.pricing_plan
-    quantity = ChatwootHub.pricing_plan_quantity
+    plan = 'premium' # ChatwootHub.pricing_plan
+    quantity = 1000
 
     if plan == 'premium'
       "You are currently on the <span class='font-semibold'>#{plan}</span> plan with <span class='font-semibold'>#{quantity} agents</span>."

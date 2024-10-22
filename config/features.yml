@@ -13,7 +13,6 @@
   enabled: false
 - name: disable_branding
   enabled: false
-  premium: true
 - name: email_continuity_on_api_channel
   enabled: false
 - name: help_center
@@ -67,10 +66,8 @@
   enabled: false
 - name: audit_logs
   enabled: false
-  premium: true
 - name: response_bot
   enabled: false
-  premium: true
 - name: message_reply_to
   enabled: false
   help_url: https://chwt.app/hc/reply-to
@@ -80,11 +77,9 @@
   enabled: false
 - name: sla
   enabled: false
-  premium: true
   help_url: https://chwt.app/hc/sla
 - name: help_center_embedding_search
   enabled: false
-  premium: true
 - name: linear_integration
   enabled: false
 - name: captain_integration

@@ -11,7 +11,7 @@
     </span>
     <% end %>
     <span><%= key %></span> 
-    <% should_disable = is_premium && ChatwootHub.pricing_plan == 'community' %>
+    <% should_disable = is_premium && ChatwootHub.pricing_plan == 'premium' %>
     <span class='value-container'><%= check_box "enabled_features", "feature_#{key}", { checked: val, disabled: should_disable  }, true, false  %> </span>
     </div>
   <% end %>
