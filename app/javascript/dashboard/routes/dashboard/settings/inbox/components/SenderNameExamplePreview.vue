@@ -30,7 +30,7 @@ export default {
           ),
           preview: {
             senderName: 'Smith',
-            businessName: 'Chatwoot',
+            businessName: 'LifeelSpace',
             email: '<support@yourbusiness.com>',
           },
         },
@@ -44,7 +44,7 @@ export default {
           ),
           preview: {
             senderName: '',
-            businessName: 'Chatwoot',
+            businessName: 'LifeelSpace',
             email: '<support@yourbusiness.com>',
           },
         },
