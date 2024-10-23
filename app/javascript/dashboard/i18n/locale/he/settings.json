@@ -315,7 +315,7 @@
     "NO_BILLING_USER": "חשבון החיוב שלך מוגדר. אנא רענן את הדף ונסה שוב."
   },
   "CREATE_ACCOUNT": {
-    "NO_ACCOUNT_WARNING": "אה הו! לא הצלחנו למצוא חשבונות LifeelSpace. נא ליצור חשבון חדש כדי להמשיך.",
+    "NO_ACCOUNT_WARNING": "אה הו! לא הצלחנו למצוא חשבונות Choira. נא ליצור חשבון חדש כדי להמשיך.",
     "NEW_ACCOUNT": "חשבון חדש",
     "SELECTOR_SUBTITLE": "צור חשבון חדש",
     "API": {

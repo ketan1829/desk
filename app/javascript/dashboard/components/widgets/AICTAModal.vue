@@ -64,7 +64,7 @@ export default {
       }
     },
     openOpenAIDoc() {
-      window.open('https://www.chatvave.com/blog/v2-17', '_blank');
+      window.open('https://www.choira.io/blog/v2-17', '_blank');
     },
   },
 };

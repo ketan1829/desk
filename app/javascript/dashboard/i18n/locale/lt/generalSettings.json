@@ -48,10 +48,10 @@
         "CUSTOM_EMAIL_DOMAIN_ENABLED": "Dabar galite gauti el. laiškus pasirinktame domene."
       }
     },
-    "UPDATE_CHATWOOT": "Yra LifeelSpace naujinimas %{latestChatwootVersion}. Atnaujinkite savo versiją.",
+    "UPDATE_CHATWOOT": "Yra Choira naujinimas %{latestChatwootVersion}. Atnaujinkite savo versiją.",
     "LEARN_MORE": "Sužinoti daugiau",
-    "PAYMENT_PENDING": "Laukiama jūsų mokėjimo. Atnaujinkite savo mokėjimo informaciją, kad galėtumėte toliau naudoti LifeelSpace",
-    "LIMITS_UPGRADE": "Jūsų paskyra viršijo naudojimo apribojimus, atnaujinkite savo planą, kad galėtumėte toliau naudoti LifeelSpace",
+    "PAYMENT_PENDING": "Laukiama jūsų mokėjimo. Atnaujinkite savo mokėjimo informaciją, kad galėtumėte toliau naudoti Choira",
+    "LIMITS_UPGRADE": "Jūsų paskyra viršijo naudojimo apribojimus, atnaujinkite savo planą, kad galėtumėte toliau naudoti Choira",
     "OPEN_BILLING": "Atidaryti mokėjimą"
   },
   "FORMS": {

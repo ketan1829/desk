@@ -50,8 +50,8 @@
     },
     "UPDATE_CHATWOOT": "Egy frissítés elérhető a Chatwoothoz %{latestChatwootVersion}. Kérjük frissítsd a telepítésed.",
     "LEARN_MORE": "Tudj meg többet",
-    "PAYMENT_PENDING": "A fizetésed folyamatban van. Kérlek, frissítsd fizetési adataitat a LifeelSpace használatának folytatásához",
-    "LIMITS_UPGRADE": "A fiókod túllépte a használati korlátokat. Kérjük, frissítsd tervedet a LifeelSpace használatának folytatásához",
+    "PAYMENT_PENDING": "A fizetésed folyamatban van. Kérlek, frissítsd fizetési adataitat a Choira használatának folytatásához",
+    "LIMITS_UPGRADE": "A fiókod túllépte a használati korlátokat. Kérjük, frissítsd tervedet a Choira használatának folytatásához",
     "OPEN_BILLING": "Számlázási beállítások megnyitása"
   },
   "FORMS": {

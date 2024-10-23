@@ -1,7 +1,7 @@
 {
   "INTEGRATION_SETTINGS": {
     "HEADER": "Integracions",
-    "DESCRIPTION": "LifeelSpace integrates with multiple tools and services to improve your team's efficiency. Explore the list below to configure your favorite apps.",
+    "DESCRIPTION": "Choira integrates with multiple tools and services to improve your team's efficiency. Explore the list below to configure your favorite apps.",
     "LEARN_MORE": "Learn more about integrations",
     "LOADING": "Fetching integrations",
     "CAPTAIN": {
@@ -14,7 +14,7 @@
       "SUBSCRIBED_EVENTS": "Esdeveniments subscrits",
       "FORM": {
         "CANCEL": "Cancel·la",
-        "DESC": "Els esdeveniments de Webhook us proporcionen informació en temps real sobre el que passa al vostre compte de LifeelSpace. Introduïu una URL vàlid per configurar un callback.",
+        "DESC": "Els esdeveniments de Webhook us proporcionen informació en temps real sobre el que passa al vostre compte de Choira. Introduïu una URL vàlid per configurar un callback.",
         "SUBSCRIPTIONS": {
           "LABEL": "Esdeveniments",
           "EVENTS": {
@@ -42,7 +42,7 @@
       "HEADER_BTN_TXT": "Afegeix un nou webhook",
       "LOADING": "S'estan recollint els webhooks adjunts",
       "SEARCH_404": "No hi ha articles que coincideixin amb aquesta consulta",
-      "SIDEBAR_TXT": "<p><b>Webhooks</b> </p> <p>Els webhooks són callbacks HTTP que es poden definir per a cada compte. Es produeixen per esdeveniments com la creació de missatges a LifeelSpace. Podeu crear més d'un webhook per a aquest compte. <br /><br /> Per crear un <b>webhook</b>, feu clic al botó <b> Afegir nou webhook </b>. També podeu eliminar qualsevol webhook existent fent clic al botó Elimina.</p>",
+      "SIDEBAR_TXT": "<p><b>Webhooks</b> </p> <p>Els webhooks són callbacks HTTP que es poden definir per a cada compte. Es produeixen per esdeveniments com la creació de missatges a Choira. Podeu crear més d'un webhook per a aquest compte. <br /><br /> Per crear un <b>webhook</b>, feu clic al botó <b> Afegir nou webhook </b>. També podeu eliminar qualsevol webhook existent fent clic al botó Elimina.</p>",
       "LIST": {
         "404": "No hi ha cap webhooks configurat per a aquest compte.",
         "TITLE": "Gestiona els webhooks",
@@ -89,14 +89,14 @@
       },
       "HELP_TEXT": {
         "TITLE": "Com utilitzar la integració de Slack?",
-        "BODY": "Amb aquesta integració, totes les teves converses entrants se sincronitzaran amb el canal ***%{selectedChannelName}*** del teu espai de treball de Slack. Podeu gestionar totes les converses dels vostres clients directament des del canal i no perdreu cap missatge.\n\nAquestes són les principals característiques de la integració:\n\n**Respondre a converses des de Slack:** Per respondre a una conversa al ***%{selectedChannelName}*** canal de Slack, només has d'escriure el teu missatge i enviar-lo com a fil. Això crearà una resposta al client mitjançant LifeelSpace. Així de senzill!\n\n  **Crear notes privades:** si vols crear notes privades en lloc de respostes, comença el teu missatge amb ***`nota:`***. Això garanteix que el vostre missatge es mantingui privat i no serà visible per al client.\n\n**Associar un perfil d'agent:** si la persona que va respondre a Slack té un perfil d'agent a LifeelSpace amb el mateix correu electrònic, les respostes s'associaran amb aquest perfil d'agent automàticament. Això vol dir que podeu fer un seguiment fàcilment qui va dir què i quan. D'altra banda, quan el contestador no té un perfil d'agent associat, les respostes apareixeran des del perfil del bot al client.",
+        "BODY": "Amb aquesta integració, totes les teves converses entrants se sincronitzaran amb el canal ***%{selectedChannelName}*** del teu espai de treball de Slack. Podeu gestionar totes les converses dels vostres clients directament des del canal i no perdreu cap missatge.\n\nAquestes són les principals característiques de la integració:\n\n**Respondre a converses des de Slack:** Per respondre a una conversa al ***%{selectedChannelName}*** canal de Slack, només has d'escriure el teu missatge i enviar-lo com a fil. Això crearà una resposta al client mitjançant Choira. Així de senzill!\n\n  **Crear notes privades:** si vols crear notes privades en lloc de respostes, comença el teu missatge amb ***`nota:`***. Això garanteix que el vostre missatge es mantingui privat i no serà visible per al client.\n\n**Associar un perfil d'agent:** si la persona que va respondre a Slack té un perfil d'agent a Choira amb el mateix correu electrònic, les respostes s'associaran amb aquest perfil d'agent automàticament. Això vol dir que podeu fer un seguiment fàcilment qui va dir què i quan. D'altra banda, quan el contestador no té un perfil d'agent associat, les respostes apareixeran des del perfil del bot al client.",
         "SELECTED": "seleccionat"
       },
       "SELECT_CHANNEL": {
         "OPTION_LABEL": "Selecciona el canal",
         "UPDATE": "Actualitza",
         "BUTTON_TEXT": "Connecta el canal",
-        "DESCRIPTION": "El teu espai de treball de Slack ara està enllaçat amb LifeelSpace. Tanmateix, actualment la integració està inactiva. Per activar la integració i connectar un canal a LifeelSpace, feu clic al botó següent.\n\n**Nota:** si estas intentant connectar un canal privat, afegeix l'aplicació LifeelSpace al canal de Slack abans de continuar amb aquest pas.",
+        "DESCRIPTION": "El teu espai de treball de Slack ara està enllaçat amb Choira. Tanmateix, actualment la integració està inactiva. Per activar la integració i connectar un canal a Choira, feu clic al botó següent.\n\n**Nota:** si estas intentant connectar un canal privat, afegeix l'aplicació Choira al canal de Slack abans de continuar amb aquest pas.",
         "ATTENTION_REQUIRED": "Es requereix atenció",
         "EXPIRED": "La teva integració de Slack ha caducat. Per continuar rebent missatges a Slack, suprimeix la integració i torna a connectar el vostre espai de treball."
       },
@@ -176,7 +176,7 @@
     "DASHBOARD_APPS": {
       "TITLE": "Aplicacions del tauler de control",
       "HEADER_BTN_TXT": "Afegeix una aplicació de tauler nova",
-      "SIDEBAR_TXT": "<p><b>Aplicacions del tauler de control</b></p><p>Les aplicacions del tauler de control permeten a les organitzacions incrustar una aplicació dins del tauler de control de LifeelSpace per proporcionar el context als agents d'atenció al client. Aquesta funció et permet crear una aplicació de manera independent i inserir-la dins del tauler per proporcionar informació de l'usuari, les seves comandes o el seu historial de pagaments anteriors.</p><p>Quan incrusteu la teva aplicació mitjançant el tauler de control de LifeelSpace, la teva aplicació obté el context de la conversa i el contacte com a esdeveniment de finestra. Implementa un oient per a l'esdeveniment del missatge a la teva pàgina per rebre el context.</p><p>Per afegir una aplicació de tauler nova, feu clic al botó \"Afegeix una aplicació de tauler nova\".</p>",
+      "SIDEBAR_TXT": "<p><b>Aplicacions del tauler de control</b></p><p>Les aplicacions del tauler de control permeten a les organitzacions incrustar una aplicació dins del tauler de control de Choira per proporcionar el context als agents d'atenció al client. Aquesta funció et permet crear una aplicació de manera independent i inserir-la dins del tauler per proporcionar informació de l'usuari, les seves comandes o el seu historial de pagaments anteriors.</p><p>Quan incrusteu la teva aplicació mitjançant el tauler de control de Choira, la teva aplicació obté el context de la conversa i el contacte com a esdeveniment de finestra. Implementa un oient per a l'esdeveniment del missatge a la teva pàgina per rebre el context.</p><p>Per afegir una aplicació de tauler nova, feu clic al botó \"Afegeix una aplicació de tauler nova\".</p>",
       "DESCRIPTION": "Les aplicacions del tauler permeten a les organitzacions incrustar una aplicació dins del tauler per proporcionar el context als agents d'atenció al client. Aquesta funció et permet crear una aplicació de manera independent i incorporar-la per proporcionar informació de l'usuari, les seves comandes o el seu historial de pagaments anterior.",
       "LEARN_MORE": "Learn more about Dashboard Apps",
       "LIST": {

@@ -41,7 +41,7 @@ unless Rails.env.production?
     role: :administrator
   )
 
-  web_widget = Channel::WebWidget.create!(account: account, website_url: 'https://lifeel.in')
+  web_widget = Channel::WebWidget.create!(account: account, website_url: 'https://support.choira.io')
 
   inbox = Inbox.create!(channel: web_widget, account: account, name: 'LA Support')
   InboxMember.create!(user: user, inbox: inbox)
@@ -93,5 +93,5 @@ unless Rails.env.production?
   # csat
   Seeders::MessageSeeder.create_sample_csat_collect_message conversation
 
-  CannedResponse.create!(account: account, short_code: 'start', content: 'Hello welcome to LifeelSpace.')
+  CannedResponse.create!(account: account, short_code: 'start', content: 'Hello welcome to Choira.')
 end

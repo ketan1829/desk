@@ -48,10 +48,10 @@
         "CUSTOM_EMAIL_DOMAIN_ENABLED": "Ara podeu rebre correus electrònics al vostre domini personalitzat."
       }
     },
-    "UPDATE_CHATWOOT": "L'actualització %{latestChatwootVersion} per LifeelSpace està disponible. Si us plau, actualitza l'instancia.",
+    "UPDATE_CHATWOOT": "L'actualització %{latestChatwootVersion} per Choira està disponible. Si us plau, actualitza l'instancia.",
     "LEARN_MORE": "Aprèn més",
-    "PAYMENT_PENDING": "El teu pagament està pendent. Actualitzeu la vostra informació de pagament per continuar utilitzant LifeelSpace",
-    "LIMITS_UPGRADE": "El teu compte ha superat els límits d'ús, actualitza el pla per continuar utilitzant LifeelSpace",
+    "PAYMENT_PENDING": "El teu pagament està pendent. Actualitzeu la vostra informació de pagament per continuar utilitzant Choira",
+    "LIMITS_UPGRADE": "El teu compte ha superat els límits d'ús, actualitza el pla per continuar utilitzant Choira",
     "OPEN_BILLING": "Obrir facturació"
   },
   "FORMS": {

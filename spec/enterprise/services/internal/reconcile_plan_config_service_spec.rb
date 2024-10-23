@@ -29,7 +29,7 @@ RSpec.describe Internal::ReconcilePlanConfigService do
       # end
 
       it 'will not create a premium config reset warning if config is not modified' do
-        create(:installation_config, name: 'INSTALLATION_NAME', value: 'LifeelSpace')
+        create(:installation_config, name: 'INSTALLATION_NAME', value: 'Choira')
         service.perform
         expect(Redis::Alfred.get(Redis::Alfred::CHATWOOT_INSTALLATION_CONFIG_RESET_WARNING)).to be_nil
       end

@@ -31,9 +31,9 @@ export default {
     CONDENSED: 'condensed',
     EXPANDED: 'expanded',
   },
-  DOCS_URL: '//www.chatvave.com/docs/product/',
-  HELP_CENTER_DOCS_URL: '//www.chatvave.com/docs/product/others/help-center',
-  TESTIMONIAL_URL: 'https://testimonials.cdn.chatvave.com/content.json',
+  DOCS_URL: '//www.choira.io/docs/product/',
+  HELP_CENTER_DOCS_URL: '//www.choira.io/docs/product/others/help-center',
+  TESTIMONIAL_URL: 'https://testimonials.cdn.choira.io/content.json',
   SMALL_SCREEN_BREAKPOINT: 1024,
   AVAILABILITY_STATUS_KEYS: ['online', 'busy', 'offline'],
   SNOOZE_OPTIONS: {

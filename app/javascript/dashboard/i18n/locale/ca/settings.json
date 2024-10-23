@@ -315,7 +315,7 @@
     "NO_BILLING_USER": "El teu compte de facturació s'està configurant. Actualitza la pàgina i torna-ho a provar."
   },
   "CREATE_ACCOUNT": {
-    "NO_ACCOUNT_WARNING": "Uh oh! No hem trobat cap compte de LifeelSpace. Crea un compte nou per continuar.",
+    "NO_ACCOUNT_WARNING": "Uh oh! No hem trobat cap compte de Choira. Crea un compte nou per continuar.",
     "NEW_ACCOUNT": "Compte nou",
     "SELECTOR_SUBTITLE": "Crear un compte nou",
     "API": {

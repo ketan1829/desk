@@ -192,14 +192,14 @@ es:
       description: "Las aplicaciones de panel te permiten crear e incrustar aplicaciones que muestran información de usuario, pedidos o historial de pagos, proporcionando más contexto a tus agentes de soporte al cliente."
     dyte:
       name: "Dyte"
-      description: "Dyte es un producto que integra funcionalidades de audio y video en tu aplicación. Con esta integración, tus agentes pueden iniciar llamadas de video/voz con tus clientes directamente desde LifeelSpace."
+      description: "Dyte es un producto que integra funcionalidades de audio y video en tu aplicación. Con esta integración, tus agentes pueden iniciar llamadas de video/voz con tus clientes directamente desde Choira."
       meeting_name: "%{agent_name} ha iniciado una reunión"
     slack:
       name: "Slack"
-      description: "Integra LifeelSpace con Slack para mantener a tu equipo sincronizado. Esta integración te permite recibir notificaciones de nuevas conversaciones y responder directamente desde la interfaz de Slack."
+      description: "Integra Choira con Slack para mantener a tu equipo sincronizado. Esta integración te permite recibir notificaciones de nuevas conversaciones y responder directamente desde la interfaz de Slack."
     webhooks:
       name: "Webhook"
-      description: "Los eventos de webhook proporcionan actualizaciones en tiempo real sobre las actividades en tu cuenta de LifeelSpace. Puedes suscribirte a los eventos que prefieras y LifeelSpace te enviará llamadas HTTP con las actualizaciones."
+      description: "Los eventos de webhook proporcionan actualizaciones en tiempo real sobre las actividades en tu cuenta de Choira. Puedes suscribirte a los eventos que prefieras y Choira te enviará llamadas HTTP con las actualizaciones."
     dialogflow:
       name: "Dialogflow"
       description: "Construye chatbots con Dialogflow e intégralos fácilmente en tu bandeja de entrada. Estos bots pueden manejar consultas iniciales antes de transferirlas a un agente de servicio al cliente."

@@ -17,7 +17,7 @@ export const conversationData = {
       account_id: 1,
       availability_status: 'offline',
       confirmed: true,
-      email: 'info@chatvave.com',
+      email: 'info@choira.io',
       available_name: 'Muhsin Keloth',
       id: 21,
       name: 'Muhsin Keloth',

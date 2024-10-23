@@ -4,7 +4,7 @@
 # # This is set to run against every PR.
 # #
 
-name: Run LifeelSpace CE spec
+name: Run Choira CE spec
 on:
   push:
     branches:

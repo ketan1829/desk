@@ -48,10 +48,10 @@
         "CUSTOM_EMAIL_DOMAIN_ENABLED": "Du kan modtage e-mails på dit brugerdefinerede domæne nu."
       }
     },
-    "UPDATE_CHATWOOT": "En opdatering %{latestChatwootVersion} til LifeelSpace er tilgængelig. Opdater venligst din instans.",
+    "UPDATE_CHATWOOT": "En opdatering %{latestChatwootVersion} til Choira er tilgængelig. Opdater venligst din instans.",
     "LEARN_MORE": "Lær mere",
-    "PAYMENT_PENDING": "Your payment is pending. Please update your payment information to continue using LifeelSpace",
-    "LIMITS_UPGRADE": "Your account has exceeded the usage limits, please upgrade your plan to continue using LifeelSpace",
+    "PAYMENT_PENDING": "Your payment is pending. Please update your payment information to continue using Choira",
+    "LIMITS_UPGRADE": "Your account has exceeded the usage limits, please upgrade your plan to continue using Choira",
     "OPEN_BILLING": "Open billing"
   },
   "FORMS": {

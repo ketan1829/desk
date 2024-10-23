@@ -3,7 +3,7 @@
     "HEADER": "Botovi",
     "LOADING_EDITOR": "Otvaranje Editora...",
     "HEADER_BTN_TXT": "Dodaj konfiguraciju Bota",
-    "SIDEBAR_TXT": "<p><b>Agentski Botovi</b> <p>Agentski Botovi su kao najčudesniji članovi vašeg tima. Oni mogu riješiti male stvari, tako da se možete usredotočiti na stvari koje su važne. Isprobajte ih.</p> <p> Možete upravljati svojim botovima s ove stranice ili stvoriti nove pomoću gumba 'Dodaj konfiguraciju bota'.</p> <p> Otvorite <a href=\"https:/ /www.lifeel.in/hc/LifeelSpace-user-guide-cloud-version/articles/1677497472-how-to-use-agent-bots\" target=\"blank\">Priručnik o agentskim botovima</a> u drugoj kartici za pomoć.</p>",
+    "SIDEBAR_TXT": "<p><b>Agentski Botovi</b> <p>Agentski Botovi su kao najčudesniji članovi vašeg tima. Oni mogu riješiti male stvari, tako da se možete usredotočiti na stvari koje su važne. Isprobajte ih.</p> <p> Možete upravljati svojim botovima s ove stranice ili stvoriti nove pomoću gumba 'Dodaj konfiguraciju bota'.</p> <p> Otvorite <a href=\"https:/ /www.support.choira.io/hc/Choira-user-guide-cloud-version/articles/1677497472-how-to-use-agent-bots\" target=\"blank\">Priručnik o agentskim botovima</a> u drugoj kartici za pomoć.</p>",
     "CSML_BOT_EDITOR": {
       "NAME": {
         "LABEL": "Naziv Bota",
