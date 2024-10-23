@@ -48,10 +48,10 @@
         "CUSTOM_EMAIL_DOMAIN_ENABLED": "Teraz môžete prijímať e-maily vo vlastnej doméne."
       }
     },
-    "UPDATE_CHATWOOT": "K dispozícii je aktualizácia %{latestChatwootVersion} pre LifeelSpace. Prosím, aktualizujte svoju inštanciu.",
+    "UPDATE_CHATWOOT": "K dispozícii je aktualizácia %{latestChatwootVersion} pre PROFITIZE. Prosím, aktualizujte svoju inštanciu.",
     "LEARN_MORE": "Learn more",
-    "PAYMENT_PENDING": "Your payment is pending. Please update your payment information to continue using LifeelSpace",
-    "LIMITS_UPGRADE": "Your account has exceeded the usage limits, please upgrade your plan to continue using LifeelSpace",
+    "PAYMENT_PENDING": "Your payment is pending. Please update your payment information to continue using PROFITIZE",
+    "LIMITS_UPGRADE": "Your account has exceeded the usage limits, please upgrade your plan to continue using PROFITIZE",
     "OPEN_BILLING": "Open billing"
   },
   "FORMS": {

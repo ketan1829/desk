@@ -50,8 +50,8 @@
     },
     "UPDATE_CHATWOOT": "Chatwoot에 대한 %{latestChatwootVersion} 업데이트를 사용할 수 있습니다. 인스턴스를 업데이트하십시오.",
     "LEARN_MORE": "Learn more",
-    "PAYMENT_PENDING": "Your payment is pending. Please update your payment information to continue using LifeelSpace",
-    "LIMITS_UPGRADE": "Your account has exceeded the usage limits, please upgrade your plan to continue using LifeelSpace",
+    "PAYMENT_PENDING": "Your payment is pending. Please update your payment information to continue using PROFITIZE",
+    "LIMITS_UPGRADE": "Your account has exceeded the usage limits, please upgrade your plan to continue using PROFITIZE",
     "OPEN_BILLING": "Open billing"
   },
   "FORMS": {
