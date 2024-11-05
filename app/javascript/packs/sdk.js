@@ -203,6 +203,6 @@ const runSDK = ({ baseUrl, websiteToken }) => {
   });
 };
 
-window.chatwootSDK = {
+window.lifeelSDK = {
   run: runSDK,
 };
