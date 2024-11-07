@@ -1,7 +1,7 @@
 {
   "INBOX_MGMT": {
     "HEADER": "Zarządzanie skrzynkami",
-    "SIDEBAR_TXT": "<p><b>Skrzynka odbiorcza</b></p> <p>Gdy podłączysz stronę internetową lub stronę na Facebooku do LifeelSpace, nazywana jest <b>skrzynką odbiorczą</b>. Możesz mieć nieograniczoną liczbę skrzynek odbiorczych na swoim koncie LifeelSpace.</p><p>Kliknij <b>Dodaj skrzynkę odbiorczą</b>, aby połączyć swoją stronę internetową lub stronę na Facebooku.</p><p>W panelu możesz zobaczyć wszystkie rozmowy ze wszystkich swoich skrzynek odbiorczych w jednym miejscu i odpowiadać na nie w zakładce „Konwersacje”.</p><p>Możesz również zobaczyć rozmowy specyficzne dla danej skrzynki odbiorczej, klikając na nazwę skrzynki odbiorczej w lewym panelu nawigacyjnym.</p>",
+    "SIDEBAR_TXT": "<p><b>Skrzynka odbiorcza</b></p> <p>Gdy podłączysz stronę internetową lub stronę na Facebooku do PROFITIZE, nazywana jest <b>skrzynką odbiorczą</b>. Możesz mieć nieograniczoną liczbę skrzynek odbiorczych na swoim koncie PROFITIZE.</p><p>Kliknij <b>Dodaj skrzynkę odbiorczą</b>, aby połączyć swoją stronę internetową lub stronę na Facebooku.</p><p>W panelu możesz zobaczyć wszystkie rozmowy ze wszystkich swoich skrzynek odbiorczych w jednym miejscu i odpowiadać na nie w zakładce „Konwersacje”.</p><p>Możesz również zobaczyć rozmowy specyficzne dla danej skrzynki odbiorczej, klikając na nazwę skrzynki odbiorczej w lewym panelu nawigacyjnym.</p>",
     "RECONNECTION_REQUIRED": "Your inbox is disconnected. You won't receive new messages until you reauthorize it.",
     "CLICK_TO_RECONNECT": "Click here to reconnect.",
     "LIST": {
@@ -11,7 +11,7 @@
       {
         "title": "Wybierz kanał",
         "route": "settings_inbox_new",
-        "body": "Wybierz dostawcę, którego chcesz zintegrować z LifeelSpace."
+        "body": "Wybierz dostawcę, którego chcesz zintegrować z PROFITIZE."
       },
       {
         "title": "Utwórz skrzynkę odbiorczą",
@@ -40,7 +40,7 @@
         "PLACEHOLDER": "Wprowadź nazwę swojej witryny (np. Acme Inc.)."
       },
       "FB": {
-        "HELP": "PS: Logując się, uzyskujemy dostęp tylko do wiadomości na Twojej stronie. LifeelSpace nigdy nie będzie miał dostępu do prywatnych wiadomości.",
+        "HELP": "PS: Logując się, uzyskujemy dostęp tylko do wiadomości na Twojej stronie. PROFITIZE nigdy nie będzie miał dostępu do prywatnych wiadomości.",
         "CHOOSE_PAGE": "Wybierz stronę",
         "CHOOSE_PLACEHOLDER": "Wybierz stronę z listy",
         "INBOX_NAME": "Nazwa skrzynki odbiorczej",
@@ -342,7 +342,7 @@
       },
       "AUTH": {
         "TITLE": "Wybierz kanał",
-        "DESC": "LifeelSpace supports live-chat widgets, Facebook Messenger, Twitter profiles, WhatsApp, Emails, etc., as channels. If you want to build a custom channel, you can create it using the API channel. To get started, choose one of the channels below."
+        "DESC": "PROFITIZE supports live-chat widgets, Facebook Messenger, Twitter profiles, WhatsApp, Emails, etc., as channels. If you want to build a custom channel, you can create it using the API channel. To get started, choose one of the channels below."
       },
       "AGENTS": {
         "TITLE": "Agenci",
@@ -356,7 +356,7 @@
       },
       "FINISH": {
         "TITLE": "Twoja skrzynka odbiorcza jest gotowa!",
-        "DESC": "Pomyślnie zakończyłeś integrację strony na Facebooku z czatwootem. Następnym razem, gdy klient komunikuje Twoją stronę, konwersacja pojawi się automatycznie na twojej skrzynce odbiorczej.<br>Dostarczamy również skrypt widżetu, który można łatwo dodać do swojej witryny. Gdy tylko będzie on dostępny na Twojej stronie internetowej, klienci mogą wysyłać Ci wiadomości bezpośrednio z Twojej strony bez pomocy żadnego zewnętrznego narzędzia, a konwersacja pojawi się tutaj w LifeelSpace.<br>Coś, co? Cóż, na pewno spróbujemy być :)"
+        "DESC": "Pomyślnie zakończyłeś integrację strony na Facebooku z czatwootem. Następnym razem, gdy klient komunikuje Twoją stronę, konwersacja pojawi się automatycznie na twojej skrzynce odbiorczej.<br>Dostarczamy również skrypt widżetu, który można łatwo dodać do swojej witryny. Gdy tylko będzie on dostępny na Twojej stronie internetowej, klienci mogą wysyłać Ci wiadomości bezpośrednio z Twojej strony bez pomocy żadnego zewnętrznego narzędzia, a konwersacja pojawi się tutaj w PROFITIZE.<br>Coś, co? Cóż, na pewno spróbujemy być :)"
       },
       "EMAIL_PROVIDER": {
         "TITLE": "Wybierz dostawcę poczty e-mail",
@@ -731,7 +731,7 @@
         "USER_MESSAGE": "Cześć",
         "AGENT_MESSAGE": "Witam"
       },
-      "BRANDING_TEXT": "Napędzany przez LifeelSpace",
+      "BRANDING_TEXT": "Napędzany przez PROFITIZE",
       "SCRIPT_SETTINGS": "\n      window.chatwootSettings = {options};"
     },
     "EMAIL_PROVIDERS": {

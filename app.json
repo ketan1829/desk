@@ -1,9 +1,9 @@
 {
-  "name": "LifeelSpace",
-  "description": "LifeelSpace is a customer support tool for instant messaging channels",
+  "name": "PROFITIZE",
+  "description": "PROFITIZE is a customer support tool for instant messaging channels",
   "website": "https://www.chatvave.com/",
   "repository": "https://github.com",
-  "logo": "https://space.lifeel.in/brand-assets/logo_thumbnail.svg",
+  "logo": "https://space.aspen2-web.dep.lifeel.in/brand-assets/logo_thumbnail.svg",
   "keywords": [
     "live chat",
     "customer support",
@@ -26,11 +26,11 @@
       "value": "production"
     },
     "FRONTEND_URL": {
-      "description": "Public root URL of the LifeelSpace installation. This will be used in the emails.",
+      "description": "Public root URL of the PROFITIZE installation. This will be used in the emails.",
       "value": "https://CHANGE.herokuapp.com"
     },
     "INSTALLATION_ENV": {
-      "description": "Installation method used for LifeelSpace.",
+      "description": "Installation method used for PROFITIZE.",
       "value": "heroku"
     },
     "REDIS_OPENSSL_VERIFY_MODE":{

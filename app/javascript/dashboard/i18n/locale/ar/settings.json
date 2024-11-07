@@ -57,7 +57,7 @@
       },
       "ACCESS_TOKEN": {
         "TITLE": "رمز المصادقة",
-        "NOTE": "يمكن استخدام هذا رمز المصادقة إذا كنت تبني تطبيقات API للتكامل مع LifeelSpace",
+        "NOTE": "يمكن استخدام هذا رمز المصادقة إذا كنت تبني تطبيقات API للتكامل مع PROFITIZE",
         "COPY": "نسخ"
       },
       "AUDIO_NOTIFICATIONS_SECTION": {

@@ -76,3 +76,6 @@ yarn-debug.log*
 .yarn-integrity
 
 /storybook-static
+aspen2_db_conv.sql
+chatwoot_development.sql
+create_sequences.sql

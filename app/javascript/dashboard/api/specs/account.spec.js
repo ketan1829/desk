@@ -31,10 +31,10 @@ describe('#accountAPI', () => {
 
     it('#createAccount', () => {
       accountAPI.createAccount({
-        name: 'LifeelSpace',
+        name: 'PROFITIZE',
       });
       expect(axiosMock.post).toHaveBeenCalledWith('/api/v1/accounts', {
-        name: 'LifeelSpace',
+        name: 'PROFITIZE',
       });
     });
   });

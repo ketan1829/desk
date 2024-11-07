@@ -1,7 +1,7 @@
 {
   "INBOX_MGMT": {
     "HEADER": "Posta",
-    "SIDEBAR_TXT": "<p><b>Casella</b></p> <p> Quando colleghi un sito web o una pagina facebook a LifeelSpace, si chiama <b>Casella</b>. Puoi avere caselle illimitate nel tuo account LifeelSpace. </p><p> Clicca su <b>Aggiungi Casella</b> per collegare un sito web o una pagina Facebook. </p><p> Nella Dashboard, puoi vedere tutte le conversazioni da tutte le tue caselle di posta in un unico posto e rispondere ad esse nella scheda `Conversazioni`. </p><p> È anche possibile visualizzare le conversazioni specifiche di una casella facendo clic sul nome della casella nel riquadro sinistro del cruscotto. </p>",
+    "SIDEBAR_TXT": "<p><b>Casella</b></p> <p> Quando colleghi un sito web o una pagina facebook a PROFITIZE, si chiama <b>Casella</b>. Puoi avere caselle illimitate nel tuo account PROFITIZE. </p><p> Clicca su <b>Aggiungi Casella</b> per collegare un sito web o una pagina Facebook. </p><p> Nella Dashboard, puoi vedere tutte le conversazioni da tutte le tue caselle di posta in un unico posto e rispondere ad esse nella scheda `Conversazioni`. </p><p> È anche possibile visualizzare le conversazioni specifiche di una casella facendo clic sul nome della casella nel riquadro sinistro del cruscotto. </p>",
     "RECONNECTION_REQUIRED": "Your inbox is disconnected. You won't receive new messages until you reauthorize it.",
     "CLICK_TO_RECONNECT": "Click here to reconnect.",
     "LIST": {
@@ -11,7 +11,7 @@
       {
         "title": "Scegli il canale",
         "route": "Nuovo",
-        "body": "Scegli il provider che vuoi integrare con LifeelSpace."
+        "body": "Scegli il provider che vuoi integrare con PROFITIZE."
       },
       {
         "title": "Crea casella",
@@ -40,7 +40,7 @@
         "PLACEHOLDER": "Inserisci il nome del tuo sito web (ad esempio: Acme Inc)"
       },
       "FB": {
-        "HELP": "PS: Accedendo, abbiamo accesso solo ai messaggi della tua pagina. LifeelSpace, non potrà accedere ai tuoi messaggi privati.",
+        "HELP": "PS: Accedendo, abbiamo accesso solo ai messaggi della tua pagina. PROFITIZE, non potrà accedere ai tuoi messaggi privati.",
         "CHOOSE_PAGE": "Scegli una pagina",
         "CHOOSE_PLACEHOLDER": "Seleziona una pagina dalla lista",
         "INBOX_NAME": "Nome casella",
@@ -342,7 +342,7 @@
       },
       "AUTH": {
         "TITLE": "Scegli un canale",
-        "DESC": "LifeelSpace supporta i widget di chat live, Facebook Messenger, profili Twitter, WhatsApp, Email, ecc., come canali. Se vuoi costruire un canale personalizzato, puoi crearlo usando il canale API. Per iniziare, scegli uno dei canali qui sotto."
+        "DESC": "PROFITIZE supporta i widget di chat live, Facebook Messenger, profili Twitter, WhatsApp, Email, ecc., come canali. Se vuoi costruire un canale personalizzato, puoi crearlo usando il canale API. Per iniziare, scegli uno dei canali qui sotto."
       },
       "AGENTS": {
         "TITLE": "Agenti",
@@ -352,11 +352,11 @@
       },
       "DETAILS": {
         "TITLE": "Dettagli casella",
-        "DESC": "Dal menu a tendina qui sotto, seleziona la pagina Facebook che vuoi collegare a LifeelSpace. Puoi anche assegnare un nome personalizzato alla tua casella per una migliore identificazione."
+        "DESC": "Dal menu a tendina qui sotto, seleziona la pagina Facebook che vuoi collegare a PROFITIZE. Puoi anche assegnare un nome personalizzato alla tua casella per una migliore identificazione."
       },
       "FINISH": {
         "TITLE": "Azzeccato!",
-        "DESC": "Hai completato con successo l'integrazione della tua pagina Facebook con il LifeelSpace. La prossima volta che un cliente invia un messaggio alla tua pagina, la conversazione apparirà automaticamente nella tua casella.<br>Ti forniamo anche uno script per widget che puoi facilmente aggiungere al tuo sito web. Una volta dal vivo sul tuo sito web, i clienti possono inviarti messaggi direttamente dal tuo sito web senza l'aiuto di alcuno strumento esterno e la conversazione apparirà proprio qui, su LifeelSpace.<br>Bello, eh? Beh, cerchiamo di esserlo :)"
+        "DESC": "Hai completato con successo l'integrazione della tua pagina Facebook con il PROFITIZE. La prossima volta che un cliente invia un messaggio alla tua pagina, la conversazione apparirà automaticamente nella tua casella.<br>Ti forniamo anche uno script per widget che puoi facilmente aggiungere al tuo sito web. Una volta dal vivo sul tuo sito web, i clienti possono inviarti messaggi direttamente dal tuo sito web senza l'aiuto di alcuno strumento esterno e la conversazione apparirà proprio qui, su PROFITIZE.<br>Bello, eh? Beh, cerchiamo di esserlo :)"
       },
       "EMAIL_PROVIDER": {
         "TITLE": "Select your email provider",
@@ -731,7 +731,7 @@
         "USER_MESSAGE": "Salve",
         "AGENT_MESSAGE": "Ciao"
       },
-      "BRANDING_TEXT": "Offerto da LifeelSpace",
+      "BRANDING_TEXT": "Offerto da PROFITIZE",
       "SCRIPT_SETTINGS": "\n      window.chatwootSettings = {options};"
     },
     "EMAIL_PROVIDERS": {

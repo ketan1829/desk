@@ -6,11 +6,11 @@
     "DESCRIPTION": "Audit Logs maintain a record of activities in your account, allowing you to track and audit your account, team, or services.",
     "LEARN_MORE": "Learn more about audit logs",
     "SEARCH_404": "Nu există elemente care să corespundă acestei interogări",
-    "SIDEBAR_TXT": "<p><b>Jurnale de audit</b> </p><p> Jurnalele de audit sunt piste pentru evenimente și acțiuni într-un sistem LifeelSpace. </p>",
+    "SIDEBAR_TXT": "<p><b>Jurnale de audit</b> </p><p> Jurnalele de audit sunt piste pentru evenimente și acțiuni într-un sistem PROFITIZE. </p>",
     "LIST": {
       "404": "Nu există jurnale de audit disponibile în acest cont.",
       "TITLE": "Gestionarea jurnalelor de audit",
-      "DESC": "Jurnalele de audit sunt piste pentru evenimente și acțiuni într-un sistem LifeelSpace.",
+      "DESC": "Jurnalele de audit sunt piste pentru evenimente și acțiuni într-un sistem PROFITIZE.",
       "TABLE_HEADER": [
         "Activitate",
         "Timp",
