@@ -9,11 +9,13 @@ import endOfDay from 'date-fns/endOfDay';
 import getUnixTime from 'date-fns/getUnixTime';
 import startOfDay from 'date-fns/startOfDay';
 import subDays from 'date-fns/subDays';
-import { emitter } from 'shared/helpers/mitt';
+import ReportHeader from './components/ReportHeader.vue';
+export const FETCH_INTERVAL = 60000;
 
 export default {
   name: 'LiveReports',
   components: {
+    ReportHeader,
     AgentTable,
     MetricCard,
     ReportHeatmap,
@@ -57,13 +59,24 @@ export default {
   },
   mounted() {
     this.$store.dispatch('agents/get');
-    this.fetchAllData();
-
-    emitter.on('fetch_overview_reports', () => {
-      this.fetchAllData();
-    });
+    this.initalizeReport();
+  },
+  beforeUnmount() {
+    if (this.timeoutId) {
+      clearTimeout(this.timeoutId);
+    }
   },
   methods: {
+    initalizeReport() {
+      this.fetchAllData();
+      this.scheduleReportRefresh();
+    },
+    scheduleReportRefresh() {
+      this.timeoutId = setTimeout(async () => {
+        await this.fetchAllData();
+        this.scheduleReportRefresh();
+      }, FETCH_INTERVAL);
+    },
     fetchAllData() {
       this.fetchAccountConversationMetric();
       this.fetchAgentConversationMetric();
@@ -123,8 +136,9 @@ export default {
 </script>
 
 <template>
-  <div class="flex-1 p-4 overflow-auto">
-    <div class="flex flex-col items-center md:flex-row">
+  <ReportHeader :header-title="$t('OVERVIEW_REPORTS.HEADER')" />
+  <div class="flex flex-col gap-4 pb-6">
+    <div class="flex flex-col items-center md:flex-row gap-4">
       <div
         class="flex-1 w-full max-w-full md:w-[65%] md:max-w-[65%] conversation-metric"
       >
@@ -140,10 +154,10 @@ export default {
             :key="index"
             class="flex-1 min-w-0 pb-2"
           >
-            <h3 class="text-base text-slate-700 dark:text-slate-100">
+            <h3 class="text-base text-n-slate-11">
               {{ name }}
             </h3>
-            <p class="text-woot-800 dark:text-woot-300 text-3xl mb-0 mt-1">
+            <p class="text-n-slate-12 text-3xl mb-0 mt-1">
               {{ metric }}
             </p>
           </div>
@@ -156,17 +170,17 @@ export default {
             :key="index"
             class="flex-1 min-w-0 pb-2"
           >
-            <h3 class="text-base text-slate-700 dark:text-slate-100">
+            <h3 class="text-base text-n-slate-11">
               {{ name }}
             </h3>
-            <p class="text-woot-800 dark:text-woot-300 text-3xl mb-0 mt-1">
+            <p class="text-n-slate-12 text-3xl mb-0 mt-1">
               {{ metric }}
             </p>
           </div>
         </MetricCard>
       </div>
     </div>
-    <div class="flex flex-row flex-wrap max-w-full ml-auto mr-auto">
+    <div class="flex flex-row flex-wrap max-w-full">
       <MetricCard :header="$t('OVERVIEW_REPORTS.CONVERSATION_HEATMAP.HEADER')">
         <template #control>
           <woot-button
@@ -185,7 +199,7 @@ export default {
         />
       </MetricCard>
     </div>
-    <div class="flex flex-row flex-wrap max-w-full ml-auto mr-auto">
+    <div class="flex flex-row flex-wrap max-w-full">
       <MetricCard :header="$t('OVERVIEW_REPORTS.AGENT_CONVERSATIONS.HEADER')">
         <AgentTable
           :agents="agents"
